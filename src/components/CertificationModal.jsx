@@ -96,16 +96,19 @@ export default function CertificationModal() {
                   </div>
 
                   {/* Progress summary */}
-                  <div className="bg-parchment-200 rounded-card p-4 mb-6 text-center">
-                    <p className="font-display text-3xl font-bold text-shire-600">
+                  <div
+                    className="bg-parchment-200 rounded-card p-4 mb-6 text-center"
+                    style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
+                  >
+                    <p className="text-3xl font-bold text-shire-600">
                       {claimedCount} / {totalBadges}
                     </p>
-                    <p className="font-body text-earth-500 text-sm">
+                    <p className="text-earth-500 text-sm">
                       badges claimed
                     </p>
 
                     {/* Completion message */}
-                    <p className="font-body text-earth-600 mt-3 text-sm">
+                    <p className="text-earth-600 mt-3 text-sm">
                       {claimedCount === totalBadges ? (
                         <span className="text-gold-600 font-semibold">
                           ✨ Perfect completion! You are a true Ringbearer.

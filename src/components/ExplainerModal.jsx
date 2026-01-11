@@ -1,9 +1,19 @@
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useApp } from '../context/AppContext';
 import { slideUp, springs } from '../utils/animations';
+import { playRandomGreeting, stopGreetingSound } from '../hooks/useSound';
 
 export default function ExplainerModal() {
   const { goToScreen, SCREENS, name } = useApp();
+
+  // Play a random greeting when the screen mounts
+  useEffect(() => {
+    playRandomGreeting();
+
+    // Stop the greeting if user leaves this screen
+    return () => stopGreetingSound();
+  }, []);
 
   return (
     <motion.div

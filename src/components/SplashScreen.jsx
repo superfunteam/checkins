@@ -1,9 +1,23 @@
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useApp } from '../context/AppContext';
-import { fadeIn, pulseButton, springs } from '../utils/animations';
+import { fadeIn, springs } from '../utils/animations';
+import { preloadBadgeSounds, preloadGreetingSounds, startBackgroundMusic } from '../hooks/useSound';
 
 export default function SplashScreen() {
   const { goToScreen, SCREENS } = useApp();
+
+  // Preload all sounds during splash screen for instant playback later
+  useEffect(() => {
+    preloadBadgeSounds();
+    preloadGreetingSounds();
+  }, []);
+
+  // Handle enter button - start background music and navigate
+  const handleEnter = () => {
+    startBackgroundMusic(); // Start BG music on first user interaction
+    goToScreen(SCREENS.NAME);
+  };
 
   return (
     <motion.div
@@ -62,20 +76,27 @@ export default function SplashScreen() {
       {/* Enter button */}
       <motion.button
         className="btn-primary text-xl px-10 py-5"
-        onClick={() => goToScreen(SCREENS.NAME)}
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.6 }}
-        whileHover={{ scale: 1.02 }}
+        onClick={handleEnter}
+        initial={{ y: 20, opacity: 0, scale: 1 }}
+        animate={{
+          y: 0,
+          opacity: 1,
+          scale: [1, 1.2, 1],
+        }}
+        transition={{
+          y: { delay: 0.6 },
+          opacity: { delay: 0.6 },
+          scale: {
+            delay: 0.6,
+            duration: 1.5,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          },
+        }}
+        whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.98 }}
       >
-        <motion.span
-          variants={pulseButton}
-          animate="animate"
-          className="inline-block"
-        >
-          Enter the Shire
-        </motion.span>
+        Enter the Shire
       </motion.button>
     </motion.div>
   );

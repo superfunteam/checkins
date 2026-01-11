@@ -1,8 +1,9 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useApp } from '../context/AppContext';
 import { BADGE_TYPES, getPrimaryBadges, getSecretBadges } from '../data/badges';
 import { slideUpModal, backdrop, springs } from '../utils/animations';
+import FloatingBadge from './FloatingBadge';
 
 // Badge type labels
 const typeLabels = {
@@ -38,12 +39,71 @@ export default function BadgeModal() {
     dismissHonorSystem,
     play,
     isSecretUnlocked,
+    badgeOriginRect,
+    isClosingBadgeModal,
   } = useApp();
+
+  // Ref to get target position in modal
+  const badgeTargetRef = useRef(null);
+  const [targetRect, setTargetRect] = useState(null);
+  const [isFloatingVisible, setIsFloatingVisible] = useState(false);
+  const [showModalBadge, setShowModalBadge] = useState(false);
 
   const [showHonorSystem, setShowHonorSystem] = useState(false);
   const [dontAskAgain, setDontAskAgain] = useState(false);
   const [justClaimed, setJustClaimed] = useState(false);
   const [slideDirection, setSlideDirection] = useState(0);
+
+  // Calculate target rect when modal opens and manage floating badge visibility
+  useEffect(() => {
+    if (selectedBadge && badgeOriginRect && !isClosingBadgeModal) {
+      // Don't show floating badge yet - wait for modal to settle
+      setShowModalBadge(false);
+
+      // Wait for modal slide-up animation to mostly complete before measuring
+      // This ensures we get the final position, not the animated position
+      const timer = setTimeout(() => {
+        if (badgeTargetRef.current) {
+          const rect = badgeTargetRef.current.getBoundingClientRect();
+          setTargetRect({
+            top: rect.top,
+            left: rect.left,
+            width: rect.width,
+            height: rect.height,
+          });
+          // Now start the floating animation
+          setIsFloatingVisible(true);
+        }
+      }, 280); // Wait for modal spring animation to fully settle
+
+      return () => clearTimeout(timer);
+    } else if (isClosingBadgeModal && badgeOriginRect) {
+      // Start reverse animation - use stored targetRect
+      setIsFloatingVisible(true);
+      setShowModalBadge(false);
+    } else if (selectedBadge && !badgeOriginRect) {
+      // Navigation between badges (no origin rect) - show badge immediately
+      setIsFloatingVisible(false);
+      setShowModalBadge(true);
+      setTargetRect(null);
+    } else if (!selectedBadge) {
+      // Reset states when modal fully closed
+      setTargetRect(null);
+      setIsFloatingVisible(false);
+      setShowModalBadge(false);
+    }
+  }, [selectedBadge, badgeOriginRect, isClosingBadgeModal]);
+
+  // Handle floating badge animation complete
+  const handleFloatingComplete = useCallback(() => {
+    // Show modal badge FIRST (instant, via style prop)
+    if (!isClosingBadgeModal) {
+      setShowModalBadge(true);
+    }
+    // THEN hide floating badge - they briefly overlap which is fine
+    // This order prevents any flicker during the handoff
+    setIsFloatingVisible(false);
+  }, [isClosingBadgeModal]);
 
   // Get navigable badges (primary + unlocked secrets)
   const primaryBadges = getPrimaryBadges();
@@ -208,14 +268,21 @@ export default function BadgeModal() {
               {/* Badge image */}
               <motion.div
                 className="flex justify-center mb-4"
-                initial={{ scale: 0.8, opacity: 0 }}
+                style={{
+                  // Instant opacity change - no animation to avoid flicker during handoff
+                  opacity: showModalBadge || !badgeOriginRect ? 1 : 0,
+                }}
+                initial={{ scale: 0.8 }}
                 animate={justClaimed
                   ? { scale: [1, 1.1, 0.95, 1.05, 1], rotate: [0, -3, 3, -1, 0] }
-                  : { scale: 1, opacity: 1 }
+                  : { scale: 1 }
                 }
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               >
-                <div className="w-48 h-48 badge-image-container overflow-hidden">
+                <div
+                  ref={badgeTargetRef}
+                  className="w-48 h-48 badge-image-container overflow-hidden"
+                >
                   <img
                     src={selectedBadge.image}
                     alt={selectedBadge.name}
@@ -248,17 +315,18 @@ export default function BadgeModal() {
               </h2>
 
               {/* Badge description */}
-              <p className="font-body text-earth-600 text-center mb-4 leading-relaxed">
+              <p className="font-body text-earth-600 text-center mb-4 leading-relaxed text-xl">
                 {selectedBadge.longDesc}
               </p>
 
-              {/* Instruction callout */}
+              {/* Instruction text */}
               {selectedBadge.instruction && !isClaimed && !justClaimed && (
-                <div className="bg-shire-100 border border-shire-200 rounded-button px-8 py-4 mb-6">
-                  <p className="font-display text-shire-800 text-center text-lg font-semibold">
-                    {selectedBadge.instruction}
-                  </p>
-                </div>
+                <p
+                  className="text-base text-center mb-6"
+                  style={{ fontFamily: "'Google Sans Flex', sans-serif", color: '#7C3AED' }}
+                >
+                  {selectedBadge.instruction}
+                </p>
               )}
 
               {/* Claim status or button */}
@@ -266,11 +334,18 @@ export default function BadgeModal() {
                 <>
                   {isClaimed || justClaimed ? (
                     <div className="text-center">
-                      <div className="inline-flex items-center gap-2 bg-shire-100 text-shire-700 px-4 py-2 rounded-button">
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <div
+                        className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold rounded-button shadow-button"
+                        style={{
+                          backgroundColor: '#7C3AED',
+                          color: 'white',
+                          fontFamily: "'Google Sans Flex', sans-serif",
+                        }}
+                      >
+                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
-                        <span className="font-display font-semibold">Claimed</span>
+                        <span>Claimed</span>
                       </div>
                       {claimTime && (
                         <p className="text-earth-500 text-sm mt-2">
@@ -346,6 +421,17 @@ export default function BadgeModal() {
               </motion.div>
             </AnimatePresence>
           </motion.div>
+
+          {/* Floating badge for FLIP animation */}
+          {isFloatingVisible && badgeOriginRect && targetRect && selectedBadge && (
+            <FloatingBadge
+              badge={selectedBadge}
+              originRect={badgeOriginRect}
+              targetRect={targetRect}
+              isClosing={isClosingBadgeModal}
+              onAnimationComplete={handleFloatingComplete}
+            />
+          )}
         </>
       )}
     </AnimatePresence>

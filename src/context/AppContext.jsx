@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useCallback } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import { useSound, UI_SOUNDS } from '../hooks/useSound';
+import { useSound, UI_SOUNDS, playBadgeSound, stopBadgeSound } from '../hooks/useSound';
 import { useSecretBadges } from '../hooks/useSecretBadges';
 
 const AppContext = createContext(null);
@@ -28,20 +28,34 @@ export function AppProvider({ children }) {
 
   // Modal states
   const [selectedBadge, setSelectedBadge] = useState(null);
+  const [badgeOriginRect, setBadgeOriginRect] = useState(null);
+  const [isClosingBadgeModal, setIsClosingBadgeModal] = useState(false);
   const [showCertificationModal, setShowCertificationModal] = useState(false);
   const [showChecklist, setShowChecklist] = useState(false);
 
-  // Secret unlock modal - shows the celebration modal
-  const [secretUnlockModal, setSecretUnlockModal] = useState(null);
+  // Secret unlock modal queue - shows celebration modals sequentially
+  const [secretUnlockQueue, setSecretUnlockQueue] = useState([]);
+  const [secretModalDelayed, setSecretModalDelayed] = useState(false);
 
-  // Handle secret badge unlocks - show the celebration modal
+  // Derive the current modal to show (first in queue, unless delayed)
+  const secretUnlockModal = !secretModalDelayed ? secretUnlockQueue[0] || null : null;
+
+  // Handle secret badge unlocks - add to queue
   const handleSecretUnlock = useCallback((badge) => {
-    setSecretUnlockModal(badge);
+    setSecretUnlockQueue(prev => [...prev, badge]);
   }, []);
 
   const closeSecretUnlockModal = useCallback(() => {
     play(UI_SOUNDS.modalClose);
-    setSecretUnlockModal(null);
+    setSecretUnlockQueue(prev => {
+      const remaining = prev.slice(1);
+      // If more in queue, add 1 second delay before showing next
+      if (remaining.length > 0) {
+        setSecretModalDelayed(true);
+        setTimeout(() => setSecretModalDelayed(false), 1000);
+      }
+      return remaining;
+    });
   }, [play]);
 
   // Secret badges hook
@@ -58,14 +72,26 @@ export function AppProvider({ children }) {
     setCurrentScreen(screen);
   }, [play]);
 
-  const openBadgeModal = useCallback((badge) => {
+  const openBadgeModal = useCallback((badge, rect = null) => {
     play(UI_SOUNDS.modalOpen);
+    // Play the badge-specific sound effect
+    playBadgeSound(badge.id);
+    setBadgeOriginRect(rect);
     setSelectedBadge(badge);
+    setIsClosingBadgeModal(false);
   }, [play]);
 
   const closeBadgeModal = useCallback(() => {
     play(UI_SOUNDS.modalClose);
-    setSelectedBadge(null);
+    // Stop any playing badge sound
+    stopBadgeSound();
+    setIsClosingBadgeModal(true);
+    // Delay clearing state to allow reverse animation
+    setTimeout(() => {
+      setSelectedBadge(null);
+      setBadgeOriginRect(null);
+      setIsClosingBadgeModal(false);
+    }, 300);
   }, [play]);
 
   const openCertificationModal = useCallback(() => {
@@ -103,6 +129,8 @@ export function AppProvider({ children }) {
 
     // Badge modal
     selectedBadge,
+    badgeOriginRect,
+    isClosingBadgeModal,
     openBadgeModal,
     closeBadgeModal,
 

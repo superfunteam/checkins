@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useApp } from '../context/AppContext';
 import { slideUp, springs } from '../utils/animations';
@@ -6,9 +6,48 @@ import { slideUp, springs } from '../utils/animations';
 const MAX_NAME_LENGTH = 30;
 const DEFAULT_NAME = 'A Humble Hobbit';
 
+// Messages to cycle through
+const AUDIO_MESSAGES = ['Better with Audio', 'Volume Up', 'If you want'];
+
 export default function NameModal() {
   const { setName, goToScreen, SCREENS, play } = useApp();
   const [inputValue, setInputValue] = useState('');
+  const [displayText, setDisplayText] = useState('');
+  const [messageIndex, setMessageIndex] = useState(0);
+  const [isTyping, setIsTyping] = useState(true);
+
+  // Typing animation effect
+  useEffect(() => {
+    const currentMessage = AUDIO_MESSAGES[messageIndex];
+    let timeout;
+
+    if (isTyping) {
+      // Typing forward
+      if (displayText.length < currentMessage.length) {
+        timeout = setTimeout(() => {
+          setDisplayText(currentMessage.slice(0, displayText.length + 1));
+        }, 50); // Fast typing speed
+      } else {
+        // Pause at full message, then start erasing
+        timeout = setTimeout(() => {
+          setIsTyping(false);
+        }, 1500); // Pause before erasing
+      }
+    } else {
+      // Erasing backward
+      if (displayText.length > 0) {
+        timeout = setTimeout(() => {
+          setDisplayText(displayText.slice(0, -1));
+        }, 30); // Faster erase speed
+      } else {
+        // Move to next message and start typing
+        setMessageIndex((prev) => (prev + 1) % AUDIO_MESSAGES.length);
+        setIsTyping(true);
+      }
+    }
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isTyping, messageIndex]);
 
   const handleContinue = () => {
     const finalName = inputValue.trim() || DEFAULT_NAME;
@@ -61,9 +100,6 @@ export default function NameModal() {
             autoCapitalize="words"
             autoComplete="off"
           />
-          <p className="text-right text-sm text-earth-400 mt-2">
-            {inputValue.length}/{MAX_NAME_LENGTH}
-          </p>
         </div>
 
         {/* Continue button */}
@@ -81,11 +117,27 @@ export default function NameModal() {
           className="w-full text-center text-earth-500 font-body text-sm py-2 hover:text-earth-700 transition-colors"
           onClick={handleSkip}
         >
-          Remain Anonymous
+          or Remain Anonymous
         </button>
-        <p className="text-center text-earth-400 text-xs mt-1">
+        <p className="text-center text-earth-400 text-xs mt-1 mb-6">
           (defaults to "{DEFAULT_NAME}")
         </p>
+
+        {/* Better with Audio pill - typing animation */}
+        <div className="flex justify-center">
+          <div
+            className="inline-flex items-center gap-2 px-4 py-2 bg-shire-100 text-shire-700 rounded-full"
+            style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
+          >
+            <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+            </svg>
+            <span className="text-sm font-medium">
+              {displayText}
+              <span className="animate-pulse">|</span>
+            </span>
+          </div>
+        </div>
       </motion.div>
     </motion.div>
   );

@@ -3,13 +3,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { useApp } from '../context/AppContext';
 import { scaleIn, springs } from '../utils/animations';
+import { playBadgeSound } from '../hooks/useSound';
 
 export default function SecretUnlockModal() {
   const { secretUnlockModal, closeSecretUnlockModal } = useApp();
 
-  // Fire confetti when modal opens
+  // Fire confetti and play badge sound when modal opens
   useEffect(() => {
     if (secretUnlockModal) {
+      // Play the badge-specific sound effect
+      playBadgeSound(secretUnlockModal.id);
+
       // Check for reduced motion
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         return;
@@ -129,7 +133,7 @@ export default function SecretUnlockModal() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Continue Journey
+                {secretUnlockModal.id === 'secret-ringbearer' ? 'View and Certify My Passport' : 'Continue Journey'}
               </motion.button>
             </motion.div>
           </motion.div>

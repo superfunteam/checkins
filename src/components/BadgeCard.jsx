@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useApp } from '../context/AppContext';
 import { BADGE_TYPES } from '../data/badges';
@@ -5,6 +6,7 @@ import { badgeGridItem, springs } from '../utils/animations';
 
 export default function BadgeCard({ badge, index }) {
   const { badges, openBadgeModal, isSecretUnlocked } = useApp();
+  const badgeImageRef = useRef(null);
 
   const isClaimed = badges[badge.id]?.claimed;
   const isSecret = badge.type === BADGE_TYPES.SECRET;
@@ -15,7 +17,13 @@ export default function BadgeCard({ badge, index }) {
 
   const handleClick = () => {
     if (showAsMystery) return; // Can't open mystery badges
-    openBadgeModal(badge);
+    const rect = badgeImageRef.current?.getBoundingClientRect();
+    openBadgeModal(badge, rect ? {
+      top: rect.top,
+      left: rect.left,
+      width: rect.width,
+      height: rect.height
+    } : null);
   };
 
   return (
@@ -36,51 +44,63 @@ export default function BadgeCard({ badge, index }) {
       >
         {/* The badge image with mask and styling */}
         <div
+          ref={badgeImageRef}
           className={`
             badge-image-container w-full h-full overflow-hidden
             transition-all duration-300
             ${isClaimed ? 'opacity-100' : 'opacity-40 grayscale'}
           `}
         >
-          <img
-            src={badge.image}
-            alt={badge.name}
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
+          {showAsMystery ? (
+            // Lock placeholder for secret badges
+            <img
+              src={badge.id === 'secret-ringbearer' ? '/images/badge-lock-ring.png' : '/images/badge-lock.png'}
+              alt="Locked"
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <img
+              src={badge.image}
+              alt={badge.name}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          )}
         </div>
 
-        {/* Claimed checkmark */}
+        {/* Claimed indicator - gold star for secrets, purple checkmark for regular */}
         {isClaimed && (
           <motion.div
-            className="absolute -top-1 -right-1 w-6 h-6 bg-shire-500 rounded-full flex items-center justify-center shadow-md z-10"
+            className={`absolute -top-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center shadow-md z-10 ${
+              isSecret ? 'bg-gold-500' : ''
+            }`}
+            style={!isSecret ? { backgroundColor: '#7C3AED' } : {}}
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={springs.bouncy}
           >
-            <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-            </svg>
+            {isSecret ? (
+              <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+            ) : (
+              <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+              </svg>
+            )}
           </motion.div>
-        )}
-
-        {/* Secret badge sparkle indicator */}
-        {isSecret && !showAsMystery && (
-          <div className="absolute -top-1 -left-1 w-5 h-5 bg-gold-500 rounded-full flex items-center justify-center shadow-md z-10">
-            <span className="text-xs">✨</span>
-          </div>
         )}
       </div>
 
       {/* Badge name */}
       <p
         className={`
-          font-display text-[11px] font-semibold text-center leading-tight px-1
+          text-[11px] font-semibold text-center leading-tight px-1
           ${isClaimed ? 'text-earth-800' : 'text-earth-400'}
-          ${showAsMystery ? 'text-earth-300' : ''}
         `}
+        style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
       >
-        {showAsMystery ? '???' : badge.name}
+        {showAsMystery ? '\u00A0' : badge.name}
       </p>
     </motion.button>
   );
