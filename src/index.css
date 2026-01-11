@@ -57,7 +57,9 @@
 
   /* Modal content */
   .modal-content {
-    @apply fixed bottom-0 left-0 right-0 bg-parchment-50 rounded-t-modal shadow-modal z-50 max-h-[90vh] overflow-y-auto;
+    @apply fixed bottom-0 left-0 right-0 bg-parchment-50 rounded-t-modal shadow-modal z-50 max-h-[85vh];
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
   }
 
   /* App container with max-width for desktop */

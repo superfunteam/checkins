@@ -84,7 +84,7 @@ export default function NameModal() {
       >
         {/* Prompt */}
         <h2 className="font-display text-2xl font-semibold text-earth-800 text-center mb-8">
-          What name shall be recorded in the official registry?
+          What name shall be recorded in the official registry of travelers?
         </h2>
 
         {/* Input */}
@@ -114,12 +114,16 @@ export default function NameModal() {
 
         {/* Skip option */}
         <button
-          className="w-full text-center text-earth-500 font-body text-sm py-2 hover:text-earth-700 transition-colors"
+          className="w-full text-center text-earth-500 text-sm py-2 hover:text-earth-700 transition-colors"
+          style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
           onClick={handleSkip}
         >
           or Remain Anonymous
         </button>
-        <p className="text-center text-earth-400 text-xs mt-1 mb-6">
+        <p
+          className="text-center text-earth-400 text-xs mt-1 mb-6"
+          style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
+        >
           (defaults to "{DEFAULT_NAME}")
         </p>
 

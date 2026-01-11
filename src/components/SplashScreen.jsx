@@ -29,7 +29,7 @@ export default function SplashScreen() {
     >
       {/* Ring badge in Gowalla style */}
       <motion.div
-        className="w-48 h-48 mb-8 badge-image-container overflow-hidden"
+        className="w-48 h-48 mb-8 -mt-16 badge-image-container overflow-hidden"
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ ...springs.bouncy, delay: 0.2 }}
@@ -53,7 +53,7 @@ export default function SplashScreen() {
 
       {/* Subtitle */}
       <motion.p
-        className="font-body text-lg text-earth-600 mb-2 italic"
+        className="font-body text-lg text-earth-600 mb-10 italic"
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.4 }}
@@ -63,15 +63,30 @@ export default function SplashScreen() {
         Through Middle-earth
       </motion.p>
 
-      {/* Hosts */}
-      <motion.p
-        className="font-body text-sm text-earth-500 mb-12"
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.5 }}
+      {/* Hosts - fixed bottom right */}
+      <motion.div
+        className="fixed bottom-10 right-6 flex flex-col items-center"
+        initial={{ scale: 0, rotate: -12, opacity: 0 }}
+        animate={{ scale: 1, rotate: 6, opacity: 1 }}
+        transition={{
+          type: 'spring',
+          stiffness: 400,
+          damping: 15,
+          delay: 1,
+        }}
       >
-        Hosted by Sophia and Matt
-      </motion.p>
+        <img
+          src="/images/sophia-matt.png"
+          alt="Sophia and Matt"
+          className="w-24 drop-shadow-lg"
+        />
+        <p
+          className="text-xs mt-1"
+          style={{ fontFamily: "'Google Sans Flex', sans-serif", color: '#7C3AED' }}
+        >
+          Hosted by <span className="font-bold">Sophia</span> <span className="font-bold">and</span> <span className="font-bold">Matt</span>
+        </p>
+      </motion.div>
 
       {/* Enter button */}
       <motion.button

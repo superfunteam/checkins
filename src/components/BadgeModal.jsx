@@ -135,6 +135,16 @@ export default function BadgeModal() {
     }
   }, [currentIndex, navigableBadges, openBadgeModal]);
 
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (selectedBadge) {
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = '';
+      };
+    }
+  }, [selectedBadge]);
+
   // Keyboard navigation
   useEffect(() => {
     if (!selectedBadge) return;
@@ -233,7 +243,7 @@ export default function BadgeModal() {
 
           {/* Modal */}
           <motion.div
-            className="modal-content overflow-hidden"
+            className="modal-content overflow-x-hidden overflow-y-auto"
             variants={slideUpModal}
             initial="initial"
             animate="animate"
@@ -253,7 +263,7 @@ export default function BadgeModal() {
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={0.2}
                 onDragEnd={handleDragEnd}
-                className="p-6"
+                className="p-6 pb-8"
               >
               {/* Close button */}
               <button

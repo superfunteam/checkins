@@ -3,22 +3,43 @@
   "short_name": "Shire Passport",
   "description": "Official Documentation of One's Journey Through Middle-earth",
   "start_url": "/",
+  "id": "/",
   "display": "standalone",
   "background_color": "#f9f6f0",
   "theme_color": "#4a6741",
   "orientation": "portrait",
+  "scope": "/",
+  "categories": ["entertainment", "games"],
   "icons": [
     {
       "src": "/images/icon-192.png",
       "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icon-192.png",
+      "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
     },
     {
       "src": "/images/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/images/unfurl.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide"
     }
   ]
 }
