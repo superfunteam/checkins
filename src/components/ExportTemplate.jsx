@@ -1,5 +1,5 @@
 import { useApp } from '../context/AppContext';
-import { badges, BADGE_TYPES } from '../data/badges';
+import { badges } from '../data/badges';
 import { formatCertificateDate } from '../utils/exportPng';
 
 /**
@@ -10,8 +10,8 @@ export default function ExportTemplate() {
   const { name, badges: claimedBadges, isSecretUnlocked } = useApp();
 
   const claimedCount = Object.values(claimedBadges).filter(b => b?.claimed).length;
-  const primaryBadges = badges.filter(b => b.type !== BADGE_TYPES.SECRET);
-  const secretBadges = badges.filter(b => b.type === BADGE_TYPES.SECRET);
+  // All badges sorted by order for a single unified grid
+  const allBadgesSorted = [...badges].sort((a, b) => a.order - b.order);
 
   return (
     <div
@@ -19,28 +19,28 @@ export default function ExportTemplate() {
       style={{
         display: 'none',
         width: '1080px',
-        height: '1920px',
+        height: '1920px', /* Full height to fit all 5 rows of badges + footer */
         backgroundColor: '#f9f6f0',
         fontFamily: 'Cinzel, serif',
-        padding: '60px',
+        padding: '50px',
         boxSizing: 'border-box',
       }}
     >
       {/* Header */}
-      <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+      <div style={{ textAlign: 'center', marginBottom: '24px' }}>
         <h1
           style={{
-            fontSize: '52px',
+            fontSize: '48px',
             fontWeight: '700',
             color: '#1f1a13',
-            margin: '0 0 10px',
+            margin: '0 0 8px',
           }}
         >
           The Shire Passport
         </h1>
         <p
           style={{
-            fontSize: '20px',
+            fontSize: '18px',
             color: '#5c4d3a',
             fontStyle: 'italic',
             margin: '0',
@@ -51,60 +51,78 @@ export default function ExportTemplate() {
         </p>
       </div>
 
-      {/* Recipient */}
+      {/* Recipient with count */}
       <div
         style={{
           textAlign: 'center',
-          marginBottom: '30px',
-          padding: '20px',
+          marginBottom: '24px',
+          padding: '16px 20px',
           backgroundColor: '#f0ebe0',
           borderRadius: '16px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
         }}
       >
-        <p style={{ fontSize: '16px', color: '#8b7355', margin: '0 0 8px' }}>
-          This certifies that
-        </p>
-        <p
+        <div style={{ textAlign: 'left' }}>
+          <p style={{ fontSize: '18px', color: '#8b7355', margin: '0 0 4px', fontFamily: 'Google Sans Flex, sans-serif' }}>
+            This certifies that
+          </p>
+          <p
+            style={{
+              fontSize: '32px',
+              fontWeight: '600',
+              color: '#4a6741',
+              margin: '-4px 0 0 0',
+            }}
+          >
+            {name}
+          </p>
+          <p style={{ fontSize: '18px', color: '#8b7355', margin: '0', fontFamily: 'Google Sans Flex, sans-serif' }}>
+            has completed the sacred marathon
+          </p>
+        </div>
+        <div
           style={{
-            fontSize: '36px',
-            fontWeight: '600',
-            color: '#4a6741',
-            margin: '0',
+            backgroundColor: '#4a6741',
+            borderRadius: '12px',
+            padding: '8px 20px 12px 20px',
+            textAlign: 'center',
           }}
         >
-          {name}
-        </p>
-        <p style={{ fontSize: '16px', color: '#8b7355', margin: '8px 0 0' }}>
-          has completed the sacred marathon
-        </p>
+          <p
+            style={{
+              fontSize: '36px',
+              fontWeight: '700',
+              color: '#f9f6f0',
+              margin: '0',
+              lineHeight: '1',
+              fontFamily: 'Google Sans Flex, sans-serif',
+            }}
+          >
+            {claimedCount}/{badges.length}
+          </p>
+          <p style={{ fontSize: '14px', color: '#d9e5d9', margin: '2px 0 0', fontFamily: 'Google Sans Flex, sans-serif' }}>
+            Badges
+          </p>
+        </div>
       </div>
 
       {/* Date */}
-      <p style={{ textAlign: 'center', fontSize: '18px', color: '#5c4d3a', margin: '0 0 30px' }}>
+      <p style={{ textAlign: 'center', fontSize: '20px', color: '#5c4d3a', margin: '0 0 20px' }}>
         {formatCertificateDate()}
       </p>
 
-      {/* Badge Grid - Primary */}
-      <div style={{ marginBottom: '30px' }}>
-        <p
-          style={{
-            fontSize: '14px',
-            color: '#8b7355',
-            textTransform: 'uppercase',
-            letterSpacing: '2px',
-            marginBottom: '15px',
-          }}
-        >
-          Journey Badges
-        </p>
+      {/* All Badges Grid - 5 rows x 4 columns */}
+      <div style={{ marginBottom: '20px' }}>
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '12px',
+            gap: '16px',
           }}
         >
-          {primaryBadges.map((badge) => {
+          {allBadgesSorted.map((badge) => {
             const isClaimed = claimedBadges[badge.id]?.claimed;
             return (
               <div
@@ -113,39 +131,78 @@ export default function ExportTemplate() {
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  gap: '6px',
+                  gap: '8px',
+                  position: 'relative',
                 }}
               >
+                {/* Badge with shadow - using padding trick for aspect ratio */}
                 <div
                   style={{
                     width: '100%',
-                    aspectRatio: '1',
-                    borderRadius: '50% 50% 24% 24%',
-                    border: '12px solid white',
-                    overflow: 'hidden',
-                    opacity: isClaimed ? 1 : 0.35,
-                    filter: isClaimed ? 'none' : 'grayscale(100%)',
-                    boxShadow: '0 4px 8px rgba(31, 26, 19, 0.25)',
+                    paddingBottom: '100%', /* 1:1 aspect ratio */
+                    position: 'relative',
                   }}
                 >
-                  <img
-                    src={badge.image}
-                    alt={badge.name}
+                  <div
                     style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      borderRadius: '50% 50% 24% 24%',
+                      boxShadow: '0 6px 16px rgba(0, 0, 0, 0.5), 0 3px 6px rgba(0, 0, 0, 0.4)',
+                      opacity: isClaimed ? 1 : 0.25,
+                      filter: isClaimed ? 'none' : 'grayscale(100%)',
+                      border: '12px solid white',
+                      overflow: 'hidden',
+                      boxSizing: 'border-box',
                     }}
-                    crossOrigin="anonymous"
-                  />
+                  >
+                    <img
+                      src={badge.image}
+                      alt={badge.name}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        display: 'block',
+                      }}
+                      crossOrigin="anonymous"
+                    />
+                  </div>
                 </div>
+                {/* Purple checkmark for claimed badges */}
+                {isClaimed && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '0',
+                      right: '8px',
+                      width: '36px',
+                      height: '36px',
+                      backgroundColor: '#7C3AED',
+                      borderRadius: '50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      border: '3px solid white',
+                      boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
+                    }}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                )}
                 <span
                   style={{
-                    fontSize: '10px',
+                    fontSize: '13px',
                     fontWeight: '600',
                     color: isClaimed ? '#1f1a13' : '#8b7355',
                     textAlign: 'center',
                     lineHeight: '1.2',
+                    fontFamily: 'Google Sans Flex, sans-serif',
                   }}
                 >
                   {badge.name}
@@ -154,104 +211,6 @@ export default function ExportTemplate() {
             );
           })}
         </div>
-      </div>
-
-      {/* Secret Badges */}
-      <div style={{ marginBottom: '30px' }}>
-        <p
-          style={{
-            fontSize: '14px',
-            color: '#d4af37',
-            textTransform: 'uppercase',
-            letterSpacing: '2px',
-            marginBottom: '15px',
-          }}
-        >
-          Secret Achievements
-        </p>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '12px',
-          }}
-        >
-          {secretBadges.map((badge) => {
-            const isClaimed = claimedBadges[badge.id]?.claimed;
-
-            return (
-              <div
-                key={badge.id}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: '6px',
-                }}
-              >
-                <div
-                  style={{
-                    width: '100%',
-                    aspectRatio: '1',
-                    borderRadius: '50% 50% 24% 24%',
-                    border: isClaimed ? '3px solid #d4af37' : '3px solid white',
-                    overflow: 'hidden',
-                    opacity: isClaimed ? 1 : 0.35,
-                    filter: isClaimed ? 'none' : 'grayscale(100%)',
-                    boxShadow: '0 4px 8px rgba(31, 26, 19, 0.25)',
-                  }}
-                >
-                  <img
-                    src={badge.image}
-                    alt={badge.name}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                    }}
-                    crossOrigin="anonymous"
-                  />
-                </div>
-                <span
-                  style={{
-                    fontSize: '10px',
-                    fontWeight: '600',
-                    color: isClaimed ? '#1f1a13' : '#8b7355',
-                    textAlign: 'center',
-                    lineHeight: '1.2',
-                  }}
-                >
-                  {badge.name}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Stats */}
-      <div
-        style={{
-          textAlign: 'center',
-          padding: '20px',
-          backgroundColor: '#4a6741',
-          borderRadius: '16px',
-          marginBottom: '30px',
-        }}
-      >
-        <p
-          style={{
-            fontSize: '48px',
-            fontWeight: '700',
-            color: '#f9f6f0',
-            margin: '0',
-          }}
-        >
-          {claimedCount} / {badges.length}
-        </p>
-        <p style={{ fontSize: '18px', color: '#d9e5d9', margin: '5px 0 0' }}>
-          Badges Collected
-        </p>
       </div>
 
       {/* Footer */}

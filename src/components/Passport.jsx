@@ -5,7 +5,7 @@ import BadgeCard from './BadgeCard';
 import { badgeGridContainer, fadeIn } from '../utils/animations';
 
 export default function Passport() {
-  const { name, openCertificationModal, badges, resetAndStartOver } = useApp();
+  const { name, openCertificationModal, badges, resetAndStartOver, openScheduleSheet } = useApp();
 
   const primaryBadges = getPrimaryBadges();
 
@@ -27,13 +27,24 @@ export default function Passport() {
       {/* Sticky Header */}
       <header className="sticky top-0 z-30 bg-parchment-100/95 backdrop-blur-sm border-b border-parchment-300 px-4 py-3">
         <div className="flex items-center justify-between">
-          <div>
-            <h1 className="font-display text-lg font-bold text-earth-800">
-              The Shire Passport
-            </h1>
-            <p className="text-xs text-earth-500" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
-              {name}'s Journey
-            </p>
+          <div className="flex items-center gap-3">
+            <motion.button
+              onClick={openScheduleSheet}
+              className="w-9 h-9 flex items-center justify-center rounded-lg bg-parchment-200 text-earth-600 hover:bg-parchment-300 transition-colors"
+              whileTap={{ scale: 0.95 }}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </motion.button>
+            <div>
+              <h1 className="font-display text-lg font-bold text-earth-800">
+                The Shire Passport
+              </h1>
+              <p className="text-xs text-earth-500" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
+                {name}'s Journey
+              </p>
+            </div>
           </div>
           <div className="text-right" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
             <p className="text-lg font-bold text-shire-600">

@@ -45,6 +45,8 @@ export default function BadgeModal() {
 
   // Ref to get target position in modal
   const badgeTargetRef = useRef(null);
+  const modalContentRef = useRef(null);
+  const honorSystemRef = useRef(null);
   const [targetRect, setTargetRect] = useState(null);
   const [isFloatingVisible, setIsFloatingVisible] = useState(false);
   const [showModalBadge, setShowModalBadge] = useState(false);
@@ -145,6 +147,19 @@ export default function BadgeModal() {
     }
   }, [selectedBadge]);
 
+  // Scroll to honor system buttons when they appear
+  useEffect(() => {
+    if (showHonorSystem && honorSystemRef.current && modalContentRef.current) {
+      // Small delay to allow the honor system to render
+      setTimeout(() => {
+        honorSystemRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'end',
+        });
+      }, 100);
+    }
+  }, [showHonorSystem]);
+
   // Keyboard navigation
   useEffect(() => {
     if (!selectedBadge) return;
@@ -243,7 +258,12 @@ export default function BadgeModal() {
 
           {/* Modal */}
           <motion.div
-            className="modal-content overflow-x-hidden overflow-y-auto"
+            ref={modalContentRef}
+            className="modal-content overflow-y-auto overflow-x-hidden"
+            style={{
+              WebkitOverflowScrolling: 'touch',
+              overscrollBehavior: 'contain',
+            }}
             variants={slideUpModal}
             initial="initial"
             animate="animate"
@@ -309,7 +329,15 @@ export default function BadgeModal() {
                 >
                   {typeLabels[selectedBadge.type]}
                 </span>
-                {selectedBadge.time && (
+                {selectedBadge.startTime && (
+                  <span
+                    className="px-3 py-1 rounded-full text-xs tracking-wide text-earth-800 bg-earth-200/50"
+                    style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 400 }}
+                  >
+                    {selectedBadge.startTime} – {selectedBadge.time}
+                  </span>
+                )}
+                {selectedBadge.time && !selectedBadge.startTime && (
                   <span
                     className="px-3 py-1 rounded-full text-xs tracking-wide text-earth-800 bg-earth-200/50"
                     style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 400 }}
@@ -380,6 +408,7 @@ export default function BadgeModal() {
               <AnimatePresence>
                 {showHonorSystem && (
                   <motion.div
+                    ref={honorSystemRef}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
@@ -409,21 +438,22 @@ export default function BadgeModal() {
                       </span>
                     </label>
 
-                    <div className="flex gap-3">
-                      <button
-                        className="btn-secondary flex-1"
-                        onClick={() => setShowHonorSystem(false)}
-                      >
-                        Cancel
-                      </button>
+                    {/* Stacked buttons for mobile */}
+                    <div className="flex flex-col gap-3">
                       <motion.button
-                        className="btn-primary flex-1"
+                        className="btn-primary w-full py-4 text-lg"
                         onClick={handleHonorConfirm}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
                         I So Swear
                       </motion.button>
+                      <button
+                        className="btn-secondary w-full"
+                        onClick={() => setShowHonorSystem(false)}
+                      >
+                        Cancel
+                      </button>
                     </div>
                   </motion.div>
                 )}

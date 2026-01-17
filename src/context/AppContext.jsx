@@ -33,6 +33,7 @@ export function AppProvider({ children }) {
   const [isClosingBadgeModal, setIsClosingBadgeModal] = useState(false);
   const [showCertificationModal, setShowCertificationModal] = useState(false);
   const [showChecklist, setShowChecklist] = useState(false);
+  const [showScheduleSheet, setShowScheduleSheet] = useState(false);
 
   // Secret unlock modal queue - shows celebration modals sequentially
   const [secretUnlockQueue, setSecretUnlockQueue] = useState([]);
@@ -108,6 +109,16 @@ export function AppProvider({ children }) {
     setShowChecklist(false);
   }, [play]);
 
+  const openScheduleSheet = useCallback(() => {
+    play(UI_SOUNDS.modalOpen);
+    setShowScheduleSheet(true);
+  }, [play]);
+
+  const closeScheduleSheet = useCallback(() => {
+    play(UI_SOUNDS.modalClose);
+    setShowScheduleSheet(false);
+  }, [play]);
+
   const claimBadgeWithSound = useCallback((badgeId, options = {}) => {
     storage.claimBadge(badgeId, options);
     play(UI_SOUNDS.badgeClaim);
@@ -143,6 +154,11 @@ export function AppProvider({ children }) {
     setShowChecklist,
     openCertificationModal,
     closeCertificationModal,
+
+    // Schedule sheet
+    showScheduleSheet,
+    openScheduleSheet,
+    closeScheduleSheet,
 
     // Secret badges
     isSecretUnlocked,
