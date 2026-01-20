@@ -1,6 +1,143 @@
-import { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+
+// Badge images from all passports
+const BADGE_IMAGES = [
+  '/passports/shire/assets/images/badges/badge-fellowship.webp',
+  '/passports/shire/assets/images/badges/badge-two-towers.webp',
+  '/passports/shire/assets/images/badges/badge-return-king.webp',
+  '/passports/shire/assets/images/badges/badge-breakfast.webp',
+  '/passports/shire/assets/images/badges/badge-elevenses.webp',
+  '/passports/shire/assets/images/badges/badge-luncheon.webp',
+  '/passports/shire/assets/images/badges/badge-afternoon-tea.webp',
+  '/passports/shire/assets/images/badges/badge-dinner.webp',
+  '/passports/shire/assets/images/badges/badge-supper.webp',
+  '/passports/shire/assets/images/badges/badge-you-shall-not-pass.webp',
+  '/passports/shire/assets/images/badges/badge-my-precious.webp',
+  '/passports/shire/assets/images/badges/badge-beacons-are-lit.webp',
+  '/passports/sample/assets/images/badges/badge-check-in.webp',
+  '/passports/sample/assets/images/badges/badge-pizza-time.webp',
+  '/passports/sample/assets/images/badges/badge-team-formed.webp',
+  '/passports/sample/assets/images/badges/badge-first-commit.webp',
+  '/passports/sample/assets/images/badges/badge-caffeine.webp',
+  '/passports/sample/assets/images/badges/badge-demo-ready.webp',
+];
+
+// Badge shapes with border radius
+const BADGE_SHAPES = [
+  { name: 'arch', borderRadius: '50% 50% 24% 24%' },
+  { name: 'circle', borderRadius: '50%' },
+  { name: 'square', borderRadius: '22%' },
+];
+
+// Single floating badge component
+function FloatingBadge({ position, size, delay, duration }) {
+  const [currentIndex, setCurrentIndex] = useState(() => Math.floor(Math.random() * BADGE_IMAGES.length));
+  const [shapeIndex, setShapeIndex] = useState(() => Math.floor(Math.random() * BADGE_SHAPES.length));
+  const [isVisible, setIsVisible] = useState(true);
+
+  // Change badge every 3-5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsVisible(false);
+      setTimeout(() => {
+        setCurrentIndex(prev => (prev + 1 + Math.floor(Math.random() * 3)) % BADGE_IMAGES.length);
+        setShapeIndex(prev => (prev + 1) % BADGE_SHAPES.length);
+        setIsVisible(true);
+      }, 300);
+    }, 3000 + Math.random() * 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const shape = BADGE_SHAPES[shapeIndex];
+
+  return (
+    <motion.div
+      className="absolute pointer-events-none"
+      style={position}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay, duration: 0.5 }}
+    >
+      <motion.div
+        animate={{ y: [0, -8, 0] }}
+        transition={{
+          duration,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      >
+        <AnimatePresence mode="wait">
+          {isVisible && (
+            <motion.div
+              key={`${currentIndex}-${shapeIndex}`}
+              initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              exit={{ opacity: 0, scale: 0.8, rotate: 5 }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden bg-white"
+              style={{
+                width: size,
+                height: size,
+                borderRadius: shape.borderRadius,
+                border: '4px solid white',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+              }}
+            >
+              <img
+                src={BADGE_IMAGES[currentIndex]}
+                alt=""
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// Floating badges container for hero
+function HeroFloatingBadges() {
+  // Desktop positions (8 badges)
+  const desktopBadges = useMemo(() => [
+    { position: { top: '8%', left: '5%' }, size: 72, delay: 0, duration: 3.5 },
+    { position: { top: '35%', left: '2%' }, size: 88, delay: 0.3, duration: 4 },
+    { position: { top: '65%', left: '8%' }, size: 64, delay: 0.6, duration: 3.2 },
+    { position: { top: '5%', right: '8%' }, size: 56, delay: 0.2, duration: 3.8 },
+    { position: { top: '30%', right: '3%' }, size: 80, delay: 0.5, duration: 4.2 },
+    { position: { top: '60%', right: '5%' }, size: 68, delay: 0.1, duration: 3.6 },
+    { position: { top: '80%', left: '15%' }, size: 60, delay: 0.4, duration: 3.4 },
+    { position: { top: '75%', right: '12%' }, size: 72, delay: 0.7, duration: 3.9 },
+  ], []);
+
+  // Mobile positions (4 badges near corners)
+  const mobileBadges = useMemo(() => [
+    { position: { top: '5%', left: '2%' }, size: 48, delay: 0, duration: 3.5 },
+    { position: { top: '5%', right: '2%' }, size: 44, delay: 0.3, duration: 4 },
+    { position: { bottom: '5%', left: '2%' }, size: 44, delay: 0.5, duration: 3.8 },
+    { position: { bottom: '5%', right: '2%' }, size: 48, delay: 0.2, duration: 3.6 },
+  ], []);
+
+  return (
+    <>
+      {/* Desktop badges */}
+      <div className="hidden md:block absolute inset-0 overflow-hidden">
+        {desktopBadges.map((badge, i) => (
+          <FloatingBadge key={`desktop-${i}`} {...badge} />
+        ))}
+      </div>
+      {/* Mobile badges */}
+      <div className="md:hidden absolute inset-0 overflow-hidden">
+        {mobileBadges.map((badge, i) => (
+          <FloatingBadge key={`mobile-${i}`} {...badge} />
+        ))}
+      </div>
+    </>
+  );
+}
 
 // Feature icons as SVG components
 const FeatureIcons = {
@@ -140,9 +277,10 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6">
+      <section className="pt-32 pb-20 px-10 md:px-6 relative min-h-[80vh] flex items-center">
+        <HeroFloatingBadges />
         <motion.div
-          className="landing-container mx-auto text-center"
+          className="landing-container mx-auto text-center relative z-10"
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
