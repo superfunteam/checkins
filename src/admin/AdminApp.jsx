@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { Routes, Route, Link, useParams, useNavigate } from 'react-router-dom';
 import { loadPassportIndex, loadPassport } from '../utils/passportLoader';
 import BadgeEditModal from './BadgeEditModal';
-import { savePassport } from './adminApi';
+import { savePassport, uploadFile } from './adminApi';
+import FileUploadInput from './FileUploadInput';
 import {
   TAILWIND_COLORS,
   BACKGROUND_PRESETS,
@@ -88,6 +89,7 @@ function PassportDetail() {
   const [editingBadgeType, setEditingBadgeType] = useState(null); // null | index | 'new'
   const [badgeTypeForm, setBadgeTypeForm] = useState({ name: '', label: '', color: '#3B82F6', hidden: false });
   const [refreshKey, setRefreshKey] = useState(0);
+  const [heroImageFile, setHeroImageFile] = useState(null);
 
   useEffect(() => {
     loadPassport(passportId)
@@ -305,21 +307,36 @@ function PassportDetail() {
             <div className="bg-white rounded-lg border border-gray-200 p-4">
               <div className="flex items-start gap-6">
                 {/* Preview */}
-                <div
-                  className="w-24 h-24 flex-shrink-0 rounded-2xl border-4 border-gray-200 overflow-hidden flex items-center justify-center bg-gray-50"
-                >
-                  {passport.content?.splash?.heroEmoji ? (
-                    <span className="text-5xl">{passport.content.splash.heroEmoji}</span>
-                  ) : passport.content?.splash?.heroImage ? (
-                    <img
-                      src={`/passports/${passportId}/${passport.content.splash.heroImage}`}
-                      alt="Hero"
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <span className="text-gray-300 text-sm">No badge</span>
-                  )}
-                </div>
+                {(() => {
+                  const shape = passport.settings?.badgeShape || 'arch';
+                  const effectiveShape = shape === 'shuffle' ? 'arch' : shape;
+                  const borderRadius = {
+                    arch: '50% 50% 24% 24%',
+                    circle: '50%',
+                    square: '22%'
+                  }[effectiveShape] || '50%';
+                  return (
+                    <div
+                      className="w-24 h-24 flex-shrink-0 border-4 border-white overflow-hidden flex items-center justify-center bg-gray-100"
+                      style={{
+                        borderRadius,
+                        boxShadow: '0 4px 8px rgba(31, 26, 19, 0.25), 0 2px 4px rgba(31, 26, 19, 0.15)'
+                      }}
+                    >
+                      {passport.content?.splash?.heroEmoji ? (
+                        <span className="text-5xl">{passport.content.splash.heroEmoji}</span>
+                      ) : passport.content?.splash?.heroImage ? (
+                        <img
+                          src={`/passports/${passportId}/${passport.content.splash.heroImage}`}
+                          alt="Hero"
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <span className="text-gray-300 text-sm text-center px-2">No badge</span>
+                      )}
+                    </div>
+                  );
+                })()}
 
                 {/* Controls */}
                 <div className="flex-1 space-y-4">
@@ -330,7 +347,6 @@ function PassportDetail() {
                         type="text"
                         value={passport.content?.splash?.heroEmoji || ''}
                         onChange={(e) => {
-                          // Take only last character if multiple entered
                           const emoji = e.target.value.slice(-2);
                           handleSplashChange('heroEmoji', emoji || null);
                           if (emoji) handleSplashChange('heroImage', null);
@@ -350,21 +366,28 @@ function PassportDetail() {
                         </button>
                       )}
                     </div>
-                    <p className="text-xs text-gray-400 mt-1">Using emoji will override any image</p>
+                    <p className="text-xs text-gray-400 mt-1">Emoji will override any uploaded image</p>
                   </div>
 
-                  <div>
-                    <label className="block font-medium mb-1">Image Path</label>
-                    <input
-                      type="text"
-                      value={passport.content?.splash?.heroImage || ''}
-                      onChange={(e) => handleSplashChange('heroImage', e.target.value || null)}
-                      placeholder="assets/images/splash.png"
-                      disabled={!!passport.content?.splash?.heroEmoji}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:text-gray-400"
-                    />
-                    <p className="text-xs text-gray-400 mt-1">Relative path within passport folder</p>
-                  </div>
+                  {!passport.content?.splash?.heroEmoji && (
+                    <div>
+                      <FileUploadInput
+                        label="Image"
+                        accept="image/*"
+                        value={passport.content?.splash?.heroImage}
+                        previewUrl={passport.content?.splash?.heroImage ? `/passports/${passportId}/${passport.content.splash.heroImage}` : null}
+                        onChange={async (file) => {
+                          setHeroImageFile(file);
+                          // Upload immediately
+                          const result = await uploadFile(passportId, file, 'images', 'splash.webp');
+                          await handleSplashChange('heroImage', result.path);
+                          setHeroImageFile(null);
+                        }}
+                        onClear={() => handleSplashChange('heroImage', null)}
+                        type="image"
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

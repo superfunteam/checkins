@@ -419,7 +419,8 @@
       "subtitle": "Official Documentation of One's Journey Through Middle-earth",
       "enterButton": "Enter the Shire",
       "hostedBy": "Hosted by {hosts}",
-      "heroImage": "assets/images/splash.png"
+      "heroImage": "assets/images/splash.png",
+      "heroEmoji": null
     },
     "name": {
       "prompt": "What name shall be recorded in the official registry of travelers?",
