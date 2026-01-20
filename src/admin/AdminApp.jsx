@@ -125,6 +125,16 @@ function PassportDetail() {
     setRefreshKey(k => k + 1);
   };
 
+  const handleSplashChange = async (key, value) => {
+    const updatedSplash = { ...passport.content.splash, [key]: value };
+    const updatedContent = { ...passport.content, splash: updatedSplash };
+    const updatedPassport = { ...passport, content: updatedContent };
+
+    await savePassport(passportId, updatedPassport);
+    setPassport(updatedPassport);
+    setRefreshKey(k => k + 1);
+  };
+
   const handleThemeColorChange = async (colorType, colorName) => {
     const currentColors = passport.theme?.colors || {};
     let updatedColors = { ...currentColors };
@@ -286,6 +296,77 @@ function PassportDetail() {
                   {feature}
                 </span>
               ))}
+            </div>
+          </section>
+
+          {/* Title Screen Badge */}
+          <section className="mb-8">
+            <h2 className="text-xl font-semibold mb-4">Title Screen Badge</h2>
+            <div className="bg-white rounded-lg border border-gray-200 p-4">
+              <div className="flex items-start gap-6">
+                {/* Preview */}
+                <div
+                  className="w-24 h-24 flex-shrink-0 rounded-2xl border-4 border-gray-200 overflow-hidden flex items-center justify-center bg-gray-50"
+                >
+                  {passport.content?.splash?.heroEmoji ? (
+                    <span className="text-5xl">{passport.content.splash.heroEmoji}</span>
+                  ) : passport.content?.splash?.heroImage ? (
+                    <img
+                      src={`/passports/${passportId}/${passport.content.splash.heroImage}`}
+                      alt="Hero"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-gray-300 text-sm">No badge</span>
+                  )}
+                </div>
+
+                {/* Controls */}
+                <div className="flex-1 space-y-4">
+                  <div>
+                    <label className="block font-medium mb-1">Emoji</label>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={passport.content?.splash?.heroEmoji || ''}
+                        onChange={(e) => {
+                          // Take only last character if multiple entered
+                          const emoji = e.target.value.slice(-2);
+                          handleSplashChange('heroEmoji', emoji || null);
+                          if (emoji) handleSplashChange('heroImage', null);
+                        }}
+                        placeholder="Enter emoji..."
+                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                      {passport.content?.splash?.heroEmoji && (
+                        <button
+                          onClick={() => handleSplashChange('heroEmoji', null)}
+                          className="px-3 py-2 text-gray-500 hover:text-red-600"
+                          title="Clear emoji"
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      )}
+                    </div>
+                    <p className="text-xs text-gray-400 mt-1">Using emoji will override any image</p>
+                  </div>
+
+                  <div>
+                    <label className="block font-medium mb-1">Image Path</label>
+                    <input
+                      type="text"
+                      value={passport.content?.splash?.heroImage || ''}
+                      onChange={(e) => handleSplashChange('heroImage', e.target.value || null)}
+                      placeholder="assets/images/splash.png"
+                      disabled={!!passport.content?.splash?.heroEmoji}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:text-gray-400"
+                    />
+                    <p className="text-xs text-gray-400 mt-1">Relative path within passport folder</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
 

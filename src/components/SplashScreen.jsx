@@ -52,19 +52,23 @@ export default function SplashScreen() {
       exit="exit"
     >
       {/* Ring badge in Gowalla style */}
-      {splashContent.heroImage && (
+      {(splashContent.heroImage || splashContent.heroEmoji) && (
         <motion.div
-          className="w-48 h-48 mb-8 -mt-16 badge-image-container overflow-hidden"
+          className="w-48 h-48 mb-8 -mt-16 badge-image-container overflow-hidden flex items-center justify-center"
           style={{ borderRadius: badgeBorderRadius }}
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ ...springs.bouncy, delay: 0.2 }}
         >
-          <img
-            src={getAssetUrl(splashContent.heroImage)}
-            alt={splashContent.title}
-            className="w-full h-full object-cover"
-          />
+          {splashContent.heroEmoji ? (
+            <span className="text-8xl">{splashContent.heroEmoji}</span>
+          ) : (
+            <img
+              src={getAssetUrl(splashContent.heroImage)}
+              alt={splashContent.title}
+              className="w-full h-full object-cover"
+            />
+          )}
         </motion.div>
       )}
 
