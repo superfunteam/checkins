@@ -32,7 +32,7 @@ const BADGE_SHAPES = [
 ];
 
 // Single floating badge component
-function FloatingBadge({ position, size, delay, duration }) {
+function FloatingBadge({ position, size, delay, duration, tilt = 0 }) {
   const [currentIndex, setCurrentIndex] = useState(() => Math.floor(Math.random() * BADGE_IMAGES.length));
   const [shapeIndex, setShapeIndex] = useState(() => Math.floor(Math.random() * BADGE_SHAPES.length));
   const [isVisible, setIsVisible] = useState(true);
@@ -56,7 +56,7 @@ function FloatingBadge({ position, size, delay, duration }) {
   return (
     <motion.div
       className="absolute pointer-events-none"
-      style={position}
+      style={{ ...position, transform: `rotate(${tilt}deg)` }}
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay, duration: 0.5 }}
@@ -73,9 +73,9 @@ function FloatingBadge({ position, size, delay, duration }) {
           {isVisible && (
             <motion.div
               key={`${currentIndex}-${shapeIndex}`}
-              initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              exit={{ opacity: 0, scale: 0.8, rotate: 5 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.3 }}
               className="overflow-hidden bg-white"
               style={{
@@ -101,24 +101,27 @@ function FloatingBadge({ position, size, delay, duration }) {
 
 // Floating badges container for hero
 function HeroFloatingBadges() {
-  // Desktop positions (8 badges) - all same size (96px)
+  // Desktop positions (8 badges) - evenly around edges with alternating tilt
   const desktopBadges = useMemo(() => [
-    { position: { top: '8%', left: '5%' }, size: 96, delay: 0, duration: 3.5 },
-    { position: { top: '35%', left: '2%' }, size: 96, delay: 0.3, duration: 4 },
-    { position: { top: '65%', left: '8%' }, size: 96, delay: 0.6, duration: 3.2 },
-    { position: { top: '5%', right: '8%' }, size: 96, delay: 0.2, duration: 3.8 },
-    { position: { top: '30%', right: '3%' }, size: 96, delay: 0.5, duration: 4.2 },
-    { position: { top: '60%', right: '5%' }, size: 96, delay: 0.1, duration: 3.6 },
-    { position: { top: '80%', left: '15%' }, size: 96, delay: 0.4, duration: 3.4 },
-    { position: { top: '75%', right: '12%' }, size: 96, delay: 0.7, duration: 3.9 },
+    // Left side (top to bottom)
+    { position: { top: '10%', left: '4%' }, size: 96, delay: 0, duration: 3.5, tilt: -3 },
+    { position: { top: '45%', left: '2%' }, size: 96, delay: 0.4, duration: 4, tilt: 3 },
+    { position: { top: '80%', left: '6%' }, size: 96, delay: 0.2, duration: 3.2, tilt: -3 },
+    // Right side (top to bottom)
+    { position: { top: '10%', right: '4%' }, size: 96, delay: 0.3, duration: 3.8, tilt: 3 },
+    { position: { top: '45%', right: '2%' }, size: 96, delay: 0.6, duration: 4.2, tilt: -3 },
+    { position: { top: '80%', right: '6%' }, size: 96, delay: 0.1, duration: 3.6, tilt: 3 },
+    // Bottom corners (inset more)
+    { position: { bottom: '5%', left: '18%' }, size: 96, delay: 0.5, duration: 3.4, tilt: 3 },
+    { position: { bottom: '5%', right: '18%' }, size: 96, delay: 0.7, duration: 3.9, tilt: -3 },
   ], []);
 
-  // Mobile positions (4 badges near corners) - all same size (60px)
+  // Mobile positions (4 badges near corners) - with tilt
   const mobileBadges = useMemo(() => [
-    { position: { top: '5%', left: '2%' }, size: 60, delay: 0, duration: 3.5 },
-    { position: { top: '5%', right: '2%' }, size: 60, delay: 0.3, duration: 4 },
-    { position: { bottom: '5%', left: '2%' }, size: 60, delay: 0.5, duration: 3.8 },
-    { position: { bottom: '5%', right: '2%' }, size: 60, delay: 0.2, duration: 3.6 },
+    { position: { top: '3%', left: '1%' }, size: 60, delay: 0, duration: 3.5, tilt: -3 },
+    { position: { top: '3%', right: '1%' }, size: 60, delay: 0.3, duration: 4, tilt: 3 },
+    { position: { bottom: '3%', left: '1%' }, size: 60, delay: 0.5, duration: 3.8, tilt: 3 },
+    { position: { bottom: '3%', right: '1%' }, size: 60, delay: 0.2, duration: 3.6, tilt: -3 },
   ], []);
 
   return (
