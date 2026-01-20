@@ -720,33 +720,89 @@ function PassportDetail() {
   );
 }
 
+function PasswordGate({ children }) {
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
+  const [authenticated, setAuthenticated] = useState(() => {
+    return sessionStorage.getItem('admin_authenticated') === 'true';
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const adminPassword = import.meta.env.VITE_ADMIN_PASSWORD;
+
+    if (password === adminPassword) {
+      sessionStorage.setItem('admin_authenticated', 'true');
+      setAuthenticated(true);
+      setError(false);
+    } else {
+      setError(true);
+    }
+  };
+
+  if (authenticated) {
+    return children;
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-sm">
+        <h1 className="text-2xl font-bold text-center mb-6">Admin Access</h1>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter password"
+            className={`w-full px-4 py-3 border rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+              error ? 'border-red-500' : 'border-gray-300'
+            }`}
+            autoFocus
+          />
+          {error && (
+            <p className="text-red-500 text-sm mb-4">Incorrect password</p>
+          )}
+          <button
+            type="submit"
+            className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Enter
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
 export default function AdminApp() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Link to="/admin" className="flex items-center gap-2">
-            <span className="text-xl font-bold">Passport Admin</span>
-          </Link>
-          <nav>
-            <Link
-              to="/"
-              className="text-gray-600 hover:text-gray-900 text-sm"
-            >
-              View Site
+    <PasswordGate>
+      <div className="min-h-screen bg-gray-50">
+        {/* Header */}
+        <header className="bg-white border-b border-gray-200 px-6 py-4">
+          <div className="max-w-7xl mx-auto flex items-center justify-between">
+            <Link to="/admin" className="flex items-center gap-2">
+              <span className="text-xl font-bold">Passport Admin</span>
             </Link>
-          </nav>
-        </div>
-      </header>
+            <nav>
+              <Link
+                to="/"
+                className="text-gray-600 hover:text-gray-900 text-sm"
+              >
+                View Site
+              </Link>
+            </nav>
+          </div>
+        </header>
 
-      {/* Content */}
-      <main className="max-w-7xl mx-auto">
-        <Routes>
-          <Route path="/" element={<PassportList />} />
-          <Route path="/:passportId" element={<PassportDetail />} />
-        </Routes>
-      </main>
-    </div>
+        {/* Content */}
+        <main className="max-w-7xl mx-auto">
+          <Routes>
+            <Route path="/" element={<PassportList />} />
+            <Route path="/:passportId" element={<PassportDetail />} />
+          </Routes>
+        </main>
+      </div>
+    </PasswordGate>
   );
 }
