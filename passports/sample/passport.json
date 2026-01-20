@@ -1,0 +1,305 @@
+{
+  "id": "sample",
+  "version": 1,
+  "meta": {
+    "name": "Sample Check-ins",
+    "shortName": "Sample",
+    "description": "The Ultimate Hackathon Survival Guide",
+    "hosts": {
+      "names": [
+        "Your Name Here"
+      ],
+      "image": null
+    }
+  },
+  "features": {
+    "secretBadges": true,
+    "backgroundMusic": false,
+    "scheduleTimeline": true,
+    "greetingSounds": false,
+    "badgeSounds": false
+  },
+  "schedule": {
+    "dayStart": "18:00",
+    "dayEnd": "23:59"
+  },
+  "badgeTypes": [
+    {
+      "id": "milestone",
+      "name": "Milestones",
+      "label": "Milestone",
+      "emoji": "🎯",
+      "color": "#3B82F6"
+    },
+    {
+      "id": "survival",
+      "name": "Survival",
+      "label": "Survival",
+      "emoji": "🍕",
+      "color": "#F59E0B"
+    },
+    {
+      "id": "social",
+      "name": "Social",
+      "label": "Social",
+      "emoji": "🤝",
+      "color": "#10B981"
+    },
+    {
+      "id": "secret",
+      "name": "Secrets",
+      "label": "Secret",
+      "emoji": "✨",
+      "color": "#8B5CF6",
+      "hidden": true
+    }
+  ],
+  "badges": [
+    {
+      "id": "check-in",
+      "type": "milestone",
+      "name": "I Made It",
+      "shortDesc": "Successfully found the venue",
+      "longDesc": "Against all odds, you navigated public transit, found parking, or convinced your Uber driver this was a real address. Welcome to the hackathon!",
+      "instruction": "Check in at the registration desk to claim this badge.",
+      "order": 1,
+      "emoji": "😆",
+      "time": "6:00 PM"
+    },
+    {
+      "id": "pizza-time",
+      "type": "survival",
+      "name": "Pizza Protocol",
+      "shortDesc": "First slice secured",
+      "longDesc": "You've mastered the ancient art of the pizza queue. Pro tip: the secret is to hover near the delivery entrance.",
+      "instruction": "Grab a slice (or three) when pizza arrives.",
+      "order": 2,
+      "emoji": "🍕",
+      "time": "7:00 PM"
+    },
+    {
+      "id": "team-formed",
+      "type": "social",
+      "name": "Squad Goals",
+      "shortDesc": "Found your people",
+      "longDesc": "Through a series of awkward introductions and 'what's your stack?' conversations, you've assembled a team. May your merge conflicts be few.",
+      "instruction": "Form or join a team for the hackathon.",
+      "order": 3,
+      "emoji": "🙌",
+      "time": "7:30 PM"
+    },
+    {
+      "id": "first-commit",
+      "type": "milestone",
+      "name": "git push --force",
+      "shortDesc": "Code has been written",
+      "longDesc": "Your first commit is in. It's probably a README.md with just the project name, but hey, that's still shipping code.",
+      "instruction": "Make your first commit to the project repo.",
+      "order": 4,
+      "emoji": "🖥️",
+      "time": "9:00 PM"
+    },
+    {
+      "id": "caffeine",
+      "type": "survival",
+      "name": "Caffeinated",
+      "shortDesc": "Energy levels critical",
+      "longDesc": "That third cup of coffee seemed like a good idea. Your hands are shaking but your code has never been more... interesting.",
+      "instruction": "Consume your beverage of choice to power through.",
+      "order": 5,
+      "emoji": "☕",
+      "time": "10:00 PM"
+    },
+    {
+      "id": "demo-ready",
+      "type": "milestone",
+      "name": "Ship It!",
+      "shortDesc": "Ready for the big moment",
+      "longDesc": "It works on your machine, and that's what matters. Time to present your masterpiece and pray the demo gods are merciful.",
+      "instruction": "Complete your project and prepare your demo.",
+      "order": 6,
+      "emoji": "🚀",
+      "time": "11:30 PM"
+    },
+    {
+      "id": "secret-champion",
+      "type": "secret",
+      "name": "Event Champion",
+      "shortDesc": "You did it all!",
+      "longDesc": "From check-in to demo, you experienced the full hackathon journey. You are now officially an Event Champion. Your event manager is crying tears of joy.",
+      "instruction": "Complete all badges to unlock this achievement.",
+      "order": 7,
+      "emoji": "🏆",
+      "unlockCondition": {
+        "type": "all",
+        "badgeIds": [
+          "check-in",
+          "pizza-time",
+          "team-formed",
+          "first-commit",
+          "caffeine",
+          "demo-ready"
+        ]
+      }
+    }
+  ],
+  "theme": {
+    "colors": {
+      "primary": {
+        "50": "#EFF6FF",
+        "100": "#DBEAFE",
+        "200": "#BFDBFE",
+        "300": "#93C5FD",
+        "400": "#60A5FA",
+        "500": "#3B82F6",
+        "600": "#2563EB",
+        "700": "#1D4ED8",
+        "800": "#1E40AF",
+        "900": "#1E3A8A"
+      },
+      "accent": {
+        "50": "#FFF7ED",
+        "100": "#FFEDD5",
+        "200": "#FED7AA",
+        "300": "#FDBA74",
+        "400": "#FB923C",
+        "500": "#F97316",
+        "600": "#EA580C",
+        "700": "#C2410C",
+        "800": "#9A3412",
+        "900": "#7C2D12"
+      },
+      "background": {
+        "50": "#F8FAFC",
+        "100": "#F1F5F9",
+        "200": "#E2E8F0",
+        "300": "#CBD5E1",
+        "400": "#94A3B8",
+        "500": "#64748B"
+      },
+      "text": {
+        "50": "#F8FAFC",
+        "100": "#F1F5F9",
+        "200": "#E2E8F0",
+        "300": "#CBD5E1",
+        "400": "#94A3B8",
+        "500": "#64748B",
+        "600": "#475569",
+        "700": "#334155",
+        "800": "#1E293B",
+        "900": "#0F172A"
+      },
+      "highlight": "#8B5CF6",
+      "danger": {
+        "500": "#EF4444",
+        "600": "#DC2626",
+        "700": "#B91C1C"
+      }
+    },
+    "fonts": {
+      "display": {
+        "family": "Space Grotesk",
+        "weights": [
+          400,
+          600,
+          700
+        ]
+      },
+      "body": {
+        "family": "Inter",
+        "weights": [
+          400,
+          500,
+          600
+        ]
+      },
+      "ui": {
+        "family": "Inter",
+        "weights": [
+          400,
+          500
+        ]
+      }
+    }
+  },
+  "content": {
+    "splash": {
+      "title": "Sample Check-ins",
+      "subtitle": "The Ultimate Hackathon Survival Guide",
+      "heroImage": null,
+      "enterButton": "Let's Hack"
+    },
+    "name": {
+      "title": "What's your name?",
+      "subtitle": "So we know who to blame when the WiFi goes down",
+      "placeholder": "Your name",
+      "continueButton": "Continue"
+    },
+    "explainer": {
+      "title": "Welcome to the Hackathon!",
+      "greeting": "Hey {name}!",
+      "body": [
+        "Track your hackathon journey with check-in badges. From arrival to demo, we've got milestones for every step of the way.",
+        "Tap any badge to learn more. Complete them all to unlock a secret achievement!"
+      ],
+      "quote": "\"Move fast and break things\" — but maybe not the production server",
+      "disclaimer": "Times are approximate. Pizza arrival may vary based on traffic and driver mood.",
+      "beginButton": "Start Hacking"
+    },
+    "passport": {
+      "header": "Sample Check-ins",
+      "journeySubtitle": "{name}'s Hackathon Journey",
+      "progressText": "{count} of {total} badges collected",
+      "certifyButton": "Get Certificate",
+      "resetButton": "Reset Progress"
+    },
+    "certification": {
+      "title": "Hackathon Complete!",
+      "subtitle": "You survived the night",
+      "preview": "Certificate of Completion",
+      "downloadButton": "Download Certificate",
+      "shareButton": "Share Achievement",
+      "viewChecklist": "View All Badges"
+    },
+    "certificate": {
+      "header": "Certificate of Completion",
+      "title": "Sample Check-ins",
+      "certifies": "This certifies that",
+      "completed": "has successfully completed the hackathon journey",
+      "footer": "\"Ship it!\""
+    },
+    "schedule": {
+      "title": "Tonight's Schedule"
+    },
+    "badgeModal": {
+      "claimButton": "Check In",
+      "claimedLabel": "Checked In",
+      "witnessedAt": "Completed at {time}",
+      "honorSystemText": "By checking in, you confirm you've actually done this. No cheating — your event manager is watching.",
+      "honorSystemCheckbox": "Don't ask me again",
+      "honorConfirmButton": "Confirm Check-in",
+      "cancelButton": "Cancel"
+    },
+    "checklist": {
+      "header": "Badge Checklist",
+      "description": "Made a mistake? Toggle badges on or off below. Secret badges unlock automatically when you complete all regular badges.",
+      "doneButton": "Done"
+    },
+    "secretUnlock": {
+      "header": "Achievement Unlocked!",
+      "continueButton": "Keep Going",
+      "certifyButton": "Get My Certificate"
+    }
+  },
+  "audio": {
+    "greetings": [],
+    "backgroundMusic": {}
+  },
+  "pwa": {
+    "themeColor": "#3B82F6",
+    "backgroundColor": "#F1F5F9"
+  },
+  "settings": {
+    "badgeShape": "shuffle"
+  }
+}

@@ -1,10 +1,12 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
+import { adminApiPlugin } from './vite-plugin-admin-api';
 
 export default defineConfig({
   plugins: [
     react(),
+    adminApiPlugin(),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: [

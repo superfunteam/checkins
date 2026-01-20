@@ -5,47 +5,7 @@ import { useCallback, useRef, useEffect, useState } from 'react';
 
 const audioContextRef = { current: null };
 
-// Badge sound file mapping
-const BADGE_SOUND_FILES = {
-  'breakfast': '/audio/badge-breakfast.mp3',
-  'second-breakfast': '/audio/badge-second-breakfast.mp3',
-  'elevenses': '/audio/badge-elevenses.mp3',
-  'luncheon': '/audio/badge-luncheon.mp3',
-  'afternoon-tea': '/audio/badge-afternoon-tea.mp3',
-  'dinner': '/audio/badge-dinner.mp3',
-  'supper': '/audio/badge-supper.mp3',
-  'fellowship': '/audio/badge-fellowship.mp3',
-  'two-towers': '/audio/badge-two-towers.mp3',
-  'return-king': '/audio/badge-return-king.mp3',
-  'i-will-take-it': '/audio/badge-i-will-take-it.mp3',
-  'you-shall-not-pass': '/audio/badge-you-shall-not-pass.mp3',
-  'my-precious': '/audio/badge-my-precious.mp3',
-  'ents-go-to-war': '/audio/badge-ents-go-to-war.mp3',
-  'beacons-are-lit': '/audio/badge-beacons-are-lit.mp3',
-  'i-am-no-man': '/audio/badge-i-am-no-man.mp3',
-  'secret-movies': '/audio/badge-secret-movies.mp3',
-  'secret-meals': '/audio/badge-secret-meals.mp3',
-  'secret-scenes': '/audio/badge-secret-scenes.mp3',
-  'secret-ringbearer': '/audio/badge-secret-ringbearer.mp3',
-};
-
-// Greeting sound files
-const GREETING_SOUND_FILES = [
-  '/audio/greeting-1.mp3',
-  '/audio/greeting-2.mp3',
-  '/audio/greeting-3.mp3',
-  '/audio/greeting-4.mp3',
-  '/audio/greeting-5.mp3',
-];
-
-// Background music files by time of day
-const BG_MUSIC_FILES = {
-  morning: ['/audio/bg-morning-1.mp3', '/audio/bg-morning-2.mp3'],
-  afternoon: ['/audio/bg-afternoon-1.mp3', '/audio/bg-afternoon-2.mp3'],
-  night: ['/audio/bg-night-1.mp3', '/audio/bg-night-2.mp3'],
-};
-
-// Preloaded audio cache
+// Preloaded audio cache - keyed by full URL
 const preloadedBadgeSounds = {};
 const preloadedGreetings = [];
 let badgeSoundsPreloaded = false;
@@ -59,16 +19,18 @@ let currentGreetingAudio = null;
 let bgMusicAudio = null;
 let currentTimeOfDay = null;
 let bgMusicCheckInterval = null;
+let currentBgMusicConfig = null;
 
 // Preload all badge sounds for instant playback
-export function preloadBadgeSounds() {
-  if (badgeSoundsPreloaded) return Promise.resolve();
+// Takes array of { badgeId, soundUrl } objects from passport config
+export function preloadBadgeSounds(badgeSoundMappings = []) {
+  if (badgeSoundsPreloaded || badgeSoundMappings.length === 0) return Promise.resolve();
 
-  const loadPromises = Object.entries(BADGE_SOUND_FILES).map(([badgeId, src]) => {
+  const loadPromises = badgeSoundMappings.map(({ badgeId, soundUrl }) => {
     return new Promise((resolve) => {
       const audio = new Audio();
       audio.preload = 'auto';
-      audio.src = src;
+      audio.src = soundUrl;
 
       // Resolve when loaded or on error (don't block on failures)
       audio.addEventListener('canplaythrough', () => {
@@ -102,7 +64,8 @@ export function stopBadgeSound() {
 }
 
 // Play a badge sound by badge ID (stops any previous sound first)
-export function playBadgeSound(badgeId, volume = 0.7) {
+// Optional fallbackUrl for direct playback if not preloaded
+export function playBadgeSound(badgeId, volume = 0.7, fallbackUrl = null) {
   // Check for reduced motion preference
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     return;
@@ -125,29 +88,27 @@ export function playBadgeSound(badgeId, volume = 0.7) {
         currentBadgeAudio = null;
       }
     }, { once: true });
-  } else {
+  } else if (fallbackUrl) {
     // Fallback: try to play directly if not preloaded
-    const src = BADGE_SOUND_FILES[badgeId];
-    if (src) {
-      const fallback = new Audio(src);
-      fallback.volume = volume;
-      currentBadgeAudio = fallback;
-      fallback.play().catch(e => console.warn('Badge sound play failed:', e));
+    const fallback = new Audio(fallbackUrl);
+    fallback.volume = volume;
+    currentBadgeAudio = fallback;
+    fallback.play().catch(e => console.warn('Badge sound play failed:', e));
 
-      fallback.addEventListener('ended', () => {
-        if (currentBadgeAudio === fallback) {
-          currentBadgeAudio = null;
-        }
-      }, { once: true });
-    }
+    fallback.addEventListener('ended', () => {
+      if (currentBadgeAudio === fallback) {
+        currentBadgeAudio = null;
+      }
+    }, { once: true });
   }
 }
 
 // Preload greeting sounds for instant playback
-export function preloadGreetingSounds() {
-  if (greetingsPreloaded) return Promise.resolve();
+// Takes array of greeting URLs from passport config
+export function preloadGreetingSounds(greetingUrls = []) {
+  if (greetingsPreloaded || greetingUrls.length === 0) return Promise.resolve();
 
-  const loadPromises = GREETING_SOUND_FILES.map((src, index) => {
+  const loadPromises = greetingUrls.map((src, index) => {
     return new Promise((resolve) => {
       const audio = new Audio();
       audio.preload = 'auto';
@@ -192,8 +153,10 @@ export function playRandomGreeting(volume = 0.8) {
   // Stop any currently playing greeting
   stopGreetingSound();
 
+  if (preloadedGreetings.length === 0) return;
+
   // Pick a random greeting
-  const randomIndex = Math.floor(Math.random() * GREETING_SOUND_FILES.length);
+  const randomIndex = Math.floor(Math.random() * preloadedGreetings.length);
   const audio = preloadedGreetings[randomIndex];
 
   if (audio) {
@@ -207,21 +170,6 @@ export function playRandomGreeting(volume = 0.8) {
         currentGreetingAudio = null;
       }
     }, { once: true });
-  } else {
-    // Fallback: play directly if not preloaded
-    const src = GREETING_SOUND_FILES[randomIndex];
-    if (src) {
-      const fallback = new Audio(src);
-      fallback.volume = volume;
-      currentGreetingAudio = fallback;
-      fallback.play().catch(e => console.warn('Greeting sound play failed:', e));
-
-      fallback.addEventListener('ended', () => {
-        if (currentGreetingAudio === fallback) {
-          currentGreetingAudio = null;
-        }
-      }, { once: true });
-    }
   }
 }
 
@@ -233,10 +181,21 @@ function getTimeOfDay() {
   return 'night';                        // After 7pm
 }
 
+// Configure background music with passport audio config
+// bgMusicConfig should be { morning: [url1, url2], afternoon: [...], night: [...] }
+export function configureBackgroundMusic(bgMusicConfig) {
+  currentBgMusicConfig = bgMusicConfig;
+}
+
 // Start background music (call on first user interaction)
 export function startBackgroundMusic(volume = 0.5) {
   // Check for reduced motion preference
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  // Need config to play music
+  if (!currentBgMusicConfig) {
     return;
   }
 
@@ -249,7 +208,9 @@ export function startBackgroundMusic(volume = 0.5) {
   currentTimeOfDay = timeOfDay;
 
   // Pick a random track for this time of day
-  const tracks = BG_MUSIC_FILES[timeOfDay];
+  const tracks = currentBgMusicConfig[timeOfDay];
+  if (!tracks || tracks.length === 0) return;
+
   const randomIndex = Math.floor(Math.random() * tracks.length);
   const src = tracks[randomIndex];
 
@@ -284,6 +245,8 @@ export function stopBackgroundMusic() {
 
 // Check and update background music if time of day changed
 export function updateBackgroundMusicForTime(volume = 0.5) {
+  if (!currentBgMusicConfig) return;
+
   const timeOfDay = getTimeOfDay();
 
   // If time of day changed, switch tracks
@@ -292,7 +255,9 @@ export function updateBackgroundMusicForTime(volume = 0.5) {
     currentTimeOfDay = timeOfDay;
 
     // Pick a random track for the new time of day
-    const tracks = BG_MUSIC_FILES[timeOfDay];
+    const tracks = currentBgMusicConfig[timeOfDay];
+    if (!tracks || tracks.length === 0) return;
+
     const randomIndex = Math.floor(Math.random() * tracks.length);
     const src = tracks[randomIndex];
 

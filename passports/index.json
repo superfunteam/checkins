@@ -1,0 +1,20 @@
+{
+  "passports": [
+    {
+      "id": "shire",
+      "name": "The Shire Passport",
+      "description": "Official Documentation of One's Journey Through Middle-earth",
+      "path": "/event/shire",
+      "enabled": true,
+      "default": true
+    },
+    {
+      "id": "sample",
+      "name": "Sample Check-ins",
+      "description": "The Ultimate Hackathon Survival Guide",
+      "path": "/event/sample",
+      "enabled": true,
+      "default": false
+    }
+  ]
+}

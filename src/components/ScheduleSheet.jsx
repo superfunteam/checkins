@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useApp } from '../context/AppContext';
-import { getPrimaryBadges, BADGE_TYPES } from '../data/badges';
+import { usePassport } from '../context/PassportContext';
 import { slideFromLeft, backdrop, springs } from '../utils/animations';
 
 // Parse time string like "9am ish" or "10:43am ish" into minutes from midnight
@@ -20,42 +20,11 @@ function parseTimeToMinutes(timeStr) {
   return hours * 60 + minutes;
 }
 
-// Day boundaries in minutes from midnight
-const DAY_START = 9 * 60; // 9am = 540 minutes
-const DAY_END = 20 * 60 + 30; // 8:30pm = 1230 minutes
-const DAY_DURATION = DAY_END - DAY_START;
-
-// Get current progress through the day (0-100)
-function getDayProgress() {
-  const now = new Date();
-  const currentMinutes = now.getHours() * 60 + now.getMinutes();
-
-  if (currentMinutes < DAY_START) return 0;
-  if (currentMinutes > DAY_END) return 100;
-
-  return ((currentMinutes - DAY_START) / DAY_DURATION) * 100;
-}
-
-// Get badge position on the timeline (0-100)
-function getBadgePosition(badge) {
-  const badgeMinutes = parseTimeToMinutes(badge.time);
-  if (badgeMinutes < DAY_START) return 0;
-  if (badgeMinutes > DAY_END) return 100;
-  return ((badgeMinutes - DAY_START) / DAY_DURATION) * 100;
-}
-
-// Get color based on badge type
-function getBadgeTypeColor(type) {
-  switch (type) {
-    case BADGE_TYPES.MEAL:
-      return '#D97706'; // gold/amber
-    case BADGE_TYPES.SCENE:
-      return '#DC2626'; // red
-    case BADGE_TYPES.MOVIE:
-      return '#16A34A'; // green
-    default:
-      return '#6B7280'; // gray
-  }
+// Parse schedule time like "09:00" into minutes from midnight
+function parseScheduleTime(timeStr) {
+  if (!timeStr) return 0;
+  const [hours, minutes] = timeStr.split(':').map(Number);
+  return hours * 60 + (minutes || 0);
 }
 
 // Icon components for badge types
@@ -94,28 +63,50 @@ function CheckIcon() {
 // Get icon component for badge type
 function BadgeTypeIcon({ type, color }) {
   switch (type) {
-    case BADGE_TYPES.MEAL:
-      return <MealIcon color={color} />;
-    case BADGE_TYPES.SCENE:
-      return <SceneIcon color={color} />;
-    case BADGE_TYPES.MOVIE:
-      return <MovieIcon color={color} />;
-    default:
-      return null;
+    case 'meal': return <MealIcon color={color} />;
+    case 'scene': return <SceneIcon color={color} />;
+    case 'movie': return <MovieIcon color={color} />;
+    default: return null;
   }
-}
-
-// Format time for display
-function formatTime(timeStr) {
-  if (!timeStr) return '';
-  return timeStr;
 }
 
 export default function ScheduleSheet() {
   const { showScheduleSheet, closeScheduleSheet, badges } = useApp();
+  const { primaryBadges, schedule, getTypeColor, content } = usePassport();
+
+  const scheduleContent = content.schedule;
+
+  // Parse day boundaries from schedule config
+  const dayStart = parseScheduleTime(schedule?.dayStart || '09:00');
+  const dayEnd = parseScheduleTime(schedule?.dayEnd || '20:30');
+  const dayDuration = dayEnd - dayStart;
+
+  // Get current progress through the day (0-100)
+  const getDayProgress = () => {
+    const now = new Date();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    if (currentMinutes < dayStart) return 0;
+    if (currentMinutes > dayEnd) return 100;
+    return ((currentMinutes - dayStart) / dayDuration) * 100;
+  };
+
+  // Get badge position on the timeline (0-100)
+  const getBadgePosition = (badge) => {
+    const badgeMinutes = parseTimeToMinutes(badge.time);
+    if (badgeMinutes < dayStart) return 0;
+    if (badgeMinutes > dayEnd) return 100;
+    return ((badgeMinutes - dayStart) / dayDuration) * 100;
+  };
+
   const [dayProgress, setDayProgress] = useState(getDayProgress);
 
-  const primaryBadges = getPrimaryBadges();
+  // Get start time for sorting (movies use startTime, others use time)
+  const getSortTime = (badge) => badge.startTime || badge.time;
+
+  // Sort by start time for the timeline
+  const sortedBadges = [...primaryBadges].sort((a, b) => {
+    return parseTimeToMinutes(getSortTime(a)) - parseTimeToMinutes(getSortTime(b));
+  });
 
   // Update progress every minute
   useEffect(() => {
@@ -125,7 +116,6 @@ export default function ScheduleSheet() {
       setDayProgress(getDayProgress());
     }, 60000);
 
-    // Update immediately when opening
     setDayProgress(getDayProgress());
 
     return () => clearInterval(interval);
@@ -135,7 +125,6 @@ export default function ScheduleSheet() {
     <AnimatePresence>
       {showScheduleSheet && (
         <>
-          {/* Backdrop */}
           <motion.div
             className="fixed inset-0 bg-black/50 z-40"
             variants={backdrop}
@@ -145,7 +134,6 @@ export default function ScheduleSheet() {
             onClick={closeScheduleSheet}
           />
 
-          {/* Side Sheet */}
           <motion.div
             className="fixed left-0 top-0 bottom-0 w-80 max-w-[85vw] bg-parchment-100 z-50 shadow-2xl flex flex-col"
             variants={slideFromLeft}
@@ -154,10 +142,9 @@ export default function ScheduleSheet() {
             exit="exit"
             transition={springs.smooth}
           >
-            {/* Header */}
             <header className="flex items-center justify-between px-4 py-4 border-b border-parchment-300">
               <h2 className="font-display text-lg font-bold text-earth-800">
-                Today's Journey
+                {scheduleContent?.title || "Today's Journey"}
               </h2>
               <motion.button
                 onClick={closeScheduleSheet}
@@ -170,25 +157,24 @@ export default function ScheduleSheet() {
               </motion.button>
             </header>
 
-            {/* Scrollable Content */}
             <div className="flex-1 overflow-y-auto p-4">
-              {/* Legend - Badge Type Key */}
-              <div className="mb-4 p-3 bg-parchment-200/50 rounded-xl border border-parchment-300">
+              {/* Legend */}
+              <div className="mb-4 p-3 rounded-xl border border-parchment-300" style={{ backgroundColor: 'rgba(237, 232, 220, 0.5)' }}>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1.5">
-                    <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: '#D97706' }}>
+                    <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: getTypeColor('meal') }}>
                       <MealIcon color="white" />
                     </div>
                     <span className="text-xs text-earth-500" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Meal</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: '#DC2626' }}>
+                    <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: getTypeColor('scene') }}>
                       <SceneIcon color="white" />
                     </div>
                     <span className="text-xs text-earth-500" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Scene</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: '#16A34A' }}>
+                    <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: getTypeColor('movie') }}>
                       <MovieIcon color="white" />
                     </div>
                     <span className="text-xs text-earth-500" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Movie</span>
@@ -197,10 +183,8 @@ export default function ScheduleSheet() {
               </div>
 
               <div className="relative">
-                {/* Progress Track - z-0 to stay behind dots */}
                 <div className="absolute top-0 bottom-0 bg-parchment-300 z-0" style={{ left: '17px', width: '6px' }} />
 
-                {/* Progress Fill - z-0 to stay behind dots */}
                 <motion.div
                   className="absolute top-0 origin-top z-0"
                   style={{ left: '17px', width: '6px', backgroundColor: '#7C3AED' }}
@@ -209,7 +193,6 @@ export default function ScheduleSheet() {
                   transition={{ duration: 0.5, ease: 'easeOut' }}
                 />
 
-                {/* Current Time Marker - z-20 to stay on top, with pulse animation */}
                 {dayProgress > 0 && dayProgress < 100 && (
                   <motion.div
                     className="absolute -translate-y-1/2 z-20"
@@ -227,29 +210,20 @@ export default function ScheduleSheet() {
                           '0 0 0 0 rgba(124, 58, 237, 0.7)',
                         ],
                       }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
-                      }}
+                      transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                     />
                   </motion.div>
                 )}
 
-                {/* Schedule Items */}
                 <div className="space-y-4 ml-10">
-                  {primaryBadges.map((badge) => {
+                  {sortedBadges.map((badge) => {
                     const isClaimed = badges[badge.id]?.claimed;
                     const position = getBadgePosition(badge);
                     const isPast = position < dayProgress;
-                    const typeColor = getBadgeTypeColor(badge.type);
+                    const typeColor = getTypeColor(badge.type);
 
                     return (
-                      <div
-                        key={badge.id}
-                        className="relative flex items-start gap-3"
-                      >
-                        {/* Type indicator icon - always fully opaque, z-10 above line */}
+                      <div key={badge.id} className="relative flex items-start gap-3">
                         <div
                           className="absolute -left-8 top-0 w-6 h-6 rounded-full flex items-center justify-center z-10"
                           style={{
@@ -258,34 +232,20 @@ export default function ScheduleSheet() {
                           }}
                         >
                           {isClaimed ? (
-                            <span className="text-white">
-                              <CheckIcon />
-                            </span>
+                            <span className="text-white"><CheckIcon /></span>
                           ) : (
                             <BadgeTypeIcon type={badge.type} color="white" />
                           )}
                         </div>
 
-                        {/* Content - opacity applied only to text */}
-                        <div
-                          className={`flex-1 min-w-0 transition-opacity ${
-                            isClaimed ? 'opacity-60' : isPast ? 'opacity-70' : 'opacity-100'
-                          }`}
-                        >
+                        <div className={`flex-1 min-w-0 transition-opacity ${isClaimed ? 'opacity-60' : isPast ? 'opacity-70' : 'opacity-100'}`}>
                           <span
                             className="text-xs font-medium"
-                            style={{
-                              fontFamily: "'Google Sans Flex', sans-serif",
-                              color: isClaimed ? '#9CA3AF' : '#78716C'
-                            }}
+                            style={{ fontFamily: "'Google Sans Flex', sans-serif", color: isClaimed ? '#9CA3AF' : '#78716C' }}
                           >
-                            {formatTime(badge.time)}
+                            {badge.time}
                           </span>
-                          <p
-                            className={`text-sm font-medium truncate ${
-                              isClaimed ? 'text-earth-400 line-through' : 'text-earth-700'
-                            }`}
-                          >
+                          <p className={`text-sm font-medium truncate ${isClaimed ? 'text-earth-400 line-through' : 'text-earth-700'}`}>
                             {badge.name}
                           </p>
                         </div>

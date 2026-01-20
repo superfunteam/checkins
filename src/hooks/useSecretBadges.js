@@ -1,5 +1,5 @@
 import { useEffect, useCallback, useRef } from 'react';
-import { badges, BADGE_TYPES } from '../data/badges';
+import { usePassport } from '../context/PassportContext';
 
 /**
  * Hook to handle automatic secret badge unlocking
@@ -7,12 +7,26 @@ import { badges, BADGE_TYPES } from '../data/badges';
  * @param {Function} claimBadge - Function to claim a badge
  * @param {Function} playSound - Function to play sounds
  * @param {Function} onSecretUnlock - Callback when a secret is unlocked
+ * @param {boolean} enabled - Whether secret badges feature is enabled
+ * @param {Array} secretBadgeConfigs - Optional override for secret badge configs
  */
-export function useSecretBadges(claimedBadges, claimBadge, playSound, onSecretUnlock) {
+export function useSecretBadges(
+  claimedBadges,
+  claimBadge,
+  playSound,
+  onSecretUnlock,
+  enabled = true,
+  secretBadgeConfigs = null
+) {
   const justUnlocked = useRef(new Set());
 
+  // Get secret badges from passport context if not provided
+  const passport = usePassport();
+  const secretBadges = secretBadgeConfigs || passport.secretBadges || [];
+
   const checkSecretUnlocks = useCallback(() => {
-    const secretBadges = badges.filter(b => b.type === BADGE_TYPES.SECRET);
+    // Skip if feature is disabled
+    if (!enabled) return;
 
     for (const secret of secretBadges) {
       // Skip if already claimed or already processed this session
@@ -20,6 +34,7 @@ export function useSecretBadges(claimedBadges, claimBadge, playSound, onSecretUn
       if (justUnlocked.current.has(secret.id)) continue;
 
       // Check unlock condition
+      if (!secret.unlockCondition?.badgeIds) continue;
       const { badgeIds } = secret.unlockCondition;
       const allUnlocked = badgeIds.every(id => claimedBadges[id]?.claimed);
 
@@ -35,7 +50,7 @@ export function useSecretBadges(claimedBadges, claimBadge, playSound, onSecretUn
         }, 600);
       }
     }
-  }, [claimedBadges, claimBadge, playSound, onSecretUnlock]);
+  }, [claimedBadges, claimBadge, playSound, onSecretUnlock, enabled, secretBadges]);
 
   // Check for unlocks whenever claimed badges change
   useEffect(() => {
@@ -44,16 +59,20 @@ export function useSecretBadges(claimedBadges, claimBadge, playSound, onSecretUn
 
   // Check if a secret badge is unlocked (for display purposes)
   const isSecretUnlocked = useCallback((badgeId) => {
-    const badge = badges.find(b => b.id === badgeId);
-    if (!badge || badge.type !== BADGE_TYPES.SECRET) return false;
+    // If feature disabled, always return false
+    if (!enabled) return false;
+
+    const badge = secretBadges.find(b => b.id === badgeId);
+    if (!badge) return false;
 
     // If already claimed, it's unlocked
     if (claimedBadges[badgeId]?.claimed) return true;
 
     // Check if conditions are met
+    if (!badge.unlockCondition?.badgeIds) return false;
     const { badgeIds } = badge.unlockCondition;
     return badgeIds.every(id => claimedBadges[id]?.claimed);
-  }, [claimedBadges]);
+  }, [claimedBadges, enabled, secretBadges]);
 
   return { checkSecretUnlocks, isSecretUnlocked };
 }

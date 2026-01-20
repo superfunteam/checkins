@@ -1,7 +1,17 @@
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect, useRef } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import { useSound, UI_SOUNDS, playBadgeSound, stopBadgeSound } from '../hooks/useSound';
+import {
+  useSound,
+  UI_SOUNDS,
+  playBadgeSound,
+  stopBadgeSound,
+  preloadBadgeSounds,
+  preloadGreetingSounds,
+  configureBackgroundMusic,
+  startBackgroundMusic,
+} from '../hooks/useSound';
 import { useSecretBadges } from '../hooks/useSecretBadges';
+import { usePassport } from '../context/PassportContext';
 
 const AppContext = createContext(null);
 
@@ -15,8 +25,47 @@ export const SCREENS = {
 };
 
 export function AppProvider({ children }) {
-  const storage = useLocalStorage();
+  // Get passportId from PassportContext
+  const { passportId, features, secretBadges: secretBadgeConfigs, badges, audio, getAssetUrl } = usePassport();
+  const audioInitialized = useRef(false);
+
+  // Use passport-namespaced storage
+  const storage = useLocalStorage(passportId);
   const { play } = useSound();
+
+  // Initialize audio system with passport-based paths
+  useEffect(() => {
+    if (audioInitialized.current || !badges || !getAssetUrl) return;
+    audioInitialized.current = true;
+
+    // Build badge sound mappings from passport config
+    const badgeSoundMappings = badges
+      .filter(b => b.sound)
+      .map(b => ({
+        badgeId: b.id,
+        soundUrl: getAssetUrl(b.sound),
+      }));
+
+    // Preload badge sounds if feature is enabled
+    if (features?.badgeSounds !== false && badgeSoundMappings.length > 0) {
+      preloadBadgeSounds(badgeSoundMappings);
+    }
+
+    // Preload greeting sounds if feature is enabled
+    if (features?.greetingSounds !== false && audio?.greetings) {
+      const greetingUrls = audio.greetings.map(src => getAssetUrl(src));
+      preloadGreetingSounds(greetingUrls);
+    }
+
+    // Configure background music if feature is enabled
+    if (features?.backgroundMusic !== false && audio?.backgroundMusic) {
+      const bgMusicConfig = {};
+      Object.entries(audio.backgroundMusic).forEach(([timeOfDay, tracks]) => {
+        bgMusicConfig[timeOfDay] = tracks.map(src => getAssetUrl(src));
+      });
+      configureBackgroundMusic(bgMusicConfig);
+    }
+  }, [badges, audio, features, getAssetUrl]);
 
   // Current screen state
   const [currentScreen, setCurrentScreen] = useState(() => {
@@ -60,12 +109,14 @@ export function AppProvider({ children }) {
     });
   }, [play]);
 
-  // Secret badges hook
+  // Secret badges hook - only active if feature is enabled
   const { isSecretUnlocked } = useSecretBadges(
     storage.badges,
     storage.claimBadge,
     play,
-    handleSecretUnlock
+    handleSecretUnlock,
+    features?.secretBadges !== false, // enabled by default if not specified
+    secretBadgeConfigs
   );
 
   // Navigation helpers
@@ -78,12 +129,15 @@ export function AppProvider({ children }) {
 
   const openBadgeModal = useCallback((badge, rect = null) => {
     play(UI_SOUNDS.modalOpen);
-    // Play the badge-specific sound effect
-    playBadgeSound(badge.id);
+    // Play the badge-specific sound effect (if enabled)
+    if (features?.badgeSounds !== false && badge.sound) {
+      const fallbackUrl = getAssetUrl(badge.sound);
+      playBadgeSound(badge.id, 0.7, fallbackUrl);
+    }
     setBadgeOriginRect(rect);
     setSelectedBadge(badge);
     setIsClosingBadgeModal(false);
-  }, [play]);
+  }, [play, features, getAssetUrl]);
 
   const closeBadgeModal = useCallback(() => {
     play(UI_SOUNDS.modalClose);

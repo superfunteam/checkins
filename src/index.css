@@ -45,6 +45,22 @@
     font-family: 'Google Sans Flex', sans-serif;
   }
 
+  /* Landing page container - wider than app */
+  .landing-container {
+    @apply max-w-6xl;
+  }
+
+  /* Landing page buttons */
+  .landing-btn-primary {
+    @apply inline-block px-6 py-3 bg-slate-900 text-white font-semibold rounded-xl;
+    @apply hover:bg-slate-800 active:scale-95 transition-all duration-150;
+  }
+
+  .landing-btn-secondary {
+    @apply inline-block px-6 py-3 bg-white text-slate-700 font-semibold rounded-xl border border-slate-200;
+    @apply hover:bg-slate-50 active:scale-95 transition-all duration-150;
+  }
+
   /* Card style */
   .card {
     @apply bg-parchment-50 rounded-card shadow-card p-4;
@@ -52,7 +68,8 @@
 
   /* Modal backdrop */
   .modal-backdrop {
-    @apply fixed inset-0 bg-earth-900/60 backdrop-blur-sm z-40;
+    @apply fixed inset-0 backdrop-blur-sm z-40;
+    background-color: rgba(var(--color-text-900-rgb, 31, 26, 19), 0.6);
   }
 
   /* Modal content */
@@ -74,10 +91,8 @@
     @apply max-w-md mx-auto min-h-screen relative;
   }
 
-  /* Gowalla-style badge image container */
+  /* Base badge image container - shared styles */
   .badge-image-container {
-    /* Fully rounded top corners, slightly rounded bottom */
-    border-radius: 50% 50% 24% 24%;
     /* Thick white stroke */
     border: 12px solid white;
     /* Heavy drop shadow */
@@ -86,9 +101,35 @@
       0 2px 4px rgba(31, 26, 19, 0.15);
   }
 
+  /* Badge shape: arch (default) - round top, less round bottom */
+  .badge-shape-arch .badge-image-container {
+    border-radius: 50% 50% 24% 24%;
+  }
+
+  /* Badge shape: circle - fully round */
+  .badge-shape-circle .badge-image-container {
+    border-radius: 50%;
+  }
+
+  /* Badge shape: square - rounded corners like app icon */
+  .badge-shape-square .badge-image-container {
+    border-radius: 22%;
+  }
+
   /* Badge image wrapper for positioning */
   .badge-image-wrapper {
     filter: drop-shadow(0 3px 6px rgba(31, 26, 19, 0.2));
+  }
+
+  /* Shuffle shape rotations */
+  .badge-tilt-left {
+    transform: rotate(-3deg);
+  }
+  .badge-tilt-right {
+    transform: rotate(3deg);
+  }
+  .badge-tilt-none {
+    transform: rotate(0deg);
   }
 }
 

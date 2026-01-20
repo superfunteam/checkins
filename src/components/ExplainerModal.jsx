@@ -1,19 +1,28 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useApp } from '../context/AppContext';
+import { usePassport } from '../context/PassportContext';
 import { slideUp, springs } from '../utils/animations';
 import { playRandomGreeting, stopGreetingSound } from '../hooks/useSound';
 
 export default function ExplainerModal() {
   const { goToScreen, SCREENS, name } = useApp();
+  const { content, features } = usePassport();
 
-  // Play a random greeting when the screen mounts
+  const explainerContent = content.explainer;
+
+  // Play a random greeting when the screen mounts (if enabled)
   useEffect(() => {
-    playRandomGreeting();
+    if (features.greetingSounds !== false) {
+      playRandomGreeting();
+    }
 
     // Stop the greeting if user leaves this screen
     return () => stopGreetingSound();
-  }, []);
+  }, [features.greetingSounds]);
+
+  // Format greeting with name
+  const greeting = explainerContent.greeting?.replace('{name}', name) || `Welcome, ${name}`;
 
   return (
     <motion.div
@@ -32,32 +41,34 @@ export default function ExplainerModal() {
       >
         {/* Header */}
         <h2 className="font-display text-2xl font-bold text-earth-800 text-center mb-6">
-          Your Quest Awaits
+          {explainerContent.title}
         </h2>
 
         {/* Greeting */}
         <p className="font-body text-earth-700 text-center mb-4 text-lg">
-          Welcome, <span className="font-semibold text-shire-600">{name}</span>
+          {greeting.split(name).map((part, i, arr) => (
+            <span key={i}>
+              {part}
+              {i < arr.length - 1 && <span className="font-semibold text-shire-600">{name}</span>}
+            </span>
+          ))}
         </p>
 
         {/* Body copy */}
         <div className="font-body text-earth-600 space-y-4 mb-6">
-          <p>
-            Before you lies a perilous journey through all three Extended Editions
-            of The Lord of the Rings.
-          </p>
-          <p>
-            As you witness legendary moments and partake in the seven sacred meals
-            of hobbit tradition, tap each badge to mark your progress.
-          </p>
-          <p className="italic text-earth-500 border-l-4 border-gold-400 pl-4">
-            "A wizard is never late, nor is he early. He arrives precisely when
-            he means to."
-          </p>
-          <p className="text-sm">
-            All times are approximate-ish. This passport operates on the honor system.
-            The Shire trusts its guests.
-          </p>
+          {explainerContent.body?.map((paragraph, i) => (
+            <p key={i}>{paragraph}</p>
+          ))}
+
+          {explainerContent.quote && (
+            <p className="italic text-earth-500 border-l-4 border-gold-400 pl-4">
+              "{explainerContent.quote}"
+            </p>
+          )}
+
+          {explainerContent.disclaimer && (
+            <p className="text-sm">{explainerContent.disclaimer}</p>
+          )}
         </div>
 
         {/* Begin button */}
@@ -67,7 +78,7 @@ export default function ExplainerModal() {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          Begin My Journey
+          {explainerContent.beginButton}
         </motion.button>
       </motion.div>
     </motion.div>

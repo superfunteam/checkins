@@ -1,19 +1,35 @@
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useApp } from '../context/AppContext';
-import { BADGE_TYPES } from '../data/badges';
+import { usePassport } from '../context/PassportContext';
 import { badgeGridItem, springs } from '../utils/animations';
+
+// Shape classes for shuffle mode
+const SHUFFLE_SHAPES = ['arch', 'circle', 'square'];
+const SHUFFLE_TILTS = ['badge-tilt-left', 'badge-tilt-right', 'badge-tilt-none'];
 
 export default function BadgeCard({ badge, index }) {
   const { badges, openBadgeModal, isSecretUnlocked } = useApp();
+  const { getAssetUrl, badgeShape } = usePassport();
   const badgeImageRef = useRef(null);
 
   const isClaimed = badges[badge.id]?.claimed;
-  const isSecret = badge.type === BADGE_TYPES.SECRET;
+  const isSecret = badge.type === 'secret';
   const isUnlocked = isSecret ? isSecretUnlocked(badge.id) : true;
 
   // Secret badges that aren't unlocked yet show as mystery
   const showAsMystery = isSecret && !isUnlocked && !isClaimed;
+
+  // Determine shape class and tilt for this badge
+  const { shapeClass, tiltClass } = useMemo(() => {
+    if (badgeShape === 'shuffle') {
+      // Use badge index to deterministically assign shape and tilt
+      const shape = SHUFFLE_SHAPES[index % SHUFFLE_SHAPES.length];
+      const tilt = SHUFFLE_TILTS[(index + Math.floor(index / 3)) % SHUFFLE_TILTS.length];
+      return { shapeClass: `badge-shape-${shape}`, tiltClass: tilt };
+    }
+    return { shapeClass: `badge-shape-${badgeShape}`, tiltClass: '' };
+  }, [badgeShape, index]);
 
   const handleClick = () => {
     if (showAsMystery) return; // Can't open mystery badges
@@ -28,7 +44,7 @@ export default function BadgeCard({ badge, index }) {
 
   return (
     <motion.button
-      className="badge-card relative flex flex-col items-center gap-2 p-1"
+      className={`badge-card relative flex flex-col items-center gap-2 p-1 ${shapeClass}`}
       onClick={handleClick}
       variants={badgeGridItem}
       whileHover={!showAsMystery ? { scale: 1.05 } : {}}
@@ -40,6 +56,7 @@ export default function BadgeCard({ badge, index }) {
         className={`
           badge-image-wrapper relative w-full aspect-square
           ${showAsMystery ? 'cursor-default' : 'cursor-pointer'}
+          ${tiltClass}
         `}
       >
         {/* The badge image with mask and styling */}
@@ -54,13 +71,18 @@ export default function BadgeCard({ badge, index }) {
           {showAsMystery ? (
             // Lock placeholder for secret badges
             <img
-              src={badge.id === 'secret-ringbearer' ? '/images/badge-lock-ring.png' : '/images/badge-lock.png'}
+              src={getAssetUrl(badge.id === 'secret-ringbearer' ? 'assets/images/lock-ring.png' : 'assets/images/lock.png')}
               alt="Locked"
               className="w-full h-full object-cover"
             />
+          ) : badge.emoji ? (
+            // Emoji badge
+            <div className="w-full h-full flex items-center justify-center">
+              <span className="text-5xl">{badge.emoji}</span>
+            </div>
           ) : (
             <img
-              src={badge.image}
+              src={getAssetUrl(badge.image)}
               alt={badge.name}
               className="w-full h-full object-cover"
               loading="lazy"

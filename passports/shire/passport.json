@@ -1,0 +1,538 @@
+{
+  "id": "shire",
+  "version": 1,
+  "meta": {
+    "name": "The Shire Passport",
+    "shortName": "Shire Passport",
+    "description": "Official Documentation of One's Journey Through Middle-earth",
+    "hosts": {
+      "names": [
+        "Sophia",
+        "Matt"
+      ],
+      "image": "assets/images/hosts.png"
+    }
+  },
+  "features": {
+    "secretBadges": true,
+    "backgroundMusic": true,
+    "scheduleTimeline": true,
+    "greetingSounds": true,
+    "badgeSounds": true
+  },
+  "schedule": {
+    "dayStart": "09:00",
+    "dayEnd": "20:30"
+  },
+  "badgeTypes": [
+    {
+      "id": "movie",
+      "name": "Films",
+      "label": "Film",
+      "emoji": "🎬",
+      "color": "#16A34A"
+    },
+    {
+      "id": "meal",
+      "name": "Meals",
+      "label": "Meal",
+      "emoji": "🍽️",
+      "color": "#D97706"
+    },
+    {
+      "id": "scene",
+      "name": "Scenes",
+      "label": "Scene",
+      "emoji": "⚔️",
+      "color": "#DC2626"
+    },
+    {
+      "id": "secret",
+      "name": "Secrets",
+      "label": "Secret",
+      "emoji": "✨",
+      "color": "#7C3AED",
+      "hidden": true
+    }
+  ],
+  "badges": [
+    {
+      "id": "breakfast",
+      "type": "meal",
+      "name": "Breakfast",
+      "time": "9am ish",
+      "shortDesc": "The first meal of the day",
+      "longDesc": "The most important meal in the Shire. One cannot simply begin a quest on an empty stomach.",
+      "instruction": "Eat breakfast to claim this badge.",
+      "image": "assets/images/badges/badge-breakfast.webp",
+      "sound": "assets/audio/badges/badge-breakfast.mp3",
+      "order": 1
+    },
+    {
+      "id": "second-breakfast",
+      "type": "meal",
+      "name": "Second Breakfast",
+      "time": "10am ish",
+      "shortDesc": "What about second breakfast?",
+      "longDesc": "What about second breakfast? A true hobbit never forgets. Pippin would be proud.",
+      "instruction": "Eat second breakfast to claim this badge.",
+      "image": "assets/images/badges/badge-second-breakfast.webp",
+      "sound": "assets/audio/badges/badge-second-breakfast.mp3",
+      "order": 2
+    },
+    {
+      "id": "i-will-take-it",
+      "type": "scene",
+      "name": "\"I Will Take It\"",
+      "time": "10:43am ish",
+      "shortDesc": "Frodo accepts the quest",
+      "longDesc": "In the House of Elrond, a small voice changes the fate of Middle-earth. \"I will take the Ring to Mordor. Though... I do not know the way.\"",
+      "instruction": "Watch this scene to claim this badge.",
+      "image": "assets/images/badges/badge-i-will-take-it.webp",
+      "sound": "assets/audio/badges/badge-i-will-take-it.mp3",
+      "order": 3
+    },
+    {
+      "id": "elevenses",
+      "type": "meal",
+      "name": "Elevenses",
+      "time": "11am ish",
+      "shortDesc": "A light refreshment",
+      "longDesc": "A light refreshment to bridge the gap between second breakfast and luncheon. The Shire approves of your dedication.",
+      "instruction": "Eat elevenses to claim this badge.",
+      "image": "assets/images/badges/badge-elevenses.webp",
+      "sound": "assets/audio/badges/badge-elevenses.mp3",
+      "order": 4
+    },
+    {
+      "id": "you-shall-not-pass",
+      "type": "scene",
+      "name": "\"You Shall Not Pass\"",
+      "time": "11:26am ish",
+      "shortDesc": "Gandalf faces the Balrog",
+      "longDesc": "Upon the Bridge of Khazad-dûm, Gandalf the Grey makes his stand against shadow and flame. \"You. Shall. Not. Pass!\"",
+      "instruction": "Watch this scene to claim this badge.",
+      "image": "assets/images/badges/badge-you-shall-not-pass.webp",
+      "sound": "assets/audio/badges/badge-you-shall-not-pass.mp3",
+      "order": 5
+    },
+    {
+      "id": "fellowship",
+      "type": "movie",
+      "name": "Fellowship of the Ring",
+      "time": "12:20pm ish",
+      "startTime": "9am ish",
+      "shortDesc": "First film completed",
+      "longDesc": "The journey begins. Witness the forming of the Fellowship and their departure from Rivendell.",
+      "instruction": "Finish watching The Fellowship of the Ring to claim this badge.",
+      "image": "assets/images/badges/badge-fellowship.webp",
+      "sound": "assets/audio/badges/badge-fellowship.mp3",
+      "order": 6
+    },
+    {
+      "id": "luncheon",
+      "type": "meal",
+      "name": "Luncheon",
+      "time": "1pm ish",
+      "shortDesc": "A proper sit-down meal",
+      "longDesc": "A proper sit-down meal, as is right and proper. Even Samwise Gamgee would be proud of your commitment to hobbit tradition.",
+      "instruction": "Eat luncheon to claim this badge.",
+      "image": "assets/images/badges/badge-luncheon.webp",
+      "sound": "assets/audio/badges/badge-luncheon.mp3",
+      "order": 7
+    },
+    {
+      "id": "my-precious",
+      "type": "scene",
+      "name": "\"My Precious\"",
+      "time": "2:08pm ish",
+      "shortDesc": "Gollum argues with himself",
+      "longDesc": "Witness the tortured soul of Sméagol as he wages war against himself. Two minds, one wretched creature. \"We wants it. We needs it. Must have the precious.\"",
+      "instruction": "Watch this scene to claim this badge.",
+      "image": "assets/images/badges/badge-my-precious.webp",
+      "sound": "assets/audio/badges/badge-my-precious.mp3",
+      "order": 8
+    },
+    {
+      "id": "afternoon-tea",
+      "type": "meal",
+      "name": "Afternoon Tea",
+      "time": "3pm ish",
+      "shortDesc": "Tea and sustenance",
+      "longDesc": "A civilized pause for tea and sustenance. You've earned it, precious. Yes, you have.",
+      "instruction": "Eat afternoon tea to claim this badge.",
+      "image": "assets/images/badges/badge-afternoon-tea.webp",
+      "sound": "assets/audio/badges/badge-afternoon-tea.mp3",
+      "order": 9
+    },
+    {
+      "id": "ents-go-to-war",
+      "type": "scene",
+      "name": "\"The Ents Go to War\"",
+      "time": "3:38pm ish",
+      "shortDesc": "Treebeard marches on Isengard",
+      "longDesc": "The shepherds of the forest have reached a decision. The Ents march on Isengard. \"There is no curse in Elvish, Entish, or the tongues of Men for this treachery.\"",
+      "instruction": "Watch this scene to claim this badge.",
+      "image": "assets/images/badges/badge-ents-go-to-war.webp",
+      "sound": "assets/audio/badges/badge-ents-go-to-war.mp3",
+      "order": 10
+    },
+    {
+      "id": "two-towers",
+      "type": "movie",
+      "name": "The Two Towers",
+      "time": "4:04pm ish",
+      "startTime": "12:30pm ish",
+      "shortDesc": "Second film completed",
+      "longDesc": "The fellowship is broken, but the story continues. Endure the second chapter and witness the Battle of Helm's Deep.",
+      "instruction": "Finish watching The Two Towers to claim this badge.",
+      "image": "assets/images/badges/badge-two-towers.webp",
+      "sound": "assets/audio/badges/badge-two-towers.mp3",
+      "order": 11
+    },
+    {
+      "id": "beacons-are-lit",
+      "type": "scene",
+      "name": "\"The Beacons Are Lit\"",
+      "time": "5:22pm ish",
+      "shortDesc": "Gondor calls for aid",
+      "longDesc": "Gondor calls for aid! Witness the flame pass from peak to peak across the realm of men. \"The beacons are lit! Gondor calls for aid!\"",
+      "instruction": "Watch this scene to claim this badge.",
+      "image": "assets/images/badges/badge-beacons-are-lit.webp",
+      "sound": "assets/audio/badges/badge-beacons-are-lit.mp3",
+      "order": 12
+    },
+    {
+      "id": "dinner",
+      "type": "meal",
+      "name": "Dinner",
+      "time": "6pm ish",
+      "shortDesc": "The main evening feast",
+      "longDesc": "The main evening feast. Refuel for the final push to Mount Doom. The end is in sight, but there is still far to go.",
+      "instruction": "Eat dinner to claim this badge.",
+      "image": "assets/images/badges/badge-dinner.webp",
+      "sound": "assets/audio/badges/badge-dinner.mp3",
+      "order": 13
+    },
+    {
+      "id": "i-am-no-man",
+      "type": "scene",
+      "name": "\"I Am No Man\"",
+      "time": "7:03pm ish",
+      "shortDesc": "Éowyn defeats the Witch-king",
+      "longDesc": "The Witch-king of Angmar meets his doom. \"No man can kill me.\" \"I am no man.\" The prophecy is fulfilled.",
+      "instruction": "Watch this scene to claim this badge.",
+      "image": "assets/images/badges/badge-i-am-no-man.webp",
+      "sound": "assets/audio/badges/badge-i-am-no-man.mp3",
+      "order": 14
+    },
+    {
+      "id": "supper",
+      "type": "meal",
+      "name": "Supper",
+      "time": "8pm ish",
+      "shortDesc": "The final meal",
+      "longDesc": "The seventh and final meal of a long day's journey. You have eaten as the hobbits eat. The Shire is proud of your appetite.",
+      "instruction": "Eat supper to claim this badge.",
+      "image": "assets/images/badges/badge-supper.webp",
+      "sound": "assets/audio/badges/badge-supper.mp3",
+      "order": 15
+    },
+    {
+      "id": "return-king",
+      "type": "movie",
+      "name": "Return of the King",
+      "time": "8:16pm ish",
+      "startTime": "4:15pm ish",
+      "shortDesc": "Final film completed",
+      "longDesc": "The final chapter. Commit to seeing this through to the very end. All endings are also beginnings.",
+      "instruction": "Finish watching The Return of the King to claim this badge.",
+      "image": "assets/images/badges/badge-return-king.webp",
+      "sound": "assets/audio/badges/badge-return-king.mp3",
+      "order": 16
+    },
+    {
+      "id": "secret-movies",
+      "type": "secret",
+      "name": "There and Back Again",
+      "shortDesc": "All movies completed",
+      "longDesc": "You have walked the full path from Bag End to Mount Doom and home again. Bilbo Baggins himself would tip his hat to your endurance.",
+      "image": "assets/images/badges/badge-secret-movies.webp",
+      "sound": "assets/audio/badges/badge-secret-movies.mp3",
+      "order": 17,
+      "unlockCondition": {
+        "type": "all",
+        "badgeIds": [
+          "fellowship",
+          "two-towers",
+          "return-king"
+        ]
+      },
+      "unlockHint": "All 3 films completed"
+    },
+    {
+      "id": "secret-meals",
+      "type": "secret",
+      "name": "Second Breakfast Champion",
+      "shortDesc": "All meals consumed",
+      "longDesc": "Seven meals. All consumed. You have achieved the highest honor in hobbit society. Your dedication to culinary tradition is unmatched in all the Shire.",
+      "image": "assets/images/badges/badge-secret-meals.webp",
+      "sound": "assets/audio/badges/badge-secret-meals.mp3",
+      "order": 18,
+      "unlockCondition": {
+        "type": "all",
+        "badgeIds": [
+          "breakfast",
+          "second-breakfast",
+          "elevenses",
+          "luncheon",
+          "afternoon-tea",
+          "dinner",
+          "supper"
+        ]
+      },
+      "unlockHint": "All 7 meals consumed"
+    },
+    {
+      "id": "secret-scenes",
+      "type": "secret",
+      "name": "Loremaster",
+      "shortDesc": "All key scenes witnessed",
+      "longDesc": "A true scholar of Middle-earth. You witnessed every pivotal moment in the tale. The Red Book of Westmarch shall record your attentiveness.",
+      "image": "assets/images/badges/badge-secret-scenes.webp",
+      "sound": "assets/audio/badges/badge-secret-scenes.mp3",
+      "order": 19,
+      "unlockCondition": {
+        "type": "all",
+        "badgeIds": [
+          "i-will-take-it",
+          "you-shall-not-pass",
+          "my-precious",
+          "ents-go-to-war",
+          "beacons-are-lit",
+          "i-am-no-man"
+        ]
+      },
+      "unlockHint": "All 6 scenes witnessed"
+    },
+    {
+      "id": "secret-ringbearer",
+      "type": "secret",
+      "name": "Ringbearer",
+      "shortDesc": "The ultimate achievement",
+      "longDesc": "You bore the weight of this quest to the very end. The fate of Middle-earth was in your hands, and you did not falter. Even the smallest person can change the course of the future.",
+      "image": "assets/images/badges/badge-secret-ringbearer.webp",
+      "sound": "assets/audio/badges/badge-secret-ringbearer.mp3",
+      "order": 20,
+      "unlockCondition": {
+        "type": "all",
+        "badgeIds": [
+          "secret-movies",
+          "secret-meals",
+          "secret-scenes"
+        ]
+      },
+      "unlockHint": "All other secrets unlocked"
+    }
+  ],
+  "theme": {
+    "colors": {
+      "primary": {
+        "50": "#f0f9ff",
+        "100": "#e0f2fe",
+        "200": "#bae6fd",
+        "300": "#7dd3fc",
+        "400": "#38bdf8",
+        "500": "#0ea5e9",
+        "600": "#0284c7",
+        "700": "#0369a1",
+        "800": "#075985",
+        "900": "#0c4a6e"
+      },
+      "accent": {
+        "50": "#fdf9eb",
+        "100": "#f9f0cc",
+        "200": "#f3e199",
+        "300": "#edd266",
+        "400": "#e7c333",
+        "500": "#d4af37",
+        "600": "#b8922a",
+        "700": "#8c6f20",
+        "800": "#604c16",
+        "900": "#34290c"
+      },
+      "background": {
+        "50": "#f8fafc",
+        "100": "#f1f5f9",
+        "200": "#e2e8f0",
+        "300": "#cbd5e1",
+        "400": "#94a3b8",
+        "500": "#64748b"
+      },
+      "text": {
+        "50": "#f8fafc",
+        "100": "#f1f5f9",
+        "200": "#e2e8f0",
+        "300": "#cbd5e1",
+        "400": "#94a3b8",
+        "500": "#64748b",
+        "600": "#475569",
+        "700": "#334155",
+        "800": "#1e293b",
+        "900": "#0f172a"
+      },
+      "highlight": "#7C3AED",
+      "danger": {
+        "500": "#ef4444",
+        "600": "#dc2626",
+        "700": "#b91c1c"
+      }
+    },
+    "fonts": {
+      "display": {
+        "family": "Cinzel",
+        "weights": [
+          400,
+          600,
+          700
+        ]
+      },
+      "body": {
+        "family": "Crimson Text",
+        "weights": [
+          400,
+          600
+        ]
+      },
+      "ui": {
+        "family": "Google Sans Flex",
+        "weights": [
+          400,
+          500
+        ]
+      }
+    }
+  },
+  "content": {
+    "splash": {
+      "title": "The Shire Passport",
+      "subtitle": "Official Documentation of One's Journey Through Middle-earth",
+      "enterButton": "Enter the Shire",
+      "hostedBy": "Hosted by {hosts}",
+      "heroImage": "assets/images/splash.png"
+    },
+    "name": {
+      "prompt": "What name shall be recorded in the official registry of travelers?",
+      "placeholder": "Enter your name...",
+      "continueButton": "Continue",
+      "skipButton": "or Remain Anonymous",
+      "defaultNote": "(defaults to \"{defaultName}\")",
+      "defaultName": "A Humble Hobbit",
+      "maxLength": 30,
+      "audioHints": [
+        "Better with Audio",
+        "Volume Up",
+        "If you want"
+      ]
+    },
+    "explainer": {
+      "title": "Your Quest Awaits",
+      "greeting": "Welcome, {name}",
+      "body": [
+        "Before you lies a perilous journey through all three Extended Editions of The Lord of the Rings.",
+        "As you witness legendary moments and partake in the seven sacred meals of hobbit tradition, tap each badge to mark your progress."
+      ],
+      "quote": "A wizard is never late, nor is he early. He arrives precisely when he means to.",
+      "disclaimer": "All times are approximate-ish. This passport operates on the honor system. The Shire trusts its guests.",
+      "beginButton": "Begin My Journey"
+    },
+    "passport": {
+      "header": "The Shire Passport",
+      "journeySubtitle": "{name}'s Journey",
+      "sectionTitle": "Your Journey",
+      "badgesLabel": "badges",
+      "certifyButton": "Certify My Passport",
+      "certifySubtext": "Complete your journey and download your certificate",
+      "resetButton": "Reset and Start Over"
+    },
+    "certification": {
+      "title": "Return to the World of Men",
+      "body": [
+        "Your journey through Middle-earth is complete (or as complete as you could manage).",
+        "By certifying this passport, you shall receive an official document commemorating your fellowship."
+      ],
+      "footnote": "You will be transported back to Austin, TX — the realm of mortals.",
+      "badgesLabel": "badges claimed",
+      "downloadButton": "Certify & Download",
+      "generatingText": "Generating...",
+      "reviewButton": "Review My Badges",
+      "completionMessages": {
+        "perfect": "Perfect completion! You are a true Ringbearer.",
+        "high": "A worthy journey indeed!",
+        "medium": "A respectable showing!",
+        "low": "Every journey begins with a single step."
+      }
+    },
+    "badgeModal": {
+      "claimButton": "Claim This Badge",
+      "claimedLabel": "Claimed",
+      "witnessedAt": "Witnessed at {time}",
+      "honorSystemText": "The Shire Passport operates on the honor system. By claiming this badge, you solemnly swear you have witnessed this moment (or eaten this meal).",
+      "honorSystemCheckbox": "Don't ask me again",
+      "honorConfirmButton": "I So Swear",
+      "cancelButton": "Cancel"
+    },
+    "schedule": {
+      "title": "Today's Journey"
+    },
+    "checklist": {
+      "header": "Badge Checklist",
+      "description": "Made a mistake? Toggle badges on or off below. Secret badges unlock automatically when you complete their requirements.",
+      "doneButton": "Done"
+    },
+    "secretUnlock": {
+      "header": "Secret Badge Unlocked!",
+      "continueButton": "Continue Journey",
+      "certifyButton": "View and Certify My Passport"
+    },
+    "certificate": {
+      "title": "The Shire Passport",
+      "subtitle": "Official Documentation of One's Journey Through Middle-earth",
+      "certifies": "This certifies that",
+      "completed": "has completed the sacred marathon",
+      "badgesLabel": "Badges",
+      "hostedBy": "Hosted by {hosts}",
+      "footer": "\"The road goes ever on and on...\""
+    }
+  },
+  "audio": {
+    "greetings": [
+      "assets/audio/greetings/greeting-1.mp3",
+      "assets/audio/greetings/greeting-2.mp3",
+      "assets/audio/greetings/greeting-3.mp3",
+      "assets/audio/greetings/greeting-4.mp3",
+      "assets/audio/greetings/greeting-5.mp3"
+    ],
+    "backgroundMusic": {
+      "morning": [
+        "assets/audio/music/bg-morning-1.mp3",
+        "assets/audio/music/bg-morning-2.mp3"
+      ],
+      "afternoon": [
+        "assets/audio/music/bg-afternoon-1.mp3",
+        "assets/audio/music/bg-afternoon-2.mp3"
+      ],
+      "night": [
+        "assets/audio/music/bg-night-1.mp3",
+        "assets/audio/music/bg-night-2.mp3"
+      ]
+    }
+  },
+  "pwa": {
+    "themeColor": "#4a6741",
+    "backgroundColor": "#f9f6f0"
+  },
+  "settings": {
+    "badgeShape": "arch"
+  }
+}

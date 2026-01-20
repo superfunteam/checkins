@@ -1,28 +1,49 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { useApp } from '../context/AppContext';
+import { usePassport } from '../context/PassportContext';
 import { scaleIn, springs } from '../utils/animations';
 import { playBadgeSound } from '../hooks/useSound';
 
+// Border radius values for each shape
+const SHAPE_BORDER_RADIUS = {
+  arch: '50% 50% 24% 24%',
+  circle: '50%',
+  square: '22%',
+};
+
 export default function SecretUnlockModal() {
   const { secretUnlockModal, closeSecretUnlockModal } = useApp();
+  const { getAssetUrl, content, theme, badgeShape } = usePassport();
+
+  const unlockContent = content.secretUnlock;
+
+  // Calculate border radius based on badge shape setting
+  // For secret badges, use the base shape (not shuffle since they're not in the grid)
+  const badgeBorderRadius = useMemo(() => {
+    const shape = badgeShape === 'shuffle' ? 'arch' : badgeShape;
+    return SHAPE_BORDER_RADIUS[shape] || SHAPE_BORDER_RADIUS.arch;
+  }, [badgeShape]);
 
   // Fire confetti and play badge sound when modal opens
   useEffect(() => {
     if (secretUnlockModal) {
-      // Play the badge-specific sound effect
       playBadgeSound(secretUnlockModal.id);
 
-      // Check for reduced motion
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         return;
       }
 
-      // Gold and earthy confetti colors
-      const colors = ['#d4af37', '#e7c333', '#4a6741', '#8b7355', '#f9f6f0'];
+      // Use theme colors for confetti
+      const colors = [
+        theme.colors.accent['500'],
+        theme.colors.accent['400'],
+        theme.colors.primary['500'],
+        theme.colors.text['500'],
+        theme.colors.background['100'],
+      ];
 
-      // Fire multiple bursts
       const fireConfetti = () => {
         confetti({
           particleCount: 100,
@@ -36,7 +57,7 @@ export default function SecretUnlockModal() {
       setTimeout(fireConfetti, 200);
       setTimeout(fireConfetti, 400);
     }
-  }, [secretUnlockModal]);
+  }, [secretUnlockModal, theme]);
 
   if (!secretUnlockModal) return null;
 
@@ -44,16 +65,15 @@ export default function SecretUnlockModal() {
     <AnimatePresence>
       {secretUnlockModal && (
         <>
-          {/* Backdrop */}
           <motion.div
-            className="fixed inset-0 bg-earth-900/70 backdrop-blur-sm z-50"
+            className="fixed inset-0 backdrop-blur-sm z-50"
+            style={{ backgroundColor: 'rgba(31, 26, 19, 0.7)' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeSecretUnlockModal}
           />
 
-          {/* Modal */}
           <motion.div
             className="fixed inset-0 flex items-center justify-center z-50 p-6"
             initial={{ opacity: 0 }}
@@ -69,7 +89,6 @@ export default function SecretUnlockModal() {
               transition={springs.bouncy}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Sparkle decoration */}
               <motion.div
                 className="text-5xl mb-4"
                 initial={{ scale: 0, rotate: -180 }}
@@ -79,31 +98,29 @@ export default function SecretUnlockModal() {
                 ✨
               </motion.div>
 
-              {/* Header */}
               <motion.h2
                 className="font-display text-2xl font-bold text-gold-600 mb-4"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3 }}
               >
-                Secret Badge Unlocked!
+                {unlockContent?.header || 'Secret Badge Unlocked!'}
               </motion.h2>
 
-              {/* Badge image */}
               <motion.div
                 className="w-32 h-32 mx-auto mb-4 badge-image-container overflow-hidden"
+                style={{ borderRadius: badgeBorderRadius }}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ ...springs.bouncy, delay: 0.4 }}
               >
                 <img
-                  src={secretUnlockModal.image}
+                  src={getAssetUrl(secretUnlockModal.image)}
                   alt={secretUnlockModal.name}
                   className="w-full h-full object-cover"
                 />
               </motion.div>
 
-              {/* Badge name */}
               <motion.h3
                 className="font-display text-xl font-semibold text-earth-800 mb-2"
                 initial={{ y: 20, opacity: 0 }}
@@ -113,7 +130,6 @@ export default function SecretUnlockModal() {
                 {secretUnlockModal.name}
               </motion.h3>
 
-              {/* Badge description */}
               <motion.p
                 className="font-body text-earth-600 mb-6"
                 initial={{ y: 20, opacity: 0 }}
@@ -123,7 +139,6 @@ export default function SecretUnlockModal() {
                 {secretUnlockModal.longDesc}
               </motion.p>
 
-              {/* Dismiss button */}
               <motion.button
                 className="btn-primary"
                 onClick={closeSecretUnlockModal}
@@ -133,7 +148,9 @@ export default function SecretUnlockModal() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                {secretUnlockModal.id === 'secret-ringbearer' ? 'View and Certify My Passport' : 'Continue Journey'}
+                {secretUnlockModal.id === 'secret-ringbearer'
+                  ? (unlockContent?.certifyButton || 'View and Certify My Passport')
+                  : (unlockContent?.continueButton || 'Continue Journey')}
               </motion.button>
             </motion.div>
           </motion.div>

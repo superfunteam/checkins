@@ -1,7 +1,15 @@
 import { useState, useEffect, useCallback } from 'react';
 
-const STORAGE_KEY = 'shire-passport';
 const STORAGE_VERSION = 1;
+
+/**
+ * Build storage key for a passport
+ * @param {string} passportId - The passport ID
+ * @returns {string} - Storage key
+ */
+function getStorageKey(passportId) {
+  return `passport-${passportId}`;
+}
 
 const getInitialState = () => ({
   version: STORAGE_VERSION,
@@ -11,10 +19,12 @@ const getInitialState = () => ({
   badges: {},
 });
 
-export function useLocalStorage() {
+export function useLocalStorage(passportId = 'shire') {
+  const storageKey = getStorageKey(passportId);
+
   const [data, setData] = useState(() => {
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
+      const stored = localStorage.getItem(storageKey);
       if (stored) {
         const parsed = JSON.parse(stored);
         // Version check for future migrations
@@ -28,14 +38,31 @@ export function useLocalStorage() {
     return getInitialState();
   });
 
+  // Re-initialize when passportId changes
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(storageKey);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.version === STORAGE_VERSION) {
+          setData(parsed);
+          return;
+        }
+      }
+    } catch (e) {
+      console.error('Failed to load from localStorage:', e);
+    }
+    setData(getInitialState());
+  }, [storageKey]);
+
   // Persist to localStorage whenever data changes
   useEffect(() => {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      localStorage.setItem(storageKey, JSON.stringify(data));
     } catch (e) {
       console.error('Failed to save to localStorage:', e);
     }
-  }, [data]);
+  }, [data, storageKey]);
 
   const setName = useCallback((name) => {
     setData(prev => ({

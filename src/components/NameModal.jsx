@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useApp } from '../context/AppContext';
+import { usePassport } from '../context/PassportContext';
 import { slideUp, springs } from '../utils/animations';
-
-const MAX_NAME_LENGTH = 30;
-const DEFAULT_NAME = 'A Humble Hobbit';
-
-// Messages to cycle through
-const AUDIO_MESSAGES = ['Better with Audio', 'Volume Up', 'If you want'];
 
 export default function NameModal() {
   const { setName, goToScreen, SCREENS, play } = useApp();
+  const { content } = usePassport();
+
+  const nameContent = content.name;
+  const maxLength = nameContent.maxLength || 30;
+  const defaultName = nameContent.defaultName || 'A Humble Hobbit';
+  const audioHints = nameContent.audioHints || ['Better with Audio', 'Volume Up', 'If you want'];
+
   const [inputValue, setInputValue] = useState('');
   const [displayText, setDisplayText] = useState('');
   const [messageIndex, setMessageIndex] = useState(0);
@@ -18,7 +20,7 @@ export default function NameModal() {
 
   // Typing animation effect
   useEffect(() => {
-    const currentMessage = AUDIO_MESSAGES[messageIndex];
+    const currentMessage = audioHints[messageIndex];
     let timeout;
 
     if (isTyping) {
@@ -41,23 +43,23 @@ export default function NameModal() {
         }, 30); // Faster erase speed
       } else {
         // Move to next message and start typing
-        setMessageIndex((prev) => (prev + 1) % AUDIO_MESSAGES.length);
+        setMessageIndex((prev) => (prev + 1) % audioHints.length);
         setIsTyping(true);
       }
     }
 
     return () => clearTimeout(timeout);
-  }, [displayText, isTyping, messageIndex]);
+  }, [displayText, isTyping, messageIndex, audioHints]);
 
   const handleContinue = () => {
-    const finalName = inputValue.trim() || DEFAULT_NAME;
+    const finalName = inputValue.trim() || defaultName;
     setName(finalName);
     goToScreen(SCREENS.LOADING);
   };
 
   const handleSkip = () => {
     play('snap');
-    setName(DEFAULT_NAME);
+    setName(defaultName);
     goToScreen(SCREENS.LOADING);
   };
 
@@ -84,7 +86,7 @@ export default function NameModal() {
       >
         {/* Prompt */}
         <h2 className="font-display text-2xl font-semibold text-earth-800 text-center mb-8">
-          What name shall be recorded in the official registry of travelers?
+          {nameContent.prompt}
         </h2>
 
         {/* Input */}
@@ -92,9 +94,9 @@ export default function NameModal() {
           <input
             type="text"
             value={inputValue}
-            onChange={(e) => setInputValue(e.target.value.slice(0, MAX_NAME_LENGTH))}
+            onChange={(e) => setInputValue(e.target.value.slice(0, maxLength))}
             onKeyDown={handleKeyDown}
-            placeholder="Enter your name..."
+            placeholder={nameContent.placeholder}
             className="w-full px-5 py-4 text-xl font-body text-earth-800 bg-parchment-50 border-2 border-parchment-400 rounded-button focus:border-shire-500 focus:outline-none transition-colors"
             autoCapitalize="words"
             autoComplete="off"
@@ -108,7 +110,7 @@ export default function NameModal() {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          Continue
+          {nameContent.continueButton}
         </motion.button>
 
         {/* Skip option */}
@@ -117,13 +119,13 @@ export default function NameModal() {
           style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
           onClick={handleSkip}
         >
-          or Remain Anonymous
+          {nameContent.skipButton}
         </button>
         <p
           className="text-center text-earth-400 text-xs mt-1 mb-6"
           style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
         >
-          (defaults to "{DEFAULT_NAME}")
+          {nameContent.defaultNote?.replace('{defaultName}', defaultName) || `(defaults to "${defaultName}")`}
         </p>
 
         {/* Better with Audio pill - typing animation */}

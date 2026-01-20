@@ -1,6 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
+import { usePassport } from '../context/PassportContext';
+
+// Shape classes for shuffle mode (must match BadgeCard)
+const SHUFFLE_SHAPES = ['arch', 'circle', 'square'];
+const SHUFFLE_TILTS = ['badge-tilt-left', 'badge-tilt-right', 'badge-tilt-none'];
+
+// Border radius values for each shape
+const SHAPE_BORDER_RADIUS = {
+  arch: '50% 50% 24% 24%',
+  circle: '50%',
+  square: '22%',
+};
 
 /**
  * FloatingBadge - Animates badge image between grid and modal positions
@@ -14,7 +26,25 @@ export default function FloatingBadge({
   isClosing,
   onAnimationComplete,
 }) {
+  const { getAssetUrl, badgeShape, primaryBadges } = usePassport();
   const [isVisible, setIsVisible] = useState(false);
+
+  // Calculate shape and tilt based on badge index (matching BadgeCard logic)
+  const { borderRadius, tiltDeg } = useMemo(() => {
+    if (badgeShape === 'shuffle') {
+      // Find badge index in sorted primary badges
+      const sortedBadges = [...primaryBadges].sort((a, b) => a.order - b.order);
+      const index = sortedBadges.findIndex(b => b.id === badge.id);
+      const safeIndex = index >= 0 ? index : 0;
+
+      const shape = SHUFFLE_SHAPES[safeIndex % SHUFFLE_SHAPES.length];
+      const tiltClass = SHUFFLE_TILTS[(safeIndex + Math.floor(safeIndex / 3)) % SHUFFLE_TILTS.length];
+      const tilt = tiltClass === 'badge-tilt-left' ? -3 : tiltClass === 'badge-tilt-right' ? 3 : 0;
+
+      return { borderRadius: SHAPE_BORDER_RADIUS[shape], tiltDeg: tilt };
+    }
+    return { borderRadius: SHAPE_BORDER_RADIUS[badgeShape] || SHAPE_BORDER_RADIUS.arch, tiltDeg: 0 };
+  }, [badgeShape, badge.id, primaryBadges]);
 
   // Show floating badge when we have valid rects
   useEffect(() => {
@@ -61,12 +91,26 @@ export default function FloatingBadge({
       }}
       onAnimationComplete={handleAnimationComplete}
     >
-      <div className="badge-image-container w-full h-full overflow-hidden">
-        <img
-          src={badge.image}
-          alt={badge.name}
-          className="w-full h-full object-cover"
-        />
+      <div
+        className="w-full h-full overflow-hidden"
+        style={{
+          border: '12px solid white',
+          borderRadius,
+          boxShadow: '0 4px 8px rgba(31, 26, 19, 0.25), 0 2px 4px rgba(31, 26, 19, 0.15)',
+          transform: tiltDeg !== 0 ? `rotate(${tiltDeg}deg)` : undefined,
+        }}
+      >
+        {badge.emoji ? (
+          <div className="w-full h-full flex items-center justify-center">
+            <span className="text-5xl">{badge.emoji}</span>
+          </div>
+        ) : (
+          <img
+            src={getAssetUrl(badge.image)}
+            alt={badge.name}
+            className="w-full h-full object-cover"
+          />
+        )}
       </div>
     </motion.div>,
     document.body

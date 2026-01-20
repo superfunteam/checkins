@@ -1,6 +1,29 @@
 import { useApp } from '../context/AppContext';
-import { badges } from '../data/badges';
+import { usePassport } from '../context/PassportContext';
 import { formatCertificateDate } from '../utils/exportPng';
+
+// Shape constants for shuffle mode (must match BadgeCard)
+const SHUFFLE_SHAPES = ['arch', 'circle', 'square'];
+const SHUFFLE_TILTS = [-3, 3, 0]; // degrees
+
+// Border radius values for each shape
+const SHAPE_BORDER_RADIUS = {
+  arch: '50% 50% 24% 24%',
+  circle: '50%',
+  square: '22%',
+};
+
+/**
+ * Get shape properties for a badge at a given index
+ */
+function getShapeProps(badgeShape, index) {
+  if (badgeShape === 'shuffle') {
+    const shape = SHUFFLE_SHAPES[index % SHUFFLE_SHAPES.length];
+    const tilt = SHUFFLE_TILTS[(index + Math.floor(index / 3)) % SHUFFLE_TILTS.length];
+    return { borderRadius: SHAPE_BORDER_RADIUS[shape], tiltDeg: tilt };
+  }
+  return { borderRadius: SHAPE_BORDER_RADIUS[badgeShape] || SHAPE_BORDER_RADIUS.arch, tiltDeg: 0 };
+}
 
 /**
  * Hidden template that gets captured for PNG export
@@ -8,10 +31,16 @@ import { formatCertificateDate } from '../utils/exportPng';
  */
 export default function ExportTemplate() {
   const { name, badges: claimedBadges, isSecretUnlocked } = useApp();
+  const { badges: allBadges, getAssetUrl, meta, content, theme, badgeShape } = usePassport();
+
+  const certContent = content.certificate;
 
   const claimedCount = Object.values(claimedBadges).filter(b => b?.claimed).length;
-  // All badges sorted by order for a single unified grid
-  const allBadgesSorted = [...badges].sort((a, b) => a.order - b.order);
+  const allBadgesSorted = [...allBadges].sort((a, b) => a.order - b.order);
+
+  // Format hosts text
+  const hostsText = meta.hosts?.names?.join(' and ') || '';
+  const hostedByText = certContent?.hostedBy?.replace('{hosts}', hostsText) || `Hosted by ${hostsText}`;
 
   return (
     <div
@@ -19,8 +48,8 @@ export default function ExportTemplate() {
       style={{
         display: 'none',
         width: '1080px',
-        height: '1920px', /* Full height to fit all 5 rows of badges + footer */
-        backgroundColor: '#f9f6f0',
+        height: '1920px',
+        backgroundColor: theme.colors.background['100'],
         fontFamily: 'Cinzel, serif',
         padding: '50px',
         boxSizing: 'border-box',
@@ -32,22 +61,22 @@ export default function ExportTemplate() {
           style={{
             fontSize: '48px',
             fontWeight: '700',
-            color: '#1f1a13',
+            color: theme.colors.text['800'],
             margin: '0 0 8px',
           }}
         >
-          The Shire Passport
+          {certContent?.title || meta.name}
         </h1>
         <p
           style={{
             fontSize: '18px',
-            color: '#5c4d3a',
+            color: theme.colors.text['600'],
             fontStyle: 'italic',
             margin: '0',
             fontFamily: 'Crimson Text, serif',
           }}
         >
-          Official Documentation of One's Journey Through Middle-earth
+          {certContent?.subtitle || meta.description}
         </p>
       </div>
 
@@ -57,7 +86,7 @@ export default function ExportTemplate() {
           textAlign: 'center',
           marginBottom: '24px',
           padding: '16px 20px',
-          backgroundColor: '#f0ebe0',
+          backgroundColor: theme.colors.background['200'],
           borderRadius: '16px',
           display: 'flex',
           alignItems: 'center',
@@ -65,26 +94,26 @@ export default function ExportTemplate() {
         }}
       >
         <div style={{ textAlign: 'left' }}>
-          <p style={{ fontSize: '18px', color: '#8b7355', margin: '0 0 4px', fontFamily: 'Google Sans Flex, sans-serif' }}>
-            This certifies that
+          <p style={{ fontSize: '18px', color: theme.colors.text['500'], margin: '0 0 4px', fontFamily: 'Google Sans Flex, sans-serif' }}>
+            {certContent?.certifies || 'This certifies that'}
           </p>
           <p
             style={{
               fontSize: '32px',
               fontWeight: '600',
-              color: '#4a6741',
+              color: theme.colors.primary['500'],
               margin: '-4px 0 0 0',
             }}
           >
             {name}
           </p>
-          <p style={{ fontSize: '18px', color: '#8b7355', margin: '0', fontFamily: 'Google Sans Flex, sans-serif' }}>
-            has completed the sacred marathon
+          <p style={{ fontSize: '18px', color: theme.colors.text['500'], margin: '0', fontFamily: 'Google Sans Flex, sans-serif' }}>
+            {certContent?.completed || 'has completed the sacred marathon'}
           </p>
         </div>
         <div
           style={{
-            backgroundColor: '#4a6741',
+            backgroundColor: theme.colors.primary['500'],
             borderRadius: '12px',
             padding: '8px 20px 12px 20px',
             textAlign: 'center',
@@ -94,22 +123,22 @@ export default function ExportTemplate() {
             style={{
               fontSize: '36px',
               fontWeight: '700',
-              color: '#f9f6f0',
+              color: theme.colors.background['100'],
               margin: '0',
               lineHeight: '1',
               fontFamily: 'Google Sans Flex, sans-serif',
             }}
           >
-            {claimedCount}/{badges.length}
+            {claimedCount}/{allBadges.length}
           </p>
-          <p style={{ fontSize: '14px', color: '#d9e5d9', margin: '2px 0 0', fontFamily: 'Google Sans Flex, sans-serif' }}>
-            Badges
+          <p style={{ fontSize: '14px', color: theme.colors.primary['100'], margin: '2px 0 0', fontFamily: 'Google Sans Flex, sans-serif' }}>
+            {certContent?.badgesLabel || 'Badges'}
           </p>
         </div>
       </div>
 
       {/* Date */}
-      <p style={{ textAlign: 'center', fontSize: '20px', color: '#5c4d3a', margin: '0 0 20px' }}>
+      <p style={{ textAlign: 'center', fontSize: '20px', color: theme.colors.text['600'], margin: '0 0 20px' }}>
         {formatCertificateDate()}
       </p>
 
@@ -122,8 +151,9 @@ export default function ExportTemplate() {
             gap: '16px',
           }}
         >
-          {allBadgesSorted.map((badge) => {
+          {allBadgesSorted.map((badge, index) => {
             const isClaimed = claimedBadges[badge.id]?.claimed;
+            const { borderRadius, tiltDeg } = getShapeProps(badgeShape, index);
             return (
               <div
                 key={badge.id}
@@ -135,11 +165,10 @@ export default function ExportTemplate() {
                   position: 'relative',
                 }}
               >
-                {/* Badge with shadow - using padding trick for aspect ratio */}
                 <div
                   style={{
                     width: '100%',
-                    paddingBottom: '100%', /* 1:1 aspect ratio */
+                    paddingBottom: '100%',
                     position: 'relative',
                   }}
                 >
@@ -150,29 +179,44 @@ export default function ExportTemplate() {
                       left: 0,
                       right: 0,
                       bottom: 0,
-                      borderRadius: '50% 50% 24% 24%',
+                      borderRadius,
                       boxShadow: '0 6px 16px rgba(0, 0, 0, 0.5), 0 3px 6px rgba(0, 0, 0, 0.4)',
                       opacity: isClaimed ? 1 : 0.25,
                       filter: isClaimed ? 'none' : 'grayscale(100%)',
                       border: '12px solid white',
                       overflow: 'hidden',
                       boxSizing: 'border-box',
+                      transform: tiltDeg !== 0 ? `rotate(${tiltDeg}deg)` : undefined,
                     }}
                   >
-                    <img
-                      src={badge.image}
-                      alt={badge.name}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        display: 'block',
-                      }}
-                      crossOrigin="anonymous"
-                    />
+                    {badge.emoji ? (
+                      <div
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: '64px',
+                        }}
+                      >
+                        {badge.emoji}
+                      </div>
+                    ) : (
+                      <img
+                        src={getAssetUrl(badge.image)}
+                        alt={badge.name}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          display: 'block',
+                        }}
+                        crossOrigin="anonymous"
+                      />
+                    )}
                   </div>
                 </div>
-                {/* Purple checkmark for claimed badges */}
                 {isClaimed && (
                   <div
                     style={{
@@ -199,7 +243,7 @@ export default function ExportTemplate() {
                   style={{
                     fontSize: '13px',
                     fontWeight: '600',
-                    color: isClaimed ? '#1f1a13' : '#8b7355',
+                    color: isClaimed ? theme.colors.text['800'] : theme.colors.text['500'],
                     textAlign: 'center',
                     lineHeight: '1.2',
                     fontFamily: 'Google Sans Flex, sans-serif',
@@ -215,18 +259,18 @@ export default function ExportTemplate() {
 
       {/* Footer */}
       <div style={{ textAlign: 'center' }}>
-        <p style={{ fontSize: '14px', color: '#8b7355', margin: '0 0 5px' }}>
-          Hosted by Sophia and Matt
+        <p style={{ fontSize: '14px', color: theme.colors.text['500'], margin: '0 0 5px' }}>
+          {hostedByText}
         </p>
         <p
           style={{
             fontSize: '12px',
-            color: '#a68d6b',
+            color: theme.colors.text['400'],
             fontStyle: 'italic',
             fontFamily: 'Crimson Text, serif',
           }}
         >
-          "The road goes ever on and on..."
+          {certContent?.footer || '"The road goes ever on and on..."'}
         </p>
       </div>
     </div>

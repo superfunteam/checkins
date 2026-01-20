@@ -1,32 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useApp } from '../context/AppContext';
+import { usePassport } from '../context/PassportContext';
 import { slideUp, springs } from '../utils/animations';
-import { badges } from '../data/badges';
-
-// All assets to preload
-const BADGE_IMAGES = badges.map(b => b.image);
-const LOCK_IMAGES = ['/images/badge-lock.png', '/images/badge-lock-ring.png'];
-
-const AUDIO_FILES = [
-  // Badge sounds
-  ...badges.map(b => `/audio/badge-${b.id}.mp3`),
-  // Greeting sounds
-  '/audio/greeting-1.mp3',
-  '/audio/greeting-2.mp3',
-  '/audio/greeting-3.mp3',
-  '/audio/greeting-4.mp3',
-  '/audio/greeting-5.mp3',
-  // Background music
-  '/audio/bg-morning-1.mp3',
-  '/audio/bg-morning-2.mp3',
-  '/audio/bg-afternoon-1.mp3',
-  '/audio/bg-afternoon-2.mp3',
-  '/audio/bg-night-1.mp3',
-  '/audio/bg-night-2.mp3',
-];
-
-const ALL_IMAGES = [...BADGE_IMAGES, ...LOCK_IMAGES];
 
 // Preload a single image
 function preloadImage(src) {
@@ -50,12 +26,45 @@ function preloadAudio(src) {
 
 export default function LoadingScreen() {
   const { goToScreen, SCREENS } = useApp();
+  const { badges, getAssetUrl, audio, content } = usePassport();
+
   const [progress, setProgress] = useState(0);
   const [loadingText, setLoadingText] = useState('Preparing the journey...');
 
   useEffect(() => {
     let mounted = true;
-    const totalAssets = ALL_IMAGES.length + AUDIO_FILES.length;
+
+    // Build asset lists from passport config
+    const badgeImages = badges.map(b => getAssetUrl(b.image));
+    const lockImages = [
+      getAssetUrl('assets/images/lock.png'),
+      getAssetUrl('assets/images/lock-ring.png'),
+    ];
+    const allImages = [...badgeImages, ...lockImages];
+
+    // Build audio list from passport config
+    const audioFiles = [];
+
+    // Badge sounds
+    badges.forEach(b => {
+      if (b.sound) {
+        audioFiles.push(getAssetUrl(b.sound));
+      }
+    });
+
+    // Greeting sounds
+    if (audio?.greetings) {
+      audio.greetings.forEach(src => audioFiles.push(getAssetUrl(src)));
+    }
+
+    // Background music
+    if (audio?.backgroundMusic) {
+      Object.values(audio.backgroundMusic).flat().forEach(src => {
+        audioFiles.push(getAssetUrl(src));
+      });
+    }
+
+    const totalAssets = allImages.length + audioFiles.length;
     let loadedCount = 0;
 
     const updateProgress = () => {
@@ -68,7 +77,7 @@ export default function LoadingScreen() {
     const loadAssets = async () => {
       // Load images first
       setLoadingText('Loading badges...');
-      const imagePromises = ALL_IMAGES.map(src =>
+      const imagePromises = allImages.map(src =>
         preloadImage(src).then(result => {
           updateProgress();
           return result;
@@ -81,7 +90,7 @@ export default function LoadingScreen() {
 
       // Then load audio
       setLoadingText('Preparing sounds...');
-      const audioPromises = AUDIO_FILES.map(src =>
+      const audioPromises = audioFiles.map(src =>
         preloadAudio(src).then(result => {
           updateProgress();
           return result;
@@ -106,7 +115,10 @@ export default function LoadingScreen() {
     return () => {
       mounted = false;
     };
-  }, [goToScreen, SCREENS]);
+  }, [goToScreen, SCREENS, badges, getAssetUrl, audio]);
+
+  // Get quote from content or use default
+  const flavorQuote = content.certificate?.footer || '"The road goes ever on and on..."';
 
   return (
     <motion.div
@@ -164,7 +176,7 @@ export default function LoadingScreen() {
           className="text-earth-400 text-xs text-center mt-6 italic"
           style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
         >
-          "The road goes ever on and on..."
+          {flavorQuote}
         </p>
       </motion.div>
     </motion.div>
