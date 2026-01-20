@@ -31,10 +31,14 @@ const BADGE_SHAPES = [
   { name: 'square', borderRadius: '22%' },
 ];
 
+// Tilt options
+const BADGE_TILTS = [-3, 0, 3];
+
 // Single floating badge component
-function FloatingBadge({ position, size, delay, duration, tilt = 0 }) {
+function FloatingBadge({ position, size, delay, duration }) {
   const [currentIndex, setCurrentIndex] = useState(() => Math.floor(Math.random() * BADGE_IMAGES.length));
   const [shapeIndex, setShapeIndex] = useState(() => Math.floor(Math.random() * BADGE_SHAPES.length));
+  const [tiltIndex, setTiltIndex] = useState(() => Math.floor(Math.random() * BADGE_TILTS.length));
   const [isVisible, setIsVisible] = useState(true);
 
   // Change badge every 6-10 seconds
@@ -44,6 +48,7 @@ function FloatingBadge({ position, size, delay, duration, tilt = 0 }) {
       setTimeout(() => {
         setCurrentIndex(prev => (prev + 1 + Math.floor(Math.random() * 3)) % BADGE_IMAGES.length);
         setShapeIndex(prev => (prev + 1) % BADGE_SHAPES.length);
+        setTiltIndex(prev => (prev + 1) % BADGE_TILTS.length);
         setIsVisible(true);
       }, 300);
     }, 6000 + Math.random() * 4000);
@@ -52,13 +57,14 @@ function FloatingBadge({ position, size, delay, duration, tilt = 0 }) {
   }, []);
 
   const shape = BADGE_SHAPES[shapeIndex];
+  const tilt = BADGE_TILTS[tiltIndex];
 
   return (
     <motion.div
       className="absolute pointer-events-none"
       style={position}
-      initial={{ opacity: 0, scale: 0.8, rotate: tilt }}
-      animate={{ opacity: 1, scale: 1, rotate: tilt }}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
       transition={{ delay, duration: 0.5 }}
     >
       <motion.div
@@ -72,10 +78,10 @@ function FloatingBadge({ position, size, delay, duration, tilt = 0 }) {
         <AnimatePresence mode="wait">
           {isVisible && (
             <motion.div
-              key={`${currentIndex}-${shapeIndex}`}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
+              key={`${currentIndex}-${shapeIndex}-${tiltIndex}`}
+              initial={{ opacity: 0, scale: 0.8, rotate: tilt - 5 }}
+              animate={{ opacity: 1, scale: 1, rotate: tilt }}
+              exit={{ opacity: 0, scale: 0.8, rotate: tilt + 5 }}
               transition={{ duration: 0.3 }}
               className="overflow-hidden bg-white"
               style={{
@@ -101,27 +107,27 @@ function FloatingBadge({ position, size, delay, duration, tilt = 0 }) {
 
 // Floating badges container for hero
 function HeroFloatingBadges() {
-  // Desktop positions (8 badges) - evenly around edges with alternating tilt
+  // Desktop positions (8 badges) - evenly around edges, 120px each
   const desktopBadges = useMemo(() => [
     // Left side (top to bottom)
-    { position: { top: '10%', left: '4%' }, size: 96, delay: 0, duration: 3.5, tilt: -3 },
-    { position: { top: '45%', left: '2%' }, size: 96, delay: 0.4, duration: 4, tilt: 3 },
-    { position: { top: '80%', left: '6%' }, size: 96, delay: 0.2, duration: 3.2, tilt: -3 },
+    { position: { top: '10%', left: '4%' }, size: 120, delay: 0, duration: 3.5 },
+    { position: { top: '45%', left: '2%' }, size: 120, delay: 0.4, duration: 4 },
+    { position: { top: '80%', left: '6%' }, size: 120, delay: 0.2, duration: 3.2 },
     // Right side (top to bottom)
-    { position: { top: '10%', right: '4%' }, size: 96, delay: 0.3, duration: 3.8, tilt: 3 },
-    { position: { top: '45%', right: '2%' }, size: 96, delay: 0.6, duration: 4.2, tilt: -3 },
-    { position: { top: '80%', right: '6%' }, size: 96, delay: 0.1, duration: 3.6, tilt: 3 },
+    { position: { top: '10%', right: '4%' }, size: 120, delay: 0.3, duration: 3.8 },
+    { position: { top: '45%', right: '2%' }, size: 120, delay: 0.6, duration: 4.2 },
+    { position: { top: '80%', right: '6%' }, size: 120, delay: 0.1, duration: 3.6 },
     // Bottom corners (inset more)
-    { position: { bottom: '5%', left: '18%' }, size: 96, delay: 0.5, duration: 3.4, tilt: 3 },
-    { position: { bottom: '5%', right: '18%' }, size: 96, delay: 0.7, duration: 3.9, tilt: -3 },
+    { position: { bottom: '5%', left: '18%' }, size: 120, delay: 0.5, duration: 3.4 },
+    { position: { bottom: '5%', right: '18%' }, size: 120, delay: 0.7, duration: 3.9 },
   ], []);
 
-  // Mobile positions (4 badges near corners) - with tilt
+  // Mobile positions (4 badges near corners) - 75px each
   const mobileBadges = useMemo(() => [
-    { position: { top: '3%', left: '1%' }, size: 60, delay: 0, duration: 3.5, tilt: -3 },
-    { position: { top: '3%', right: '1%' }, size: 60, delay: 0.3, duration: 4, tilt: 3 },
-    { position: { bottom: '3%', left: '1%' }, size: 60, delay: 0.5, duration: 3.8, tilt: 3 },
-    { position: { bottom: '3%', right: '1%' }, size: 60, delay: 0.2, duration: 3.6, tilt: -3 },
+    { position: { top: '3%', left: '1%' }, size: 75, delay: 0, duration: 3.5 },
+    { position: { top: '3%', right: '1%' }, size: 75, delay: 0.3, duration: 4 },
+    { position: { bottom: '3%', left: '1%' }, size: 75, delay: 0.5, duration: 3.8 },
+    { position: { bottom: '3%', right: '1%' }, size: 75, delay: 0.2, duration: 3.6 },
   ], []);
 
   return (
