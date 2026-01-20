@@ -56,9 +56,9 @@ function FloatingBadge({ position, size, delay, duration, tilt = 0 }) {
   return (
     <motion.div
       className="absolute pointer-events-none"
-      style={{ ...position, transform: `rotate(${tilt}deg)` }}
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
+      style={position}
+      initial={{ opacity: 0, scale: 0.8, rotate: tilt }}
+      animate={{ opacity: 1, scale: 1, rotate: tilt }}
       transition={{ delay, duration: 0.5 }}
     >
       <motion.div
