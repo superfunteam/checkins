@@ -340,9 +340,28 @@ function PassportDetail() {
 
                 {/* Controls - Two columns */}
                 <div className="flex-1 grid grid-cols-2 gap-6">
+                  {/* Image column */}
+                  <div>
+                    <FileUploadInput
+                      label="Image"
+                      accept="image/*"
+                      value={passport.content?.splash?.heroImage}
+                      previewUrl={passport.content?.splash?.heroImage ? `/passports/${passportId}/${passport.content.splash.heroImage}` : null}
+                      onChange={async (file) => {
+                        setHeroImageFile(file);
+                        const result = await uploadFile(passportId, file, 'images', 'splash.webp');
+                        await handleSplashChange('heroImage', result.path);
+                        await handleSplashChange('heroEmoji', null);
+                        setHeroImageFile(null);
+                      }}
+                      onClear={() => handleSplashChange('heroImage', null)}
+                      type="image"
+                    />
+                  </div>
+
                   {/* Emoji column */}
                   <div>
-                    <label className="block font-medium mb-2">Emoji</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Or use emoji</label>
                     <div className="flex gap-2">
                       <input
                         type="text"
@@ -368,25 +387,6 @@ function PassportDetail() {
                       )}
                     </div>
                     <p className="text-xs text-gray-400 mt-1">Overrides image if set</p>
-                  </div>
-
-                  {/* Image column */}
-                  <div>
-                    <FileUploadInput
-                      label="Or upload image"
-                      accept="image/*"
-                      value={passport.content?.splash?.heroImage}
-                      previewUrl={passport.content?.splash?.heroImage ? `/passports/${passportId}/${passport.content.splash.heroImage}` : null}
-                      onChange={async (file) => {
-                        setHeroImageFile(file);
-                        const result = await uploadFile(passportId, file, 'images', 'splash.webp');
-                        await handleSplashChange('heroImage', result.path);
-                        await handleSplashChange('heroEmoji', null);
-                        setHeroImageFile(null);
-                      }}
-                      onClear={() => handleSplashChange('heroImage', null)}
-                      type="image"
-                    />
                   </div>
                 </div>
               </div>
