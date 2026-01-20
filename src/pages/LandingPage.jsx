@@ -37,7 +37,7 @@ function FloatingBadge({ position, size, delay, duration }) {
   const [shapeIndex, setShapeIndex] = useState(() => Math.floor(Math.random() * BADGE_SHAPES.length));
   const [isVisible, setIsVisible] = useState(true);
 
-  // Change badge every 3-5 seconds
+  // Change badge every 6-10 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setIsVisible(false);
@@ -46,7 +46,7 @@ function FloatingBadge({ position, size, delay, duration }) {
         setShapeIndex(prev => (prev + 1) % BADGE_SHAPES.length);
         setIsVisible(true);
       }, 300);
-    }, 3000 + Math.random() * 2000);
+    }, 6000 + Math.random() * 4000);
 
     return () => clearInterval(interval);
   }, []);
@@ -101,24 +101,24 @@ function FloatingBadge({ position, size, delay, duration }) {
 
 // Floating badges container for hero
 function HeroFloatingBadges() {
-  // Desktop positions (8 badges)
+  // Desktop positions (8 badges) - all same size (96px)
   const desktopBadges = useMemo(() => [
-    { position: { top: '8%', left: '5%' }, size: 72, delay: 0, duration: 3.5 },
-    { position: { top: '35%', left: '2%' }, size: 88, delay: 0.3, duration: 4 },
-    { position: { top: '65%', left: '8%' }, size: 64, delay: 0.6, duration: 3.2 },
-    { position: { top: '5%', right: '8%' }, size: 56, delay: 0.2, duration: 3.8 },
-    { position: { top: '30%', right: '3%' }, size: 80, delay: 0.5, duration: 4.2 },
-    { position: { top: '60%', right: '5%' }, size: 68, delay: 0.1, duration: 3.6 },
-    { position: { top: '80%', left: '15%' }, size: 60, delay: 0.4, duration: 3.4 },
-    { position: { top: '75%', right: '12%' }, size: 72, delay: 0.7, duration: 3.9 },
+    { position: { top: '8%', left: '5%' }, size: 96, delay: 0, duration: 3.5 },
+    { position: { top: '35%', left: '2%' }, size: 96, delay: 0.3, duration: 4 },
+    { position: { top: '65%', left: '8%' }, size: 96, delay: 0.6, duration: 3.2 },
+    { position: { top: '5%', right: '8%' }, size: 96, delay: 0.2, duration: 3.8 },
+    { position: { top: '30%', right: '3%' }, size: 96, delay: 0.5, duration: 4.2 },
+    { position: { top: '60%', right: '5%' }, size: 96, delay: 0.1, duration: 3.6 },
+    { position: { top: '80%', left: '15%' }, size: 96, delay: 0.4, duration: 3.4 },
+    { position: { top: '75%', right: '12%' }, size: 96, delay: 0.7, duration: 3.9 },
   ], []);
 
-  // Mobile positions (4 badges near corners)
+  // Mobile positions (4 badges near corners) - all same size (60px)
   const mobileBadges = useMemo(() => [
-    { position: { top: '5%', left: '2%' }, size: 48, delay: 0, duration: 3.5 },
-    { position: { top: '5%', right: '2%' }, size: 44, delay: 0.3, duration: 4 },
-    { position: { bottom: '5%', left: '2%' }, size: 44, delay: 0.5, duration: 3.8 },
-    { position: { bottom: '5%', right: '2%' }, size: 48, delay: 0.2, duration: 3.6 },
+    { position: { top: '5%', left: '2%' }, size: 60, delay: 0, duration: 3.5 },
+    { position: { top: '5%', right: '2%' }, size: 60, delay: 0.3, duration: 4 },
+    { position: { bottom: '5%', left: '2%' }, size: 60, delay: 0.5, duration: 3.8 },
+    { position: { bottom: '5%', right: '2%' }, size: 60, delay: 0.2, duration: 3.6 },
   ], []);
 
   return (
