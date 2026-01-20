@@ -35,7 +35,7 @@ const BADGE_SHAPES = [
 const BADGE_TILTS = [-3, 0, 3];
 
 // Single floating badge component
-function FloatingBadge({ position, size, delay, duration }) {
+function FloatingBadge({ position, size, delay, duration, isDesktop = false }) {
   const [currentIndex, setCurrentIndex] = useState(() => Math.floor(Math.random() * BADGE_IMAGES.length));
   const [shapeIndex, setShapeIndex] = useState(() => Math.floor(Math.random() * BADGE_SHAPES.length));
   const [tiltIndex, setTiltIndex] = useState(() => Math.floor(Math.random() * BADGE_TILTS.length));
@@ -88,8 +88,8 @@ function FloatingBadge({ position, size, delay, duration }) {
                 width: size,
                 height: size,
                 borderRadius: shape.borderRadius,
-                border: '4px solid white',
-                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+                border: isDesktop ? '8px solid white' : '4px solid white',
+                boxShadow: isDesktop ? '0 8px 24px rgba(0, 0, 0, 0.15)' : '0 4px 12px rgba(0, 0, 0, 0.15)',
               }}
             >
               <img
@@ -135,7 +135,7 @@ function HeroFloatingBadges() {
       {/* Desktop badges */}
       <div className="hidden md:block absolute inset-0 overflow-hidden">
         {desktopBadges.map((badge, i) => (
-          <FloatingBadge key={`desktop-${i}`} {...badge} />
+          <FloatingBadge key={`desktop-${i}`} {...badge} isDesktop />
         ))}
       </div>
       {/* Mobile badges */}
