@@ -356,6 +356,7 @@ function PassportDetail() {
                       }}
                       onClear={() => handleSplashChange('heroImage', null)}
                       type="image"
+                      previewClassName="rounded-lg"
                     />
                   </div>
 

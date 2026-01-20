@@ -10,6 +10,7 @@ export default function FileUploadInput({
   type = 'image',
   required = false,
   emoji = null,
+  previewClassName = 'rounded-full',
 }) {
   const [isDragging, setIsDragging] = useState(false);
   const [localPreview, setLocalPreview] = useState(null);
@@ -86,7 +87,7 @@ export default function FileUploadInput({
             <img
               src={displayPreview}
               alt="Preview"
-              className="w-24 h-24 object-cover rounded-full"
+              className={`w-24 h-24 object-cover ${previewClassName}`}
             />
           ) : type === 'audio' ? (
             <audio
