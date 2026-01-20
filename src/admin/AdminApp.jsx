@@ -667,7 +667,7 @@ function PassportDetail() {
           {/* Preview Link */}
           <section className="pt-6 border-t">
             <a
-              href={`/${passportId}`}
+              href={`/event/${passportId}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
@@ -691,7 +691,7 @@ function PassportDetail() {
             <div className="bg-white rounded-[32px] overflow-hidden" style={{ aspectRatio: '9/19.5' }}>
               <iframe
                 key={refreshKey}
-                src={`/${passportId}`}
+                src={`/event/${passportId}`}
                 className="w-full h-full border-0"
                 title="Passport Preview"
               />

@@ -63,7 +63,7 @@
       "longDesc": "Against all odds, you navigated public transit, found parking, or convinced your Uber driver this was a real address. Welcome to the hackathon!",
       "instruction": "Check in at the registration desk to claim this badge.",
       "order": 1,
-      "emoji": "😆",
+      "image": "assets/images/badges/badge-check-in.webp",
       "time": "6:00 PM"
     },
     {
@@ -74,7 +74,7 @@
       "longDesc": "You've mastered the ancient art of the pizza queue. Pro tip: the secret is to hover near the delivery entrance.",
       "instruction": "Grab a slice (or three) when pizza arrives.",
       "order": 2,
-      "emoji": "🍕",
+      "image": "assets/images/badges/badge-pizza-time.webp",
       "time": "7:00 PM"
     },
     {
@@ -85,7 +85,7 @@
       "longDesc": "Through a series of awkward introductions and 'what's your stack?' conversations, you've assembled a team. May your merge conflicts be few.",
       "instruction": "Form or join a team for the hackathon.",
       "order": 3,
-      "emoji": "🙌",
+      "image": "assets/images/badges/badge-team-formed.webp",
       "time": "7:30 PM"
     },
     {
@@ -96,7 +96,7 @@
       "longDesc": "Your first commit is in. It's probably a README.md with just the project name, but hey, that's still shipping code.",
       "instruction": "Make your first commit to the project repo.",
       "order": 4,
-      "emoji": "🖥️",
+      "image": "assets/images/badges/badge-first-commit.webp",
       "time": "9:00 PM"
     },
     {
@@ -107,7 +107,7 @@
       "longDesc": "That third cup of coffee seemed like a good idea. Your hands are shaking but your code has never been more... interesting.",
       "instruction": "Consume your beverage of choice to power through.",
       "order": 5,
-      "emoji": "☕",
+      "image": "assets/images/badges/badge-caffeine.webp",
       "time": "10:00 PM"
     },
     {
@@ -118,7 +118,7 @@
       "longDesc": "It works on your machine, and that's what matters. Time to present your masterpiece and pray the demo gods are merciful.",
       "instruction": "Complete your project and prepare your demo.",
       "order": 6,
-      "emoji": "🚀",
+      "image": "assets/images/badges/badge-demo-ready.webp",
       "time": "11:30 PM"
     },
     {
@@ -129,7 +129,7 @@
       "longDesc": "From check-in to demo, you experienced the full hackathon journey. You are now officially an Event Champion. Your event manager is crying tears of joy.",
       "instruction": "Complete all badges to unlock this achievement.",
       "order": 7,
-      "emoji": "🏆",
+      "image": "assets/images/badges/badge-secret-champion.webp",
       "unlockCondition": {
         "type": "all",
         "badgeIds": [
