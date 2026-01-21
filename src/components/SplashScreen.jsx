@@ -4,13 +4,7 @@ import { useApp } from '../context/AppContext';
 import { usePassport } from '../context/PassportContext';
 import { fadeIn, springs } from '../utils/animations';
 import { preloadBadgeSounds, preloadGreetingSounds, startBackgroundMusic } from '../hooks/useSound';
-
-// Border radius values for each shape
-const SHAPE_BORDER_RADIUS = {
-  arch: '50% 50% 24% 24%',
-  circle: '50%',
-  square: '22%',
-};
+import { getBadgeStyles } from '../utils/badgeStyles';
 
 export default function SplashScreen() {
   const { goToScreen, SCREENS } = useApp();
@@ -18,11 +12,12 @@ export default function SplashScreen() {
 
   const splashContent = content.splash;
 
-  // Calculate border radius based on badge shape setting
+  // Calculate badge styles based on shape setting
   // Use arch as default for shuffle since this is a standalone hero image
-  const badgeBorderRadius = useMemo(() => {
+  // Splash hero badge is w-48 = 192px
+  const badgeStylesData = useMemo(() => {
     const shape = badgeShape === 'shuffle' ? 'arch' : badgeShape;
-    return SHAPE_BORDER_RADIUS[shape] || SHAPE_BORDER_RADIUS.arch;
+    return getBadgeStyles(192, shape);
   }, [badgeShape]);
 
   // Preload all sounds during splash screen for instant playback later
@@ -54,8 +49,8 @@ export default function SplashScreen() {
       {/* Ring badge in Gowalla style */}
       {(splashContent.heroImage || splashContent.heroEmoji) && (
         <motion.div
-          className="w-48 h-48 mb-8 -mt-16 badge-image-container overflow-hidden flex items-center justify-center"
-          style={{ borderRadius: badgeBorderRadius }}
+          className="w-48 h-48 mb-8 -mt-16 overflow-hidden flex items-center justify-center"
+          style={badgeStylesData}
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ ...springs.bouncy, delay: 0.2 }}

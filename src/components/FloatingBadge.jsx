@@ -2,17 +2,11 @@ import { useState, useEffect, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
 import { usePassport } from '../context/PassportContext';
+import { BADGE_SHAPES, getBadgeBorderWidth, BADGE_BOX_SHADOW } from '../utils/badgeStyles';
 
 // Shape classes for shuffle mode (must match BadgeCard)
 const SHUFFLE_SHAPES = ['arch', 'circle', 'square'];
 const SHUFFLE_TILTS = ['badge-tilt-left', 'badge-tilt-right', 'badge-tilt-none'];
-
-// Border radius values for each shape
-const SHAPE_BORDER_RADIUS = {
-  arch: '50% 50% 24% 24%',
-  circle: '50%',
-  square: '22%',
-};
 
 /**
  * FloatingBadge - Animates badge image between grid and modal positions
@@ -41,9 +35,9 @@ export default function FloatingBadge({
       const tiltClass = SHUFFLE_TILTS[(safeIndex + Math.floor(safeIndex / 3)) % SHUFFLE_TILTS.length];
       const tilt = tiltClass === 'badge-tilt-left' ? -3 : tiltClass === 'badge-tilt-right' ? 3 : 0;
 
-      return { borderRadius: SHAPE_BORDER_RADIUS[shape], tiltDeg: tilt };
+      return { borderRadius: BADGE_SHAPES[shape], tiltDeg: tilt };
     }
-    return { borderRadius: SHAPE_BORDER_RADIUS[badgeShape] || SHAPE_BORDER_RADIUS.arch, tiltDeg: 0 };
+    return { borderRadius: BADGE_SHAPES[badgeShape] || BADGE_SHAPES.arch, tiltDeg: 0 };
   }, [badgeShape, badge.id, primaryBadges]);
 
   // Show floating badge when we have valid rects
@@ -59,6 +53,9 @@ export default function FloatingBadge({
   // Calculate animation values
   const fromRect = isClosing ? targetRect : originRect;
   const toRect = isClosing ? originRect : targetRect;
+
+  // Calculate proportional border width based on target size
+  const borderWidth = getBadgeBorderWidth(toRect.width);
 
   const handleAnimationComplete = () => {
     setIsVisible(false);
@@ -94,9 +91,9 @@ export default function FloatingBadge({
       <div
         className="w-full h-full overflow-hidden"
         style={{
-          border: '12px solid white',
+          border: `${borderWidth}px solid white`,
           borderRadius,
-          boxShadow: '0 4px 8px rgba(31, 26, 19, 0.25), 0 2px 4px rgba(31, 26, 19, 0.15)',
+          boxShadow: BADGE_BOX_SHADOW,
           transform: tiltDeg !== 0 ? `rotate(${tiltDeg}deg)` : undefined,
         }}
       >

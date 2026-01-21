@@ -1,28 +1,27 @@
 import { useApp } from '../context/AppContext';
 import { usePassport } from '../context/PassportContext';
 import { formatCertificateDate } from '../utils/exportPng';
+import { BADGE_SHAPES, getBadgeBorderWidth } from '../utils/badgeStyles';
 
 // Shape constants for shuffle mode (must match BadgeCard)
 const SHUFFLE_SHAPES = ['arch', 'circle', 'square'];
 const SHUFFLE_TILTS = [-3, 3, 0]; // degrees
 
-// Border radius values for each shape
-const SHAPE_BORDER_RADIUS = {
-  arch: '50% 50% 24% 24%',
-  circle: '50%',
-  square: '22%',
-};
-
 /**
  * Get shape properties for a badge at a given index
  */
+// Export template: 1080px width, 50px padding each side = 980px, 4 cols, 16px gap
+// Badge size ≈ (980 - 48) / 4 ≈ 233px
+const EXPORT_BADGE_SIZE = 233;
+const EXPORT_BORDER_WIDTH = getBadgeBorderWidth(EXPORT_BADGE_SIZE);
+
 function getShapeProps(badgeShape, index) {
   if (badgeShape === 'shuffle') {
     const shape = SHUFFLE_SHAPES[index % SHUFFLE_SHAPES.length];
     const tilt = SHUFFLE_TILTS[(index + Math.floor(index / 3)) % SHUFFLE_TILTS.length];
-    return { borderRadius: SHAPE_BORDER_RADIUS[shape], tiltDeg: tilt };
+    return { borderRadius: BADGE_SHAPES[shape], tiltDeg: tilt };
   }
-  return { borderRadius: SHAPE_BORDER_RADIUS[badgeShape] || SHAPE_BORDER_RADIUS.arch, tiltDeg: 0 };
+  return { borderRadius: BADGE_SHAPES[badgeShape] || BADGE_SHAPES.arch, tiltDeg: 0 };
 }
 
 /**
@@ -183,7 +182,7 @@ export default function ExportTemplate() {
                       boxShadow: '0 6px 16px rgba(0, 0, 0, 0.5), 0 3px 6px rgba(0, 0, 0, 0.4)',
                       opacity: isClaimed ? 1 : 0.25,
                       filter: isClaimed ? 'none' : 'grayscale(100%)',
-                      border: '12px solid white',
+                      border: `${EXPORT_BORDER_WIDTH}px solid white`,
                       overflow: 'hidden',
                       boxSizing: 'border-box',
                       transform: tiltDeg !== 0 ? `rotate(${tiltDeg}deg)` : undefined,

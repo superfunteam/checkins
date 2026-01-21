@@ -1,8 +1,9 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useState, useLayoutEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useApp } from '../context/AppContext';
 import { usePassport } from '../context/PassportContext';
 import { badgeGridItem, springs } from '../utils/animations';
+import { getBadgeBorderWidth, BADGE_BOX_SHADOW } from '../utils/badgeStyles';
 
 // Shape classes for shuffle mode
 const SHUFFLE_SHAPES = ['arch', 'circle', 'square'];
@@ -12,6 +13,18 @@ export default function BadgeCard({ badge, index }) {
   const { badges, openBadgeModal, isSecretUnlocked } = useApp();
   const { getAssetUrl, badgeShape } = usePassport();
   const badgeImageRef = useRef(null);
+
+  const [borderWidth, setBorderWidth] = useState(8); // Default fallback
+
+  // Measure badge size and calculate proportional border
+  useLayoutEffect(() => {
+    if (badgeImageRef.current) {
+      const size = badgeImageRef.current.offsetWidth;
+      if (size > 0) {
+        setBorderWidth(getBadgeBorderWidth(size));
+      }
+    }
+  }, []);
 
   const isClaimed = badges[badge.id]?.claimed;
   const isSecret = badge.type === 'secret';
@@ -67,6 +80,10 @@ export default function BadgeCard({ badge, index }) {
             transition-all duration-300
             ${isClaimed ? 'opacity-100' : 'opacity-40 grayscale'}
           `}
+          style={{
+            border: `${borderWidth}px solid white`,
+            boxShadow: BADGE_BOX_SHADOW,
+          }}
         >
           {showAsMystery ? (
             // Lock placeholder for secret badges

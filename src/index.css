@@ -52,13 +52,20 @@
 
   /* Landing page buttons */
   .landing-btn-primary {
-    @apply inline-block px-6 py-3 bg-slate-900 text-white font-semibold rounded-xl;
-    @apply hover:bg-slate-800 active:scale-95 transition-all duration-150;
+    @apply inline-block px-6 py-3 bg-red-600 text-white font-semibold rounded-xl;
+    @apply hover:bg-red-700 active:scale-95 transition-all duration-150;
+    font-family: 'Google Sans Flex', sans-serif;
   }
 
   .landing-btn-secondary {
     @apply inline-block px-6 py-3 bg-white text-slate-700 font-semibold rounded-xl border border-slate-200;
     @apply hover:bg-slate-50 active:scale-95 transition-all duration-150;
+    font-family: 'Google Sans Flex', sans-serif;
+  }
+
+  /* Landing page headings */
+  .landing-heading {
+    font-family: 'Google Sans Flex', sans-serif;
   }
 
   /* Card style */
@@ -91,14 +98,11 @@
     @apply max-w-md mx-auto min-h-screen relative;
   }
 
-  /* Base badge image container - shared styles */
+  /* Base badge image container - border-radius applied via shape classes below */
+  /* Border width and box-shadow are now applied inline via JS for proportional scaling */
+  /* See src/utils/badgeStyles.js for the centralized styling utility */
   .badge-image-container {
-    /* Thick white stroke */
-    border: 12px solid white;
-    /* Heavy drop shadow */
-    box-shadow:
-      0 4px 8px rgba(31, 26, 19, 0.25),
-      0 2px 4px rgba(31, 26, 19, 0.15);
+    /* Border and shadow applied inline for proportional sizing */
   }
 
   /* Badge shape: arch (default) - round top, less round bottom */

@@ -5,13 +5,7 @@ import { useApp } from '../context/AppContext';
 import { usePassport } from '../context/PassportContext';
 import { scaleIn, springs } from '../utils/animations';
 import { playBadgeSound } from '../hooks/useSound';
-
-// Border radius values for each shape
-const SHAPE_BORDER_RADIUS = {
-  arch: '50% 50% 24% 24%',
-  circle: '50%',
-  square: '22%',
-};
+import { getBadgeStyles } from '../utils/badgeStyles';
 
 export default function SecretUnlockModal() {
   const { secretUnlockModal, closeSecretUnlockModal } = useApp();
@@ -19,11 +13,12 @@ export default function SecretUnlockModal() {
 
   const unlockContent = content.secretUnlock;
 
-  // Calculate border radius based on badge shape setting
+  // Calculate badge styles based on shape setting
   // For secret badges, use the base shape (not shuffle since they're not in the grid)
-  const badgeBorderRadius = useMemo(() => {
+  // Secret unlock badge is w-32 = 128px
+  const badgeStylesData = useMemo(() => {
     const shape = badgeShape === 'shuffle' ? 'arch' : badgeShape;
-    return SHAPE_BORDER_RADIUS[shape] || SHAPE_BORDER_RADIUS.arch;
+    return getBadgeStyles(128, shape);
   }, [badgeShape]);
 
   // Fire confetti and play badge sound when modal opens
@@ -108,8 +103,8 @@ export default function SecretUnlockModal() {
               </motion.h2>
 
               <motion.div
-                className="w-32 h-32 mx-auto mb-4 badge-image-container overflow-hidden"
-                style={{ borderRadius: badgeBorderRadius }}
+                className="w-32 h-32 mx-auto mb-4 overflow-hidden"
+                style={badgeStylesData}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ ...springs.bouncy, delay: 0.4 }}

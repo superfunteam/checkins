@@ -23,7 +23,7 @@ export function adminApiPlugin() {
               chunks.push(chunk);
             }
             const body = JSON.parse(Buffer.concat(chunks).toString());
-            const passportPath = path.resolve(`passports/${passportId}/passport.json`);
+            const passportPath = path.resolve(`public/passports/${passportId}/passport.json`);
 
             await fs.writeFile(passportPath, JSON.stringify(body, null, 2));
 
@@ -83,11 +83,11 @@ export function adminApiPlugin() {
             // Determine asset path
             let assetDir;
             if (assetType === 'images' || assetType === 'image') {
-              assetDir = `passports/${passportId}/assets/images/badges`;
+              assetDir = `public/passports/${passportId}/assets/images/badges`;
             } else if (assetType === 'audio' || assetType === 'sound') {
-              assetDir = `passports/${passportId}/assets/audio/badges`;
+              assetDir = `public/passports/${passportId}/assets/audio/badges`;
             } else {
-              assetDir = `passports/${passportId}/assets/${assetType}`;
+              assetDir = `public/passports/${passportId}/assets/${assetType}`;
             }
 
             const assetPath = path.resolve(assetDir);

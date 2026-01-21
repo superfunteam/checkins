@@ -4,16 +4,10 @@ import { useApp } from '../context/AppContext';
 import { usePassport } from '../context/PassportContext';
 import { slideUpModal, backdrop, springs } from '../utils/animations';
 import FloatingBadge from './FloatingBadge';
+import { BADGE_SHAPES, getBadgeStyles } from '../utils/badgeStyles';
 
 // Shape classes for shuffle mode (must match FloatingBadge/BadgeCard)
 const SHUFFLE_SHAPES = ['arch', 'circle', 'square'];
-
-// Border radius values for each shape
-const SHAPE_BORDER_RADIUS = {
-  arch: '50% 50% 24% 24%',
-  circle: '50%',
-  square: '22%',
-};
 
 export default function BadgeModal() {
   const {
@@ -47,9 +41,10 @@ export default function BadgeModal() {
   const [justClaimed, setJustClaimed] = useState(false);
   const [slideDirection, setSlideDirection] = useState(0);
 
-  // Calculate border radius based on badge shape setting (must match FloatingBadge)
-  const badgeBorderRadius = useMemo(() => {
-    if (!selectedBadge) return SHAPE_BORDER_RADIUS.arch;
+  // Calculate badge styles based on shape setting (must match FloatingBadge)
+  // Modal badge is w-48 = 192px
+  const badgeStylesData = useMemo(() => {
+    if (!selectedBadge) return getBadgeStyles(192, 'arch');
 
     if (badgeShape === 'shuffle') {
       // Find badge index in sorted primary badges
@@ -57,9 +52,9 @@ export default function BadgeModal() {
       const index = sortedBadges.findIndex(b => b.id === selectedBadge.id);
       const safeIndex = index >= 0 ? index : 0;
       const shape = SHUFFLE_SHAPES[safeIndex % SHUFFLE_SHAPES.length];
-      return SHAPE_BORDER_RADIUS[shape];
+      return getBadgeStyles(192, shape);
     }
-    return SHAPE_BORDER_RADIUS[badgeShape] || SHAPE_BORDER_RADIUS.arch;
+    return getBadgeStyles(192, badgeShape);
   }, [badgeShape, selectedBadge, primaryBadges]);
 
   // Calculate target rect when modal opens and manage floating badge visibility
@@ -244,8 +239,8 @@ export default function BadgeModal() {
                 >
                   <div
                     ref={badgeTargetRef}
-                    className="w-48 h-48 badge-image-container overflow-hidden"
-                    style={{ borderRadius: badgeBorderRadius }}
+                    className="w-48 h-48 overflow-hidden"
+                    style={badgeStylesData}
                   >
                     <img
                       src={getAssetUrl(selectedBadge.image)}
