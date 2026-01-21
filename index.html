@@ -47,6 +47,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Google+Sans+Flex:wght@400;500&display=swap" rel="stylesheet">
   </head>
   <body class="bg-parchment-100 font-body text-earth-800 antialiased">
+    <!-- Hidden Netlify form for build-time detection -->
+    <form name="event-inquiry" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="organization" />
+      <input type="text" name="event-type" />
+      <input type="text" name="event-date" />
+      <textarea name="message"></textarea>
+      <input type="text" name="budget" />
+    </form>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

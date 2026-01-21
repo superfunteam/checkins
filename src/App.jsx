@@ -13,6 +13,7 @@ import SecretUnlockModal from './components/SecretUnlockModal';
 import ScheduleSheet from './components/ScheduleSheet';
 import PassportListing from './components/PassportListing';
 import LandingPage from './pages/LandingPage';
+import EventInquiryPage from './pages/EventInquiryPage';
 import AdminApp from './admin/AdminApp';
 
 function AppContent() {
@@ -53,6 +54,9 @@ export default function App() {
       <Routes>
         {/* Landing page */}
         <Route path="/" element={<LandingPage />} />
+
+        {/* Event inquiry form */}
+        <Route path="/event-inquiry" element={<EventInquiryPage />} />
 
         {/* Passport routes */}
         <Route path="/event/:passportId/*" element={<PassportApp />} />
