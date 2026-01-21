@@ -15,6 +15,14 @@
       "path": "/event/sample",
       "enabled": true,
       "default": false
+    },
+    {
+      "id": "sales-convention",
+      "name": "NimbusFlow Booth",
+      "description": "Meet the Team, Get the Swag",
+      "path": "/event/sales-convention",
+      "enabled": true,
+      "default": false
     }
   ]
 }

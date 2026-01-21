@@ -14,6 +14,8 @@ import ScheduleSheet from './components/ScheduleSheet';
 import PassportListing from './components/PassportListing';
 import LandingPage from './pages/LandingPage';
 import EventInquiryPage from './pages/EventInquiryPage';
+import TermsPage from './pages/TermsPage';
+import PrivacyPage from './pages/PrivacyPage';
 import AdminApp from './admin/AdminApp';
 
 function AppContent() {
@@ -57,6 +59,10 @@ export default function App() {
 
         {/* Event inquiry form */}
         <Route path="/event-inquiry" element={<EventInquiryPage />} />
+
+        {/* Legal pages */}
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
 
         {/* Passport routes */}
         <Route path="/event/:passportId/*" element={<PassportApp />} />

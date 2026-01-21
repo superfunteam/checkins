@@ -1,0 +1,307 @@
+{
+  "id": "sales-convention",
+  "version": 1,
+  "meta": {
+    "name": "NimbusFlow Booth",
+    "shortName": "NimbusFlow",
+    "description": "Meet the Team, Get the Swag",
+    "eventType": "Trade Show",
+    "hosts": {
+      "names": [
+        "NimbusFlow"
+      ],
+      "image": null
+    }
+  },
+  "features": {
+    "secretBadges": true,
+    "backgroundMusic": false,
+    "scheduleTimeline": true,
+    "greetingSounds": false,
+    "badgeSounds": false
+  },
+  "schedule": {
+    "dayStart": "08:00",
+    "dayEnd": "18:00"
+  },
+  "badgeTypes": [
+    {
+      "id": "keynote",
+      "name": "Keynotes",
+      "label": "Keynote",
+      "emoji": "🎤",
+      "color": "#3B82F6"
+    },
+    {
+      "id": "networking",
+      "name": "Networking",
+      "label": "Networking",
+      "emoji": "🤝",
+      "color": "#10B981"
+    },
+    {
+      "id": "training",
+      "name": "Training",
+      "label": "Training",
+      "emoji": "📚",
+      "color": "#F59E0B"
+    },
+    {
+      "id": "secret",
+      "name": "Secrets",
+      "label": "Secret",
+      "emoji": "🏆",
+      "color": "#8B5CF6",
+      "hidden": true
+    }
+  ],
+  "badges": [
+    {
+      "id": "sandra",
+      "type": "networking",
+      "name": "Meet Sandra",
+      "shortDesc": "Dashboard & integrations",
+      "longDesc": "Sandra knows everything about our analytics dashboard and third-party integrations.",
+      "instruction": "Chat with Sandra about the latest dashboard updates and integrations.",
+      "order": 1,
+      "image": "assets/images/badges/badge-sandra.webp",
+      "time": "Booth A1"
+    },
+    {
+      "id": "marcus",
+      "type": "networking",
+      "name": "Meet Marcus",
+      "shortDesc": "Enterprise solutions",
+      "longDesc": "Marcus is our enterprise guru—he's helped Fortune 500 companies streamline their workflows.",
+      "instruction": "Talk to Marcus about enterprise pricing and custom solutions.",
+      "order": 2,
+      "image": "assets/images/badges/badge-marcus.webp",
+      "time": "Booth A2"
+    },
+    {
+      "id": "priya",
+      "type": "networking",
+      "name": "Meet Priya",
+      "shortDesc": "Mobile app features",
+      "longDesc": "Priya built our mobile app from the ground up and loves showing off the latest features.",
+      "instruction": "Ask Priya for a quick demo of our mobile app.",
+      "order": 3,
+      "image": "assets/images/badges/badge-priya.webp",
+      "time": "Booth B1"
+    },
+    {
+      "id": "david",
+      "type": "networking",
+      "name": "Meet David",
+      "shortDesc": "Security & compliance",
+      "longDesc": "David handles all things security. SOC 2, HIPAA, GDPR—he's got you covered.",
+      "instruction": "Have David walk you through our security certifications.",
+      "order": 4,
+      "image": "assets/images/badges/badge-meet-david.webp",
+      "time": "Booth B2"
+    },
+    {
+      "id": "kenji",
+      "type": "networking",
+      "name": "Meet Kenji",
+      "shortDesc": "API & developer tools",
+      "longDesc": "Kenji is a developer advocate who can answer any API or integration question.",
+      "instruction": "Grab some API docs from Kenji and ask about webhooks.",
+      "order": 5,
+      "image": "assets/images/badges/badge-kenji.webp",
+      "time": "Booth C1"
+    },
+    {
+      "id": "aaliyah",
+      "type": "networking",
+      "name": "Meet Aaliyah",
+      "shortDesc": "Customer success",
+      "longDesc": "Aaliyah runs our customer success team and has amazing case studies to share.",
+      "instruction": "Hear from Aaliyah about how customers are using NimbusFlow.",
+      "order": 6,
+      "image": "assets/images/badges/badge-aaliyah.webp",
+      "time": "Booth C2"
+    },
+    {
+      "id": "free-swag",
+      "type": "secret",
+      "name": "Free Swag!",
+      "shortDesc": "You earned it!",
+      "longDesc": "You met the whole NimbusFlow team! Head to the welcome desk to claim your free t-shirt or travel coffee mug.",
+      "instruction": "Complete all badges to unlock this reward.",
+      "order": 7,
+      "image": "assets/images/badges/badge-shirt.webp",
+      "unlockCondition": {
+        "type": "all",
+        "badgeIds": [
+          "sandra",
+          "marcus",
+          "priya",
+          "david",
+          "kenji",
+          "aaliyah"
+        ]
+      }
+    }
+  ],
+  "theme": {
+    "colors": {
+      "primary": {
+        "50": "#fffbeb",
+        "100": "#fef3c7",
+        "200": "#fde68a",
+        "300": "#fcd34d",
+        "400": "#fbbf24",
+        "500": "#f59e0b",
+        "600": "#d97706",
+        "700": "#b45309",
+        "800": "#92400e",
+        "900": "#78350f"
+      },
+      "accent": {
+        "50": "#ecfeff",
+        "100": "#cffafe",
+        "200": "#a5f3fc",
+        "300": "#67e8f9",
+        "400": "#22d3ee",
+        "500": "#06b6d4",
+        "600": "#0891b2",
+        "700": "#0e7490",
+        "800": "#155e75",
+        "900": "#164e63"
+      },
+      "background": {
+        "50": "#f0f9ff",
+        "100": "#e0f2fe",
+        "200": "#bae6fd",
+        "300": "#7dd3fc",
+        "400": "#38bdf8",
+        "500": "#0ea5e9"
+      },
+      "text": {
+        "50": "#f0f9ff",
+        "100": "#e0f2fe",
+        "200": "#bae6fd",
+        "300": "#7dd3fc",
+        "400": "#38bdf8",
+        "500": "#0ea5e9",
+        "600": "#0284c7",
+        "700": "#0369a1",
+        "800": "#075985",
+        "900": "#0c4a6e"
+      },
+      "highlight": "#f97316",
+      "danger": {
+        "500": "#ef4444",
+        "600": "#dc2626",
+        "700": "#b91c1c"
+      }
+    },
+    "fonts": {
+      "display": {
+        "family": "Space Grotesk",
+        "weights": [
+          400,
+          600,
+          700
+        ]
+      },
+      "body": {
+        "family": "Inter",
+        "weights": [
+          400,
+          500,
+          600
+        ]
+      },
+      "ui": {
+        "family": "Inter",
+        "weights": [
+          400,
+          500
+        ]
+      }
+    }
+  },
+  "content": {
+    "splash": {
+      "title": "NimbusFlow Booth",
+      "subtitle": "Meet the Team, Get the Swag",
+      "heroImage": "assets/images/badges/splash.webp",
+      "enterButton": "Let's Go",
+      "heroEmoji": null
+    },
+    "name": {
+      "title": "What's your name?",
+      "subtitle": "So we know who to give the swag to!",
+      "placeholder": "Your name",
+      "continueButton": "Continue"
+    },
+    "explainer": {
+      "title": "Welcome!",
+      "greeting": "Hey {name}!",
+      "body": [
+        "Meet the NimbusFlow team and collect badges along the way. Each team member has something cool to show you.",
+        "Meet all 6 team members to unlock a free t-shirt or travel mug!"
+      ],
+      "quote": "\"Work smarter, flow better.\"",
+      "disclaimer": "Find us at booths A1-C2. We don't bite!",
+      "beginButton": "Start Collecting"
+    },
+    "passport": {
+      "header": "NimbusFlow Booth",
+      "journeySubtitle": "{name}'s Booth Journey",
+      "progressText": "{count} of {total} team members met",
+      "certifyButton": "Get Certificate",
+      "resetButton": "Reset Progress"
+    },
+    "certification": {
+      "title": "You Met Everyone!",
+      "subtitle": "Claim your swag at the welcome desk",
+      "preview": "Certificate of Completion",
+      "downloadButton": "Download Certificate",
+      "shareButton": "Share Achievement",
+      "viewChecklist": "View All Badges"
+    },
+    "certificate": {
+      "header": "Certificate of Completion",
+      "title": "NimbusFlow Booth Tour",
+      "certifies": "This certifies that",
+      "completed": "met the entire NimbusFlow team",
+      "footer": "\"Work smarter, flow better.\""
+    },
+    "schedule": {
+      "title": "Booth Locations"
+    },
+    "badgeModal": {
+      "claimButton": "I Met Them!",
+      "claimedLabel": "Met!",
+      "witnessedAt": "{time}",
+      "honorSystemText": "Confirm you chatted with this team member.",
+      "honorSystemCheckbox": "Don't ask me again",
+      "honorConfirmButton": "Confirm",
+      "cancelButton": "Cancel"
+    },
+    "checklist": {
+      "header": "Team Checklist",
+      "description": "Made a mistake? Toggle badges on or off below. The free swag badge unlocks when you meet everyone!",
+      "doneButton": "Done"
+    },
+    "secretUnlock": {
+      "header": "You Did It!",
+      "continueButton": "Keep Exploring",
+      "certifyButton": "Claim My Swag"
+    }
+  },
+  "audio": {
+    "greetings": [],
+    "backgroundMusic": {}
+  },
+  "pwa": {
+    "themeColor": "#3B82F6",
+    "backgroundColor": "#F1F5F9"
+  },
+  "settings": {
+    "badgeShape": "arch"
+  }
+}

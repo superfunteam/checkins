@@ -170,6 +170,29 @@ function HeroFloatingBadges() {
   );
 }
 
+// Floating badges for footer CTA
+function FooterFloatingBadges() {
+  // 6 badges evenly distributed around the CTA
+  const badges = useMemo(() => [
+    // Left side - top, middle, bottom
+    { position: { top: '5%', left: '5%' }, size: 100, delay: 0, duration: 3.5 },
+    { position: { top: '40%', left: '3%' }, size: 100, delay: 0.3, duration: 4 },
+    { position: { bottom: '8%', left: '6%' }, size: 100, delay: 0.5, duration: 3.8 },
+    // Right side - top, middle, bottom
+    { position: { top: '8%', right: '5%' }, size: 100, delay: 0.2, duration: 3.6 },
+    { position: { top: '42%', right: '3%' }, size: 100, delay: 0.4, duration: 4.2 },
+    { position: { bottom: '5%', right: '6%' }, size: 100, delay: 0.6, duration: 3.4 },
+  ], []);
+
+  return (
+    <div className="hidden md:block absolute inset-0 overflow-hidden">
+      {badges.map((badge, i) => (
+        <FloatingBadge key={`footer-${i}`} {...badge} />
+      ))}
+    </div>
+  );
+}
+
 // Feature data with badge images
 const features = [
   {
@@ -255,11 +278,11 @@ const featureStaggerContainer = {
 // Passport showcase data
 const PASSPORT_SHOWCASES = [
   {
-    id: 'shire',
-    title: 'The Shire Passport',
-    badgeCount: 12,
-    heroImage: '/passports/shire/assets/images/badges/badge-fellowship.webp',
-    path: '/event/shire',
+    id: 'sales-convention',
+    title: 'NimbusFlow Booth',
+    badgeCount: 6,
+    heroEmoji: '💼',
+    path: '/event/sales-convention',
   },
   {
     id: 'sample',
@@ -267,6 +290,13 @@ const PASSPORT_SHOWCASES = [
     badgeCount: 6,
     heroEmoji: '🚀',
     path: '/event/sample',
+  },
+  {
+    id: 'shire',
+    title: 'The Shire Passport',
+    badgeCount: 12,
+    heroImage: '/passports/shire/assets/images/badges/badge-fellowship.webp',
+    path: '/event/shire',
   },
 ];
 
@@ -306,11 +336,11 @@ function PhonePreview({ passportId }) {
   }, []);
 
   return (
-    <div className="bg-slate-900 rounded-t-[24px] px-2 pt-2 shadow-xl w-full max-w-[185px] mx-auto">
+    <div className="bg-slate-900 rounded-t-[24px] px-2 pt-2 shadow-xl w-full max-w-[296px] mx-auto">
       {/* Notch */}
       <div className="bg-slate-900 h-5 w-16 mx-auto rounded-full mb-1.5" />
       {/* Screen */}
-      <div className="bg-white rounded-t-[18px] overflow-hidden relative" style={{ aspectRatio: '9/17' }}>
+      <div className="bg-white rounded-t-[18px] overflow-hidden relative" style={{ aspectRatio: '720/1480' }}>
         {/* Both screens rendered, positioned absolutely */}
         {screens.map((num, index) => {
           const isActive = index === currentScreen;
@@ -337,8 +367,30 @@ function PhonePreview({ passportId }) {
   );
 }
 
-// Passport card component
+// Passport card component - loads hero from passport.json
 function PassportShowcaseCard({ passport }) {
+  const [heroData, setHeroData] = useState({ heroImage: passport.heroImage, heroEmoji: passport.heroEmoji });
+  const [eventType, setEventType] = useState(null);
+
+  useEffect(() => {
+    // Fetch passport.json to get hero image/emoji and event type
+    fetch(`/passports/${passport.id}/passport.json`)
+      .then(res => res.json())
+      .then(data => {
+        const splash = data.content?.splash || {};
+        if (splash.heroImage || splash.heroEmoji) {
+          setHeroData({
+            heroImage: splash.heroImage ? `/passports/${passport.id}/${splash.heroImage}` : null,
+            heroEmoji: splash.heroEmoji
+          });
+        }
+        if (data.meta?.eventType) {
+          setEventType(data.meta.eventType);
+        }
+      })
+      .catch(() => {}); // Fallback to static data on error
+  }, [passport.id]);
+
   return (
     <Link
       to={passport.path}
@@ -350,16 +402,24 @@ function PassportShowcaseCard({ passport }) {
           className="w-20 h-20 overflow-hidden flex items-center justify-center bg-slate-50 mb-3"
           style={getBadgeStyles(80, 'arch')}
         >
-          {passport.heroEmoji ? (
-            <span className="text-4xl">{passport.heroEmoji}</span>
-          ) : (
+          {heroData.heroEmoji ? (
+            <span className="text-4xl">{heroData.heroEmoji}</span>
+          ) : heroData.heroImage ? (
             <img
-              src={passport.heroImage}
+              src={heroData.heroImage}
               alt={passport.title}
               className="w-full h-full object-cover"
             />
+          ) : (
+            <span className="text-4xl">📋</span>
           )}
         </div>
+        {/* Event type pill */}
+        {eventType && (
+          <span className="inline-block bg-red-100/70 text-red-600 text-xs font-medium px-2.5 py-0.5 rounded-full my-2">
+            {eventType}
+          </span>
+        )}
         {/* Title and count */}
         <h3 className="font-semibold text-slate-800 text-lg leading-tight mb-1 landing-heading">
           {passport.title}
@@ -402,24 +462,32 @@ function CTACard() {
             <path d="M175.483 582.425C175.085 582.425 172.069 582.425 166.953 584.247C147.698 591.105 146.777 625.28 141.836 635.082C134.323 649.985 119.099 666.171 114.8 680.555C105.841 707.736 91.2261 749.683 90.2988 756.962C89.9835 760.882 89.9835 765.263 89.9835 769.776" stroke="black" strokeOpacity="0.05" strokeWidth="20" strokeLinecap="round"/>
           </svg>
         </div>
+        {/* Get Started pill */}
+        <span className="inline-block bg-red-100/70 text-red-600 text-xs font-medium px-2.5 py-0.5 rounded-full my-2">
+          Get Started
+        </span>
         {/* Title and subtitle */}
         <h3 className="font-semibold text-slate-800 text-lg leading-tight mb-1 landing-heading">
-          Get Started
+          Custom Checkins
         </h3>
         <p className="text-sm text-slate-500">
-          Create your own passport
+          Unlimited Badges
         </p>
       </div>
       {/* Placeholder phone area to match height */}
       <div className="flex-1 flex items-start justify-center pt-2">
-        <div className="bg-slate-200 rounded-t-[24px] px-2 pt-2 w-full max-w-[185px] mx-auto">
-          <div className="bg-slate-200 h-5 w-16 mx-auto rounded-full mb-1.5" />
-          <div className="bg-slate-100 rounded-t-[18px] flex items-center justify-center" style={{ aspectRatio: '9/17' }}>
-            <div className="text-center text-slate-400 p-4">
-              <svg className="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
-              </svg>
-              <span className="text-xs font-medium">Your event here</span>
+        <div className="bg-slate-300 rounded-t-[24px] px-2 pt-2 shadow-xl w-full max-w-[296px] mx-auto">
+          {/* Notch */}
+          <div className="bg-slate-300 h-5 w-16 mx-auto rounded-full mb-1.5" />
+          {/* Screen */}
+          <div className="bg-slate-100 rounded-t-[18px] overflow-hidden relative" style={{ aspectRatio: '720/1480' }}>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-center text-slate-400 p-4">
+                <svg className="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
+                </svg>
+                <span className="text-xs font-medium">Your event here</span>
+              </div>
             </div>
           </div>
         </div>
@@ -490,6 +558,14 @@ export default function LandingPage() {
           animate="visible"
           variants={staggerContainer}
         >
+          <motion.div
+            className="block mb-4 md:mt-24"
+            variants={fadeInUp}
+          >
+            <span className="inline-block bg-red-100 text-red-700 text-sm font-medium px-4 py-1.5 rounded-full">
+              Win your next work event
+            </span>
+          </motion.div>
           <motion.h1
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-tight landing-heading bg-white/70 md:bg-transparent rounded-lg px-2 py-1 inline-block"
             variants={fadeInUp}
@@ -592,7 +668,7 @@ export default function LandingPage() {
           </motion.div>
 
           <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -784,9 +860,10 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-16 px-6 bg-white border-t border-slate-100">
-        <div className="landing-container mx-auto text-center">
+      {/* CTA Section */}
+      <section className="py-24 md:py-32 px-6 bg-white border-t border-slate-100 relative min-h-[500px] flex items-center">
+        <FooterFloatingBadges />
+        <div className="landing-container mx-auto text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -798,12 +875,20 @@ export default function LandingPage() {
             <p className="text-lg text-slate-600 mb-8">
               Start building engaging check-in experiences today.
             </p>
-            <Link to="/events" className="landing-btn-primary">
+            <Link to="/event-inquiry" className="landing-btn-primary">
               Host Event
             </Link>
           </motion.div>
-          <div className="mt-16 pt-8 border-t border-slate-100 text-slate-500 text-sm">
-            &copy; {new Date().getFullYear()} Checkins. All rights reserved.
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-8 px-6 bg-slate-50 border-t border-slate-100">
+        <div className="landing-container mx-auto text-center text-slate-500 text-sm">
+          <p>&copy; {new Date().getFullYear()} Checkins. All rights reserved.</p>
+          <div className="mt-4 flex justify-center gap-6">
+            <Link to="/terms" className="hover:text-slate-700 transition-colors">Terms of Service</Link>
+            <Link to="/privacy" className="hover:text-slate-700 transition-colors">Privacy Policy</Link>
           </div>
         </div>
       </footer>

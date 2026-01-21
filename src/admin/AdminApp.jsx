@@ -127,8 +127,19 @@ function PassportDetail() {
     setRefreshKey(k => k + 1);
   };
 
-  const handleSplashChange = async (key, value) => {
-    const updatedSplash = { ...passport.content.splash, [key]: value };
+  const handleMetaChange = async (key, value) => {
+    const updatedMeta = { ...passport.meta, [key]: value };
+    const updatedPassport = { ...passport, meta: updatedMeta };
+
+    await savePassport(passportId, updatedPassport);
+    setPassport(updatedPassport);
+    setRefreshKey(k => k + 1);
+  };
+
+  const handleSplashChange = async (keyOrChanges, value) => {
+    // Support both single key-value and object of changes
+    const changes = typeof keyOrChanges === 'object' ? keyOrChanges : { [keyOrChanges]: value };
+    const updatedSplash = { ...passport.content.splash, ...changes };
     const updatedContent = { ...passport.content, splash: updatedSplash };
     const updatedPassport = { ...passport, content: updatedContent };
 
@@ -350,8 +361,7 @@ function PassportDetail() {
                       onChange={async (file) => {
                         setHeroImageFile(file);
                         const result = await uploadFile(passportId, file, 'images', 'splash.webp');
-                        await handleSplashChange('heroImage', result.path);
-                        await handleSplashChange('heroEmoji', null);
+                        await handleSplashChange({ heroImage: result.path, heroEmoji: null });
                         setHeroImageFile(null);
                       }}
                       onClear={() => handleSplashChange('heroImage', null)}
@@ -369,8 +379,11 @@ function PassportDetail() {
                         value={passport.content?.splash?.heroEmoji || ''}
                         onChange={(e) => {
                           const emoji = e.target.value.slice(-2);
-                          handleSplashChange('heroEmoji', emoji || null);
-                          if (emoji) handleSplashChange('heroImage', null);
+                          if (emoji) {
+                            handleSplashChange({ heroEmoji: emoji, heroImage: null });
+                          } else {
+                            handleSplashChange('heroEmoji', null);
+                          }
                         }}
                         placeholder="Enter emoji..."
                         className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -397,7 +410,36 @@ function PassportDetail() {
           {/* Settings */}
           <section className="mb-8">
             <h2 className="text-xl font-semibold mb-4">Settings</h2>
-            <div className="bg-white rounded-lg border border-gray-200 p-4">
+            <div className="bg-white rounded-lg border border-gray-200 p-4 space-y-4">
+              {/* Event Type */}
+              <div className="flex items-center justify-between">
+                <div>
+                  <label htmlFor="eventType" className="font-medium">Event Type</label>
+                  <p className="text-sm text-gray-500">Category shown on the homepage showcase</p>
+                </div>
+                <select
+                  id="eventType"
+                  value={passport.meta?.eventType || ''}
+                  onChange={(e) => handleMetaChange('eventType', e.target.value || null)}
+                  className="px-3 py-2 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="">None</option>
+                  <option value="Watch Party">Watch Party</option>
+                  <option value="Happy Hour">Happy Hour</option>
+                  <option value="Conference">Conference</option>
+                  <option value="Scavenger Hunt">Scavenger Hunt</option>
+                  <option value="Meetup">Meetup</option>
+                  <option value="Mixer">Mixer</option>
+                  <option value="Workshop">Workshop</option>
+                  <option value="Party">Party</option>
+                  <option value="Trade Show">Trade Show</option>
+                  <option value="Team Building">Team Building</option>
+                  <option value="Hackathon">Hackathon</option>
+                  <option value="Wedding">Wedding</option>
+                </select>
+              </div>
+
+              {/* Badge Shape */}
               <div className="flex items-center justify-between">
                 <div>
                   <label htmlFor="badgeShape" className="font-medium">Badge Shape</label>

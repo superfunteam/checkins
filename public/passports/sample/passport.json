@@ -5,6 +5,7 @@
     "name": "Sample Check-ins",
     "shortName": "Sample",
     "description": "The Ultimate Hackathon Survival Guide",
+    "eventType": "Hackathon",
     "hosts": {
       "names": [
         "Your Name Here"

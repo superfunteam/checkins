@@ -5,6 +5,7 @@
     "name": "The Shire Passport",
     "shortName": "Shire Passport",
     "description": "Official Documentation of One's Journey Through Middle-earth",
+    "eventType": "Watch Party",
     "hosts": {
       "names": [
         "Sophia",
