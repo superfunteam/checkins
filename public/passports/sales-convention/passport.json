@@ -65,7 +65,10 @@
       "instruction": "Chat with Sandra about the latest dashboard updates and integrations.",
       "order": 1,
       "image": "assets/images/badges/badge-sandra.webp",
-      "time": "Booth A1"
+      "time": "Booth A1",
+      "requiresQrScan": true,
+      "claimSecret": "kwbf779y36fj",
+      "qrImage": "assets/images/qr/qr-sandra.png"
     },
     {
       "id": "marcus",

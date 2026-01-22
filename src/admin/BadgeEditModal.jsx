@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import FileUploadInput from './FileUploadInput';
 import EmojiPicker from './EmojiPicker';
-import { uploadFile } from './adminApi';
+import { uploadFile, saveQrImage } from './adminApi';
+import { generateClaimSecret, buildQrData, buildQrServiceUrl } from '../utils/qrUtils';
 
 export default function BadgeEditModal({
   badge,
@@ -27,6 +28,9 @@ export default function BadgeEditModal({
     sound: '',
     unlockHint: '',
     unlockCondition: { type: 'all', badgeIds: [] },
+    requiresQrScan: false,
+    claimSecret: '',
+    qrImage: '',
   });
 
   const [visualType, setVisualType] = useState('image'); // 'image' or 'emoji'
@@ -36,6 +40,8 @@ export default function BadgeEditModal({
   const [soundFile, setSoundFile] = useState(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
+  const [qrPreviewUrl, setQrPreviewUrl] = useState(null);
+  const [showRegenerateWarning, setShowRegenerateWarning] = useState(false);
 
   // Initialize form with badge data
   useEffect(() => {
@@ -55,16 +61,25 @@ export default function BadgeEditModal({
         sound: badge.sound || '',
         unlockHint: badge.unlockHint || '',
         unlockCondition: badge.unlockCondition || { type: 'all', badgeIds: [] },
+        requiresQrScan: badge.requiresQrScan || false,
+        claimSecret: badge.claimSecret || '',
+        qrImage: badge.qrImage || '',
       });
       // Set visual type based on what the badge has
       setVisualType(badge.emoji ? 'emoji' : 'image');
+      // Set QR preview URL if badge has QR enabled
+      if (badge.requiresQrScan && badge.claimSecret) {
+        const qrData = buildQrData(passportId, badge.id, badge.claimSecret);
+        setQrPreviewUrl(buildQrServiceUrl(qrData));
+      }
     } else if (isNew) {
       // Set order to be after the last badge
       const maxOrder = Math.max(0, ...allBadges.map(b => b.order || 0));
       setFormData(prev => ({ ...prev, order: maxOrder + 1 }));
       setVisualType('emoji'); // Default new badges to emoji
+      setQrPreviewUrl(null);
     }
-  }, [badge, isNew, badgeTypes, allBadges]);
+  }, [badge, isNew, badgeTypes, allBadges, passportId]);
 
   const handleChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -83,6 +98,37 @@ export default function BadgeEditModal({
     });
   };
 
+  const handleQrToggle = (enabled) => {
+    handleChange('requiresQrScan', enabled);
+    if (enabled && !formData.claimSecret && formData.id) {
+      // Generate new secret when enabling
+      const newSecret = generateClaimSecret();
+      handleChange('claimSecret', newSecret);
+      const qrData = buildQrData(passportId, formData.id, newSecret);
+      setQrPreviewUrl(buildQrServiceUrl(qrData));
+    } else if (!enabled) {
+      setQrPreviewUrl(null);
+    }
+  };
+
+  const handleRegenerateQr = () => {
+    if (formData.qrImage) {
+      // Show warning if there's an existing QR
+      setShowRegenerateWarning(true);
+    } else {
+      confirmRegenerateQr();
+    }
+  };
+
+  const confirmRegenerateQr = () => {
+    const newSecret = generateClaimSecret();
+    handleChange('claimSecret', newSecret);
+    handleChange('qrImage', ''); // Clear old image path
+    const qrData = buildQrData(passportId, formData.id, newSecret);
+    setQrPreviewUrl(buildQrServiceUrl(qrData));
+    setShowRegenerateWarning(false);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
@@ -91,6 +137,8 @@ export default function BadgeEditModal({
     try {
       let finalImagePath = formData.image;
       let finalSoundPath = formData.sound;
+      let finalQrImagePath = formData.qrImage;
+      let finalClaimSecret = formData.claimSecret;
 
       // Upload image if a new file was selected (only if using image mode)
       if (visualType === 'image' && imageFile) {
@@ -106,6 +154,20 @@ export default function BadgeEditModal({
         const filename = `badge-${formData.id}.${ext}`;
         const result = await uploadFile(passportId, soundFile, 'audio', filename);
         finalSoundPath = result.path;
+      }
+
+      // Handle QR code generation and saving
+      if (formData.requiresQrScan) {
+        // Generate secret if not exists
+        if (!finalClaimSecret) {
+          finalClaimSecret = generateClaimSecret();
+        }
+
+        // Save QR image if we have a preview URL (new or regenerated)
+        if (qrPreviewUrl && !formData.qrImage) {
+          const result = await saveQrImage(passportId, qrPreviewUrl, formData.id);
+          finalQrImagePath = result.path;
+        }
       }
 
       // Build the badge object
@@ -135,6 +197,13 @@ export default function BadgeEditModal({
       }
       if (finalSoundPath) {
         badgeData.sound = finalSoundPath;
+      }
+
+      // Add QR scan fields
+      if (formData.requiresQrScan) {
+        badgeData.requiresQrScan = true;
+        badgeData.claimSecret = finalClaimSecret;
+        badgeData.qrImage = finalQrImagePath;
       }
 
       // Add secret badge fields
@@ -433,6 +502,105 @@ export default function BadgeEditModal({
                 handleChange('sound', '');
               }}
             />
+          </section>
+
+          {/* QR Code Verification Section */}
+          <section>
+            <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
+              QR Code Verification
+            </h3>
+            <div className="space-y-4">
+              <label className="flex items-center gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={formData.requiresQrScan}
+                  onChange={(e) => handleQrToggle(e.target.checked)}
+                  disabled={!formData.id}
+                  className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                />
+                <div>
+                  <span className="text-sm font-medium text-gray-700">
+                    Require QR Code Scan
+                  </span>
+                  {!formData.id && (
+                    <p className="text-xs text-amber-600">Set badge ID first</p>
+                  )}
+                </div>
+              </label>
+
+              {formData.requiresQrScan && formData.id && (
+                <div className="bg-gray-50 rounded-lg p-4 space-y-4">
+                  {/* QR Preview */}
+                  <div className="flex flex-col items-center gap-3">
+                    {qrPreviewUrl ? (
+                      <img
+                        src={qrPreviewUrl}
+                        alt="QR Code Preview"
+                        className="w-48 h-48 border border-gray-200 rounded-lg bg-white"
+                      />
+                    ) : formData.qrImage ? (
+                      <img
+                        src={`/passports/${passportId}/${formData.qrImage}`}
+                        alt="QR Code"
+                        className="w-48 h-48 border border-gray-200 rounded-lg bg-white"
+                      />
+                    ) : (
+                      <div className="w-48 h-48 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center text-gray-400 text-sm text-center p-4">
+                        QR code will be generated on save
+                      </div>
+                    )}
+
+                    <div className="flex gap-2">
+                      <button
+                        type="button"
+                        onClick={handleRegenerateQr}
+                        className="px-3 py-1.5 text-sm bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors"
+                      >
+                        Regenerate QR Code
+                      </button>
+                      {(qrPreviewUrl || formData.qrImage) && (
+                        <a
+                          href={qrPreviewUrl || `/passports/${passportId}/${formData.qrImage}`}
+                          download={`qr-${formData.id}.png`}
+                          className="px-3 py-1.5 text-sm bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition-colors"
+                        >
+                          Download for Print
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  <p className="text-xs text-gray-500 text-center">
+                    Print this QR code and display it at the badge location. Users must scan it to claim the badge.
+                  </p>
+
+                  {/* Regenerate Warning Modal */}
+                  {showRegenerateWarning && (
+                    <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
+                      <p className="text-sm text-amber-800 mb-3">
+                        <strong>Warning:</strong> Regenerating the QR code will invalidate any printed QR codes. Users with old QR codes won't be able to claim this badge.
+                      </p>
+                      <div className="flex gap-2">
+                        <button
+                          type="button"
+                          onClick={confirmRegenerateQr}
+                          className="px-3 py-1.5 text-sm bg-amber-600 text-white rounded hover:bg-amber-700 transition-colors"
+                        >
+                          Yes, Regenerate
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setShowRegenerateWarning(false)}
+                          className="px-3 py-1.5 text-sm bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </section>
 
           {/* Secret Badge Section */}

@@ -5,6 +5,9 @@ import { usePassport } from '../context/PassportContext';
 import { slideUpModal, backdrop, springs } from '../utils/animations';
 import FloatingBadge from './FloatingBadge';
 import { BADGE_SHAPES, getBadgeStyles } from '../utils/badgeStyles';
+import QrScanner from './QrScanner';
+import QrCodeIcon from './icons/QrCodeIcon';
+import { parseQrData, validateQrScan } from '../utils/qrUtils';
 
 // Shape classes for shuffle mode (must match FloatingBadge/BadgeCard)
 const SHUFFLE_SHAPES = ['arch', 'circle', 'square'];
@@ -25,8 +28,11 @@ export default function BadgeModal() {
     isClosingBadgeModal,
   } = useApp();
 
-  const { primaryBadges, secretBadges, getAssetUrl, getTypeLabel, getTypeColor, content, badgeShape } = usePassport();
+  const { primaryBadges, secretBadges, getAssetUrl, getTypeLabel, getTypeColor, content, badgeShape, passportId } = usePassport();
   const modalContent = content.badgeModal;
+
+  const [showQrScanner, setShowQrScanner] = useState(false);
+  const [qrError, setQrError] = useState(null);
 
   // Ref to get target position in modal
   const badgeTargetRef = useRef(null);
@@ -162,19 +168,47 @@ export default function BadgeModal() {
   const typeColor = getTypeColor(selectedBadge.type);
 
   const handleClaimClick = () => {
-    if (honorSystemDismissed) performClaim();
-    else setShowHonorSystem(true);
+    if (selectedBadge.requiresQrScan) {
+      setShowQrScanner(true);
+      setQrError(null);
+    } else if (honorSystemDismissed) {
+      performClaim();
+    } else {
+      setShowHonorSystem(true);
+    }
   };
 
   const performClaim = () => {
     claimBadge(selectedBadge.id);
     setJustClaimed(true);
     setShowHonorSystem(false);
+    setShowQrScanner(false);
     if (dontAskAgain) dismissHonorSystem();
     setTimeout(() => {
       closeBadgeModal();
       setJustClaimed(false);
     }, 800);
+  };
+
+  const handleQrScanSuccess = (decodedText) => {
+    const result = validateQrScan(
+      decodedText,
+      passportId,
+      selectedBadge.id,
+      selectedBadge.claimSecret
+    );
+
+    if (result.valid) {
+      setQrError(null);
+      performClaim();
+    } else {
+      setQrError(result.error);
+      setShowQrScanner(false);
+    }
+  };
+
+  const handleQrScanClose = () => {
+    setShowQrScanner(false);
   };
 
   const contentVariants = {
@@ -283,6 +317,12 @@ export default function BadgeModal() {
                   </p>
                 )}
 
+                {qrError && (
+                  <div className="mb-4 p-3 bg-red-50 text-red-700 rounded-lg text-sm text-center">
+                    {qrError}
+                  </div>
+                )}
+
                 {!showHonorSystem && (
                   <>
                     {isClaimed || justClaimed ? (
@@ -302,6 +342,16 @@ export default function BadgeModal() {
                           </p>
                         )}
                       </div>
+                    ) : selectedBadge.requiresQrScan ? (
+                      <motion.button
+                        className="btn-primary w-full flex items-center justify-center gap-2"
+                        onClick={handleClaimClick}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <QrCodeIcon className="w-5 h-5" />
+                        <span>Scan QR Code to Claim</span>
+                      </motion.button>
                     ) : (
                       <motion.button
                         className="btn-primary w-full"
@@ -369,6 +419,16 @@ export default function BadgeModal() {
               onAnimationComplete={handleFloatingComplete}
             />
           )}
+
+          <AnimatePresence>
+            {showQrScanner && (
+              <QrScanner
+                onSuccess={handleQrScanSuccess}
+                onError={(e) => setQrError(e)}
+                onClose={handleQrScanClose}
+              />
+            )}
+          </AnimatePresence>
         </>
       )}
     </AnimatePresence>

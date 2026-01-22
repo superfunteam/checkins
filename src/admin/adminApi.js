@@ -47,3 +47,26 @@ export async function uploadFile(passportId, file, assetType, filename) {
 
   return response.json();
 }
+
+/**
+ * Save a QR code image from an external service
+ * @param {string} passportId - The passport ID
+ * @param {string} qrUrl - The URL to fetch the QR image from
+ * @param {string} badgeId - The badge ID (used for filename)
+ */
+export async function saveQrImage(passportId, qrUrl, badgeId) {
+  const response = await fetch(`/api/admin/passport/${passportId}/save-qr`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ qrUrl, badgeId }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.error || 'Failed to save QR image');
+  }
+
+  return response.json();
+}

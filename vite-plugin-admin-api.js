@@ -114,6 +114,56 @@ export function adminApiPlugin() {
           return;
         }
 
+        // POST /api/admin/passport/:id/save-qr
+        if (action === 'save-qr' && req.method === 'POST') {
+          try {
+            const chunks = [];
+            for await (const chunk of req) {
+              chunks.push(chunk);
+            }
+            const body = JSON.parse(Buffer.concat(chunks).toString());
+            const { qrUrl, badgeId } = body;
+
+            if (!qrUrl || !badgeId) {
+              res.statusCode = 400;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ error: 'Missing qrUrl or badgeId' }));
+              return;
+            }
+
+            // Fetch QR image from external service
+            const response = await fetch(qrUrl);
+            if (!response.ok) {
+              throw new Error(`Failed to fetch QR image: ${response.status}`);
+            }
+
+            const imageBuffer = Buffer.from(await response.arrayBuffer());
+
+            // Ensure QR directory exists
+            const qrDir = path.resolve(`public/passports/${passportId}/assets/images/qr`);
+            await fs.mkdir(qrDir, { recursive: true });
+
+            // Save the QR image
+            const filename = `qr-${badgeId}.png`;
+            const filePath = path.join(qrDir, filename);
+            await fs.writeFile(filePath, imageBuffer);
+
+            const relativePath = `assets/images/qr/${filename}`;
+
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({
+              success: true,
+              path: relativePath,
+            }));
+          } catch (error) {
+            console.error('Save QR error:', error);
+            res.statusCode = 500;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ error: error.message }));
+          }
+          return;
+        }
+
         next();
       });
     },
