@@ -64,7 +64,7 @@ export default function Passport() {
         <div className="mt-2 h-2 bg-parchment-300 rounded-full overflow-hidden">
           <motion.div
             className="h-full"
-            style={{ backgroundColor: '#7C3AED' }}
+            style={{ backgroundColor: 'var(--color-highlight)' }}
             initial={{ width: 0 }}
             animate={{ width: `${(claimedPrimaryCount / totalPrimaryBadges) * 100}%` }}
             transition={{ duration: 0.5, ease: 'easeOut' }}

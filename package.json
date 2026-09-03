@@ -1,12 +1,15 @@
 {
-  "name": "shire-passport",
+  "name": "checkins",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev:twilight": "VITE_HOST_PASSPORT=twilight vite",
+    "preview:twilight": "VITE_HOST_PASSPORT=twilight vite build && vite preview",
+    "test:e2e": "node scripts/e2e/flow.mjs"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",

@@ -1,0 +1,481 @@
+{
+  "id": "twilight",
+  "version": 1,
+  "_notes": "PLACEHOLDER CONTENT. Badge list, times, copy, art, and audio are stand-ins until the real event plan lands. Bump `version` whenever art or sounds are replaced so every phone refetches.",
+  "meta": {
+    "name": "The Twilight Passport",
+    "shortName": "Twilight Passport",
+    "description": "Official Documentation of One's Journey Through Forks, Washington",
+    "eventType": "Watch Party",
+    "hosts": {
+      "names": [
+        "Sophia",
+        "Matt"
+      ],
+      "image": null
+    }
+  },
+  "features": {
+    "secretBadges": true,
+    "backgroundMusic": false,
+    "scheduleTimeline": true,
+    "greetingSounds": false,
+    "badgeSounds": false
+  },
+  "schedule": {
+    "dayStart": "09:00",
+    "dayEnd": "21:00"
+  },
+  "badgeTypes": [
+    {
+      "id": "movie",
+      "name": "Films",
+      "label": "Film",
+      "emoji": "🎬",
+      "color": "#4D6F8D"
+    },
+    {
+      "id": "meal",
+      "name": "Meals",
+      "label": "Meal",
+      "emoji": "🍎",
+      "color": "#C8262B"
+    },
+    {
+      "id": "scene",
+      "name": "Scenes",
+      "label": "Scene",
+      "emoji": "🌙",
+      "color": "#C9A227"
+    },
+    {
+      "id": "secret",
+      "name": "Secrets",
+      "label": "Secret",
+      "emoji": "✨",
+      "color": "#7C3AED",
+      "hidden": true
+    }
+  ],
+  "badges": [
+    {
+      "id": "breakfast",
+      "type": "meal",
+      "name": "Breakfast",
+      "time": "9am ish",
+      "shortDesc": "Fuel for a long day in Forks",
+      "longDesc": "Charlie would make eggs. Bella would make something better. Either way, you cannot survive five films on an empty stomach.",
+      "instruction": "Eat breakfast to claim this badge.",
+      "image": "assets/images/badges/badge-breakfast.webp",
+      "order": 1
+    },
+    {
+      "id": "vampire-baseball",
+      "type": "scene",
+      "name": "Vampire Baseball",
+      "time": "10:25am ish",
+      "shortDesc": "The Cullens play ball in a thunderstorm",
+      "longDesc": "There is a reason they only play during a storm. Witness the single most important sporting event in the history of the Olympic Peninsula.",
+      "instruction": "Watch this scene to claim this badge.",
+      "image": "assets/images/badges/badge-vampire-baseball.webp",
+      "order": 2
+    },
+    {
+      "id": "twilight",
+      "type": "movie",
+      "name": "Twilight",
+      "time": "11:05am ish",
+      "startTime": "9am ish",
+      "shortDesc": "First film completed",
+      "longDesc": "Bella moves to Forks, meets a very pale boy in biology, and everything changes. The saga begins.",
+      "instruction": "Finish watching Twilight to claim this badge.",
+      "image": "assets/images/badges/badge-twilight.webp",
+      "order": 3
+    },
+    {
+      "id": "lunch",
+      "type": "meal",
+      "name": "Lunch",
+      "time": "1pm ish",
+      "shortDesc": "A cafeteria-tray-worthy midday meal",
+      "longDesc": "Sit at the table by the window and stare dramatically at nothing. Then eat. You have earned it.",
+      "instruction": "Eat lunch to claim this badge.",
+      "image": "assets/images/badges/badge-lunch.webp",
+      "order": 4
+    },
+    {
+      "id": "volterra",
+      "type": "scene",
+      "name": "Volterra",
+      "time": "1:10pm ish",
+      "shortDesc": "Bella races the clock in Italy",
+      "longDesc": "A fountain, a red-cloaked festival, and a boy about to step into the sun. Run, Bella.",
+      "instruction": "Watch this scene to claim this badge.",
+      "image": "assets/images/badges/badge-volterra.webp",
+      "order": 5
+    },
+    {
+      "id": "new-moon",
+      "type": "movie",
+      "name": "New Moon",
+      "time": "1:30pm ish",
+      "startTime": "11:20am ish",
+      "shortDesc": "Second film completed",
+      "longDesc": "Edward leaves, Jacob takes his shirt off, and the seasons literally spin past the window. You made it through.",
+      "instruction": "Finish watching New Moon to claim this badge.",
+      "image": "assets/images/badges/badge-new-moon.webp",
+      "order": 6
+    },
+    {
+      "id": "the-tent",
+      "type": "scene",
+      "name": "The Tent",
+      "time": "3:20pm ish",
+      "shortDesc": "A very cold night on the mountain",
+      "longDesc": "Three people, one tent, one blizzard, and a conversation nobody wanted to have. Somebody is hotter than somebody else.",
+      "instruction": "Watch this scene to claim this badge.",
+      "image": "assets/images/badges/badge-the-tent.webp",
+      "order": 7
+    },
+    {
+      "id": "eclipse",
+      "type": "movie",
+      "name": "Eclipse",
+      "time": "3:50pm ish",
+      "startTime": "1:45pm ish",
+      "shortDesc": "Third film completed",
+      "longDesc": "An army of newborns, a treaty tested, and a choice finally made. The middle of the saga is behind you.",
+      "instruction": "Finish watching Eclipse to claim this badge.",
+      "image": "assets/images/badges/badge-eclipse.webp",
+      "order": 8
+    },
+    {
+      "id": "the-wedding",
+      "type": "scene",
+      "name": "The Wedding",
+      "time": "4:35pm ish",
+      "shortDesc": "Bella walks down the aisle",
+      "longDesc": "Flowers hanging from every branch, a very nervous bride, and a groom who has waited a century. Try not to cry. You will fail.",
+      "instruction": "Watch this scene to claim this badge.",
+      "image": "assets/images/badges/badge-the-wedding.webp",
+      "order": 9
+    },
+    {
+      "id": "dinner",
+      "type": "meal",
+      "name": "Dinner",
+      "time": "6pm ish",
+      "shortDesc": "The main evening meal",
+      "longDesc": "Something warm before the final stretch. The Cullens cooked Italian for Bella once; you can do at least as well.",
+      "instruction": "Eat dinner to claim this badge.",
+      "image": "assets/images/badges/badge-dinner.webp",
+      "order": 10
+    },
+    {
+      "id": "breaking-dawn-1",
+      "type": "movie",
+      "name": "Breaking Dawn – Part 1",
+      "time": "6:05pm ish",
+      "startTime": "4:05pm ish",
+      "shortDesc": "Fourth film completed",
+      "longDesc": "A honeymoon, a headboard, and the strangest pregnancy in cinema. You have seen things that cannot be unseen.",
+      "instruction": "Finish watching Breaking Dawn – Part 1 to claim this badge.",
+      "image": "assets/images/badges/badge-breaking-dawn-1.webp",
+      "order": 11
+    },
+    {
+      "id": "the-battle",
+      "type": "scene",
+      "name": "The Battle",
+      "time": "7:50pm ish",
+      "shortDesc": "Everyone fights the Volturi in the snow",
+      "longDesc": "Heads roll. Fan favorites fall. The ground opens up. And then... well. You will see.",
+      "instruction": "Watch this scene to claim this badge.",
+      "image": "assets/images/badges/badge-the-battle.webp",
+      "order": 12
+    },
+    {
+      "id": "late-night-snack",
+      "type": "meal",
+      "name": "Late Night Snack",
+      "time": "8pm ish",
+      "shortDesc": "One last bite before forever",
+      "longDesc": "The final feeding of the day. Vampires do not need snacks. You are not a vampire. Yet.",
+      "instruction": "Eat a late night snack to claim this badge.",
+      "image": "assets/images/badges/badge-late-night-snack.webp",
+      "order": 13
+    },
+    {
+      "id": "breaking-dawn-2",
+      "type": "movie",
+      "name": "Breaking Dawn – Part 2",
+      "time": "8:15pm ish",
+      "startTime": "6:20pm ish",
+      "shortDesc": "Final film completed",
+      "longDesc": "The saga ends. Forever is only the beginning, and you were there for all of it.",
+      "instruction": "Finish watching Breaking Dawn – Part 2 to claim this badge.",
+      "image": "assets/images/badges/badge-breaking-dawn-2.webp",
+      "order": 14
+    },
+    {
+      "id": "secret-movies",
+      "type": "secret",
+      "name": "Forever",
+      "shortDesc": "All films completed",
+      "longDesc": "Five films. Roughly ten hours. You watched the whole saga in a single day and came out the other side. Nobody can take that from you.",
+      "image": "assets/images/badges/badge-secret-movies.webp",
+      "order": 15,
+      "unlockCondition": {
+        "type": "all",
+        "badgeIds": [
+          "twilight",
+          "new-moon",
+          "eclipse",
+          "breaking-dawn-1",
+          "breaking-dawn-2"
+        ]
+      },
+      "unlockHint": "All 5 films completed"
+    },
+    {
+      "id": "secret-meals",
+      "type": "secret",
+      "name": "Human Food Connoisseur",
+      "shortDesc": "All meals consumed",
+      "longDesc": "You ate every meal like a human. Edward would be baffled. Jacob would be proud.",
+      "image": "assets/images/badges/badge-secret-meals.webp",
+      "order": 16,
+      "unlockCondition": {
+        "type": "all",
+        "badgeIds": [
+          "breakfast",
+          "lunch",
+          "dinner",
+          "late-night-snack"
+        ]
+      },
+      "unlockHint": "All 4 meals consumed"
+    },
+    {
+      "id": "secret-scenes",
+      "type": "secret",
+      "name": "Twihard",
+      "shortDesc": "All key scenes witnessed",
+      "longDesc": "You caught every pivotal moment. You know the difference between a Cullen and a Volturi on sight. Welcome to the fandom.",
+      "image": "assets/images/badges/badge-secret-scenes.webp",
+      "order": 17,
+      "unlockCondition": {
+        "type": "all",
+        "badgeIds": [
+          "vampire-baseball",
+          "volterra",
+          "the-tent",
+          "the-wedding",
+          "the-battle"
+        ]
+      },
+      "unlockHint": "All 5 scenes witnessed"
+    },
+    {
+      "id": "secret-immortal",
+      "type": "secret",
+      "name": "Immortal",
+      "shortDesc": "The ultimate achievement",
+      "longDesc": "Every film, every meal, every scene. You did not merely survive the marathon; you were transformed by it. Your eyes may be a little gold.",
+      "image": "assets/images/badges/badge-secret-immortal.webp",
+      "order": 18,
+      "finale": true,
+      "unlockCondition": {
+        "type": "all",
+        "badgeIds": [
+          "secret-movies",
+          "secret-meals",
+          "secret-scenes"
+        ]
+      },
+      "unlockHint": "All other secrets unlocked"
+    }
+  ],
+  "theme": {
+    "colors": {
+      "primary": {
+        "50": "#f3f6f9",
+        "100": "#e3eaf1",
+        "200": "#c5d3e0",
+        "300": "#9db3c8",
+        "400": "#6f8faa",
+        "500": "#4d6f8d",
+        "600": "#3d5a74",
+        "700": "#32485d",
+        "800": "#2b3c4d",
+        "900": "#1d2a37"
+      },
+      "accent": {
+        "50": "#fdf2f2",
+        "100": "#fbe1e1",
+        "200": "#f6bfbf",
+        "300": "#ee8f8f",
+        "400": "#e05656",
+        "500": "#c8262b",
+        "600": "#a91d22",
+        "700": "#8b1a1f",
+        "800": "#6d181c",
+        "900": "#4a1113"
+      },
+      "background": {
+        "50": "#fafbfc",
+        "100": "#f2f4f7",
+        "200": "#e4e8ee",
+        "300": "#d0d6df",
+        "400": "#a2acb9",
+        "500": "#74818f"
+      },
+      "text": {
+        "50": "#f8fafc",
+        "100": "#f1f5f9",
+        "200": "#e2e8f0",
+        "300": "#cbd5e1",
+        "400": "#94a3b8",
+        "500": "#64748b",
+        "600": "#475569",
+        "700": "#334155",
+        "800": "#1e293b",
+        "900": "#0f172a"
+      },
+      "highlight": "#C8262B",
+      "danger": {
+        "500": "#ef4444",
+        "600": "#dc2626",
+        "700": "#b91c1c"
+      }
+    },
+    "fonts": {
+      "display": {
+        "family": "Playfair Display",
+        "weights": [
+          400,
+          600,
+          700
+        ]
+      },
+      "body": {
+        "family": "Lora",
+        "weights": [
+          400,
+          600
+        ]
+      },
+      "ui": {
+        "family": "Google Sans Flex",
+        "weights": [
+          400,
+          500
+        ]
+      }
+    }
+  },
+  "content": {
+    "splash": {
+      "title": "The Twilight Passport",
+      "subtitle": "Official Documentation of One's Journey Through Forks, Washington",
+      "enterButton": "Enter Forks",
+      "hostedBy": "Hosted by {hosts}",
+      "heroImage": null,
+      "heroEmoji": "🍎"
+    },
+    "name": {
+      "prompt": "What name shall be recorded in the Forks High School visitor log?",
+      "placeholder": "Enter your name...",
+      "continueButton": "Continue",
+      "skipButton": "or Remain Anonymous",
+      "defaultNote": "(defaults to \"{defaultName}\")",
+      "defaultName": "The New Kid",
+      "maxLength": 30,
+      "audioHints": [
+        "Better with Audio",
+        "Volume Up",
+        "If you want"
+      ]
+    },
+    "explainer": {
+      "title": "Your Saga Awaits",
+      "greeting": "Welcome to Forks, {name}",
+      "body": [
+        "Before you lies the entire Twilight Saga, all five films, back to back to back.",
+        "As you witness the iconic moments and eat like a human along the way, tap each badge to mark your progress."
+      ],
+      "quote": "About three things I was absolutely positive.",
+      "disclaimer": "All times are approximate-ish. This passport operates on the honor system. The Cullens trust their guests.",
+      "beginButton": "Begin My Saga"
+    },
+    "passport": {
+      "header": "The Twilight Passport",
+      "journeySubtitle": "{name}'s Saga",
+      "sectionTitle": "Your Saga",
+      "badgesLabel": "badges",
+      "certifyButton": "Certify My Passport",
+      "certifySubtext": "Complete your saga and download your certificate",
+      "resetButton": "Reset and Start Over"
+    },
+    "certification": {
+      "title": "Leaving Forks",
+      "body": [
+        "Your journey through the Twilight Saga is complete (or as complete as you could manage).",
+        "By certifying this passport, you shall receive an official document commemorating your devotion."
+      ],
+      "footnote": "You will be transported back to Austin, TX, where the sun unfortunately shines.",
+      "badgesLabel": "badges claimed",
+      "downloadButton": "Certify & Download",
+      "generatingText": "Generating...",
+      "reviewButton": "Review My Badges",
+      "completionMessages": {
+        "perfect": "Perfect completion! You are truly immortal.",
+        "high": "A devoted showing indeed!",
+        "medium": "A respectable saga!",
+        "low": "Every saga begins with a move to a rainy town."
+      }
+    },
+    "badgeModal": {
+      "claimButton": "Claim This Badge",
+      "claimedLabel": "Claimed",
+      "witnessedAt": "Witnessed at {time}",
+      "honorSystemText": "The Twilight Passport operates on the honor system. By claiming this badge, you solemnly swear you have witnessed this moment (or eaten this meal).",
+      "honorSystemCheckbox": "Don't ask me again",
+      "honorConfirmButton": "I So Swear",
+      "cancelButton": "Cancel"
+    },
+    "schedule": {
+      "title": "Today's Saga"
+    },
+    "checklist": {
+      "header": "Badge Checklist",
+      "description": "Made a mistake? Toggle badges on or off below. Secret badges unlock automatically when you complete their requirements.",
+      "doneButton": "Done"
+    },
+    "secretUnlock": {
+      "header": "Secret Badge Unlocked!",
+      "continueButton": "Continue Saga",
+      "certifyButton": "View and Certify My Passport"
+    },
+    "certificate": {
+      "title": "The Twilight Passport",
+      "subtitle": "Official Documentation of One's Journey Through Forks, Washington",
+      "certifies": "This certifies that",
+      "completed": "has completed the saga marathon",
+      "badgesLabel": "Badges",
+      "hostedBy": "Hosted by {hosts}",
+      "footer": "\"Forever is only the beginning.\""
+    }
+  },
+  "audio": {
+    "greetings": [],
+    "backgroundMusic": {}
+  },
+  "pwa": {
+    "themeColor": "#1d2a37",
+    "backgroundColor": "#f2f4f7"
+  },
+  "settings": {
+    "badgeShape": "shuffle"
+  }
+}

@@ -45,7 +45,7 @@ export function useSecretBadges(
         // Small delay for dramatic effect
         setTimeout(() => {
           claimBadge(secret.id, { isAutoUnlock: true });
-          playSound(secret.id === 'secret-ringbearer' ? 'horn' : 'chime');
+          playSound(secret.finale || secret.id === 'secret-ringbearer' ? 'horn' : 'chime');
           onSecretUnlock?.(secret);
         }, 600);
       }

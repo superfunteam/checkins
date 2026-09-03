@@ -17,6 +17,7 @@ import EventInquiryPage from './pages/EventInquiryPage';
 import TermsPage from './pages/TermsPage';
 import PrivacyPage from './pages/PrivacyPage';
 import AdminApp from './admin/AdminApp';
+import { getHostPassportId } from './utils/hostPassport';
 
 function AppContent() {
   const { currentScreen } = useApp();
@@ -40,9 +41,9 @@ function AppContent() {
   );
 }
 
-function PassportApp() {
+function PassportApp({ passportId }) {
   return (
-    <PassportProvider>
+    <PassportProvider passportId={passportId}>
       <AppProvider>
         <AppContent />
       </AppProvider>
@@ -51,6 +52,22 @@ function PassportApp() {
 }
 
 export default function App() {
+  // twilight.checkins.party (or twilight.localhost in dev) mounts that
+  // passport at "/". The path-based routes keep working everywhere.
+  const hostPassportId = getHostPassportId();
+
+  if (hostPassportId) {
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route path="/admin/*" element={<AdminApp />} />
+          <Route path="/event/:passportId/*" element={<PassportApp />} />
+          <Route path="/*" element={<PassportApp passportId={hostPassportId} />} />
+        </Routes>
+      </BrowserRouter>
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>

@@ -25,9 +25,10 @@ export async function loadPassportIndex() {
  * @param {string} passportId - The passport ID (e.g., 'shire')
  * @returns {Promise<Object>} - The passport configuration
  */
-export async function loadPassport(passportId) {
+export async function loadPassport(passportId, { fresh = false } = {}) {
   try {
-    const response = await fetch(`/passports/${passportId}/passport.json`);
+    // `fresh` bypasses the HTTP cache so a midday edit is seen on the next poll.
+    const response = await fetch(`/passports/${passportId}/passport.json`, fresh ? { cache: 'no-store' } : undefined);
     if (!response.ok) {
       if (response.status === 404) {
         throw new Error(`Passport "${passportId}" not found`);
@@ -56,15 +57,21 @@ export function getDefaultPassport(index) {
  * Build full asset URL for a passport
  * @param {string} passportId - The passport ID
  * @param {string} assetPath - Relative asset path (e.g., 'assets/images/badges/badge-breakfast.webp')
+ * @param {number|string} [version] - passport.json `version`; appended as ?v=
+ *   so bumping the version busts every cached image/sound on every phone.
  * @returns {string} - Full URL path
  */
-export function buildAssetUrl(passportId, assetPath) {
+export function buildAssetUrl(passportId, assetPath, version) {
   // Return null if no asset path provided
   if (!assetPath) return null;
 
+  // Absolute URLs and data URIs pass through untouched
+  if (/^(https?:)?\/\//.test(assetPath) || assetPath.startsWith('data:')) return assetPath;
+
   // Remove leading assets/ if present since it's already in the path structure
   const cleanPath = assetPath.replace(/^assets\//, '');
-  return `/passports/${passportId}/assets/${cleanPath}`;
+  const url = `/passports/${passportId}/assets/${cleanPath}`;
+  return version === undefined || version === null ? url : `${url}?v=${encodeURIComponent(version)}`;
 }
 
 /**

@@ -1,12 +1,21 @@
 {
   "passports": [
     {
+      "id": "twilight",
+      "name": "The Twilight Passport",
+      "description": "Official Documentation of One's Journey Through Forks, Washington",
+      "path": "/event/twilight",
+      "hostname": "twilight.checkins.party",
+      "enabled": true,
+      "default": true
+    },
+    {
       "id": "shire",
       "name": "The Shire Passport",
       "description": "Official Documentation of One's Journey Through Middle-earth",
       "path": "/event/shire",
       "enabled": true,
-      "default": true
+      "default": false
     },
     {
       "id": "sample",

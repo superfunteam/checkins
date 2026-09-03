@@ -12,6 +12,7 @@ import {
 } from '../hooks/useSound';
 import { useSecretBadges } from '../hooks/useSecretBadges';
 import { usePassport } from '../context/PassportContext';
+import { setUpdateBusy } from '../pwa/updateGate';
 
 const AppContext = createContext(null);
 
@@ -108,6 +109,16 @@ export function AppProvider({ children }) {
       return remaining;
     });
   }, [play]);
+
+  // Tell the update gate when a silent app reload would interrupt the guest:
+  // any modal/sheet open, or mid-onboarding. Splash and the idle passport
+  // screen are safe because a reload lands right back where they were.
+  const midOnboarding = currentScreen === SCREENS.NAME || currentScreen === SCREENS.LOADING || currentScreen === SCREENS.EXPLAINER;
+  const interacting = Boolean(selectedBadge) || showCertificationModal || showScheduleSheet || secretUnlockQueue.length > 0 || midOnboarding;
+  useEffect(() => {
+    setUpdateBusy(interacting);
+    return () => setUpdateBusy(false);
+  }, [interacting]);
 
   // Secret badges hook - only active if feature is enabled
   const { isSecretUnlocked } = useSecretBadges(

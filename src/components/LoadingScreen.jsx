@@ -139,7 +139,7 @@ export default function LoadingScreen() {
         <div className="relative w-24 h-24 mb-8">
           <motion.div
             className="w-full h-full rounded-full border-4 border-parchment-300"
-            style={{ borderTopColor: '#7C3AED' }}
+            style={{ borderTopColor: 'var(--color-highlight)' }}
             animate={{ rotate: 360 }}
             transition={{
               duration: 1,
@@ -164,7 +164,7 @@ export default function LoadingScreen() {
         <div className="w-full h-2 bg-parchment-200 rounded-full overflow-hidden">
           <motion.div
             className="h-full rounded-full"
-            style={{ backgroundColor: '#7C3AED' }}
+            style={{ backgroundColor: 'var(--color-highlight)' }}
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.3 }}

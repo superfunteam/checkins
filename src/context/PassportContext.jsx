@@ -1,10 +1,15 @@
-import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { loadPassport, buildAssetUrl, getPrimaryBadges, getSecretBadges, getBadgeById, getBadgeType } from '../utils/passportLoader';
 import { loadFonts, setFontVariables } from '../utils/fontLoader';
 import { injectManifest, updateMetaTags } from '../utils/manifestGenerator';
+import { getPassportBasePath } from '../utils/hostPassport';
 
 const PassportContext = createContext(null);
+
+// How often an open passport re-checks passport.json for new badges, art, or
+// copy. Also checked whenever the tab becomes visible / focused / online.
+const CONTENT_REFRESH_MS = 45 * 1000;
 
 /**
  * Apply theme colors as CSS variables
@@ -13,30 +18,46 @@ const PassportContext = createContext(null);
 function applyTheme(theme) {
   const root = document.documentElement;
 
-  // Apply color palette
   Object.entries(theme.colors).forEach(([colorName, shades]) => {
     if (typeof shades === 'object') {
       Object.entries(shades).forEach(([shade, value]) => {
         root.style.setProperty(`--color-${colorName}-${shade}`, value);
       });
     } else {
-      // Single value like 'highlight'
       root.style.setProperty(`--color-${colorName}`, shades);
     }
   });
 
-  // Apply font variables
   setFontVariables(theme.fonts);
 }
 
-export function PassportProvider({ children }) {
-  const { passportId } = useParams();
+/** Push a (new or updated) passport into the document: theme, fonts, manifest, meta. */
+async function applyPassportToDocument(passportData, basePath) {
+  applyTheme(passportData.theme);
+  await loadFonts(passportData.theme.fonts);
+  injectManifest(passportData, basePath);
+  updateMetaTags(passportData);
+}
+
+/**
+ * @param {{ passportId?: string, children: any }} props
+ *   `passportId` overrides the route param; used when a host like
+ *   twilight.checkins.party mounts a passport at "/".
+ */
+export function PassportProvider({ passportId: passportIdProp, children }) {
+  const params = useParams();
+  const passportId = passportIdProp || params.passportId;
+  const basePath = getPassportBasePath(passportId);
+
   const [passport, setPassport] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const lastJsonRef = useRef(null);
 
-  // Load passport configuration
+  // Initial load
   useEffect(() => {
+    let cancelled = false;
+
     async function load() {
       if (!passportId) {
         setError(new Error('No passport ID provided'));
@@ -49,87 +70,129 @@ export function PassportProvider({ children }) {
         setError(null);
 
         const passportData = await loadPassport(passportId);
+        if (cancelled) return;
 
-        // Apply theme
-        applyTheme(passportData.theme);
+        await applyPassportToDocument(passportData, basePath);
+        if (cancelled) return;
 
-        // Load fonts
-        await loadFonts(passportData.theme.fonts);
-
-        // Inject manifest and update meta tags
-        injectManifest(passportData);
-        updateMetaTags(passportData);
-
+        lastJsonRef.current = JSON.stringify(passportData);
         setPassport(passportData);
       } catch (err) {
+        if (cancelled) return;
         console.error('Failed to load passport:', err);
         setError(err);
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     }
 
     load();
-  }, [passportId]);
+    return () => {
+      cancelled = true;
+    };
+  }, [passportId, basePath]);
 
-  // Build asset URL helper
+  // Live refresh: pick up edits to passport.json without a reload.
+  useEffect(() => {
+    if (loading || error || !passportId) return undefined;
+
+    let cancelled = false;
+    let inFlight = false;
+
+    const refresh = async () => {
+      if (inFlight || cancelled) return;
+      if (navigator.onLine === false) return;
+
+      inFlight = true;
+      try {
+        const fresh = await loadPassport(passportId, { fresh: true });
+        if (cancelled) return;
+        const json = JSON.stringify(fresh);
+        if (json !== lastJsonRef.current) {
+          lastJsonRef.current = json;
+          await applyPassportToDocument(fresh, basePath);
+          if (cancelled) return;
+          setPassport(fresh);
+          console.log(`Passport "${passportId}" updated to version ${fresh.version ?? '?'}`);
+        }
+      } catch (err) {
+        // Offline or a transient error: keep what we have and try again later.
+        console.debug('Passport refresh skipped:', err?.message || err);
+      } finally {
+        inFlight = false;
+      }
+    };
+
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') refresh();
+    };
+
+    // The timer skips hidden tabs (the visibility handler catches them up);
+    // focus / online / visible always refresh immediately.
+    const interval = setInterval(() => {
+      if (document.visibilityState !== 'hidden') refresh();
+    }, CONTENT_REFRESH_MS);
+    document.addEventListener('visibilitychange', onVisible);
+    window.addEventListener('focus', refresh);
+    window.addEventListener('online', refresh);
+
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+      document.removeEventListener('visibilitychange', onVisible);
+      window.removeEventListener('focus', refresh);
+      window.removeEventListener('online', refresh);
+    };
+  }, [passportId, basePath, loading, error]);
+
+  const assetVersion = passport?.version;
+
+  // Build asset URL helper (versioned so a bump busts every phone's cache)
   const getAssetUrl = useCallback((assetPath) => {
     if (!passportId) return assetPath;
-    return buildAssetUrl(passportId, assetPath);
-  }, [passportId]);
+    return buildAssetUrl(passportId, assetPath, assetVersion);
+  }, [passportId, assetVersion]);
 
   // Memoized badge helpers
   const badges = useMemo(() => passport?.badges || [], [passport]);
-
   const primaryBadges = useMemo(() => getPrimaryBadges(badges), [badges]);
-
   const secretBadges = useMemo(() => getSecretBadges(badges), [badges]);
-
   const badgeTypes = useMemo(() => passport?.badgeTypes || [], [passport]);
 
-  // Get badge by ID helper
   const getBadge = useCallback((id) => getBadgeById(badges, id), [badges]);
-
-  // Get badge type helper
   const getType = useCallback((typeId) => getBadgeType(badgeTypes, typeId), [badgeTypes]);
 
-  // Get type color helper
   const getTypeColor = useCallback((typeId) => {
     const type = getBadgeType(badgeTypes, typeId);
     return type?.color || '#6B7280';
   }, [badgeTypes]);
 
-  // Get type label helper
   const getTypeLabel = useCallback((typeId) => {
     const type = getBadgeType(badgeTypes, typeId);
     return type?.label || typeId;
   }, [badgeTypes]);
 
-  // Context value
   const value = useMemo(() => {
     if (!passport) return null;
 
     return {
-      // Core data
       passportId,
+      basePath,
       passport,
       loading,
       error,
 
-      // Badge data
       badges,
       primaryBadges,
       secretBadges,
       badgeTypes,
 
-      // Helpers
       getAssetUrl,
       getBadge,
       getType,
       getTypeColor,
       getTypeLabel,
 
-      // Direct access to common config
       meta: passport.meta,
       features: passport.features,
       theme: passport.theme,
@@ -142,6 +205,7 @@ export function PassportProvider({ children }) {
     };
   }, [
     passportId,
+    basePath,
     passport,
     loading,
     error,
@@ -156,7 +220,6 @@ export function PassportProvider({ children }) {
     getTypeLabel,
   ]);
 
-  // Show loading state
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-parchment-100">
@@ -168,7 +231,6 @@ export function PassportProvider({ children }) {
     );
   }
 
-  // Show error state
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-parchment-100 p-8">

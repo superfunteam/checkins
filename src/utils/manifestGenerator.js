@@ -1,17 +1,22 @@
 /**
- * Dynamic PWA manifest generator
- * Creates and injects manifest based on passport configuration
+ * PWA manifest + document meta for a passport.
+ *
+ * `generateManifest` is pure and shared with vite-plugin-passport-manifests,
+ * which writes real manifest files per passport. The browser side just points
+ * <link rel="manifest"> at the right file for the current host mode.
  */
 
 /**
- * Generate manifest JSON from passport config
  * @param {Object} passport - Full passport configuration
- * @returns {Object} - Manifest object
+ * @param {{ basePath?: string }} options - Where the passport is mounted:
+ *   "/event/<id>" on checkins.party, "/" on <id>.checkins.party
  */
-export function generateManifest(passport) {
+export function generateManifest(passport, { basePath = `/event/${passport.id}` } = {}) {
   const { meta, pwa, theme } = passport;
+  const iconBase = `/passports/${passport.id}/assets/images/icons`;
 
   return {
+    id: basePath,
     name: meta.name,
     short_name: meta.shortName,
     description: meta.description,
@@ -19,60 +24,40 @@ export function generateManifest(passport) {
     background_color: pwa?.backgroundColor || theme.colors.background['100'],
     display: 'standalone',
     orientation: 'portrait',
-    start_url: `/event/${passport.id}`,
-    scope: `/event/${passport.id}`,
+    start_url: basePath,
+    scope: basePath,
+    categories: ['entertainment', 'games'],
     icons: [
-      {
-        src: `/passports/${passport.id}/assets/images/icons/icon-192.png`,
-        sizes: '192x192',
-        type: 'image/png',
-      },
-      {
-        src: `/passports/${passport.id}/assets/images/icons/icon-512.png`,
-        sizes: '512x512',
-        type: 'image/png',
-      },
-      {
-        src: `/passports/${passport.id}/assets/images/icons/icon-maskable-192.png`,
-        sizes: '192x192',
-        type: 'image/png',
-        purpose: 'maskable',
-      },
-      {
-        src: `/passports/${passport.id}/assets/images/icons/icon-maskable-512.png`,
-        sizes: '512x512',
-        type: 'image/png',
-        purpose: 'maskable',
-      },
+      { src: `${iconBase}/icon-192.png`, sizes: '192x192', type: 'image/png' },
+      { src: `${iconBase}/icon-512.png`, sizes: '512x512', type: 'image/png' },
+      { src: `${iconBase}/icon-maskable-192.png`, sizes: '192x192', type: 'image/png', purpose: 'maskable' },
+      { src: `${iconBase}/icon-maskable-512.png`, sizes: '512x512', type: 'image/png', purpose: 'maskable' },
     ],
   };
 }
 
+/** URL of the pre-generated manifest file for a passport and mount point. */
+export function manifestUrl(passportId, basePath) {
+  const variant = basePath === '/' ? '.host' : '';
+  return `/passports/${passportId}/manifest${variant}.webmanifest`;
+}
+
 /**
- * Inject manifest into document
- * @param {Object} passport - Passport configuration
+ * Point the document at this passport's manifest.
+ * @param {Object} passport
+ * @param {string} basePath
  */
-export function injectManifest(passport) {
-  // Remove existing manifest link
-  const existingLink = document.querySelector('link[rel="manifest"]');
-  if (existingLink) {
-    existingLink.remove();
+export function injectManifest(passport, basePath = `/event/${passport.id}`) {
+  const href = manifestUrl(passport.id, basePath);
+  let link = document.querySelector('link[rel="manifest"]');
+  if (!link) {
+    link = document.createElement('link');
+    link.rel = 'manifest';
+    document.head.appendChild(link);
   }
-
-  // Generate manifest
-  const manifest = generateManifest(passport);
-
-  // Create blob URL
-  const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-
-  // Create and append link
-  const link = document.createElement('link');
-  link.rel = 'manifest';
-  link.href = url;
-  document.head.appendChild(link);
-
-  console.log('Dynamic manifest injected');
+  if (link.getAttribute('href') !== href) {
+    link.setAttribute('href', href);
+  }
 }
 
 /**
@@ -81,39 +66,25 @@ export function injectManifest(passport) {
  */
 export function updateMetaTags(passport) {
   const { meta, pwa, theme } = passport;
+  const iconBase = `/passports/${passport.id}/assets/images/icons`;
 
-  // Update title
   document.title = meta.name;
 
-  // Update theme-color
   setMetaTag('theme-color', pwa?.themeColor || theme.colors.primary['500']);
-
-  // Update description
   setMetaTag('description', meta.description);
-
-  // Update apple-mobile-web-app-title
   setMetaTag('apple-mobile-web-app-title', meta.shortName);
 
-  // Update Open Graph tags
   setMetaProperty('og:title', meta.name);
   setMetaProperty('og:description', meta.description);
-
-  // Update Twitter tags
+  setMetaProperty('og:url', window.location.origin + window.location.pathname);
   setMetaTag('twitter:title', meta.name);
   setMetaTag('twitter:description', meta.description);
 
-  // Update apple-touch-icon
-  const appleIcon = document.querySelector('link[rel="apple-touch-icon"]');
-  if (appleIcon) {
-    appleIcon.href = `/passports/${passport.id}/assets/images/icons/icon-maskable-192.png`;
-  }
+  document.querySelectorAll('link[rel="apple-touch-icon"]').forEach((icon) => {
+    icon.href = `${iconBase}/icon-maskable-192.png`;
+  });
 }
 
-/**
- * Set or update a meta tag
- * @param {string} name - Meta tag name attribute
- * @param {string} content - Meta tag content
- */
 function setMetaTag(name, content) {
   let meta = document.querySelector(`meta[name="${name}"]`);
   if (!meta) {
@@ -124,11 +95,6 @@ function setMetaTag(name, content) {
   meta.content = content;
 }
 
-/**
- * Set or update a meta property (for Open Graph)
- * @param {string} property - Meta tag property attribute
- * @param {string} content - Meta tag content
- */
 function setMetaProperty(property, content) {
   let meta = document.querySelector(`meta[property="${property}"]`);
   if (!meta) {

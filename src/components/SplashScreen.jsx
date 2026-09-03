@@ -108,7 +108,7 @@ export default function SplashScreen() {
           />
           <p
             className="text-xs mt-1"
-            style={{ fontFamily: "'Google Sans Flex', sans-serif", color: '#7C3AED' }}
+            style={{ fontFamily: "'Google Sans Flex', sans-serif", color: 'var(--color-highlight)' }}
           >
             Hosted by{' '}
             {meta.hosts.names.map((name, i) => (
