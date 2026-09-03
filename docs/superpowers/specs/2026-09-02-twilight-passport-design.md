@@ -1,0 +1,104 @@
+# Twilight Passport + Live-Update Readiness — Design
+
+Date: 2026-09-02
+
+## Goal
+
+Host a public, in-person Twilight movie-marathon check-in party at
+`twilight.checkins.party`, modeled on the Shire passport. Many guests add the
+app to their home screen in the morning; the host pushes new badges, art, and
+copy throughout the day and every phone picks the changes up silently.
+
+## What the audit found (before this work)
+
+- Two service workers fought over `/sw.js`: a hand-written `public/sw.js`
+  registered from `main.jsx`, and the workbox SW that vite-plugin-pwa writes
+  over it at build time. Only the workbox one shipped; the manual registration
+  was redundant.
+- The workbox precache included every passport's assets plus 40 MB of legacy
+  duplicate PNGs in `public/images` — 206 entries, 82 MB — downloaded by every
+  visitor's phone in the background.
+- The generated register script only registered once on load. A standalone
+  PWA left open all day never checks for a new build (browsers only check on
+  navigation or every 24h), so a midday deploy would not reach anyone.
+- `passport.json` was fetched once at mount. New badges required a full reload.
+- The manifest was injected as a `blob:` URL and hard-coded `/event/<id>` as
+  scope, which is wrong on a subdomain host.
+
+## Design
+
+### 1. Service worker and app updates
+
+- Single SW from vite-plugin-pwa, `registerType: 'prompt'` so the app, not the
+  browser, decides when to swap. `injectRegister: false`; registration lives in
+  `src/pwa/registerServiceWorker.js` using `virtual:pwa-register`.
+- Precache only the app shell (`index.html`, hashed JS/CSS, root icons).
+  `passports/**` and legacy `audio/**` are excluded from precache.
+- Runtime caching:
+  - `/passports/*/passport.json`, `/passports/index.json`: NetworkFirst, 4s
+    timeout, so content is always fresh when online and available offline.
+  - `/passports/*/assets/**`: StaleWhileRevalidate (instant from cache,
+    refreshed in the background).
+  - Google Fonts: CacheFirst (unchanged).
+- Update checks: `registration.update()` every 60s, plus on `visibilitychange`
+  → visible, `focus`, and `online`.
+- Silent swap: when a new SW is waiting, `src/pwa/updateGate.js` waits until the
+  app is idle (no modal/sheet open) or the tab is hidden, then activates and
+  reloads. State lives in localStorage so the reload lands back on the passport
+  screen. No confirmation UI.
+
+### 2. Live passport content
+
+- `PassportContext` re-fetches `passport.json` every 45s (and on visible /
+  focus / online) with `cache: 'no-store'`. If the body changed it swaps the
+  passport in place: badges, copy, theme, and fonts re-apply without a reload.
+- Asset URLs carry `?v=<passport.version>`. Bumping `version` in
+  `passport.json` busts every cached image/sound for every guest within one
+  poll. Replacing a file in place without a bump still propagates, just on the
+  next natural load rather than instantly.
+
+### 3. Subdomain hosting
+
+- `src/utils/hostPassport.js` maps `<id>.checkins.party` (and `<id>.localhost`
+  for dev) to a passport id. `www` and `app` are ignored.
+- On a host-mapped domain, `/` renders that passport; `/event/<id>` keeps
+  working everywhere. `/admin` still mounts.
+- Netlify: add `twilight.checkins.party` as a domain alias and CNAME it. The
+  existing SPA fallback serves `index.html` for any host; no server-side host
+  rules are needed.
+
+### 4. Real manifest files per passport
+
+- A Vite plugin (`vite-plugin-passport-manifests.js`) reads every
+  `public/passports/<id>/passport.json` and emits two manifests per passport:
+  `manifest.webmanifest` (scope `/event/<id>/`) and `manifest.host.webmanifest`
+  (scope `/`). In dev they are served by middleware; in build they are written
+  into `dist/passports/<id>/`.
+- `injectManifest` points `<link rel="manifest">` at the right file for the
+  current host mode. The static `public/manifest.json` (Shire-branded) and the
+  manifest `<link>` in `index.html` are removed; the landing page is not an
+  installable app.
+
+### 5. Twilight passport scaffold
+
+- `public/passports/twilight/passport.json`: same shape as Shire. Badge types
+  movie / meal / scene / secret. Placeholder badges for the five films, meals,
+  a handful of iconic scenes, and four secrets, all flagged as placeholders in
+  copy so nothing ships by accident. Sounds and music disabled until audio is
+  supplied.
+- Placeholder art: generated WebP badges and PWA icons in the passport's
+  palette so add-to-home-screen works today; real art drops in over the same
+  filenames (then bump `version`).
+- Registered in `passports/index.json` at `/event/twilight`.
+
+### 6. Hosting hygiene
+
+- `netlify.toml`: `no-cache` for `sw.js`, `index.html`, manifests, and
+  `passport.json`; `immutable` for hashed `/assets/*`.
+- Delete the dead `public/images/badge-*` duplicates, `public/images/*.png`
+  leftovers, `public/audio`, and `public/sw.js` / `public/manifest.json`.
+
+### Out of scope
+
+Real badge list, art, audio, and schedule (host will supply). Server-side
+sync of claims between guests (still honor system, local-only).
