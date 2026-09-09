@@ -1,14 +1,17 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useApp } from '../context/AppContext';
 import { usePassport } from '../context/PassportContext';
 import BadgeCard from './BadgeCard';
 import { badgeGridContainer, fadeIn } from '../utils/animations';
+import { getTwilightTeam } from '../data/twilightTeams';
 
 export default function Passport() {
-  const { name, openCertificationModal, badges, resetAndStartOver, openScheduleSheet } = useApp();
+  const { name, openCertificationModal, badges, resetAndStartOver, openScheduleSheet, teamPollEnabled, teamPoll, allBadgesComplete } = useApp();
   const { primaryBadges, badges: allBadgesData, content, features } = usePassport();
 
+  const reduceMotion = useReducedMotion();
   const passportContent = content.passport;
+  const team = teamPollEnabled && getTwilightTeam(teamPoll.final || teamPoll.initial);
 
   // Count claimed primary badges (for progress bar)
   const claimedPrimaryCount = primaryBadges.filter(b => badges[b.id]?.claimed).length;
@@ -24,16 +27,17 @@ export default function Passport() {
     <motion.div
       className="min-h-screen flex flex-col bg-parchment-100"
       variants={fadeIn}
-      initial="initial"
+      initial={reduceMotion ? false : "initial"}
       animate="animate"
       exit="exit"
     >
       {/* Sticky Header */}
-      <header className="sticky top-0 z-30 backdrop-blur-sm border-b border-parchment-300 px-4 py-3" style={{ backgroundColor: 'rgba(249, 246, 240, 0.95)' }}>
+      <header className="sticky top-0 z-30 backdrop-blur-sm border-b border-parchment-300 px-4 py-3" style={{ backgroundColor: 'var(--color-background-100)' }}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             {features.scheduleTimeline !== false && (
               <motion.button
+                aria-label="Open schedule"
                 onClick={openScheduleSheet}
                 className="w-9 h-9 flex items-center justify-center rounded-lg bg-parchment-200 text-earth-600 hover:bg-parchment-300 transition-colors"
                 whileTap={{ scale: 0.95 }}
@@ -50,6 +54,7 @@ export default function Passport() {
               <p className="text-xs text-earth-500" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
                 {journeySubtitle}
               </p>
+              {team && <p className="text-xs mt-1" style={{ color: team.color }}>{team.label} · {teamPoll.final ? 'final verdict' : 'first instinct'}</p>}
             </div>
           </div>
           <div className="text-right" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
@@ -64,10 +69,10 @@ export default function Passport() {
         <div className="mt-2 h-2 bg-parchment-300 rounded-full overflow-hidden">
           <motion.div
             className="h-full"
-            style={{ backgroundColor: 'var(--color-highlight)' }}
-            initial={{ width: 0 }}
-            animate={{ width: `${(claimedPrimaryCount / totalPrimaryBadges) * 100}%` }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
+            style={{ backgroundColor: 'var(--color-highlight)', transformOrigin: 'left' }}
+            initial={false}
+            animate={{ scaleX: claimedPrimaryCount / totalPrimaryBadges }}
+            transition={{ duration: reduceMotion ? 0 : 0.2, ease: 'easeOut' }}
           />
         </div>
       </header>
@@ -82,7 +87,7 @@ export default function Passport() {
           <motion.div
             className="grid grid-cols-3 gap-3"
             variants={badgeGridContainer}
-            initial="initial"
+            initial={reduceMotion ? false : "initial"}
             animate="animate"
           >
             {allBadgesSorted.map((badge, index) => (
@@ -99,7 +104,7 @@ export default function Passport() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            {passportContent.certifyButton}
+            {teamPollEnabled && allBadgesComplete ? (teamPoll.final ? 'Share My Team' : 'Make My Final Pick') : passportContent.certifyButton}
           </motion.button>
           <p
             className="text-center text-earth-400 text-sm mt-4"

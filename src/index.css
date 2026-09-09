@@ -9,6 +9,14 @@
     -webkit-overflow-scrolling: touch;
   }
 
+  html { scrollbar-gutter: stable; }
+  html[data-passport-theme], html[data-passport-theme] body {
+    background: var(--color-background-100);
+    color: var(--color-text-800);
+  }
+  html[data-passport-theme="dark"] .modal-backdrop { background-color: rgba(0, 8, 13, 0.75); }
+  html[data-passport-theme="dark"] input { color-scheme: dark; }
+
   /* Safe area insets for notched devices */
   body {
     padding-top: env(safe-area-inset-top);
@@ -35,13 +43,13 @@
   /* Chunky button style */
   .btn-primary {
     @apply px-8 py-4 bg-shire-500 text-parchment-100 font-semibold text-lg rounded-button shadow-button;
-    @apply hover:bg-shire-600 active:scale-95 transition-all duration-150;
+    @apply hover:bg-shire-600;
     font-family: 'Google Sans Flex', sans-serif;
   }
 
   .btn-secondary {
     @apply px-6 py-3 bg-parchment-200 text-earth-700 font-medium rounded-button border border-parchment-400;
-    @apply hover:bg-parchment-300 active:scale-95 transition-all duration-150;
+    @apply hover:bg-parchment-300;
     font-family: 'Google Sans Flex', sans-serif;
   }
 
@@ -75,7 +83,7 @@
 
   /* Modal backdrop */
   .modal-backdrop {
-    @apply fixed inset-0 backdrop-blur-sm z-40;
+    @apply fixed inset-0 z-40;
     background-color: rgba(var(--color-text-900-rgb, 31, 26, 19), 0.6);
   }
 
@@ -91,11 +99,20 @@
     overscroll-behavior-y: contain;
     /* Ensure scrollbar doesn't interfere on iOS */
     scrollbar-width: thin;
+    width: min(100%, 28rem);
+    margin-inline: auto;
   }
+
+  .badge-detail-sheet { height: 85dvh; }
+  .badge-detail-page { touch-action: pan-y; }
+
+  .app-container .min-h-screen { min-height: 100svh; }
+
 
   /* App container with max-width for desktop */
   .app-container {
-    @apply max-w-md mx-auto min-h-screen relative;
+    @apply max-w-md mx-auto relative;
+    min-height: 100svh;
   }
 
   /* Base badge image container - border-radius applied via shape classes below */

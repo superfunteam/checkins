@@ -1,121 +1,37 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useApp } from '../context/AppContext';
 import { usePassport } from '../context/PassportContext';
-import { slideUp, springs } from '../utils/animations';
+import { slideUp } from '../utils/animations';
 
-// Preload a single image
-function preloadImage(src) {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.onload = () => resolve({ src, success: true });
-    img.onerror = () => resolve({ src, success: false });
-    img.src = src;
-  });
-}
-
-// Preload a single audio file
-function preloadAudio(src) {
-  return new Promise((resolve) => {
-    const audio = new Audio();
-    audio.oncanplaythrough = () => resolve({ src, success: true });
-    audio.onerror = () => resolve({ src, success: false });
-    audio.src = src;
-  });
-}
+import { preloadImage, warmImages } from '../utils/preloadImages';
 
 export default function LoadingScreen() {
   const { goToScreen, SCREENS } = useApp();
-  const { badges, getAssetUrl, audio, content } = usePassport();
+  const { badges, getAssetUrl, content } = usePassport();
 
+  const reduceMotion = useReducedMotion();
   const [progress, setProgress] = useState(0);
   const [loadingText, setLoadingText] = useState('Preparing the journey...');
 
   useEffect(() => {
     let mounted = true;
-
-    // Build asset lists from passport config
-    const badgeImages = badges.map(b => getAssetUrl(b.image));
-    const lockImages = [
-      getAssetUrl('assets/images/lock.png'),
-      getAssetUrl('assets/images/lock-ring.png'),
-    ];
-    const allImages = [...badgeImages, ...lockImages];
-
-    // Build audio list from passport config
-    const audioFiles = [];
-
-    // Badge sounds
-    badges.forEach(b => {
-      if (b.sound) {
-        audioFiles.push(getAssetUrl(b.sound));
-      }
+    // Prepare the first visible rows. Remaining art warms in a bounded queue;
+    // audio is already managed by AppContext and never blocks navigation.
+    const images = [...badges].sort((a, b) => a.order - b.order).map(b => getAssetUrl(b.image));
+    const firstRows = images.slice(0, 9);
+    let loaded = 0;
+    setLoadingText('Loading badges...');
+    setProgress(0);
+    Promise.all(firstRows.map(src => preloadImage(src).then(() => {
+      loaded += 1;
+      if (mounted) setProgress(Math.round(loaded / firstRows.length * 100));
+    }))).then(() => {
+      warmImages(images.slice(9));
+      if (mounted) goToScreen(SCREENS.EXPLAINER, { silent: true });
     });
-
-    // Greeting sounds
-    if (audio?.greetings) {
-      audio.greetings.forEach(src => audioFiles.push(getAssetUrl(src)));
-    }
-
-    // Background music
-    if (audio?.backgroundMusic) {
-      Object.values(audio.backgroundMusic).flat().forEach(src => {
-        audioFiles.push(getAssetUrl(src));
-      });
-    }
-
-    const totalAssets = allImages.length + audioFiles.length;
-    let loadedCount = 0;
-
-    const updateProgress = () => {
-      loadedCount++;
-      if (mounted) {
-        setProgress(Math.round((loadedCount / totalAssets) * 100));
-      }
-    };
-
-    const loadAssets = async () => {
-      // Load images first
-      setLoadingText('Loading badges...');
-      const imagePromises = allImages.map(src =>
-        preloadImage(src).then(result => {
-          updateProgress();
-          return result;
-        })
-      );
-
-      await Promise.all(imagePromises);
-
-      if (!mounted) return;
-
-      // Then load audio
-      setLoadingText('Preparing sounds...');
-      const audioPromises = audioFiles.map(src =>
-        preloadAudio(src).then(result => {
-          updateProgress();
-          return result;
-        })
-      );
-
-      await Promise.all(audioPromises);
-
-      if (!mounted) return;
-
-      // Small delay to show 100% before transitioning
-      setLoadingText('Ready!');
-      setTimeout(() => {
-        if (mounted) {
-          goToScreen(SCREENS.EXPLAINER, { silent: true });
-        }
-      }, 500);
-    };
-
-    loadAssets();
-
-    return () => {
-      mounted = false;
-    };
-  }, [goToScreen, SCREENS, badges, getAssetUrl, audio]);
+    return () => { mounted = false; };
+  }, [goToScreen, SCREENS, badges, getAssetUrl]);
 
   // Get quote from content or use default
   const flavorQuote = content.certificate?.footer || '"The road goes ever on and on..."';
@@ -124,26 +40,22 @@ export default function LoadingScreen() {
     <motion.div
       className="min-h-screen flex flex-col items-center justify-center p-8"
       variants={slideUp}
-      initial="initial"
+      initial={reduceMotion ? false : "initial"}
       animate="animate"
       exit="exit"
-      transition={springs.smooth}
     >
       <motion.div
         className="w-full max-w-xs flex flex-col items-center"
-        initial={{ y: 30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.1 }}
       >
         {/* Spinning ring loader */}
         <div className="relative w-24 h-24 mb-8">
           <motion.div
             className="w-full h-full rounded-full border-4 border-parchment-300"
             style={{ borderTopColor: 'var(--color-highlight)' }}
-            animate={{ rotate: 360 }}
+            animate={{ rotate: reduceMotion ? 0 : 360 }}
             transition={{
               duration: 1,
-              repeat: Infinity,
+              repeat: reduceMotion ? 0 : Infinity,
               ease: 'linear',
             }}
           />
@@ -164,10 +76,10 @@ export default function LoadingScreen() {
         <div className="w-full h-2 bg-parchment-200 rounded-full overflow-hidden">
           <motion.div
             className="h-full rounded-full"
-            style={{ backgroundColor: 'var(--color-highlight)' }}
-            initial={{ width: 0 }}
-            animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.3 }}
+            style={{ backgroundColor: 'var(--color-highlight)', transformOrigin: 'left' }}
+            initial={false}
+            animate={{ scaleX: progress / 100 }}
+            transition={{ duration: reduceMotion ? 0 : 0.15 }}
           />
         </div>
 

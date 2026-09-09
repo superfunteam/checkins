@@ -31,23 +31,24 @@ export function useSecretBadges(
     for (const secret of secretBadges) {
       // Skip if already claimed or already processed this session
       if (claimedBadges[secret.id]?.claimed) continue;
-      if (justUnlocked.current.has(secret.id)) continue;
 
       // Check unlock condition
       if (!secret.unlockCondition?.badgeIds) continue;
       const { badgeIds } = secret.unlockCondition;
       const allUnlocked = badgeIds.every(id => claimedBadges[id]?.claimed);
+      // A reset starts a fresh collection within this same mounted session.
+      if (!allUnlocked) justUnlocked.current.delete(secret.id);
+      if (justUnlocked.current.has(secret.id)) continue;
 
       if (allUnlocked) {
         // Mark as being unlocked to prevent duplicate triggers
         justUnlocked.current.add(secret.id);
 
-        // Small delay for dramatic effect
-        setTimeout(() => {
-          claimBadge(secret.id, { isAutoUnlock: true });
-          playSound(secret.finale || secret.id === 'secret-ringbearer' ? 'horn' : 'chime');
-          onSecretUnlock?.(secret);
-        }, 600);
+        // Queue immediately; the dialog coordinator waits for the current
+        // sheet to finish exiting before showing this celebration.
+        claimBadge(secret.id, { isAutoUnlock: true });
+        playSound(secret.finale || secret.id === 'secret-ringbearer' ? 'horn' : 'chime');
+        onSecretUnlock?.(secret);
       }
     }
   }, [claimedBadges, claimBadge, playSound, onSecretUnlock, enabled, secretBadges]);

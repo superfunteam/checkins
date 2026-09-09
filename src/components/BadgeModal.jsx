@@ -1,20 +1,32 @@
-import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useLayoutEffect, useCallback, useRef, useMemo } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useApp } from '../context/AppContext';
 import { usePassport } from '../context/PassportContext';
-import { slideUpModal, backdrop, springs } from '../utils/animations';
-import FloatingBadge from './FloatingBadge';
-import { BADGE_SHAPES, getBadgeStyles } from '../utils/badgeStyles';
+import { easeOut } from '../utils/animations';
+import { useDialog } from '../hooks/useDialog';
+import { getBadgeStyles } from '../utils/badgeStyles';
 import QrScanner from './QrScanner';
 import QrCodeIcon from './icons/QrCodeIcon';
-import { parseQrData, validateQrScan } from '../utils/qrUtils';
+import { validateQrScan } from '../utils/qrUtils';
 
-// Shape classes for shuffle mode (must match FloatingBadge/BadgeCard)
+// Shape classes for shuffle mode (must match BadgeCard)
 const SHUFFLE_SHAPES = ['arch', 'circle', 'square'];
 
 export default function BadgeModal() {
+  const { selectedBadge, finishBadgeExit } = useApp();
+  const [retainedBadge, setRetainedBadge] = useState(null);
+  useLayoutEffect(() => {
+    if (selectedBadge) setRetainedBadge(selectedBadge);
+  }, [selectedBadge]);
+  const finishExit = useCallback(() => {
+    if (!selectedBadge) { setRetainedBadge(null); finishBadgeExit(); }
+  }, [selectedBadge, finishBadgeExit]);
+  const badge = selectedBadge || retainedBadge;
+  return badge ? <BadgeDialog selectedBadge={badge} open={Boolean(selectedBadge)} onExited={finishExit} /> : null;
+}
+
+function BadgeDialog({ selectedBadge, open, onExited }) {
   const {
-    selectedBadge,
     closeBadgeModal,
     openBadgeModal,
     badges,
@@ -22,84 +34,50 @@ export default function BadgeModal() {
     getClaimTime,
     honorSystemDismissed,
     dismissHonorSystem,
-    play,
-    isSecretUnlocked,
-    badgeOriginRect,
-    isClosingBadgeModal,
   } = useApp();
 
-  const { primaryBadges, secretBadges, getAssetUrl, getTypeLabel, getTypeColor, content, badgeShape, passportId } = usePassport();
+  const { primaryBadges, secretBadges, getAssetUrl, getTypeLabel, getTypeColor, content, badgeShape, passportId, badges: allBadgeDefinitions } = usePassport();
   const modalContent = content.badgeModal;
 
   const [showQrScanner, setShowQrScanner] = useState(false);
   const [qrError, setQrError] = useState(null);
 
-  // Ref to get target position in modal
-  const badgeTargetRef = useRef(null);
+  // Keep scrolling and focus stable through the exit animation
   const modalContentRef = useRef(null);
+  const backdropRef = useRef(null);
   const honorSystemRef = useRef(null);
-  const [targetRect, setTargetRect] = useState(null);
-  const [isFloatingVisible, setIsFloatingVisible] = useState(false);
-  const [showModalBadge, setShowModalBadge] = useState(false);
+  const claimTimer = useRef(null);
+  const reduceMotion = useReducedMotion();
+  const { isPresent } = useDialog(modalContentRef, closeBadgeModal, { nativeMotion: true, backdropRef, open, onExited });
 
   const [showHonorSystem, setShowHonorSystem] = useState(false);
   const [dontAskAgain, setDontAskAgain] = useState(false);
   const [justClaimed, setJustClaimed] = useState(false);
   const [slideDirection, setSlideDirection] = useState(0);
 
-  // Calculate badge styles based on shape setting (must match FloatingBadge)
+  // Calculate badge styles based on shape setting (matches the grid)
   // Modal badge is w-48 = 192px
   const badgeStylesData = useMemo(() => {
     if (!selectedBadge) return getBadgeStyles(192, 'arch');
 
     if (badgeShape === 'shuffle') {
       // Find badge index in sorted primary badges
-      const sortedBadges = [...primaryBadges].sort((a, b) => a.order - b.order);
+      const sortedBadges = [...allBadgeDefinitions].sort((a, b) => a.order - b.order);
       const index = sortedBadges.findIndex(b => b.id === selectedBadge.id);
       const safeIndex = index >= 0 ? index : 0;
       const shape = SHUFFLE_SHAPES[safeIndex % SHUFFLE_SHAPES.length];
       return getBadgeStyles(192, shape);
     }
     return getBadgeStyles(192, badgeShape);
-  }, [badgeShape, selectedBadge, primaryBadges]);
+  }, [badgeShape, selectedBadge, allBadgeDefinitions]);
 
-  // Calculate target rect when modal opens and manage floating badge visibility
   useEffect(() => {
-    if (selectedBadge && badgeOriginRect && !isClosingBadgeModal) {
-      setShowModalBadge(false);
-      const timer = setTimeout(() => {
-        if (badgeTargetRef.current) {
-          const rect = badgeTargetRef.current.getBoundingClientRect();
-          setTargetRect({
-            top: rect.top,
-            left: rect.left,
-            width: rect.width,
-            height: rect.height,
-          });
-          setIsFloatingVisible(true);
-        }
-      }, 400);
-      return () => clearTimeout(timer);
-    } else if (isClosingBadgeModal && badgeOriginRect) {
-      setIsFloatingVisible(true);
-      setShowModalBadge(false);
-    } else if (selectedBadge && !badgeOriginRect) {
-      setIsFloatingVisible(false);
-      setShowModalBadge(true);
-      setTargetRect(null);
-    } else if (!selectedBadge) {
-      setTargetRect(null);
-      setIsFloatingVisible(false);
-      setShowModalBadge(false);
-    }
-  }, [selectedBadge, badgeOriginRect, isClosingBadgeModal]);
-
-  const handleFloatingComplete = useCallback(() => {
-    if (!isClosingBadgeModal) {
-      setShowModalBadge(true);
-    }
-    setIsFloatingVisible(false);
-  }, [isClosingBadgeModal]);
+    setShowHonorSystem(false);
+    setJustClaimed(false);
+    setQrError(null);
+    setShowQrScanner(false);
+    return () => { clearTimeout(claimTimer.current); claimTimer.current = null; };
+  }, [selectedBadge.id]);
 
   // Get navigable badges (primary + unlocked secrets)
   const unlockedSecrets = secretBadges.filter(b => badges[b.id]?.claimed);
@@ -128,30 +106,23 @@ export default function BadgeModal() {
   }, [currentIndex, navigableBadges, openBadgeModal]);
 
   useEffect(() => {
-    if (selectedBadge) {
-      document.body.style.overflow = 'hidden';
-      return () => { document.body.style.overflow = ''; };
-    }
-  }, [selectedBadge]);
-
-  useEffect(() => {
     if (showHonorSystem && honorSystemRef.current && modalContentRef.current) {
-      setTimeout(() => {
-        honorSystemRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
-      }, 100);
+      const timer = setTimeout(() => {
+        honorSystemRef.current?.scrollIntoView({ behavior: reduceMotion ? 'instant' : 'smooth', block: 'end' });
+      }, 40);
+      return () => clearTimeout(timer);
     }
-  }, [showHonorSystem]);
+  }, [showHonorSystem, reduceMotion]);
 
   useEffect(() => {
-    if (!selectedBadge) return;
+    if (!isPresent || showQrScanner) return;
     const handleKeyDown = (e) => {
       if (e.key === 'ArrowLeft') { e.preventDefault(); goToPrevBadge(); }
       else if (e.key === 'ArrowRight') { e.preventDefault(); goToNextBadge(); }
-      else if (e.key === 'Escape') { closeBadgeModal(); }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedBadge, goToPrevBadge, goToNextBadge, closeBadgeModal]);
+  }, [isPresent, showQrScanner, goToPrevBadge, goToNextBadge]);
 
   const handleDragEnd = (e, info) => {
     const swipeThreshold = 50;
@@ -159,11 +130,8 @@ export default function BadgeModal() {
     else if (info.offset.x < -swipeThreshold) goToNextBadge();
   };
 
-  if (!selectedBadge) return null;
-
   const isClaimed = badges[selectedBadge.id]?.claimed;
   const claimTime = getClaimTime(selectedBadge.id);
-  const isSecret = selectedBadge.type === 'secret';
   const typeLabel = getTypeLabel(selectedBadge.type);
   const typeColor = getTypeColor(selectedBadge.type);
 
@@ -179,15 +147,13 @@ export default function BadgeModal() {
   };
 
   const performClaim = () => {
+    if (justClaimed || claimTimer.current || !isPresent) return;
     claimBadge(selectedBadge.id);
     setJustClaimed(true);
     setShowHonorSystem(false);
     setShowQrScanner(false);
     if (dontAskAgain) dismissHonorSystem();
-    setTimeout(() => {
-      closeBadgeModal();
-      setJustClaimed(false);
-    }, 800);
+    claimTimer.current = setTimeout(closeBadgeModal, reduceMotion ? 150 : 420);
   };
 
   const handleQrScanSuccess = (decodedText) => {
@@ -212,35 +178,25 @@ export default function BadgeModal() {
   };
 
   const contentVariants = {
-    enter: (direction) => ({ x: direction > 0 ? -300 : 300, opacity: 0 }),
+    enter: (direction) => ({ x: reduceMotion ? 0 : direction > 0 ? -24 : 24, opacity: 0 }),
     center: { x: 0, opacity: 1 },
-    exit: (direction) => ({ x: direction > 0 ? 300 : -300, opacity: 0 }),
+    exit: (direction) => ({ x: reduceMotion ? 0 : direction > 0 ? 24 : -24, opacity: 0 }),
   };
 
   return (
-    <AnimatePresence>
-      {selectedBadge && (
-        <>
-          <motion.div
-            className="modal-backdrop"
-            variants={backdrop}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            onClick={closeBadgeModal}
-          />
+    <>
+          <div ref={backdropRef} className="modal-backdrop" onClick={closeBadgeModal} />
 
-          <motion.div
+          <div
             ref={modalContentRef}
-            className="modal-content overflow-y-auto overflow-x-hidden"
+            className="modal-content badge-detail-sheet"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="badge-dialog-title"
+            tabIndex={-1}
             style={{ WebkitOverflowScrolling: 'touch', overscrollBehavior: 'contain' }}
-            variants={slideUpModal}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            transition={springs.smooth}
           >
-            <AnimatePresence mode="wait" custom={slideDirection}>
+            <AnimatePresence initial={false} mode="wait" custom={slideDirection} onExitComplete={() => modalContentRef.current?.scrollTo({ top: 0, behavior: 'instant' })}>
               <motion.div
                 key={selectedBadge.id}
                 custom={slideDirection}
@@ -248,16 +204,17 @@ export default function BadgeModal() {
                 initial="enter"
                 animate="center"
                 exit="exit"
-                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                drag="x"
+                transition={{ duration: reduceMotion ? 0 : 0.14, ease: easeOut }}
+                drag={reduceMotion ? false : "x"}
                 dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={0.2}
+                dragElastic={0.08}
                 onDragEnd={handleDragEnd}
-                className="p-6 pb-8"
+                className="badge-detail-page p-6 pb-8"
               >
                 <button
                   className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center text-earth-400 hover:text-earth-600"
                   onClick={closeBadgeModal}
+                  aria-label="Close badge"
                 >
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -266,13 +223,11 @@ export default function BadgeModal() {
 
                 <motion.div
                   className="flex justify-center mb-4"
-                  style={{ opacity: showModalBadge || !badgeOriginRect ? 1 : 0 }}
-                  initial={badgeOriginRect ? false : { scale: 0.8 }}
-                  animate={justClaimed ? { scale: [1, 1.1, 0.95, 1.05, 1], rotate: [0, -3, 3, -1, 0] } : { scale: 1 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  initial={false}
+                  animate={justClaimed && !reduceMotion ? { scale: [1, 1.06, 1] } : { scale: 1 }}
+                  transition={{ duration: 0.24, ease: easeOut }}
                 >
                   <div
-                    ref={badgeTargetRef}
                     className="w-48 h-48 overflow-hidden"
                     style={badgeStylesData}
                   >
@@ -303,16 +258,16 @@ export default function BadgeModal() {
                   )}
                 </div>
 
-                <h2 className="font-display text-2xl font-bold text-earth-800 text-center mt-2 mb-4">
+                <h2 id="badge-dialog-title" className="font-display text-2xl font-bold text-earth-800 text-center mt-2 mb-4">
                   {selectedBadge.name}
                 </h2>
 
-                <p className="font-body text-earth-600 text-center mb-4 leading-relaxed text-xl">
+                <p className="font-body text-earth-600 text-center mb-4 leading-relaxed text-xl whitespace-pre-line">
                   {selectedBadge.longDesc}
                 </p>
 
                 {selectedBadge.instruction && !isClaimed && !justClaimed && (
-                  <p className="text-base text-center mb-6" style={{ fontFamily: "'Google Sans Flex', sans-serif", color: '#7C3AED' }}>
+                  <p className="text-base text-center mb-6" style={{ fontFamily: "'Google Sans Flex', sans-serif", color: 'var(--color-hint)' }}>
                     {selectedBadge.instruction}
                   </p>
                 )}
@@ -329,7 +284,7 @@ export default function BadgeModal() {
                       <div className="text-center">
                         <div
                           className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold rounded-button shadow-button"
-                          style={{ backgroundColor: '#7C3AED', color: 'white', fontFamily: "'Google Sans Flex', sans-serif" }}
+                          style={{ backgroundColor: 'var(--color-claimed)', color: 'white', fontFamily: "'Google Sans Flex', sans-serif" }}
                         >
                           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -369,7 +324,7 @@ export default function BadgeModal() {
                   {showHonorSystem && (
                     <motion.div
                       ref={honorSystemRef}
-                      initial={{ opacity: 0, y: 10 }}
+                      initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       className="bg-parchment-200 rounded-card p-4"
@@ -408,17 +363,7 @@ export default function BadgeModal() {
                 </AnimatePresence>
               </motion.div>
             </AnimatePresence>
-          </motion.div>
-
-          {isFloatingVisible && badgeOriginRect && targetRect && selectedBadge && (
-            <FloatingBadge
-              badge={selectedBadge}
-              originRect={badgeOriginRect}
-              targetRect={targetRect}
-              isClosing={isClosingBadgeModal}
-              onAnimationComplete={handleFloatingComplete}
-            />
-          )}
+          </div>
 
           <AnimatePresence>
             {showQrScanner && (
@@ -429,8 +374,6 @@ export default function BadgeModal() {
               />
             )}
           </AnimatePresence>
-        </>
-      )}
-    </AnimatePresence>
+    </>
   );
 }

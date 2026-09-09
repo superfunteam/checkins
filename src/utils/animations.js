@@ -3,9 +3,9 @@ export const springs = {
   // Snappy for UI interactions
   snappy: { type: 'spring', stiffness: 400, damping: 30 },
   // Bouncy for celebrations
-  bouncy: { type: 'spring', stiffness: 300, damping: 15 },
+  bouncy: { type: 'spring', stiffness: 380, damping: 24 },
   // Smooth for modals
-  smooth: { type: 'spring', stiffness: 200, damping: 25 },
+  smooth: { type: 'spring', stiffness: 420, damping: 38, mass: 0.8 },
   // Gentle for subtle movements
   gentle: { type: 'spring', stiffness: 100, damping: 20 },
 };
@@ -17,35 +17,39 @@ export const transitions = {
   slow: { duration: 0.4, ease: 'easeInOut' },
 };
 
+export const easeOut = [0.22, 1, 0.36, 1];
+export const sheetTransition = { duration: 0.24, ease: easeOut };
+export const overlayTransition = { duration: 0.16, ease: 'easeOut' };
+
 // Animation variants
 export const fadeIn = {
   initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.18 } },
+  exit: { opacity: 0, transition: { duration: 0.12 } },
 };
 
 export const slideUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: 20 },
+  initial: { opacity: 0, y: 10 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.2, ease: easeOut } },
+  exit: { opacity: 0, y: -6, transition: { duration: 0.12 } },
 };
 
 export const slideUpModal = {
-  initial: { opacity: 0, y: '100%' },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: '100%' },
+  initial: { opacity: 0, y: 32 },
+  animate: { opacity: 1, y: 0, transition: sheetTransition },
+  exit: { opacity: 0, y: 24, transition: { duration: 0.16, ease: 'easeIn' } },
 };
 
 export const slideFromLeft = {
-  initial: { x: '-100%', opacity: 0 },
-  animate: { x: 0, opacity: 1 },
-  exit: { x: '-100%', opacity: 0 },
+  initial: { x: -32, opacity: 0 },
+  animate: { x: 0, opacity: 1, transition: sheetTransition },
+  exit: { x: -24, opacity: 0, transition: { duration: 0.16 } },
 };
 
 export const scaleIn = {
-  initial: { opacity: 0, scale: 0.9 },
-  animate: { opacity: 1, scale: 1 },
-  exit: { opacity: 0, scale: 0.9 },
+  initial: { opacity: 0, scale: 0.97, y: 8 },
+  animate: { opacity: 1, scale: 1, y: 0, transition: sheetTransition },
+  exit: { opacity: 0, scale: 0.98, y: 4, transition: { duration: 0.16 } },
 };
 
 export const stampIn = {
@@ -83,18 +87,18 @@ export const badgeGridContainer = {
   initial: {},
   animate: {
     transition: {
-      staggerChildren: 0.03,
-      delayChildren: 0.1,
+      staggerChildren: 0,
+      delayChildren: 0,
     },
   },
 };
 
 export const badgeGridItem = {
-  initial: { opacity: 0, scale: 0.8 },
+  initial: { opacity: 0, y: 6 },
   animate: {
     opacity: 1,
-    scale: 1,
-    transition: springs.snappy,
+    y: 0,
+    transition: { duration: 0.2, ease: easeOut },
   },
 };
 

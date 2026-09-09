@@ -47,7 +47,7 @@ export default function ExportTemplate() {
       style={{
         display: 'none',
         width: '1080px',
-        height: '1920px',
+        minHeight: '1920px',
         backgroundColor: theme.colors.background['100'],
         fontFamily: 'Cinzel, serif',
         padding: '50px',
@@ -224,7 +224,7 @@ export default function ExportTemplate() {
                       right: '8px',
                       width: '36px',
                       height: '36px',
-                      backgroundColor: '#7C3AED',
+                      backgroundColor: 'var(--color-claimed)',
                       borderRadius: '50%',
                       display: 'flex',
                       alignItems: 'center',

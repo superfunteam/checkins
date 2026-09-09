@@ -1,0 +1,38 @@
+.team-screen { min-height: 100svh; padding: 38px 20px max(24px, env(safe-area-inset-bottom)); display: flex; flex-direction: column; justify-content: center; color: #f0eee8; font-family: 'Google Sans Flex', sans-serif; }
+.team-heading { text-align: center; }
+.team-eyebrow { color: #a1b2b5; font-size: 10px; font-weight: 600; letter-spacing: .2em; margin-bottom: 14px; }
+.team-heading h1 { font-size: clamp(26px, 7vw, 34px); line-height: 1.2; margin: 0 0 12px; outline: none; }
+.team-heading > p:last-child { color: #bdcbce; font-size: 16px; line-height: 1.55; max-width: 340px; margin: auto; }
+/* Five neighboring slots let the three characters wrap without a hard end. */
+.team-carousel { position: relative; margin: 14px -20px 0; overflow: hidden; height: clamp(290px, 43svh, 420px); touch-action: pan-y; outline: none; }
+.team-carousel:focus-visible { outline: 2px solid #bbceca; outline-offset: -3px; border-radius: 12px; }
+.team-carousel-track { position: relative; height: 100%; touch-action: pan-y; }
+.team-carousel-slide { position: absolute; left: 17%; bottom: 0; width: 66%; height: 100%; transform-origin: center bottom; -webkit-tap-highlight-color: transparent; user-select: none; }
+.team-character-stage { display: block; position: relative; height: 100%; pointer-events: none; }
+.team-character { position: relative; z-index: 2; width: 100%; height: 100%; object-fit: contain; }
+.team-aura { position: absolute; inset: 20% 5% 5%; border-radius: 50%; background: radial-gradient(ellipse, var(--team-dim), transparent 70%); opacity: 0; }
+.team-platform { position: absolute; bottom: 1%; left: 10%; width: 80%; height: 24px; border-radius: 50%; border: 1px solid #64767d; background: #17282e; box-shadow: 0 7px 0 #091115; }
+.team-carousel-slide[data-centered=true] .team-platform { border: 2px solid var(--team-color); background: var(--team-dim); box-shadow: 0 5px 0 #091115, 0 0 20px var(--team-dim); }
+.team-carousel-slide[data-centered=true] .team-aura { opacity: .26; }
+.team-carousel-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; }
+.team-arrow { color: var(--team-color); border: 1px solid #3a4d53; border-radius: 50%; width: 44px; height: 44px; font-size: 22px; flex-shrink: 0; }
+.team-arrow:focus-visible { outline: 2px solid var(--team-color); outline-offset: 3px; }
+.team-active-name { text-align: center; }
+.team-active-name h2 { font-size: 23px; line-height: 1.25; }
+.team-epithet { color: #a1b2b5; font-family: 'Crimson Text', serif; font-size: 16px; font-style: italic; padding-top: 4px; }
+.team-pagination { display: flex; gap: 2px; justify-content: center; margin-top: 8px; }
+.team-pagination label { position: relative; display: grid; place-items: center; width: 36px; height: 36px; cursor: pointer; }
+.team-pagination input { position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+.team-pagination span { width: 7px; height: 7px; border-radius: 50%; background: #52676e; }
+.team-pagination input:checked + span { width: 22px; border-radius: 6px; background: var(--team-color); }
+.team-pagination input:focus-visible + span { outline: 2px solid #f0eee8; outline-offset: 4px; }
+.team-selection-note { display: flex; align-items: center; justify-content: center; min-height: 56px; text-align: center; color: #c7d0d0; font-size: 16px; line-height: 1.5; margin: 8px 0; }
+.team-confirm { width: 100%; min-height: 56px; font-size: 16px; }
+.team-confirm:disabled { opacity: .45; cursor: not-allowed; }
+.team-footnote { text-align: center; font-size: 12px; line-height: 1.5; color: #a1b2b5; margin: 14px 0 0; }
+.team-share-preview { width: 100%; display: block; border-radius: 10px; box-shadow: 0 12px 40px #0005; }
+.team-share-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 22px; }
+.team-share-actions button { min-height: 48px; }
+.team-share-link { text-decoration: underline; color: #c7d0d0; font-size: 14px; }
+.team-share-status { text-align: center; font-size: 14px; line-height: 1.5; min-height: 24px; color: #c7d0d0; }
+@media (max-width: 350px) { .team-screen { padding-inline: 14px; } .team-carousel { margin-inline: -14px; } }

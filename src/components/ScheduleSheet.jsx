@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState, useRef } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useApp } from '../context/AppContext';
 import { usePassport } from '../context/PassportContext';
-import { slideFromLeft, backdrop, springs } from '../utils/animations';
+import { slideFromLeft, backdrop, overlayTransition } from '../utils/animations';
+
+import { useDialog } from '../hooks/useDialog';
 
 // Parse time string like "9am ish" or "10:43am ish" into minutes from midnight
 function parseTimeToMinutes(timeStr) {
@@ -71,7 +73,15 @@ function BadgeTypeIcon({ type, color }) {
 }
 
 export default function ScheduleSheet() {
-  const { showScheduleSheet, closeScheduleSheet, badges } = useApp();
+  const { showScheduleSheet, finishScheduleExit } = useApp();
+  return <AnimatePresence initial={false} onExitComplete={finishScheduleExit}>{showScheduleSheet && <ScheduleDialog key="schedule" />}</AnimatePresence>;
+}
+
+function ScheduleDialog() {
+  const { closeScheduleSheet, badges } = useApp();
+  const dialogRef = useRef(null);
+  const reduceMotion = useReducedMotion();
+  const { isPresent, completeExit } = useDialog(dialogRef, closeScheduleSheet);
   const { primaryBadges, schedule, getTypeColor, content } = usePassport();
 
   const scheduleContent = content.schedule;
@@ -110,8 +120,6 @@ export default function ScheduleSheet() {
 
   // Update progress every minute
   useEffect(() => {
-    if (!showScheduleSheet) return;
-
     const interval = setInterval(() => {
       setDayProgress(getDayProgress());
     }, 60000);
@@ -119,34 +127,37 @@ export default function ScheduleSheet() {
     setDayProgress(getDayProgress());
 
     return () => clearInterval(interval);
-  }, [showScheduleSheet]);
+  }, [dayStart, dayEnd]);
 
   return (
-    <AnimatePresence>
-      {showScheduleSheet && (
-        <>
+    <>
           <motion.div
             className="fixed inset-0 bg-black/50 z-40"
+            transition={overlayTransition}
             variants={backdrop}
-            initial="initial"
-            animate="animate"
-            exit="exit"
+            initial={reduceMotion ? false : "initial"}
+            animate={isPresent ? "animate" : "exit"}
             onClick={closeScheduleSheet}
           />
 
           <motion.div
             className="fixed left-0 top-0 bottom-0 w-80 max-w-[85vw] bg-parchment-100 z-50 shadow-2xl flex flex-col"
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label={scheduleContent?.title || "Today’s Journey"}
+            tabIndex={-1}
+            onAnimationComplete={completeExit}
             variants={slideFromLeft}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            transition={springs.smooth}
+            initial={reduceMotion ? false : "initial"}
+            animate={isPresent ? "animate" : "exit"}
           >
             <header className="flex items-center justify-between px-4 py-4 border-b border-parchment-300">
               <h2 className="font-display text-lg font-bold text-earth-800">
                 {scheduleContent?.title || "Today's Journey"}
               </h2>
               <motion.button
+                aria-label="Close schedule"
                 onClick={closeScheduleSheet}
                 className="w-8 h-8 flex items-center justify-center rounded-full bg-parchment-200 text-earth-600 hover:bg-parchment-300 transition-colors"
                 whileTap={{ scale: 0.95 }}
@@ -159,7 +170,7 @@ export default function ScheduleSheet() {
 
             <div className="flex-1 overflow-y-auto p-4">
               {/* Legend */}
-              <div className="mb-4 p-3 rounded-xl border border-parchment-300" style={{ backgroundColor: 'rgba(237, 232, 220, 0.5)' }}>
+              <div className="mb-4 p-3 rounded-xl border border-parchment-300" style={{ backgroundColor: 'var(--color-background-200)' }}>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1.5">
                     <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: getTypeColor('meal') }}>
@@ -187,31 +198,19 @@ export default function ScheduleSheet() {
 
                 <motion.div
                   className="absolute top-0 origin-top z-0"
-                  style={{ left: '17px', width: '6px', backgroundColor: '#7C3AED' }}
-                  initial={{ height: 0 }}
-                  animate={{ height: `${dayProgress}%` }}
-                  transition={{ duration: 0.5, ease: 'easeOut' }}
+                  style={{ left: '17px', width: '6px', height: '100%', backgroundColor: 'var(--color-claimed)' }}
+                  initial={false}
+                  animate={{ scaleY: dayProgress / 100 }}
+                  transition={{ duration: reduceMotion ? 0 : 0.2, ease: 'easeOut' }}
                 />
 
                 {dayProgress > 0 && dayProgress < 100 && (
                   <motion.div
                     className="absolute -translate-y-1/2 z-20"
                     style={{ top: `${dayProgress}%`, left: '10px', width: '21px', height: '21px' }}
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={springs.bouncy}
+                    initial={false}
                   >
-                    <motion.div
-                      className="w-full h-full bg-black rotate-45"
-                      animate={{
-                        boxShadow: [
-                          '0 0 0 0 rgba(124, 58, 237, 0.7)',
-                          '0 0 10px 5px rgba(124, 58, 237, 0.5)',
-                          '0 0 0 0 rgba(124, 58, 237, 0.7)',
-                        ],
-                      }}
-                      transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                    />
+                    <div className="w-full h-full rotate-45" style={{ backgroundColor: "var(--color-highlight)" }} />
                   </motion.div>
                 )}
 
@@ -227,8 +226,8 @@ export default function ScheduleSheet() {
                         <div
                           className="absolute -left-8 top-0 w-6 h-6 rounded-full flex items-center justify-center z-10"
                           style={{
-                            backgroundColor: isClaimed ? '#7C3AED' : typeColor,
-                            boxShadow: `0 0 0 3px ${isClaimed ? '#7C3AED' : typeColor}20`
+                            backgroundColor: isClaimed ? 'var(--color-claimed)' : typeColor,
+                            boxShadow: `0 0 0 3px ${typeColor}20`
                           }}
                         >
                           {isClaimed ? (
@@ -241,7 +240,7 @@ export default function ScheduleSheet() {
                         <div className={`flex-1 min-w-0 transition-opacity ${isClaimed ? 'opacity-60' : isPast ? 'opacity-70' : 'opacity-100'}`}>
                           <span
                             className="text-xs font-medium"
-                            style={{ fontFamily: "'Google Sans Flex', sans-serif", color: isClaimed ? '#9CA3AF' : '#78716C' }}
+                            style={{ fontFamily: "'Google Sans Flex', sans-serif", color: 'var(--color-text-500)' }}
                           >
                             {badge.time}
                           </span>
@@ -256,8 +255,6 @@ export default function ScheduleSheet() {
               </div>
             </div>
           </motion.div>
-        </>
-      )}
-    </AnimatePresence>
+    </>
   );
 }

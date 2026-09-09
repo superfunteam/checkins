@@ -37,12 +37,37 @@ function manifestFor(passport, hostMode) {
 
 export function passportManifestsPlugin() {
   let outDir = 'dist';
+  let forcedPassport = '';
 
   return {
     name: 'passport-manifests',
 
     configResolved(config) {
       outDir = config.build.outDir;
+      forcedPassport = config.env?.VITE_HOST_PASSPORT || '';
+    },
+
+    // Seed the event surface before React or web fonts load, avoiding a light
+    // flash when opening a dark passport. Full theme application stays in React.
+    transformIndexHtml(html) {
+      const themes = Object.fromEntries(listPassportIds().map(id => {
+        const { theme } = readPassport(id);
+        return [id, { mode: theme.mode || 'light', bg: theme.colors.background['100'], text: theme.colors.text['800'], muted: theme.colors.text['600'], primary: theme.colors.primary['500'] }];
+      }));
+      const encoded = JSON.stringify(themes).replaceAll('<', '\\u003c');
+      const forced = JSON.stringify(forcedPassport).replaceAll('<', '\\u003c');
+      const script = `(() => {
+        if (location.pathname.startsWith('/admin')) return;
+        const pathId = location.pathname.match(/^\\/event\\/([a-z0-9-]+)(?:\\/|$)/)?.[1];
+        const hostId = /^(?:[a-z0-9-]+)\\.(?:checkins\\.party|localhost)$/.test(location.hostname) ? location.hostname.split('.')[0] : '';
+        const theme = (${encoded})[pathId || ${forced} || hostId];
+        if (!theme) return;
+        const root = document.documentElement;
+        root.dataset.passportTheme = theme.mode;
+        root.style.colorScheme = theme.mode;
+        for (const [key,value] of Object.entries({'background-100':theme.bg,'text-800':theme.text,'text-600':theme.muted,'primary-500':theme.primary})) root.style.setProperty('--color-'+key,value);
+      })();`;
+      return html.replace('<!-- Primary Meta Tags -->', `<style>html[data-passport-theme],html[data-passport-theme] body{background:var(--color-background-100);color:var(--color-text-800)}</style><script>${script}</script>\n    <!-- Primary Meta Tags -->`);
     },
 
     configureServer(server) {

@@ -2,10 +2,12 @@
 """
 Generate placeholder badge art and PWA icons for the Twilight passport.
 
-Real art replaces these files under the same names (then bump `version` in
-passport.json so every phone refetches). Run: python3 scripts/make-twilight-placeholders.py
+Creates missing assets only; never overwrites an existing sample or final image.
+Run: python3 scripts/make-twilight-placeholders.py
 """
 from pathlib import Path
+import json
+import textwrap
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent / "public/passports/twilight/assets/images"
@@ -150,9 +152,19 @@ def icon(size, maskable):
 
 
 if __name__ == "__main__":
-    for badge_id, kind, lines in BADGE_SPECS:
-        badge(badge_id, kind, lines)
+    passport = json.loads((ROOT.parent.parent / "passport.json").read_text())
+    written = 0
+    for item in passport["badges"]:
+        if (BADGES / f"badge-{item['id']}.webp").exists():
+            continue
+        lines = textwrap.wrap(item["name"].upper(), width=16)
+        if len(lines) > 2:
+            lines = [item["type"].upper(), "ART PENDING"]
+        badge(item["id"], item["type"], lines)
+        written += 1
     for s in (192, 512):
-        icon(s, False)
-        icon(s, True)
-    print(f"wrote {len(BADGE_SPECS)} badges and 4 icons to {ROOT}")
+        for maskable in (False, True):
+            name = f"icon-maskable-{s}.png" if maskable else f"icon-{s}.png"
+            if not (ICONS / name).exists():
+                icon(s, maskable)
+    print(f"wrote {written} missing badge placeholders to {ROOT}; existing art preserved")

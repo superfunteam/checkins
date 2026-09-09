@@ -17,6 +17,8 @@ const CONTENT_REFRESH_MS = 45 * 1000;
  */
 function applyTheme(theme) {
   const root = document.documentElement;
+  root.dataset.passportTheme = theme.mode || "light";
+  root.style.colorScheme = theme.mode === "dark" ? "dark" : "light";
 
   Object.entries(theme.colors).forEach(([colorName, shades]) => {
     if (typeof shades === 'object') {
@@ -28,6 +30,8 @@ function applyTheme(theme) {
     }
   });
 
+  root.style.setProperty('--color-claimed', theme.mode === 'dark' ? theme.colors.accent['500'] : '#7C3AED');
+  root.style.setProperty('--color-hint', theme.mode === 'dark' ? theme.colors.accent['600'] : '#7C3AED');
   setFontVariables(theme.fonts);
 }
 
@@ -53,6 +57,11 @@ export function PassportProvider({ passportId: passportIdProp, children }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const lastJsonRef = useRef(null);
+
+  useEffect(() => () => {
+    delete document.documentElement.dataset.passportTheme;
+    document.documentElement.style.removeProperty('color-scheme');
+  }, []);
 
   // Initial load
   useEffect(() => {

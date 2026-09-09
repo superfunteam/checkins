@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback, useEffect, useRef } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import {
   useSound,
@@ -13,6 +13,7 @@ import {
 import { useSecretBadges } from '../hooks/useSecretBadges';
 import { usePassport } from '../context/PassportContext';
 import { setUpdateBusy } from '../pwa/updateGate';
+import { getTwilightTeam } from '../data/twilightTeams';
 
 const AppContext = createContext(null);
 
@@ -23,21 +24,24 @@ export const SCREENS = {
   LOADING: 'loading',
   EXPLAINER: 'explainer',
   PASSPORT: 'passport',
+  TEAM_PICK: 'team-pick',
+  TEAM_FINAL: 'team-final',
+  TEAM_SHARE: 'team-share',
 };
 
 export function AppProvider({ children }) {
   // Get passportId from PassportContext
   const { passportId, features, secretBadges: secretBadgeConfigs, badges, audio, getAssetUrl } = usePassport();
-  const audioInitialized = useRef(false);
 
   // Use passport-namespaced storage
   const storage = useLocalStorage(passportId);
   const { play } = useSound();
+  const teamPollEnabled = passportId === 'twilight' && features?.teamPoll === true;
+  const allBadgesComplete = badges.length > 0 && badges.every(b => storage.badges[b.id]?.claimed);
 
   // Initialize audio system with passport-based paths
   useEffect(() => {
-    if (audioInitialized.current || !badges || !getAssetUrl) return;
-    audioInitialized.current = true;
+    if (!badges || !getAssetUrl) return;
 
     // Build badge sound mappings from passport config
     const badgeSoundMappings = badges
@@ -72,25 +76,27 @@ export function AppProvider({ children }) {
   const [currentScreen, setCurrentScreen] = useState(() => {
     // If user has already set up, go straight to passport
     if (storage.createdAt && storage.name) {
-      return SCREENS.PASSPORT;
+      return teamPollEnabled && !storage.teamPoll.initial ? SCREENS.TEAM_PICK : SCREENS.PASSPORT;
     }
     return SCREENS.SPLASH;
   });
 
   // Modal states
   const [selectedBadge, setSelectedBadge] = useState(null);
-  const [badgeOriginRect, setBadgeOriginRect] = useState(null);
-  const [isClosingBadgeModal, setIsClosingBadgeModal] = useState(false);
+  const [badgeModalExiting, setBadgeModalExiting] = useState(false);
   const [showCertificationModal, setShowCertificationModal] = useState(false);
+  const [certificationExiting, setCertificationExiting] = useState(false);
+  const [scheduleExiting, setScheduleExiting] = useState(false);
   const [showChecklist, setShowChecklist] = useState(false);
   const [showScheduleSheet, setShowScheduleSheet] = useState(false);
 
   // Secret unlock modal queue - shows celebration modals sequentially
   const [secretUnlockQueue, setSecretUnlockQueue] = useState([]);
-  const [secretModalDelayed, setSecretModalDelayed] = useState(false);
+  const [secretModalExiting, setSecretModalExiting] = useState(false);
 
-  // Derive the current modal to show (first in queue, unless delayed)
-  const secretUnlockModal = !secretModalDelayed ? secretUnlockQueue[0] || null : null;
+  // Show queued celebrations only after the previous dialog finishes closing.
+  const secretUnlockModal = currentScreen === SCREENS.PASSPORT && !selectedBadge && !badgeModalExiting && !secretModalExiting && !showCertificationModal && !certificationExiting && !showScheduleSheet && !scheduleExiting
+    ? secretUnlockQueue[0] || null : null;
 
   // Handle secret badge unlocks - add to queue
   const handleSecretUnlock = useCallback((badge) => {
@@ -99,22 +105,20 @@ export function AppProvider({ children }) {
 
   const closeSecretUnlockModal = useCallback(() => {
     play(UI_SOUNDS.modalClose);
-    setSecretUnlockQueue(prev => {
-      const remaining = prev.slice(1);
-      // If more in queue, add 1 second delay before showing next
-      if (remaining.length > 0) {
-        setSecretModalDelayed(true);
-        setTimeout(() => setSecretModalDelayed(false), 1000);
-      }
-      return remaining;
-    });
+    stopBadgeSound();
+    setSecretModalExiting(true);
+    setSecretUnlockQueue(prev => prev.slice(1));
   }, [play]);
+  const finishSecretExit = useCallback(() => setSecretModalExiting(false), []);
+  const finishCertificationExit = useCallback(() => { setCertificationExiting(false); setShowChecklist(false); }, []);
+  const finishScheduleExit = useCallback(() => setScheduleExiting(false), []);
+  const finishBadgeExit = useCallback(() => setBadgeModalExiting(false), []);
 
   // Tell the update gate when a silent app reload would interrupt the guest:
   // any modal/sheet open, or mid-onboarding. Splash and the idle passport
   // screen are safe because a reload lands right back where they were.
-  const midOnboarding = currentScreen === SCREENS.NAME || currentScreen === SCREENS.LOADING || currentScreen === SCREENS.EXPLAINER;
-  const interacting = Boolean(selectedBadge) || showCertificationModal || showScheduleSheet || secretUnlockQueue.length > 0 || midOnboarding;
+  const midOnboarding = ![SCREENS.SPLASH, SCREENS.PASSPORT].includes(currentScreen);
+  const interacting = Boolean(selectedBadge) || badgeModalExiting || secretModalExiting || showCertificationModal || certificationExiting || showScheduleSheet || scheduleExiting || secretUnlockQueue.length > 0 || midOnboarding;
   useEffect(() => {
     setUpdateBusy(interacting);
     return () => setUpdateBusy(false);
@@ -135,52 +139,75 @@ export function AppProvider({ children }) {
     if (!options.silent) {
       play(UI_SOUNDS.buttonTap);
     }
-    setCurrentScreen(screen);
-  }, [play]);
+    setCurrentScreen(screen === SCREENS.PASSPORT && teamPollEnabled && !storage.teamPoll.initial ? SCREENS.TEAM_PICK : screen);
+  }, [play, teamPollEnabled, storage.teamPoll.initial]);
 
-  const openBadgeModal = useCallback((badge, rect = null) => {
+  // Let every celebration finish before asking for the final verdict. This
+  // also resumes the unanswered poll after a reload, without losing claims.
+  useEffect(() => {
+    if (!teamPollEnabled || currentScreen !== SCREENS.PASSPORT || interacting) return;
+    if (!storage.teamPoll.initial) setCurrentScreen(SCREENS.TEAM_PICK);
+    else if (allBadgesComplete && !storage.teamPoll.final) setCurrentScreen(SCREENS.TEAM_FINAL);
+  }, [teamPollEnabled, currentScreen, interacting, allBadgesComplete, storage.teamPoll.initial, storage.teamPoll.final]);
+
+  const chooseInitialTeam = useCallback(team => {
+    if (!teamPollEnabled || !getTwilightTeam(team)) return;
+    storage.pickInitialTeam(team);
+    play(UI_SOUNDS.buttonTap);
+    setCurrentScreen(SCREENS.PASSPORT);
+  }, [teamPollEnabled, storage.pickInitialTeam, play]);
+
+  const confirmFinalTeam = useCallback(team => {
+    if (!teamPollEnabled || !allBadgesComplete || !storage.teamPoll.initial || !getTwilightTeam(team)) return;
+    storage.pickFinalTeam(team);
+    play(UI_SOUNDS.buttonTap);
+    setCurrentScreen(SCREENS.TEAM_SHARE);
+  }, [teamPollEnabled, allBadgesComplete, storage.teamPoll.initial, storage.pickFinalTeam, play]);
+
+  const openBadgeModal = useCallback((badge) => {
     play(UI_SOUNDS.modalOpen);
     // Play the badge-specific sound effect (if enabled)
     if (features?.badgeSounds !== false && badge.sound) {
       const fallbackUrl = getAssetUrl(badge.sound);
       playBadgeSound(badge.id, 0.7, fallbackUrl);
     }
-    setBadgeOriginRect(rect);
     setSelectedBadge(badge);
-    setIsClosingBadgeModal(false);
+    setBadgeModalExiting(false);
   }, [play, features, getAssetUrl]);
 
   const closeBadgeModal = useCallback(() => {
     play(UI_SOUNDS.modalClose);
     // Stop any playing badge sound
     stopBadgeSound();
-    setIsClosingBadgeModal(true);
-    // Delay clearing state to allow reverse animation
-    setTimeout(() => {
-      setSelectedBadge(null);
-      setBadgeOriginRect(null);
-      setIsClosingBadgeModal(false);
-    }, 300);
+    setBadgeModalExiting(true);
+    setSelectedBadge(null);
   }, [play]);
 
   const openCertificationModal = useCallback(() => {
     play(UI_SOUNDS.modalOpen);
+    if (teamPollEnabled && allBadgesComplete) {
+      setCurrentScreen(storage.teamPoll.final ? SCREENS.TEAM_SHARE : SCREENS.TEAM_FINAL);
+      return;
+    }
+    setCertificationExiting(false);
     setShowCertificationModal(true);
-  }, [play]);
+  }, [play, teamPollEnabled, allBadgesComplete, storage.teamPoll.final]);
 
   const closeCertificationModal = useCallback(() => {
     play(UI_SOUNDS.modalClose);
+    setCertificationExiting(true);
     setShowCertificationModal(false);
-    setShowChecklist(false);
   }, [play]);
 
   const openScheduleSheet = useCallback(() => {
     play(UI_SOUNDS.modalOpen);
+    setScheduleExiting(false);
     setShowScheduleSheet(true);
   }, [play]);
 
   const closeScheduleSheet = useCallback(() => {
     play(UI_SOUNDS.modalClose);
+    setScheduleExiting(true);
     setShowScheduleSheet(false);
   }, [play]);
 
@@ -191,6 +218,10 @@ export function AppProvider({ children }) {
 
   const resetAndStartOver = useCallback(() => {
     storage.resetAll();
+    setSecretUnlockQueue([]);
+    setSelectedBadge(null);
+    setShowCertificationModal(false);
+    setShowScheduleSheet(false);
     setCurrentScreen(SCREENS.SPLASH);
   }, [storage]);
 
@@ -198,6 +229,10 @@ export function AppProvider({ children }) {
     // Storage
     ...storage,
     claimBadge: claimBadgeWithSound,
+    teamPollEnabled,
+    allBadgesComplete,
+    chooseInitialTeam,
+    confirmFinalTeam,
 
     // Sound
     play,
@@ -208,8 +243,9 @@ export function AppProvider({ children }) {
 
     // Badge modal
     selectedBadge,
-    badgeOriginRect,
-    isClosingBadgeModal,
+    finishBadgeExit,
+    finishCertificationExit,
+    finishScheduleExit,
     openBadgeModal,
     closeBadgeModal,
 
@@ -229,6 +265,7 @@ export function AppProvider({ children }) {
     isSecretUnlocked,
     secretUnlockModal,
     closeSecretUnlockModal,
+    finishSecretExit,
 
     // Reset
     resetAndStartOver,

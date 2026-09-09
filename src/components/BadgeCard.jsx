@@ -1,5 +1,5 @@
 import { useRef, useMemo, useState, useLayoutEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useApp } from '../context/AppContext';
 import { usePassport } from '../context/PassportContext';
 import { badgeGridItem, springs } from '../utils/animations';
@@ -12,6 +12,7 @@ const SHUFFLE_TILTS = ['badge-tilt-left', 'badge-tilt-right', 'badge-tilt-none']
 export default function BadgeCard({ badge, index }) {
   const { badges, openBadgeModal, isSecretUnlocked } = useApp();
   const { getAssetUrl, badgeShape } = usePassport();
+  const reduceMotion = useReducedMotion();
   const badgeImageRef = useRef(null);
 
   const [borderWidth, setBorderWidth] = useState(8); // Default fallback
@@ -46,13 +47,7 @@ export default function BadgeCard({ badge, index }) {
 
   const handleClick = () => {
     if (showAsMystery) return; // Can't open mystery badges
-    const rect = badgeImageRef.current?.getBoundingClientRect();
-    openBadgeModal(badge, rect ? {
-      top: rect.top,
-      left: rect.left,
-      width: rect.width,
-      height: rect.height
-    } : null);
+    openBadgeModal(badge);
   };
 
   return (
@@ -60,9 +55,10 @@ export default function BadgeCard({ badge, index }) {
       className={`badge-card relative flex flex-col items-center gap-2 p-1 ${shapeClass}`}
       onClick={handleClick}
       variants={badgeGridItem}
-      whileHover={!showAsMystery ? { scale: 1.05 } : {}}
-      whileTap={!showAsMystery ? { scale: 0.95 } : {}}
-      layout
+      whileHover={!reduceMotion && !showAsMystery ? { scale: 1.025 } : {}}
+      whileTap={!reduceMotion && !showAsMystery ? { scale: 0.97 } : {}}
+      transition={springs.snappy}
+      aria-disabled={showAsMystery}
     >
       {/* Badge image container with Gowalla styling */}
       <div
@@ -77,7 +73,7 @@ export default function BadgeCard({ badge, index }) {
           ref={badgeImageRef}
           className={`
             badge-image-container w-full h-full overflow-hidden
-            transition-all duration-300
+            transition-opacity duration-200
             ${isClaimed ? 'opacity-100' : 'opacity-40 grayscale'}
           `}
           style={{
@@ -113,8 +109,8 @@ export default function BadgeCard({ badge, index }) {
             className={`absolute -top-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center shadow-md z-10 ${
               isSecret ? 'bg-gold-500' : ''
             }`}
-            style={!isSecret ? { backgroundColor: '#7C3AED' } : {}}
-            initial={{ scale: 0 }}
+            style={!isSecret ? { backgroundColor: 'var(--color-claimed)' } : {}}
+            initial={reduceMotion ? false : { scale: 0 }}
             animate={{ scale: 1 }}
             transition={springs.bouncy}
           >

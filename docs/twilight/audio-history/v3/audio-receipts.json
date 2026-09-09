@@ -1,0 +1,326 @@
+{
+  "breakfast": {
+    "voice": "Will",
+    "voiceId": "bIHbv24MWmeRgasZH58o",
+    "model": "eleven_v3",
+    "scriptHash": "d3dfe921cdbb435c6a87898fd81769d34bbacfdfb5801ff21e73e6f5c374304f",
+    "durationSeconds": 13.24,
+    "bytes": 212367,
+    "requestId": "o2xvwyw6OmbD7RXQrhZh"
+  },
+  "first-sight": {
+    "voice": "Sarah",
+    "voiceId": "EXAVITQu4vr4xnSDxMaL",
+    "model": "eleven_v3",
+    "scriptHash": "e6e4070977071e4d4a97d9977036fd4c47369e7b3cb826e2b6692c384cebd358",
+    "durationSeconds": 12.75,
+    "bytes": 204426,
+    "requestId": "oT4HRegfLurlVJHWfvgz"
+  },
+  "twilight": {
+    "voice": "George",
+    "voiceId": "JBFqnCBsd6RMkjVDRZzb",
+    "model": "eleven_v3",
+    "scriptHash": "47746d86b4f2596664e6f0c9689ea52ee4d48e9b7cbb2cbd9da51500361b9370",
+    "durationSeconds": 14.03,
+    "bytes": 224906,
+    "requestId": "7ZQHsDUtL3zUQtJXKQef"
+  },
+  "the-van": {
+    "voice": "George",
+    "voiceId": "JBFqnCBsd6RMkjVDRZzb",
+    "model": "eleven_v3",
+    "scriptHash": "54f2bfe23ff02fae3b0e900b907ebd3eaff5deedccb431ead8e23c5e455321f5",
+    "durationSeconds": 17.55,
+    "bytes": 281330,
+    "requestId": "BTv9Z3p2emqCb3Cku6WC"
+  },
+  "skin-of-a-killer": {
+    "voice": "Sarah",
+    "voiceId": "EXAVITQu4vr4xnSDxMaL",
+    "model": "eleven_v3",
+    "scriptHash": "d5ae494759102da4ae3f93a079fe5026641d83c57acd7a904723421a2c959aec",
+    "durationSeconds": 12.83,
+    "bytes": 205679,
+    "requestId": "jCkngA2X1c4svLBEcIp5"
+  },
+  "vampire-baseball": {
+    "voice": "Jessica",
+    "voiceId": "cgSgspJ2msm6clMCkdW9",
+    "model": "eleven_v3",
+    "scriptHash": "9ee66e4cb8799c9bbcc13e056e3bdf5ce11333be1e8ba60a565ad1e24eca64df",
+    "durationSeconds": 16.04,
+    "bytes": 257088,
+    "requestId": "DWCVKAlYiKgWmeQNeL5O"
+  },
+  "lunch": {
+    "voice": "Jessica",
+    "voiceId": "cgSgspJ2msm6clMCkdW9",
+    "model": "eleven_v3",
+    "scriptHash": "67c6f03c73fd86fe3e89325fb7a6b1fcef5482ef5e1ee832087720e886ce490d",
+    "durationSeconds": 15.65,
+    "bytes": 250819,
+    "requestId": "jpE91ifvW8ZpqNmUitRH"
+  },
+  "paper-cut": {
+    "voice": "Sarah",
+    "voiceId": "EXAVITQu4vr4xnSDxMaL",
+    "model": "eleven_v3",
+    "scriptHash": "9967c99f386cf77c8669b7dcba34c2294bba0e408d464d9cbd0a58e83ba09ea9",
+    "durationSeconds": 15.31,
+    "bytes": 245386,
+    "requestId": "uMezHQ2La82sxui8JoMT"
+  },
+  "the-goodbye": {
+    "voice": "Sarah",
+    "voiceId": "EXAVITQu4vr4xnSDxMaL",
+    "model": "eleven_v3",
+    "scriptHash": "0e02f873e0ccb430a3760b7616ad9e4dd6a285657dd1836292d6f9277ef4212c",
+    "durationSeconds": 12.59,
+    "bytes": 201918,
+    "requestId": "tgd0oBeA508DjQ7RYDU4"
+  },
+  "garage-days": {
+    "voice": "Will",
+    "voiceId": "bIHbv24MWmeRgasZH58o",
+    "model": "eleven_v3",
+    "scriptHash": "ff02476b7eeffa2d997c8debdb0a9cb9cd4b82aeb1b1dd28daf5b70551a388ce",
+    "durationSeconds": 13.71,
+    "bytes": 219890,
+    "requestId": "M1kAZQ890LtofG1FtkKc"
+  },
+  "volterra": {
+    "voice": "George",
+    "voiceId": "JBFqnCBsd6RMkjVDRZzb",
+    "model": "eleven_v3",
+    "scriptHash": "35e113c4ce958af696d362bbf2bea653d3b3db29a35332e2dffa913f703263eb",
+    "durationSeconds": 13.09,
+    "bytes": 209859,
+    "requestId": "OyHr2J7KclDhV4NZsHte"
+  },
+  "new-moon": {
+    "voice": "Sarah",
+    "voiceId": "EXAVITQu4vr4xnSDxMaL",
+    "model": "eleven_v3",
+    "scriptHash": "d3c1b07a592fe799006c06230a5d43775fb56080b7c8a18cf75ba3a824bc0481",
+    "durationSeconds": 14.6,
+    "bytes": 234101,
+    "requestId": "hxZkL5ktQLme6rXkaEUj"
+  },
+  "late-night-snack": {
+    "voice": "Will",
+    "voiceId": "bIHbv24MWmeRgasZH58o",
+    "model": "eleven_v3",
+    "scriptHash": "7a407514d62db97f5dc1095eca305b220cdbae8119be40dcb6d4cf4b4e97aa71",
+    "durationSeconds": 14.76,
+    "bytes": 236608,
+    "requestId": "kTRtE6Mrqp8f4CSxbQT4"
+  },
+  "cullen-origins": {
+    "voice": "George",
+    "voiceId": "JBFqnCBsd6RMkjVDRZzb",
+    "model": "eleven_v3",
+    "scriptHash": "35bf00697e4681a9d1b552388497eb01bdbe0032e603da2e299ff7e088a3d68d",
+    "durationSeconds": 13.64,
+    "bytes": 218636,
+    "requestId": "dlMFGcq6dgyJCUpbsQjv"
+  },
+  "jacobs-confession": {
+    "voice": "Will",
+    "voiceId": "bIHbv24MWmeRgasZH58o",
+    "model": "eleven_v3",
+    "scriptHash": "cf15c3b538a8295a0fe556951fd47667ba4ffa1d8fa0d3a28f3dbf846c4eb212",
+    "durationSeconds": 12.93,
+    "bytes": 207351,
+    "requestId": "1hF8EaHrqMPKvn4VkDyD"
+  },
+  "the-kiss": {
+    "voice": "Sarah",
+    "voiceId": "EXAVITQu4vr4xnSDxMaL",
+    "model": "eleven_v3",
+    "scriptHash": "445530a5a5ff05972c99f04ad6ed7bff0abbaddb4c22581098126d901ee67b03",
+    "durationSeconds": 13.17,
+    "bytes": 211113,
+    "requestId": "gIe22y3YSSerdOsYaRBT"
+  },
+  "the-tent": {
+    "voice": "Will",
+    "voiceId": "bIHbv24MWmeRgasZH58o",
+    "model": "eleven_v3",
+    "scriptHash": "d1bbea39c2439d125341b0507cf6628172182729e1f0e4b3aaac8ee10b6f6c56",
+    "durationSeconds": 16.35,
+    "bytes": 262104,
+    "requestId": "U05VDPnB24UBg203xzY1"
+  },
+  "newborn-battle": {
+    "voice": "George",
+    "voiceId": "JBFqnCBsd6RMkjVDRZzb",
+    "model": "eleven_v3",
+    "scriptHash": "81de787d15d282d8de99a9e6f3ce1536bf3f782bad7c792cde5a5e0a4b011ef3",
+    "durationSeconds": 14.45,
+    "bytes": 231593,
+    "requestId": "6HzXTJI42GtYbYo2UdLA"
+  },
+  "eclipse": {
+    "voice": "Jessica",
+    "voiceId": "cgSgspJ2msm6clMCkdW9",
+    "model": "eleven_v3",
+    "scriptHash": "fbfbd7f21f40d976ea4d991362ed06ae1ebc6f944d15c9ce16c8d4e0119a48ce",
+    "durationSeconds": 15.96,
+    "bytes": 255835,
+    "requestId": "4fjlELArmdQRsfFNHIXq"
+  },
+  "the-wedding": {
+    "voice": "Jessica",
+    "voiceId": "cgSgspJ2msm6clMCkdW9",
+    "model": "eleven_v3",
+    "scriptHash": "80f2219bdc489eb9fb26eda3897e89d572a7f2d246900e666ad75d90e23a734c",
+    "durationSeconds": 18.36,
+    "bytes": 294287,
+    "requestId": "5TOlPCiQHMygGs6OimeY"
+  },
+  "isle-esme": {
+    "voice": "Sarah",
+    "voiceId": "EXAVITQu4vr4xnSDxMaL",
+    "model": "eleven_v3",
+    "scriptHash": "470e162339ee01984e13ea57694fdba75e15e664418262dde5f1853336106145",
+    "durationSeconds": 13.48,
+    "bytes": 216128,
+    "requestId": "I7Thm1m6RgeWqKoDxo37"
+  },
+  "renesmee-born": {
+    "voice": "George",
+    "voiceId": "JBFqnCBsd6RMkjVDRZzb",
+    "model": "eleven_v3",
+    "scriptHash": "86f53a69c2d5f207167de3acb8f93375f5c8da1045b9c3a209925e857d11e0b5",
+    "durationSeconds": 14.03,
+    "bytes": 224906,
+    "requestId": "c406XW1PapfIcHNLoDb1"
+  },
+  "imprinting": {
+    "voice": "Will",
+    "voiceId": "bIHbv24MWmeRgasZH58o",
+    "model": "eleven_v3",
+    "scriptHash": "dc4adc9fa5a84718d818f2ed1615095c37e4aa22c32151af855bf7ed888620b1",
+    "durationSeconds": 13.09,
+    "bytes": 209859,
+    "requestId": "4JIPqQLFXkCkY8nfjOIK"
+  },
+  "breaking-dawn-1": {
+    "voice": "George",
+    "voiceId": "JBFqnCBsd6RMkjVDRZzb",
+    "model": "eleven_v3",
+    "scriptHash": "51f69c3755b2fe141f83a4ea5c264730d1e8e29aab048bdf367891d02c2bb284",
+    "durationSeconds": 16.67,
+    "bytes": 267119,
+    "requestId": "Ea24XZwCFnMTwbwjQRJl"
+  },
+  "dinner": {
+    "voice": "Will",
+    "voiceId": "bIHbv24MWmeRgasZH58o",
+    "model": "eleven_v3",
+    "scriptHash": "2a1f0c74513381a0c67f30fa5bc8a9fd41e498f976a21eb10d6ea69c6c8d70c5",
+    "durationSeconds": 15.23,
+    "bytes": 244132,
+    "requestId": "trKLjq2o8evhJ2EZZIjc"
+  },
+  "rapid-growth": {
+    "voice": "Sarah",
+    "voiceId": "EXAVITQu4vr4xnSDxMaL",
+    "model": "eleven_v3",
+    "scriptHash": "adda4dc34fec1d3b5aea105feadcaed6883dc73407c88a9d5b2a5619080819ac",
+    "durationSeconds": 13.4,
+    "bytes": 214875,
+    "requestId": "1pkqeITnaL00eDpDHUZl"
+  },
+  "the-witnesses": {
+    "voice": "George",
+    "voiceId": "JBFqnCBsd6RMkjVDRZzb",
+    "model": "eleven_v3",
+    "scriptHash": "0284486558fef2b5695a2e5dbc1414281490300dc5676741e4a9e1d98b9628db",
+    "durationSeconds": 15.65,
+    "bytes": 250819,
+    "requestId": "4kVblUQM4lDJEga9KeVq"
+  },
+  "the-battle": {
+    "voice": "George",
+    "voiceId": "JBFqnCBsd6RMkjVDRZzb",
+    "model": "eleven_v3",
+    "scriptHash": "b467844a781955524a15b6c2c2db909deabcddecf0a29b92aebec5d4f03e2c3d",
+    "durationSeconds": 15.39,
+    "bytes": 246639,
+    "requestId": "LcugbEFjcAotvJGxGxxM"
+  },
+  "breaking-dawn-2": {
+    "voice": "Sarah",
+    "voiceId": "EXAVITQu4vr4xnSDxMaL",
+    "model": "eleven_v3",
+    "scriptHash": "9633251769bf97524f5548075fc214a3d5bc1d4643c29abc811bed695a461f61",
+    "durationSeconds": 16.04,
+    "bytes": 257088,
+    "requestId": "cRpFQCgRPkBaHWqLRXcc"
+  },
+  "secret-movies": {
+    "voice": "George",
+    "voiceId": "JBFqnCBsd6RMkjVDRZzb",
+    "model": "eleven_v3",
+    "scriptHash": "9145f5fa0cb9c7f7655940315b5c985f385c2c980d3669502e459b9973784191",
+    "durationSeconds": 13.17,
+    "bytes": 211113,
+    "requestId": "Alw79Ac8QxLj2mN39w4e"
+  },
+  "secret-meals": {
+    "voice": "Jessica",
+    "voiceId": "cgSgspJ2msm6clMCkdW9",
+    "model": "eleven_v3",
+    "scriptHash": "00b8b9d900f6d70723bbbdf138cade30d93bce85962d4518b89fb0947f981e7a",
+    "durationSeconds": 17.24,
+    "bytes": 276315,
+    "requestId": "XS6XeK68b4b6W9yLLPHD"
+  },
+  "secret-scenes": {
+    "voice": "Jessica",
+    "voiceId": "cgSgspJ2msm6clMCkdW9",
+    "model": "eleven_v3",
+    "scriptHash": "bb78349f0d2e78fd1951a49f0854704c8d857b8ea75ec82381d7f8662f10849e",
+    "durationSeconds": 17.79,
+    "bytes": 285092,
+    "requestId": "hJ9OEMru2ufXIKYvChFf"
+  },
+  "secret-immortal": {
+    "voice": "George",
+    "voiceId": "JBFqnCBsd6RMkjVDRZzb",
+    "model": "eleven_v3",
+    "scriptHash": "aace1fe8bcce1e0676df2d80a94436e9f3599b2107d5b8d79b4eab22ed1a6d16",
+    "durationSeconds": 16.59,
+    "bytes": 265866,
+    "requestId": "mGvkoVjRzxE5UEqvVwjr"
+  },
+  "greeting-1": {
+    "voice": "Sarah",
+    "voiceId": "EXAVITQu4vr4xnSDxMaL",
+    "model": "eleven_v3",
+    "scriptHash": "a7917ec072c7f786e517b8c856f032823a6e17fc705c29ddaa2f16a20777e655",
+    "durationSeconds": 11.81,
+    "bytes": 189379,
+    "requestId": "zqtpPfug8JtP4T0c6yCO"
+  },
+  "greeting-2": {
+    "voice": "George",
+    "voiceId": "JBFqnCBsd6RMkjVDRZzb",
+    "model": "eleven_v3",
+    "scriptHash": "1c3d767f2828192d8465c2df291d2a9a32f012149b88a667e0cb61d6467e5c02",
+    "durationSeconds": 14.21,
+    "bytes": 227831,
+    "requestId": "XO6k4WRyodYNzbdjNvyc"
+  },
+  "greeting-3": {
+    "voice": "Jessica",
+    "voiceId": "cgSgspJ2msm6clMCkdW9",
+    "model": "eleven_v3",
+    "scriptHash": "13e0c066f8aa2745251937a73d6b3faf9c5f2c8e3efb0d65735ee53b45cddf42",
+    "durationSeconds": 13.4,
+    "bytes": 214875,
+    "requestId": "DgkPQmJ74GUiWjDnvVIv"
+  }
+}

@@ -1,0 +1,314 @@
+{
+  "model": "eleven_v3",
+  "imageMode": "built-in image_gen",
+  "style": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: ",
+  "films": [
+    {
+      "id": "twilight",
+      "name": "Twilight",
+      "start": "11:00",
+      "end": "12:57",
+      "edition": "Extended Edition"
+    },
+    {
+      "id": "new-moon",
+      "name": "New Moon",
+      "start": "13:05",
+      "end": "15:10",
+      "edition": "Extended Edition"
+    },
+    {
+      "id": "eclipse",
+      "name": "Eclipse",
+      "start": "15:20",
+      "end": "17:23",
+      "edition": "Extended Edition"
+    },
+    {
+      "id": "breaking-dawn-1",
+      "name": "Breaking Dawn – Part 1",
+      "start": "17:30",
+      "end": "19:22",
+      "edition": "Extended Edition"
+    },
+    {
+      "id": "breaking-dawn-2",
+      "name": "Breaking Dawn – Part 2",
+      "start": "19:30",
+      "end": "21:23",
+      "edition": "Theatrical Edition"
+    }
+  ],
+  "voices": {
+    "diary": {
+      "id": "EXAVITQu4vr4xnSDxMaL",
+      "name": "Sarah",
+      "direction": "Intimate American diary narrator; reflective, quietly wry, tender on emotional scenes. Original performance, no actor imitation."
+    },
+    "immortal": {
+      "id": "JBFqnCBsd6RMkjVDRZzb",
+      "name": "George",
+      "direction": "Warm resonant gothic storyteller; measured, velvet gravitas, build gently into epic rewards. Original narrator, no actor imitation."
+    },
+    "warm": {
+      "id": "bIHbv24MWmeRgasZH58o",
+      "name": "Will",
+      "direction": "Warm grounded conversational narrator; easy humor and genuine friendship, never a caricature of an ethnicity."
+    },
+    "spark": {
+      "id": "cgSgspJ2msm6clMCkdW9",
+      "name": "Jessica",
+      "direction": "Bright conspiratorial narrator; playful anticipation, delighted celebrations, crisp comic pauses."
+    }
+  },
+  "badges": [
+    {
+      "id": "breakfast",
+      "name": "Brunch",
+      "voice": "warm",
+      "narration": "[warmly] Welcome to brunch. The Cullens may run on animal blood and unresolved feelings, but you need actual food. Fill your plate. Five films of extremely poor communication await.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: A sumptuous rustic brunch still life in Charlie Swan’s cozy kitchen: eggs, pancakes, berries, steaming coffee, a red apple, rain on the window and evergreen forest beyond. Warm amber inside, moody teal outside. No people."
+    },
+    {
+      "id": "first-sight",
+      "name": "The Cullens Arrive",
+      "voice": "diary",
+      "narration": "[curious] The Cullens have entered the cafeteria. Beautiful. Mysterious. Entirely uninterested in lunch. Bella has spotted Edward, and the weather forecast now includes a one hundred percent chance of yearning.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: FIRST SIGHT OF THE CULLENS. Fully clothed brunette Bella in a blue jacket notices pale bronze-haired Edward across a rainy school cafeteria. Four elegant Cullen siblings softly behind him. An untouched red apple. Intense eye contact."
+    },
+    {
+      "id": "the-van",
+      "name": "Emergency Contact",
+      "voice": "immortal",
+      "narration": "[dramatic] A sliding van. A split second. One very inconvenient handprint. Edward has saved Bella’s life and absolutely demolished his plausible deniability. Claim your badge. The laws of physics are unavailable for comment.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: Edward in a dark coat braces his palm against the deeply dented blue side of a sliding van, shielding fully clothed Bella crouched beside a red pickup in a rain-glazed school parking lot. Dramatic frozen impact, no injuries, silver rain."
+    },
+    {
+      "id": "skin-of-a-killer",
+      "name": "A Very Sparkly Secret",
+      "voice": "diary",
+      "narration": "[softly] The secret is out. Sunlight does not burn Edward. It makes him sparkle. Somewhere between the meadow and meeting the family, Bella’s very strange crush has become a very strange future.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: A luminous faceted diamond-like crystal held in an antique silver setting rests among white wildflowers in a sunlit forest meadow. Shafts of sunlight scatter a thousand tiny rainbow sparkles across blue-green cedar boughs. A delicate red ribbon suggests a shared secret. Symbolic supernatural revelation, tranquil romantic landscape, no people."
+    },
+    {
+      "id": "vampire-baseball",
+      "name": "Vampire Baseball",
+      "voice": "spark",
+      "narration": "[excited] Thunder overhead. Alice on the mound. The Cullens are finally using immortality for something practical: outrageous baseball. Enjoy the inning. Three unexpected guests are about to make this a contact sport.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: Pixie-haired Alice Cullen in vintage white baseball uniform winds up for a dramatic pitch on a misty forest baseball field. Big white baseball in foreground, teammates as small silhouettes, lightning arcs over Olympic mountains. Three ominous distant strangers at forest edge."
+    },
+    {
+      "id": "twilight",
+      "name": "Twilight",
+      "voice": "immortal",
+      "narration": "[proud] Twilight complete. You survived biology, vampire baseball, and the least relaxing trip to a ballet studio imaginable. One film down. The rain has stopped being weather. It is a lifestyle.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: FINAL TWILIGHT MOVIE ACHIEVEMENT. Bella in a modest deep-blue prom dress and Edward in a dark suit dance beneath a glowing gazebo at night, blue woodland behind them, a luminous red apple subtly nestled in foreground ivy. Lush sweeping romantic finale art."
+    },
+    {
+      "id": "lunch",
+      "name": "Lunch",
+      "voice": "spark",
+      "narration": "[cheerful] Lunch break. Congratulations on remembering to eat, unlike a certain table at Forks High. Refuel now. New Moon has an ambitious schedule of heartbreak, motorcycles, and questionable international travel.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: Rich warm lunch still life: toasted sandwiches, steaming soup, fries, a red apple and a glass of water on a rainy Pacific Northwest diner table. Red vinyl booth, misty pines through window. Cozy delicious painted fantasy-game feast."
+    },
+    {
+      "id": "paper-cut",
+      "name": "One Drop",
+      "voice": "diary",
+      "narration": "[hushed] One birthday present. One paper cut. One room full of vampires. Jasper’s self-control has left the party, and the cake suddenly feels irrelevant. You witnessed the smallest accident with the largest consequences.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: Elegant Cullen birthday table: an open gift with torn silver wrapping, white flowers, candlelit cake; tense pale blond Jasper in dark clothing recoils in background while Bella draws back her hand. A single tiny ruby spot on paper, no wounds or gore. Suspenseful burgundy and teal."
+    },
+    {
+      "id": "the-goodbye",
+      "name": "The Empty Forest",
+      "voice": "diary",
+      "narration": "[sad] Edward says goodbye beneath the trees. Bella is left with silence, and autumn has no intention of being kind. You have reached the heartbreak chapter. Take a breath. Stay with the story.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: Brunette Bella alone at the center of an immense mossy cedar forest as distant Edward in a dark coat disappears into silver fog. Fallen orange leaves, monumental trees, a quiet aching composition. Fully clothed, no distressing injury."
+    },
+    {
+      "id": "garage-days",
+      "name": "A Little More Sun",
+      "voice": "warm",
+      "narration": "[warmly] A garage, two motorcycles, and someone who keeps showing up. Jacob brings a little warmth back into Bella’s life. The bikes are a work in progress. For once, that feels like hope.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: Fully clothed Bella and Jacob with short black hair and warm brown skin laughing while repairing two old motorcycles in a rustic garage. Tools, warm work lamp, rainy window, glowing friendship and amber light, respectful contemporary clothing with no stereotyped motifs."
+    },
+    {
+      "id": "volterra",
+      "name": "Race to the Sun",
+      "voice": "immortal",
+      "narration": "[urgent] Red cloaks. A clock tower. Edward is one step from the sunlight, and Bella is running out of seconds. You made it to Volterra. Try not to attract the attention of the ancient vampire government.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: Bella in a modest green shirt races through a sunlit Italian square of red-cloaked festivalgoers toward Edward standing fully clothed in the shadow of a stone doorway. Grand clock tower and fountain. Urgent motion, blood-red cloaks, golden noon and cool shadow."
+    },
+    {
+      "id": "new-moon",
+      "name": "New Moon",
+      "voice": "diary",
+      "narration": "[relieved] New Moon complete. You endured the empty chair, the motorcycles, and an emergency trip to Italy. Edward is back. The Volturi have questions. Two films down, and absolutely nobody has learned to make a simple phone call.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: FINAL NEW MOON MOVIE ACHIEVEMENT. A copper full moon over La Push sea cliffs, a powerful russet wolf on the cliff, Bella and Edward reunited fully clothed in the lower center, distant Italian clock tower suggested in mist. Epic wistful painted cover with gold and dark teal."
+    },
+    {
+      "id": "late-night-snack",
+      "name": "Snack Break",
+      "voice": "warm",
+      "narration": "[playful] Snack break. Team Sweet. Team Salty. Finally, a rivalry we can resolve by having both. Stretch, refill, and prepare for Eclipse. The next love triangle comes with a weather advisory.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: A lavish snack-break still life of overflowing popcorn, chocolate squares, fresh strawberries, pretzels and steaming mugs on a rustic cedar table; a rainlit window, low copper moon, red napkin. Inviting lush painterly game feast, no people."
+    },
+    {
+      "id": "cullen-origins",
+      "name": "A Century of Secrets",
+      "voice": "immortal",
+      "narration": "[reflective] Before the Cullens were a family, each of them had another life. Carlisle gave Edward a second chance in Chicago. Eternity kept the memories. You have looked behind the beautiful faces and found the history.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: A century of Cullen family history: an antique silver pocket watch, aged family portrait of elegant pale Edward and Carlisle in early twentieth-century civilian suits, a weathered journal, dried white rose, modern glass Cullen home glimpsed through forest mist. Deep reflective gilded oil painting, no readable writing."
+    },
+    {
+      "id": "jacobs-confession",
+      "name": "Team Jacob Makes a Case",
+      "voice": "warm",
+      "narration": "[earnest] Jacob has something to say, and subtlety is taking the afternoon off. He wants Bella to choose a life with him. The feelings are real. The choice still belongs to Bella.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: Fully clothed Jacob in a dark casual shirt speaks earnestly to fully clothed Bella on a coastal forest path, respectful distance between them, wind through pines, warm amber edge light on Jacob versus cool blue on Bella. Emotional conversation, no grabbing or kissing."
+    },
+    {
+      "id": "the-kiss",
+      "name": "A Heart Divided",
+      "voice": "diary",
+      "narration": "[softly] Bella asks Jacob to kiss her. For a moment, another future feels possible. You witnessed a heart divided between warmth and forever. No badge in the world can make this conversation less complicated.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: Tender nonsexual closed-mouth kiss between fully clothed Bella in a heavy blue jacket and Jacob in a dark shirt, shoulders and faces framed by misty snowy mountain pines. YA romantic painting with soft golden dawn rim light, modest and gentle."
+    },
+    {
+      "id": "the-tent",
+      "name": "Fire, Ice & One Tent",
+      "voice": "warm",
+      "narration": "[dryly] One tent. One freezing human. One vampire with no central heating. Jacob has finally found an argument that can be settled with a thermometer. You survived the camping trip. Emotionally, results may vary.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: Small warmly lit canvas tent in a dramatic snowy mountain night, flap open to reveal fully clothed Bella bundled in blankets with Jacob nearby for warmth and pale Edward seated watchfully apart. Three quiet figures, intimate shelter against vast icy blue storm, no nudity."
+    },
+    {
+      "id": "newborn-battle",
+      "name": "An Unlikely Alliance",
+      "voice": "immortal",
+      "narration": "[dramatic] The newborn army is here. The Cullens and the wolves stand together, and Jasper’s battle lessons are suddenly very practical. You witnessed the alliance nobody expected. For this fight, the team is survival.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: Powerful russet and gray wolves leap alongside agile fully clothed Cullen vampires through a misty green forest clearing against distant shadowy attackers. Pale blond Jasper leads with a commanding outstretched arm, dynamic epic fantasy battle painting, no blood, no severed limbs."
+    },
+    {
+      "id": "eclipse",
+      "name": "Eclipse",
+      "voice": "spark",
+      "narration": "[proud] Eclipse complete. Newborn army defeated. Tent diplomacy survived. Bella’s future chosen. Three films down, and Alice can finally begin the most formidable campaign of all: planning a wedding.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: FINAL ECLIPSE MOVIE ACHIEVEMENT. A magnificent eclipsed sun crowns two intersecting silver and red ribbons, a white rose and a wolf silhouetted below, fully clothed Bella with Edward and Jacob at either side in a misty mountain panorama. Elegant epic painted romance composition."
+    },
+    {
+      "id": "the-wedding",
+      "name": "Until Forever",
+      "voice": "spark",
+      "narration": "[tenderly] White flowers. Trembling hands. A promise made at last. Bella and Edward are married, and Alice has apparently decorated the entire forest. Claim your wedding badge. Crying is an acceptable form of participation.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: Adult newlyweds Bella in an elegant modest long-sleeved white bridal gown and Edward in a black wedding suit exchange rings under cascading white wisteria in a woodland wedding aisle. Warm sunlight and silver forest, tender joyful painterly romance, no lettering."
+    },
+    {
+      "id": "isle-esme",
+      "name": "Isle Esme",
+      "voice": "diary",
+      "narration": "[amused] Welcome to Isle Esme. The ocean is beautiful, the moonlight is perfect, and the furniture was not rated for vampire newlyweds. You witnessed the honeymoon chapter. A moment of silence for the pillows.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: Tasteful symbolic honeymoon aftermath, NO PEOPLE: luxurious tropical island bedroom open to moonlit sea, white curtains billowing, scattered white pillow feathers, a cracked carved wooden headboard, two wedding rings on bedside table. Romantic candlelight and silver tropical night, no sexual imagery."
+    },
+    {
+      "id": "renesmee-born",
+      "name": "A New Heartbeat",
+      "voice": "immortal",
+      "narration": "[serious] A new heartbeat enters the Cullen house. Renesmee is born, and Edward fights to keep Bella from slipping away. You witnessed the moment everything changes. Love, terror, and a second chance at forever.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: Symbolic tender birth scene with NO medical procedure or gore: a tiny peacefully sleeping infant Renesmee wrapped securely in an ivory blanket in a wooden cradle, pale Edward’s protective hand on its rim, a single warm sunrise shaft in Cullen glass-house room. Hope amid deep blue shadows."
+    },
+    {
+      "id": "imprinting",
+      "name": "Gravity Changes",
+      "voice": "warm",
+      "narration": "[awed] Jacob’s world changes in a heartbeat. Imprinting binds him to protect Renesmee, and the pack’s oldest rules suddenly matter in a new way. You witnessed the moment hostility gives way to guardianship.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: Protective guardianship symbolism, absolutely no romance: a huge gentle russet wolf stands watch a respectful distance from an ivory baby cradle in a moonlit forest glade, warm protective halo around cradle, silver-blue pines and a small star. Tender safe mythic storybook game painting."
+    },
+    {
+      "id": "breaking-dawn-1",
+      "name": "Breaking Dawn – Part 1",
+      "voice": "immortal",
+      "narration": "[dramatic] Breaking Dawn, Part One, complete. Wedding vows, ruined pillows, a new heartbeat, and eyes opening on another life. Four films down. Bella has changed. Your commitment to this marathon is becoming supernatural.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: FINAL BREAKING DAWN PART ONE ACHIEVEMENT. Two intertwined silver wedding rings rest atop white wedding petals, a crimson dawn reflected in a large luminous feminine eye suggested subtly in clouds, white feathers drift over a tropical ocean merging into blue forest. Symbolic elegant oil-painted finale."
+    },
+    {
+      "id": "dinner",
+      "name": "Dinner",
+      "voice": "warm",
+      "narration": "[warmly] Dinner is served. Four films behind you, one very dramatic snowfield ahead. Gather your coven, fill your plate, and give your mortal metabolism the respect it deserves. Forever can wait five minutes.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: Lavish candlelit dinner in the Cullen glass house, roasted vegetables, pasta, crusty bread and sparkling water on a long elegant table, red cloth napkins, white flowers, twilight forest through enormous windows. Warm welcoming epic painted feast, no people."
+    },
+    {
+      "id": "rapid-growth",
+      "name": "Growing Beyond the Rules",
+      "voice": "diary",
+      "narration": "[wondering] Renesmee is growing faster than anyone expected. A heartbeat. A childhood racing forward. Memories shared with a touch. You have met the exception to the rule, and the vampire world is about to notice.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: Little Renesmee fully dressed in a cream cardigan rests her small hand on adult Bella’s cheek in the Cullen home, faint luminous memory motes like fireflies, a height-marked wooden door with no legible numbers behind them. Tender mother-child wonder, golden morning, non-romantic."
+    },
+    {
+      "id": "the-witnesses",
+      "name": "Witnesses to the Impossible",
+      "voice": "immortal",
+      "narration": "[commanding] Witnesses arrive from across the vampire world. Different histories. Extraordinary gifts. One child who must be understood before she is judged. You have joined the gathering. The Cullen guest room situation is now critical.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: An international gathering of distinct adult vampire witnesses of varied ethnicities in elegant contemporary traveling clothes stand in a semicircle outside the glowing Cullen glass house at snowy dusk. Carlisle welcomes them; one subtle electrical glimmer and one elemental mist suggest supernatural gifts. Respectful, no ethnic caricatures, epic council painting."
+    },
+    {
+      "id": "the-battle",
+      "name": "The Snowfield Reckoning",
+      "voice": "immortal",
+      "narration": "[tense] The Volturi advance across the snow. The witnesses hold their ground. Every gift, every alliance, every promise has brought us here. You reached the reckoning. Keep watching. Alice has one more thing to show you.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: Two great opposing lines on a snowy forest battlefield: red-lined black-cloaked Volturi opposite fully clothed Cullen allies and enormous wolves. Adult Bella stands centrally projecting a subtle luminous protective shield, Edward beside her. Ethereal vision-like fractured light at edges. Epic action, no gore or decapitation."
+    },
+    {
+      "id": "breaking-dawn-2",
+      "name": "Breaking Dawn – Part 2",
+      "voice": "diary",
+      "narration": "[tenderly] Breaking Dawn, Part Two, complete. The family stands. The future opens. Bella lets Edward into her memories, and our story comes full circle. You finished the final film. Stay for the farewell. You have earned every name in those credits.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: FINAL BREAKING DAWN PART TWO ACHIEVEMENT. Adult Bella and Edward fully clothed embrace tenderly in a luminous wildflower meadow, their child Renesmee safely playing at a distance, brilliant dawn beyond dark evergreen mountains, subtle shield-like silver halo. Hopeful sumptuous romance novel final-page oil painting."
+    },
+    {
+      "id": "secret-movies",
+      "name": "Forever",
+      "voice": "immortal",
+      "narration": "[triumphant] Five movies. One complete saga. From the first glance in Forks to the last promise of forever, you stayed. Your Forever badge is unlocked. The Cullens recognize commitment when they see it.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: Ultimate ALL FIVE MOVIES achievement: five radiant silver stars form a crown over a single luminous red apple, entwined silver wedding rings and white meadow flowers, rising dawn across the Pacific Northwest mountains. Rich royal burgundy, silver and gold, exceptionally beautiful fantasy legendary-item painting."
+    },
+    {
+      "id": "secret-meals",
+      "name": "Human Food Connoisseur",
+      "voice": "spark",
+      "narration": "[delighted] Every meal enjoyed. Brunch, lunch, snack, and dinner. You have mastered the ancient human art of eating regularly. Your Human Food Connoisseur badge is unlocked. Edward remains confused. Charlie would be proud.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: ALL MEALS achievement: ornate silver platter crowned with a radiant red apple, golden bread, berries, chocolate and a steaming coffee cup, four candles, cozy Cullen dinner table in a blue forest. A sumptuous legendary feast still life, elegant not cartoon. "
+    },
+    {
+      "id": "secret-scenes",
+      "name": "Twihard",
+      "voice": "spark",
+      "narration": "[excited] Every scene witnessed. Twenty moments, from the cafeteria to the snowfield. You noticed the details. You stayed for the drama. Your Twihard badge is unlocked. At this point, you could probably give the Cullens a tour.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: ALL SCENES legendary achievement: an open antique illustrated journal with blank luminous pages, a crystal prism reflecting a tiny thunderbolt, a silver crescent, white wedding flower and wolf silhouette, red ribbon bookmark, blue evergreen boughs and gold sparkles. One cohesive still life, no panels, no writing. "
+    },
+    {
+      "id": "secret-immortal",
+      "name": "Immortal",
+      "voice": "immortal",
+      "narration": "[awed] Every film. Every scene. Every meal. You did not just visit Forks. You became part of the story. Your Immortal badge is unlocked. Welcome to the family. Forever begins with a very well-earned certificate.",
+      "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: ULTIMATE IMMORTAL achievement: a magnificent silver crown of interwoven evergreen branches holds a ruby apple-shaped jewel, gold light rises through an open circle like an eternal eclipse, white wedding blossoms and glittering crystal droplets. Legendary fantasy video game reward, transcendent gothic romance oil painting."
+    }
+  ],
+  "greetings": [
+    {
+      "id": "greeting-1",
+      "voice": "diary",
+      "narration": "[softly] Welcome to Forks. The sky is gray, the coffee is warm, and someone across the room is about to make your life very complicated. Five films. Twenty moments. One day to remember."
+    },
+    {
+      "id": "greeting-2",
+      "voice": "immortal",
+      "narration": "[warmly] Welcome, traveler, to the Twilight Passport. Witness the scenes. Finish the films. Remember to eat like a human. Collect your memories, and we shall see whether you leave Forks the same person who arrived."
+    },
+    {
+      "id": "greeting-3",
+      "voice": "spark",
+      "narration": "[excited] You made it! Brunch is at eleven, the romance is eternal, and the drama is extremely well scheduled. Tap your badges as you go. By tonight, even the Volturi will have to respect your dedication."
+    }
+  ]
+}

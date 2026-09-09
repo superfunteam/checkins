@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { getTwilightTeam, readTeamPoll } from '../data/twilightTeams';
 
 const STORAGE_VERSION = 1;
 
@@ -17,6 +18,7 @@ const getInitialState = () => ({
   createdAt: null,
   honorSystemDismissed: false,
   badges: {},
+  teamPoll: readTeamPoll(null),
 });
 
 export function useLocalStorage(passportId = 'shire') {
@@ -127,6 +129,24 @@ export function useLocalStorage(passportId = 'shire') {
     setData(getInitialState());
   }, []);
 
+  const pickInitialTeam = useCallback((team) => {
+    if (!getTwilightTeam(team)) return;
+    setData(prev => {
+      const poll = readTeamPoll(prev.teamPoll);
+      if (poll.initial) return prev;
+      return { ...prev, teamPoll: { ...poll, initial: team, initialPickedAt: new Date().toISOString() } };
+    });
+  }, []);
+
+  const pickFinalTeam = useCallback((team) => {
+    if (!getTwilightTeam(team)) return;
+    setData(prev => {
+      const poll = readTeamPoll(prev.teamPoll);
+      if (!poll.initial) return prev;
+      return { ...prev, teamPoll: { ...poll, final: team, finalPickedAt: new Date().toISOString() } };
+    });
+  }, []);
+
   const getClaimTime = useCallback((badgeId) => {
     const badge = data.badges[badgeId];
     if (!badge?.claimedAt) return null;
@@ -146,6 +166,9 @@ export function useLocalStorage(passportId = 'shire') {
     createdAt: data.createdAt,
     honorSystemDismissed: data.honorSystemDismissed,
     badges: data.badges,
+    teamPoll: readTeamPoll(data.teamPoll),
+    pickInitialTeam,
+    pickFinalTeam,
     setName,
     claimBadge,
     unclaimBadge,

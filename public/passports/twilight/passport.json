@@ -1,7 +1,6 @@
 {
   "id": "twilight",
-  "version": 1,
-  "_notes": "PLACEHOLDER CONTENT. Badge list, times, copy, art, and audio are stand-ins until the real event plan lands. Bump `version` whenever art or sounds are replaced so every phone refetches.",
+  "version": 7,
   "meta": {
     "name": "The Twilight Passport",
     "shortName": "Twilight Passport",
@@ -19,12 +18,13 @@
     "secretBadges": true,
     "backgroundMusic": false,
     "scheduleTimeline": true,
-    "greetingSounds": false,
-    "badgeSounds": false
+    "greetingSounds": true,
+    "badgeSounds": true,
+    "teamPoll": true
   },
   "schedule": {
-    "dayStart": "09:00",
-    "dayEnd": "21:00"
+    "dayStart": "10:30",
+    "dayEnd": "21:32"
   },
   "badgeTypes": [
     {
@@ -61,170 +61,409 @@
     {
       "id": "breakfast",
       "type": "meal",
-      "name": "Breakfast",
-      "time": "9am ish",
-      "shortDesc": "Fuel for a long day in Forks",
-      "longDesc": "Charlie would make eggs. Bella would make something better. Either way, you cannot survive five films on an empty stomach.",
-      "instruction": "Eat breakfast to claim this badge.",
+      "name": "Brunch",
+      "time": "11:00am ish",
+      "shortDesc": "Fuel for forever",
+      "longDesc": "Brunch before brooding. Fill your plate, pour the coffee, and prepare for five films of questionable decisions. Charlie would approve.",
+      "instruction": "Enjoy the meal to claim.",
       "image": "assets/images/badges/badge-breakfast.webp",
+      "sound": "assets/audio/badges/badge-breakfast.mp3",
       "order": 1
+    },
+    {
+      "id": "first-sight",
+      "type": "scene",
+      "name": "The Cullens Arrive",
+      "time": "11:08am ish",
+      "shortDesc": "Enter the Cullens",
+      "longDesc": "Twilight · ~0:08:45\n\nBella spots Edward across the cafeteria. Beautiful, mysterious, and apparently above eating lunch. Forks just got interesting.",
+      "instruction": "Watch this scene to claim.",
+      "image": "assets/images/badges/badge-first-sight.webp",
+      "sound": "assets/audio/badges/badge-first-sight.mp3",
+      "movieId": "twilight",
+      "movieOffset": "0:08:45",
+      "order": 2
+    },
+    {
+      "id": "the-van",
+      "type": "scene",
+      "name": "Emergency Contact",
+      "time": "11:27am ish",
+      "shortDesc": "One inconvenient handprint",
+      "longDesc": "Twilight · ~0:27:00\n\nEdward stops Tyler’s van with one hand. Bella notices. His cover story now has a very inconvenient dent.",
+      "instruction": "Watch this scene to claim.",
+      "image": "assets/images/badges/badge-the-van.webp",
+      "sound": "assets/audio/badges/badge-the-van.mp3",
+      "movieId": "twilight",
+      "movieOffset": "0:27:00",
+      "order": 3
+    },
+    {
+      "id": "skin-of-a-killer",
+      "type": "scene",
+      "name": "A Very Sparkly Secret",
+      "time": "12:04pm ish",
+      "shortDesc": "Sunlight spills secrets",
+      "longDesc": "Twilight · ~1:04:00\n\nSunlight reveals Edward’s sparkle; the Cullen house reveals his family. Immortality comes with secrets, excellent windows, and ambitious dinner plans.",
+      "instruction": "Watch this scene to claim.",
+      "image": "assets/images/badges/badge-skin-of-a-killer.webp",
+      "sound": "assets/audio/badges/badge-skin-of-a-killer.mp3",
+      "movieId": "twilight",
+      "movieOffset": "1:04:00",
+      "order": 4
     },
     {
       "id": "vampire-baseball",
       "type": "scene",
       "name": "Vampire Baseball",
-      "time": "10:25am ish",
-      "shortDesc": "The Cullens play ball in a thunderstorm",
-      "longDesc": "There is a reason they only play during a storm. Witness the single most important sporting event in the history of the Olympic Peninsula.",
-      "instruction": "Watch this scene to claim this badge.",
+      "time": "12:12pm ish",
+      "shortDesc": "Thunder. Bats. Trouble.",
+      "longDesc": "Twilight · ~1:12:00\n\nThunder hides the hits. Alice pitches; the Cullens play. Then James, Laurent, and Victoria arrive. So much for a friendly game.",
+      "instruction": "Watch this scene to claim.",
       "image": "assets/images/badges/badge-vampire-baseball.webp",
-      "order": 2
+      "sound": "assets/audio/badges/badge-vampire-baseball.mp3",
+      "movieId": "twilight",
+      "movieOffset": "1:12:00",
+      "order": 5
     },
     {
       "id": "twilight",
       "type": "movie",
       "name": "Twilight",
-      "time": "11:05am ish",
-      "startTime": "9am ish",
-      "shortDesc": "First film completed",
-      "longDesc": "Bella moves to Forks, meets a very pale boy in biology, and everything changes. The saga begins.",
-      "instruction": "Finish watching Twilight to claim this badge.",
+      "time": "12:57pm ish",
+      "shortDesc": "First film complete",
+      "longDesc": "James’s hunt is over. Bella and Edward make it to prom. One film down; the yearning is just getting started.",
+      "instruction": "Finish the film to claim.",
       "image": "assets/images/badges/badge-twilight.webp",
-      "order": 3
+      "sound": "assets/audio/badges/badge-twilight.mp3",
+      "startTime": "11:00am ish",
+      "edition": "Extended Edition",
+      "order": 6
     },
     {
       "id": "lunch",
       "type": "meal",
       "name": "Lunch",
-      "time": "1pm ish",
-      "shortDesc": "A cafeteria-tray-worthy midday meal",
-      "longDesc": "Sit at the table by the window and stare dramatically at nothing. Then eat. You have earned it.",
-      "instruction": "Eat lunch to claim this badge.",
+      "time": "1:00pm ish",
+      "shortDesc": "Refuel before heartbreak",
+      "longDesc": "Refuel before New Moon. Heartbreak and questionable motorcycle decisions are easier to handle after a proper lunch.",
+      "instruction": "Enjoy the meal to claim.",
       "image": "assets/images/badges/badge-lunch.webp",
-      "order": 4
+      "sound": "assets/audio/badges/badge-lunch.mp3",
+      "order": 7
+    },
+    {
+      "id": "paper-cut",
+      "type": "scene",
+      "name": "One Drop",
+      "time": "1:16pm ish",
+      "shortDesc": "Birthday, interrupted",
+      "longDesc": "New Moon · ~0:11:00\n\nOne birthday gift. One paper cut. Jasper loses control, and Bella discovers how fragile a human is among vampires.",
+      "instruction": "Watch this scene to claim.",
+      "image": "assets/images/badges/badge-paper-cut.webp",
+      "sound": "assets/audio/badges/badge-paper-cut.mp3",
+      "movieId": "new-moon",
+      "movieOffset": "0:11:00",
+      "order": 8
+    },
+    {
+      "id": "the-goodbye",
+      "type": "scene",
+      "name": "The Empty Forest",
+      "time": "1:25pm ish",
+      "shortDesc": "Love leaves Forks",
+      "longDesc": "New Moon · ~0:20:00\n\nEdward leaves to keep Bella safe. Her world falls quiet; the months pass. Forks keeps raining, because of course it does.",
+      "instruction": "Watch this scene to claim.",
+      "image": "assets/images/badges/badge-the-goodbye.webp",
+      "sound": "assets/audio/badges/badge-the-goodbye.mp3",
+      "movieId": "new-moon",
+      "movieOffset": "0:20:00",
+      "order": 9
+    },
+    {
+      "id": "garage-days",
+      "type": "scene",
+      "name": "A Little More Sun",
+      "time": "1:53pm ish",
+      "shortDesc": "Motorcycles and second chances",
+      "longDesc": "New Moon · ~0:48:00\n\nTwo broken motorcycles, one patient friend. Jacob brings warmth back into Bella’s life. The engines—and the heart—need a little work.",
+      "instruction": "Watch this scene to claim.",
+      "image": "assets/images/badges/badge-garage-days.webp",
+      "sound": "assets/audio/badges/badge-garage-days.mp3",
+      "movieId": "new-moon",
+      "movieOffset": "0:48:00",
+      "order": 10
     },
     {
       "id": "volterra",
       "type": "scene",
-      "name": "Volterra",
-      "time": "1:10pm ish",
-      "shortDesc": "Bella races the clock in Italy",
-      "longDesc": "A fountain, a red-cloaked festival, and a boy about to step into the sun. Run, Bella.",
-      "instruction": "Watch this scene to claim this badge.",
+      "name": "Race to the Sun",
+      "time": "2:44pm ish",
+      "shortDesc": "Beat the sunlight",
+      "longDesc": "New Moon · ~1:39:00\n\nBella races through Volterra to stop Edward stepping into sunlight. Reunion secured; vampire government paperwork still pending.",
+      "instruction": "Watch this scene to claim.",
       "image": "assets/images/badges/badge-volterra.webp",
-      "order": 5
+      "sound": "assets/audio/badges/badge-volterra.mp3",
+      "movieId": "new-moon",
+      "movieOffset": "1:39:00",
+      "order": 11
     },
     {
       "id": "new-moon",
       "type": "movie",
       "name": "New Moon",
-      "time": "1:30pm ish",
-      "startTime": "11:20am ish",
-      "shortDesc": "Second film completed",
-      "longDesc": "Edward leaves, Jacob takes his shirt off, and the seasons literally spin past the window. You made it through.",
-      "instruction": "Finish watching New Moon to claim this badge.",
+      "time": "3:10pm ish",
+      "shortDesc": "Second film complete",
+      "longDesc": "Heartbreak, motorcycles, emergency Italy. Bella and Edward reunite, but the Volturi have conditions. Two films down; nobody can make a simple call.",
+      "instruction": "Finish the film to claim.",
       "image": "assets/images/badges/badge-new-moon.webp",
-      "order": 6
-    },
-    {
-      "id": "the-tent",
-      "type": "scene",
-      "name": "The Tent",
-      "time": "3:20pm ish",
-      "shortDesc": "A very cold night on the mountain",
-      "longDesc": "Three people, one tent, one blizzard, and a conversation nobody wanted to have. Somebody is hotter than somebody else.",
-      "instruction": "Watch this scene to claim this badge.",
-      "image": "assets/images/badges/badge-the-tent.webp",
-      "order": 7
-    },
-    {
-      "id": "eclipse",
-      "type": "movie",
-      "name": "Eclipse",
-      "time": "3:50pm ish",
-      "startTime": "1:45pm ish",
-      "shortDesc": "Third film completed",
-      "longDesc": "An army of newborns, a treaty tested, and a choice finally made. The middle of the saga is behind you.",
-      "instruction": "Finish watching Eclipse to claim this badge.",
-      "image": "assets/images/badges/badge-eclipse.webp",
-      "order": 8
-    },
-    {
-      "id": "the-wedding",
-      "type": "scene",
-      "name": "The Wedding",
-      "time": "4:35pm ish",
-      "shortDesc": "Bella walks down the aisle",
-      "longDesc": "Flowers hanging from every branch, a very nervous bride, and a groom who has waited a century. Try not to cry. You will fail.",
-      "instruction": "Watch this scene to claim this badge.",
-      "image": "assets/images/badges/badge-the-wedding.webp",
-      "order": 9
-    },
-    {
-      "id": "dinner",
-      "type": "meal",
-      "name": "Dinner",
-      "time": "6pm ish",
-      "shortDesc": "The main evening meal",
-      "longDesc": "Something warm before the final stretch. The Cullens cooked Italian for Bella once; you can do at least as well.",
-      "instruction": "Eat dinner to claim this badge.",
-      "image": "assets/images/badges/badge-dinner.webp",
-      "order": 10
-    },
-    {
-      "id": "breaking-dawn-1",
-      "type": "movie",
-      "name": "Breaking Dawn – Part 1",
-      "time": "6:05pm ish",
-      "startTime": "4:05pm ish",
-      "shortDesc": "Fourth film completed",
-      "longDesc": "A honeymoon, a headboard, and the strangest pregnancy in cinema. You have seen things that cannot be unseen.",
-      "instruction": "Finish watching Breaking Dawn – Part 1 to claim this badge.",
-      "image": "assets/images/badges/badge-breaking-dawn-1.webp",
-      "order": 11
-    },
-    {
-      "id": "the-battle",
-      "type": "scene",
-      "name": "The Battle",
-      "time": "7:50pm ish",
-      "shortDesc": "Everyone fights the Volturi in the snow",
-      "longDesc": "Heads roll. Fan favorites fall. The ground opens up. And then... well. You will see.",
-      "instruction": "Watch this scene to claim this badge.",
-      "image": "assets/images/badges/badge-the-battle.webp",
+      "sound": "assets/audio/badges/badge-new-moon.mp3",
+      "startTime": "1:05pm ish",
+      "edition": "Extended Edition",
       "order": 12
     },
     {
       "id": "late-night-snack",
       "type": "meal",
-      "name": "Late Night Snack",
-      "time": "8pm ish",
-      "shortDesc": "One last bite before forever",
-      "longDesc": "The final feeding of the day. Vampires do not need snacks. You are not a vampire. Yet.",
-      "instruction": "Eat a late night snack to claim this badge.",
+      "name": "Snack Break",
+      "time": "3:15pm ish",
+      "shortDesc": "Team Sweet or Salty",
+      "longDesc": "Team Sweet. Team Salty. Finally, a rivalry solved by having both. Grab a bite before Eclipse turns up the heat.",
+      "instruction": "Enjoy the meal to claim.",
       "image": "assets/images/badges/badge-late-night-snack.webp",
+      "sound": "assets/audio/badges/badge-late-night-snack.mp3",
       "order": 13
+    },
+    {
+      "id": "cullen-origins",
+      "type": "scene",
+      "name": "A Century of Secrets",
+      "time": "4:07pm ish",
+      "shortDesc": "The Cullen backstories",
+      "longDesc": "Eclipse · ~0:47:00\n\nBefore the Cullens were family, each had another life. Rosalie and Jasper reveal the memories behind those golden eyes.",
+      "instruction": "Watch this scene to claim.",
+      "image": "assets/images/badges/badge-cullen-origins.webp",
+      "sound": "assets/audio/badges/badge-cullen-origins.mp3",
+      "movieId": "eclipse",
+      "movieOffset": "0:47:00",
+      "order": 14
+    },
+    {
+      "id": "jacobs-confession",
+      "type": "scene",
+      "name": "Team Jacob Makes a Case",
+      "time": "4:30pm ish",
+      "shortDesc": "Jacob makes his case",
+      "longDesc": "Eclipse · ~1:10:00\n\nJacob wants Bella to choose him—and a human future. His feelings are clear. The choice is still hers.",
+      "instruction": "Watch this scene to claim.",
+      "image": "assets/images/badges/badge-jacobs-confession.webp",
+      "sound": "assets/audio/badges/badge-jacobs-confession.mp3",
+      "movieId": "eclipse",
+      "movieOffset": "1:10:00",
+      "order": 15
+    },
+    {
+      "id": "the-kiss",
+      "type": "scene",
+      "name": "A Heart Divided",
+      "time": "4:37pm ish",
+      "shortDesc": "A heart divided",
+      "longDesc": "Eclipse · ~1:17:00\n\nBella asks Jacob to kiss her. For a moment, another future feels possible. This time, she makes the invitation.",
+      "instruction": "Watch this scene to claim.",
+      "image": "assets/images/badges/badge-the-kiss.webp",
+      "sound": "assets/audio/badges/badge-the-kiss.mp3",
+      "movieId": "eclipse",
+      "movieOffset": "1:17:00",
+      "order": 16
+    },
+    {
+      "id": "the-tent",
+      "type": "scene",
+      "name": "Fire, Ice & One Tent",
+      "time": "4:54pm ish",
+      "shortDesc": "Fire meets ice",
+      "longDesc": "Eclipse · ~1:34:00\n\nBella is freezing. Edward runs cold. Jacob supplies the warmth—and never lets Edward forget it. The world’s least relaxing camping trip.",
+      "instruction": "Watch this scene to claim.",
+      "image": "assets/images/badges/badge-the-tent.webp",
+      "sound": "assets/audio/badges/badge-the-tent.mp3",
+      "movieId": "eclipse",
+      "movieOffset": "1:34:00",
+      "order": 17
+    },
+    {
+      "id": "newborn-battle",
+      "type": "scene",
+      "name": "An Unlikely Alliance",
+      "time": "5:00pm ish",
+      "shortDesc": "An unlikely alliance",
+      "longDesc": "Eclipse · ~1:40:00\n\nCullens and wolves unite against Victoria’s newborn army. Jasper’s lessons become survival skills. For once, everybody is on the same team.",
+      "instruction": "Watch this scene to claim.",
+      "image": "assets/images/badges/badge-newborn-battle.webp",
+      "sound": "assets/audio/badges/badge-newborn-battle.mp3",
+      "movieId": "eclipse",
+      "movieOffset": "1:40:00",
+      "order": 18
+    },
+    {
+      "id": "eclipse",
+      "type": "movie",
+      "name": "Eclipse",
+      "time": "5:23pm ish",
+      "shortDesc": "Third film complete",
+      "longDesc": "Newborn army defeated. Tent diplomacy survived. Bella chooses her future. Three films down; Alice can finally start planning that wedding.",
+      "instruction": "Finish the film to claim.",
+      "image": "assets/images/badges/badge-eclipse.webp",
+      "sound": "assets/audio/badges/badge-eclipse.mp3",
+      "startTime": "3:20pm ish",
+      "edition": "Extended Edition",
+      "order": 19
+    },
+    {
+      "id": "the-wedding",
+      "type": "scene",
+      "name": "Until Forever",
+      "time": "5:55pm ish",
+      "shortDesc": "Forever starts here",
+      "longDesc": "Breaking Dawn – Part 1 · ~0:25:00\n\nWhite flowers, trembling hands, forever spoken aloud. Bella and Edward marry beneath Alice’s extravagant canopy. Crying counts as participation.",
+      "instruction": "Watch this scene to claim.",
+      "image": "assets/images/badges/badge-the-wedding.webp",
+      "sound": "assets/audio/badges/badge-the-wedding.mp3",
+      "movieId": "breaking-dawn-1",
+      "movieOffset": "0:25:00",
+      "order": 20
+    },
+    {
+      "id": "isle-esme",
+      "type": "scene",
+      "name": "Isle Esme",
+      "time": "6:25pm ish",
+      "shortDesc": "RIP, honeymoon pillows",
+      "longDesc": "Breaking Dawn – Part 1 · ~0:55:00\n\nMoonlight. Ocean air. Ruined pillows. Bella and Edward reach Isle Esme; the furniture discovers it wasn’t built for vampire newlyweds.",
+      "instruction": "Watch this scene to claim.",
+      "image": "assets/images/badges/badge-isle-esme.webp",
+      "sound": "assets/audio/badges/badge-isle-esme.mp3",
+      "movieId": "breaking-dawn-1",
+      "movieOffset": "0:55:00",
+      "order": 21
+    },
+    {
+      "id": "renesmee-born",
+      "type": "scene",
+      "name": "A New Heartbeat",
+      "time": "7:12pm ish",
+      "shortDesc": "One new heartbeat",
+      "longDesc": "Breaking Dawn – Part 1 · ~1:42:00\n\nRenesmee is born. Edward fights to save Bella, giving her one last chance at forever. Everything changes with a heartbeat.",
+      "instruction": "Watch this scene to claim.",
+      "image": "assets/images/badges/badge-renesmee-born.webp",
+      "sound": "assets/audio/badges/badge-renesmee-born.mp3",
+      "movieId": "breaking-dawn-1",
+      "movieOffset": "1:42:00",
+      "order": 22
+    },
+    {
+      "id": "imprinting",
+      "type": "scene",
+      "name": "Gravity Changes",
+      "time": "7:15pm ish",
+      "shortDesc": "Gravity changes",
+      "longDesc": "Breaking Dawn – Part 1 · ~1:45:00\n\nJacob’s world shifts toward protecting Renesmee. The pack’s oldest rules turn an enemy into someone he must keep safe.",
+      "instruction": "Watch this scene to claim.",
+      "image": "assets/images/badges/badge-imprinting.webp",
+      "sound": "assets/audio/badges/badge-imprinting.mp3",
+      "movieId": "breaking-dawn-1",
+      "movieOffset": "1:45:00",
+      "order": 23
+    },
+    {
+      "id": "breaking-dawn-1",
+      "type": "movie",
+      "name": "Breaking Dawn – Part 1",
+      "time": "7:22pm ish",
+      "shortDesc": "Fourth film complete",
+      "longDesc": "Vows exchanged. Pillows destroyed. Renesmee born. Bella opens her eyes to a new life. Four films down; forever just got complicated.",
+      "instruction": "Finish the film to claim.",
+      "image": "assets/images/badges/badge-breaking-dawn-1.webp",
+      "sound": "assets/audio/badges/badge-breaking-dawn-1.mp3",
+      "startTime": "5:30pm ish",
+      "edition": "Extended Edition",
+      "order": 24
+    },
+    {
+      "id": "dinner",
+      "type": "meal",
+      "name": "Dinner",
+      "time": "7:25pm ish",
+      "shortDesc": "Feed your coven",
+      "longDesc": "Four films behind you. One snowfield ahead. Gather your coven and eat like a human. Forever can wait five minutes.",
+      "instruction": "Enjoy the meal to claim.",
+      "image": "assets/images/badges/badge-dinner.webp",
+      "sound": "assets/audio/badges/badge-dinner.mp3",
+      "order": 25
+    },
+    {
+      "id": "rapid-growth",
+      "type": "scene",
+      "name": "Growing Beyond the Rules",
+      "time": "8:00pm ish",
+      "shortDesc": "Growing beyond the rules",
+      "longDesc": "Breaking Dawn – Part 2 · ~0:30:00\n\nRenesmee grows impossibly fast and shares memories through touch. Born, not bitten: the vampire world is about to meet an exception.",
+      "instruction": "Watch this scene to claim.",
+      "image": "assets/images/badges/badge-rapid-growth.webp",
+      "sound": "assets/audio/badges/badge-rapid-growth.mp3",
+      "movieId": "breaking-dawn-2",
+      "movieOffset": "0:30:00",
+      "order": 26
+    },
+    {
+      "id": "the-witnesses",
+      "type": "scene",
+      "name": "Witnesses to the Impossible",
+      "time": "8:30pm ish",
+      "shortDesc": "Witness the impossible",
+      "longDesc": "Breaking Dawn – Part 2 · ~1:00:00\n\nCarlisle gathers witnesses from around the world to prove Renesmee’s nature. Extraordinary gifts, one shared purpose, absolutely no spare bedrooms.",
+      "instruction": "Watch this scene to claim.",
+      "image": "assets/images/badges/badge-the-witnesses.webp",
+      "sound": "assets/audio/badges/badge-the-witnesses.mp3",
+      "movieId": "breaking-dawn-2",
+      "movieOffset": "1:00:00",
+      "order": 27
+    },
+    {
+      "id": "the-battle",
+      "type": "scene",
+      "name": "The Snowfield Reckoning",
+      "time": "9:06pm ish",
+      "shortDesc": "The final reckoning",
+      "longDesc": "Breaking Dawn – Part 2 · ~1:36:00\n\nThe Volturi face the Cullens across the snow. Alice reveals what a battle could cost. Hold your breath—and keep watching.",
+      "instruction": "Watch this scene to claim.",
+      "image": "assets/images/badges/badge-the-battle.webp",
+      "sound": "assets/audio/badges/badge-the-battle.mp3",
+      "movieId": "breaking-dawn-2",
+      "movieOffset": "1:36:00",
+      "order": 28
     },
     {
       "id": "breaking-dawn-2",
       "type": "movie",
       "name": "Breaking Dawn – Part 2",
-      "time": "8:15pm ish",
-      "startTime": "6:20pm ish",
-      "shortDesc": "Final film completed",
-      "longDesc": "The saga ends. Forever is only the beginning, and you were there for all of it.",
-      "instruction": "Finish watching Breaking Dawn – Part 2 to claim this badge.",
+      "time": "9:23pm ish",
+      "shortDesc": "Final film complete",
+      "longDesc": "Bella shares her memories with Edward. The family has a future. Five films down; farewell credits end around 9:32.",
+      "instruction": "Finish the film to claim.",
       "image": "assets/images/badges/badge-breaking-dawn-2.webp",
-      "order": 14
+      "sound": "assets/audio/badges/badge-breaking-dawn-2.mp3",
+      "startTime": "7:30pm ish",
+      "edition": "Theatrical Edition",
+      "order": 29
     },
     {
       "id": "secret-movies",
       "type": "secret",
       "name": "Forever",
-      "shortDesc": "All films completed",
-      "longDesc": "Five films. Roughly ten hours. You watched the whole saga in a single day and came out the other side. Nobody can take that from you.",
+      "shortDesc": "All films complete",
+      "longDesc": "Five films, one forever. From the first glance in Forks to the final meadow, you stayed. The Cullens recognize commitment.",
       "image": "assets/images/badges/badge-secret-movies.webp",
-      "order": 15,
+      "sound": "assets/audio/badges/badge-secret-movies.mp3",
       "unlockCondition": {
         "type": "all",
         "badgeIds": [
@@ -235,56 +474,73 @@
           "breaking-dawn-2"
         ]
       },
-      "unlockHint": "All 5 films completed"
+      "unlockHint": "Complete all 5 films",
+      "order": 30
     },
     {
       "id": "secret-meals",
       "type": "secret",
       "name": "Human Food Connoisseur",
-      "shortDesc": "All meals consumed",
-      "longDesc": "You ate every meal like a human. Edward would be baffled. Jacob would be proud.",
+      "shortDesc": "Every meal conquered",
+      "longDesc": "Brunch, lunch, snack, dinner: every human meal conquered. Your mortal metabolism thanks you. Charlie’s proud; Edward still doesn’t understand popcorn.",
       "image": "assets/images/badges/badge-secret-meals.webp",
-      "order": 16,
+      "sound": "assets/audio/badges/badge-secret-meals.mp3",
       "unlockCondition": {
         "type": "all",
         "badgeIds": [
           "breakfast",
           "lunch",
-          "dinner",
-          "late-night-snack"
+          "late-night-snack",
+          "dinner"
         ]
       },
-      "unlockHint": "All 4 meals consumed"
+      "unlockHint": "Enjoy all 4 meals",
+      "order": 31
     },
     {
       "id": "secret-scenes",
       "type": "secret",
       "name": "Twihard",
-      "shortDesc": "All key scenes witnessed",
-      "longDesc": "You caught every pivotal moment. You know the difference between a Cullen and a Volturi on sight. Welcome to the fandom.",
+      "shortDesc": "Every scene witnessed",
+      "longDesc": "Twenty moments, every checkpoint. From cafeteria glances to the snowfield, you caught it all. Welcome to the Forks unofficial historical society.",
       "image": "assets/images/badges/badge-secret-scenes.webp",
-      "order": 17,
+      "sound": "assets/audio/badges/badge-secret-scenes.mp3",
       "unlockCondition": {
         "type": "all",
         "badgeIds": [
+          "first-sight",
+          "the-van",
+          "skin-of-a-killer",
           "vampire-baseball",
+          "paper-cut",
+          "the-goodbye",
+          "garage-days",
           "volterra",
+          "cullen-origins",
+          "jacobs-confession",
+          "the-kiss",
           "the-tent",
+          "newborn-battle",
           "the-wedding",
+          "isle-esme",
+          "renesmee-born",
+          "imprinting",
+          "rapid-growth",
+          "the-witnesses",
           "the-battle"
         ]
       },
-      "unlockHint": "All 5 scenes witnessed"
+      "unlockHint": "Witness all 20 scenes",
+      "order": 32
     },
     {
       "id": "secret-immortal",
       "type": "secret",
       "name": "Immortal",
-      "shortDesc": "The ultimate achievement",
-      "longDesc": "Every film, every meal, every scene. You did not merely survive the marathon; you were transformed by it. Your eyes may be a little gold.",
+      "shortDesc": "The complete saga",
+      "longDesc": "Every film. Every scene. Every meal. You came to Forks and earned forever. Welcome to the family. Act surprised when you sparkle.",
       "image": "assets/images/badges/badge-secret-immortal.webp",
-      "order": 18,
-      "finale": true,
+      "sound": "assets/audio/badges/badge-secret-immortal.mp3",
       "unlockCondition": {
         "type": "all",
         "badgeIds": [
@@ -293,60 +549,62 @@
           "secret-scenes"
         ]
       },
-      "unlockHint": "All other secrets unlocked"
+      "unlockHint": "Complete films, scenes, and meals",
+      "finale": true,
+      "order": 33
     }
   ],
   "theme": {
     "colors": {
       "primary": {
-        "50": "#f3f6f9",
-        "100": "#e3eaf1",
-        "200": "#c5d3e0",
-        "300": "#9db3c8",
-        "400": "#6f8faa",
-        "500": "#4d6f8d",
-        "600": "#3d5a74",
-        "700": "#32485d",
-        "800": "#2b3c4d",
-        "900": "#1d2a37"
+        "50": "#172c31",
+        "100": "#22383c",
+        "200": "#345159",
+        "300": "#56747b",
+        "400": "#9fbab9",
+        "500": "#bbceca",
+        "600": "#d4dfd8",
+        "700": "#dbe6df",
+        "800": "#e6eee8",
+        "900": "#f2f5ed"
       },
       "accent": {
-        "50": "#fdf2f2",
-        "100": "#fbe1e1",
-        "200": "#f6bfbf",
-        "300": "#ee8f8f",
-        "400": "#e05656",
-        "500": "#c8262b",
-        "600": "#a91d22",
-        "700": "#8b1a1f",
-        "800": "#6d181c",
-        "900": "#4a1113"
+        "50": "#2d1821",
+        "100": "#41222d",
+        "200": "#60303d",
+        "300": "#854455",
+        "400": "#bb6e81",
+        "500": "#933f55",
+        "600": "#e8a6b4",
+        "700": "#f0bec8",
+        "800": "#f7d4db",
+        "900": "#fce8ec"
       },
       "background": {
-        "50": "#fafbfc",
-        "100": "#f2f4f7",
-        "200": "#e4e8ee",
-        "300": "#d0d6df",
-        "400": "#a2acb9",
-        "500": "#74818f"
+        "50": "#17282e",
+        "100": "#0f1c22",
+        "200": "#22343b",
+        "300": "#354950",
+        "400": "#516970",
+        "500": "#788f95"
       },
       "text": {
-        "50": "#f8fafc",
-        "100": "#f1f5f9",
-        "200": "#e2e8f0",
-        "300": "#cbd5e1",
-        "400": "#94a3b8",
-        "500": "#64748b",
-        "600": "#475569",
-        "700": "#334155",
-        "800": "#1e293b",
-        "900": "#0f172a"
+        "50": "#0f1c22",
+        "100": "#17282e",
+        "200": "#293e45",
+        "300": "#7e969b",
+        "400": "#a1b2b5",
+        "500": "#b3c1c2",
+        "600": "#c7d0d0",
+        "700": "#e0e5e2",
+        "800": "#f0eee8",
+        "900": "#faf7f0"
       },
-      "highlight": "#C8262B",
+      "highlight": "#e3a6b5",
       "danger": {
-        "500": "#ef4444",
-        "600": "#dc2626",
-        "700": "#b91c1c"
+        "500": "#c45161",
+        "600": "#e87c89",
+        "700": "#f3acb5"
       }
     },
     "fonts": {
@@ -372,19 +630,20 @@
           500
         ]
       }
-    }
+    },
+    "mode": "dark"
   },
   "content": {
     "splash": {
       "title": "The Twilight Passport",
-      "subtitle": "Official Documentation of One's Journey Through Forks, Washington",
+      "subtitle": "A rain-soaked journey from first sight to forever",
       "enterButton": "Enter Forks",
       "hostedBy": "Hosted by {hosts}",
-      "heroImage": null,
-      "heroEmoji": "🍎"
+      "heroImage": "assets/images/badges/badge-twilight.webp",
+      "heroEmoji": null
     },
     "name": {
-      "prompt": "What name shall be recorded in the Forks High School visitor log?",
+      "prompt": "Your name for the Forks register?",
       "placeholder": "Enter your name...",
       "continueButton": "Continue",
       "skipButton": "or Remain Anonymous",
@@ -401,11 +660,11 @@
       "title": "Your Saga Awaits",
       "greeting": "Welcome to Forks, {name}",
       "body": [
-        "Before you lies the entire Twilight Saga, all five films, back to back to back.",
-        "As you witness the iconic moments and eat like a human along the way, tap each badge to mark your progress."
+        "Five films, twenty scenes, four meals. Rain, romance, questionable decisions. Brunch and Twilight start at 11.",
+        "Tap badges as you watch and eat. Collection bonuses unlock automatically. Claim them all to become Immortal."
       ],
-      "quote": "About three things I was absolutely positive.",
-      "disclaimer": "All times are approximate-ish. This passport operates on the honor system. The Cullens trust their guests.",
+      "quote": "Some forevers come with badges.",
+      "disclaimer": "Times are approximate. Follow the scene on screen. The honor system applies.",
       "beginButton": "Begin My Saga"
     },
     "passport": {
@@ -414,68 +673,72 @@
       "sectionTitle": "Your Saga",
       "badgesLabel": "badges",
       "certifyButton": "Certify My Passport",
-      "certifySubtext": "Complete your saga and download your certificate",
+      "certifySubtext": "Save your day in Forks",
       "resetButton": "Reset and Start Over"
     },
     "certification": {
       "title": "Leaving Forks",
       "body": [
-        "Your journey through the Twilight Saga is complete (or as complete as you could manage).",
-        "By certifying this passport, you shall receive an official document commemorating your devotion."
+        "From first sight to forever, you were there.",
+        "Save your passport. Forks remembers."
       ],
-      "footnote": "You will be transported back to Austin, TX, where the sun unfortunately shines.",
+      "footnote": "Back to Austin. Bring sunglasses.",
       "badgesLabel": "badges claimed",
       "downloadButton": "Certify & Download",
       "generatingText": "Generating...",
       "reviewButton": "Review My Badges",
       "completionMessages": {
-        "perfect": "Perfect completion! You are truly immortal.",
-        "high": "A devoted showing indeed!",
-        "medium": "A respectable saga!",
-        "low": "Every saga begins with a move to a rainy town."
+        "perfect": "Every badge. Forever yours.",
+        "high": "The Cullens salute you.",
+        "medium": "You belong in Forks.",
+        "low": "Your forever has begun."
       }
     },
     "badgeModal": {
       "claimButton": "Claim This Badge",
       "claimedLabel": "Claimed",
       "witnessedAt": "Witnessed at {time}",
-      "honorSystemText": "The Twilight Passport operates on the honor system. By claiming this badge, you solemnly swear you have witnessed this moment (or eaten this meal).",
+      "honorSystemText": "Claim what you watched or ate. The Cullens trust you. Even Edward.",
       "honorSystemCheckbox": "Don't ask me again",
       "honorConfirmButton": "I So Swear",
       "cancelButton": "Cancel"
     },
     "schedule": {
-      "title": "Today's Saga"
+      "title": "Today’s Saga · 11am Start"
     },
     "checklist": {
       "header": "Badge Checklist",
-      "description": "Made a mistake? Toggle badges on or off below. Secret badges unlock automatically when you complete their requirements.",
+      "description": "Toggle badges to correct mistakes. Bonuses unlock automatically.",
       "doneButton": "Done"
     },
     "secretUnlock": {
       "header": "Secret Badge Unlocked!",
       "continueButton": "Continue Saga",
-      "certifyButton": "View and Certify My Passport"
+      "certifyButton": "Save My Passport"
     },
     "certificate": {
       "title": "The Twilight Passport",
-      "subtitle": "Official Documentation of One's Journey Through Forks, Washington",
+      "subtitle": "From first sight to forever",
       "certifies": "This certifies that",
-      "completed": "has completed the saga marathon",
+      "completed": "has journeyed through the Twilight Saga",
       "badgesLabel": "Badges",
       "hostedBy": "Hosted by {hosts}",
-      "footer": "\"Forever is only the beginning.\""
+      "footer": "Forks remembers."
     }
   },
   "audio": {
-    "greetings": [],
+    "greetings": [
+      "assets/audio/greetings/greeting-1.mp3",
+      "assets/audio/greetings/greeting-2.mp3",
+      "assets/audio/greetings/greeting-3.mp3"
+    ],
     "backgroundMusic": {}
   },
   "pwa": {
-    "themeColor": "#1d2a37",
-    "backgroundColor": "#f2f4f7"
+    "themeColor": "#0f1c22",
+    "backgroundColor": "#0f1c22"
   },
   "settings": {
-    "badgeShape": "shuffle"
+    "badgeShape": "arch"
   }
 }

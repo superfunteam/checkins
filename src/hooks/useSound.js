@@ -5,11 +5,11 @@ import { useCallback, useRef, useEffect, useState } from 'react';
 
 const audioContextRef = { current: null };
 
-// Preloaded audio cache - keyed by full URL
+// Active passport's badge audio, refreshed when its URLs or version change.
 const preloadedBadgeSounds = {};
 const preloadedGreetings = [];
-let badgeSoundsPreloaded = false;
-let greetingsPreloaded = false;
+let badgeSoundSignature = '';
+let greetingSignature = '';
 
 // Track currently playing sounds
 let currentBadgeAudio = null;
@@ -24,7 +24,11 @@ let currentBgMusicConfig = null;
 // Preload all badge sounds for instant playback
 // Takes array of { badgeId, soundUrl } objects from passport config
 export function preloadBadgeSounds(badgeSoundMappings = []) {
-  if (badgeSoundsPreloaded || badgeSoundMappings.length === 0) return Promise.resolve();
+  if (badgeSoundMappings.length === 0) return Promise.resolve();
+  const signature = JSON.stringify(badgeSoundMappings);
+  if (signature === badgeSoundSignature) return Promise.resolve();
+  badgeSoundSignature = signature;
+  Object.keys(preloadedBadgeSounds).forEach(id => delete preloadedBadgeSounds[id]);
 
   const loadPromises = badgeSoundMappings.map(({ badgeId, soundUrl }) => {
     return new Promise((resolve) => {
@@ -34,7 +38,7 @@ export function preloadBadgeSounds(badgeSoundMappings = []) {
 
       // Resolve when loaded or on error (don't block on failures)
       audio.addEventListener('canplaythrough', () => {
-        preloadedBadgeSounds[badgeId] = audio;
+        if (badgeSoundSignature === signature) preloadedBadgeSounds[badgeId] = audio;
         resolve();
       }, { once: true });
 
@@ -49,7 +53,6 @@ export function preloadBadgeSounds(badgeSoundMappings = []) {
   });
 
   return Promise.all(loadPromises).then(() => {
-    badgeSoundsPreloaded = true;
     console.log('Badge sounds preloaded');
   });
 }
@@ -66,11 +69,6 @@ export function stopBadgeSound() {
 // Play a badge sound by badge ID (stops any previous sound first)
 // Optional fallbackUrl for direct playback if not preloaded
 export function playBadgeSound(badgeId, volume = 0.7, fallbackUrl = null) {
-  // Check for reduced motion preference
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    return;
-  }
-
   // Stop any currently playing badge sound
   stopBadgeSound();
 
@@ -106,7 +104,11 @@ export function playBadgeSound(badgeId, volume = 0.7, fallbackUrl = null) {
 // Preload greeting sounds for instant playback
 // Takes array of greeting URLs from passport config
 export function preloadGreetingSounds(greetingUrls = []) {
-  if (greetingsPreloaded || greetingUrls.length === 0) return Promise.resolve();
+  if (greetingUrls.length === 0) return Promise.resolve();
+  const signature = JSON.stringify(greetingUrls);
+  if (signature === greetingSignature) return Promise.resolve();
+  greetingSignature = signature;
+  preloadedGreetings.length = 0;
 
   const loadPromises = greetingUrls.map((src, index) => {
     return new Promise((resolve) => {
@@ -115,7 +117,7 @@ export function preloadGreetingSounds(greetingUrls = []) {
       audio.src = src;
 
       audio.addEventListener('canplaythrough', () => {
-        preloadedGreetings[index] = audio;
+        if (greetingSignature === signature) preloadedGreetings[index] = audio;
         resolve();
       }, { once: true });
 
@@ -129,7 +131,6 @@ export function preloadGreetingSounds(greetingUrls = []) {
   });
 
   return Promise.all(loadPromises).then(() => {
-    greetingsPreloaded = true;
     console.log('Greeting sounds preloaded');
   });
 }
@@ -145,11 +146,6 @@ export function stopGreetingSound() {
 
 // Play a random greeting sound
 export function playRandomGreeting(volume = 0.8) {
-  // Check for reduced motion preference
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    return;
-  }
-
   // Stop any currently playing greeting
   stopGreetingSound();
 
@@ -189,11 +185,6 @@ export function configureBackgroundMusic(bgMusicConfig) {
 
 // Start background music (call on first user interaction)
 export function startBackgroundMusic(volume = 0.5) {
-  // Check for reduced motion preference
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    return;
-  }
-
   // Need config to play music
   if (!currentBgMusicConfig) {
     return;
@@ -509,11 +500,6 @@ export function useSound() {
 
   const play = useCallback((soundName, volume = 0.5) => {
     if (!isEnabled) return;
-
-    // Check for reduced motion preference
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return;
-    }
 
     try {
       const ctx = ensureAudioContext();

@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { fadeIn } from '../utils/animations';
+import { useDialog } from '../hooks/useDialog';
 import { Html5Qrcode } from 'html5-qrcode';
 
 const SCANNER_CONFIG = {
@@ -10,6 +12,10 @@ const SCANNER_CONFIG = {
 
 export default function QrScanner({ onSuccess, onError, onClose }) {
   const scannerRef = useRef(null);
+  const dialogRef = useRef(null);
+  const callbacks = useRef({ onSuccess, onError });
+  callbacks.current = { onSuccess, onError };
+  const { isPresent, completeExit } = useDialog(dialogRef, onClose);
   const html5QrCodeRef = useRef(null);
   const [hasPermission, setHasPermission] = useState(null);
   const [isStarting, setIsStarting] = useState(true);
@@ -30,7 +36,7 @@ export default function QrScanner({ onSuccess, onError, onClose }) {
             if (isMounted) {
               // Stop scanner before calling success
               html5QrCode.stop().catch(console.error);
-              onSuccess(decodedText);
+              callbacks.current.onSuccess(decodedText);
             }
           },
           () => {
@@ -38,6 +44,7 @@ export default function QrScanner({ onSuccess, onError, onClose }) {
           }
         );
 
+        if (!isMounted) { await html5QrCode.stop().catch(() => {}); return; }
         if (isMounted) {
           setHasPermission(true);
           setIsStarting(false);
@@ -48,9 +55,9 @@ export default function QrScanner({ onSuccess, onError, onClose }) {
           setHasPermission(false);
           setIsStarting(false);
           if (err.name === 'NotAllowedError' || err.message?.includes('Permission')) {
-            onError?.('Camera access required to scan QR codes');
+            callbacks.current.onError?.('Camera access required to scan QR codes');
           } else {
-            onError?.(`Unable to start camera: ${err.message}`);
+            callbacks.current.onError?.(`Unable to start camera: ${err.message}`);
           }
         }
       }
@@ -66,7 +73,7 @@ export default function QrScanner({ onSuccess, onError, onClose }) {
         });
       }
     };
-  }, [onSuccess, onError]);
+  }, []);
 
   const handleClose = () => {
     if (html5QrCodeRef.current) {
@@ -77,15 +84,19 @@ export default function QrScanner({ onSuccess, onError, onClose }) {
 
   return (
     <motion.div
+      ref={dialogRef}
+      role="dialog" aria-modal="true" aria-label="Scan QR Code" tabIndex={-1}
       className="fixed inset-0 z-[100] bg-black flex flex-col"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      variants={fadeIn}
+      initial="initial"
+      animate={isPresent ? "animate" : "exit"}
+      onAnimationComplete={completeExit}
     >
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 bg-black/80">
         <h2 className="text-white font-semibold text-lg">Scan QR Code</h2>
         <button
+          aria-label="Close QR scanner"
           onClick={handleClose}
           className="w-10 h-10 flex items-center justify-center text-white hover:text-gray-300"
         >
@@ -117,7 +128,8 @@ export default function QrScanner({ onSuccess, onError, onClose }) {
                 Please allow camera access in your browser settings to scan QR codes.
               </p>
               <button
-                onClick={handleClose}
+                aria-label="Close QR scanner"
+          onClick={handleClose}
                 className="px-6 py-2 bg-white text-black rounded-lg font-medium"
               >
                 Close

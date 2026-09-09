@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, MotionConfig, useReducedMotion } from 'framer-motion';
 import { PassportProvider } from './context/PassportContext';
 import { AppProvider, useApp, SCREENS } from './context/AppContext';
 import SplashScreen from './components/SplashScreen';
@@ -11,6 +11,8 @@ import BadgeModal from './components/BadgeModal';
 import CertificationModal from './components/CertificationModal';
 import SecretUnlockModal from './components/SecretUnlockModal';
 import ScheduleSheet from './components/ScheduleSheet';
+import TeamPickScreen from './components/TeamPickScreen';
+import TeamShareScreen from './components/TeamShareScreen';
 import PassportListing from './components/PassportListing';
 import LandingPage from './pages/LandingPage';
 import EventInquiryPage from './pages/EventInquiryPage';
@@ -21,15 +23,20 @@ import { getHostPassportId } from './utils/hostPassport';
 
 function AppContent() {
   const { currentScreen } = useApp();
+  const reduceMotion = useReducedMotion();
 
   return (
-    <div className="app-container bg-background-100">
+    <MotionConfig reducedMotion="user" transition={{ duration: reduceMotion ? 0 : 0.2 }}>
+    <div className={`app-container bg-background-100${reduceMotion ? ' motion-reduced' : ''}`}>
       <AnimatePresence mode="wait">
         {currentScreen === SCREENS.SPLASH && <SplashScreen key="splash" />}
         {currentScreen === SCREENS.NAME && <NameModal key="name" />}
         {currentScreen === SCREENS.LOADING && <LoadingScreen key="loading" />}
         {currentScreen === SCREENS.EXPLAINER && <ExplainerModal key="explainer" />}
         {currentScreen === SCREENS.PASSPORT && <Passport key="passport" />}
+        {currentScreen === SCREENS.TEAM_PICK && <TeamPickScreen key="team-pick" />}
+        {currentScreen === SCREENS.TEAM_FINAL && <TeamPickScreen key="team-final" finalRound />}
+        {currentScreen === SCREENS.TEAM_SHARE && <TeamShareScreen key="team-share" />}
       </AnimatePresence>
 
       {/* Modals */}
@@ -38,6 +45,7 @@ function AppContent() {
       <SecretUnlockModal />
       <ScheduleSheet />
     </div>
+    </MotionConfig>
   );
 }
 

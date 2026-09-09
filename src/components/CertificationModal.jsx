@@ -1,15 +1,24 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useRef } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useApp } from '../context/AppContext';
 import { usePassport } from '../context/PassportContext';
-import { slideUpModal, backdrop, springs } from '../utils/animations';
+import { slideUpModal, backdrop, overlayTransition } from '../utils/animations';
 import { exportPassportPng } from '../utils/exportPng';
+import { useDialog } from '../hooks/useDialog';
 import BadgeChecklist from './BadgeChecklist';
 import ExportTemplate from './ExportTemplate';
 
 export default function CertificationModal() {
+  const { showCertificationModal, finishCertificationExit } = useApp();
+  return (
+    <AnimatePresence initial={false} onExitComplete={finishCertificationExit}>
+      {showCertificationModal && <CertificationDialog key="certification" />}
+    </AnimatePresence>
+  );
+}
+
+function CertificationDialog() {
   const {
-    showCertificationModal,
     closeCertificationModal,
     showChecklist,
     setShowChecklist,
@@ -18,10 +27,15 @@ export default function CertificationModal() {
     play,
   } = useApp();
 
-  const { badges: allBadges, content } = usePassport();
+  const { badges: allBadges, content, passportId } = usePassport();
+  const reduceMotion = useReducedMotion();
   const certContent = content.certification;
 
   const [isExporting, setIsExporting] = useState(false);
+
+  const dialogRef = useRef(null);
+  const handleClose = () => { if (!isExporting) closeCertificationModal(); };
+  const { isPresent, completeExit } = useDialog(dialogRef, handleClose);
 
   const claimedCount = getClaimedCount();
   const totalBadges = allBadges.length;
@@ -31,7 +45,7 @@ export default function CertificationModal() {
     play('horn');
 
     try {
-      await exportPassportPng({ name });
+      await exportPassportPng({ name, passportId });
     } catch (error) {
       console.error('Export failed:', error);
       play('bonk');
@@ -49,33 +63,35 @@ export default function CertificationModal() {
     return messages?.low || 'Every journey begins with a single step.';
   };
 
-  if (!showCertificationModal) return null;
-
   return (
-    <AnimatePresence>
-      {showCertificationModal && (
-        <>
+    <>
           <motion.div
             className="modal-backdrop"
+            transition={overlayTransition}
             variants={backdrop}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            onClick={closeCertificationModal}
+            initial={reduceMotion ? false : "initial"}
+            animate={isPresent ? "animate" : "exit"}
+            onClick={handleClose}
           />
 
           <motion.div
             className="modal-content"
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label={certContent.title}
+            tabIndex={-1}
+            onAnimationComplete={completeExit}
             variants={slideUpModal}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            transition={springs.smooth}
+            initial={reduceMotion ? false : "initial"}
+            animate={isPresent ? "animate" : "exit"}
           >
             <div className="p-6">
               <button
                 className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center text-earth-400 hover:text-earth-600"
-                onClick={closeCertificationModal}
+                aria-label="Close certificate"
+                disabled={isExporting}
+                onClick={handleClose}
               >
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -151,8 +167,6 @@ export default function CertificationModal() {
           </motion.div>
 
           <ExportTemplate />
-        </>
-      )}
-    </AnimatePresence>
+    </>
   );
 }

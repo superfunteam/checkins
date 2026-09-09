@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useApp } from '../context/AppContext';
 import { usePassport } from '../context/PassportContext';
-import { slideUp, springs } from '../utils/animations';
+import { slideUp } from '../utils/animations';
 import { playRandomGreeting, stopGreetingSound } from '../hooks/useSound';
 
 export default function ExplainerModal() {
   const { goToScreen, SCREENS, name } = useApp();
   const { content, features } = usePassport();
 
+  const reduceMotion = useReducedMotion();
   const explainerContent = content.explainer;
 
   // Play a random greeting when the screen mounts (if enabled)
@@ -28,16 +29,12 @@ export default function ExplainerModal() {
     <motion.div
       className="min-h-screen flex flex-col items-center justify-center p-6"
       variants={slideUp}
-      initial="initial"
+      initial={reduceMotion ? false : "initial"}
       animate="animate"
       exit="exit"
-      transition={springs.smooth}
     >
       <motion.div
         className="w-full max-w-sm bg-parchment-50 rounded-modal shadow-modal p-8"
-        initial={{ y: 30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.1 }}
       >
         {/* Header */}
         <h2 className="font-display text-2xl font-bold text-earth-800 text-center mb-6">
