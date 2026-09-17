@@ -65,13 +65,15 @@ localStorage; it is harmless and not shown.
 The app detects `<id>.checkins.party` in the browser and mounts that passport
 at `/`. Nothing server-side is host-specific.
 
-One-time setup in Netlify:
+Production is live at https://twilight.checkins.party on the Netlify site
+`checkins-party`. Netlify builds and publishes `main` using `npm run build`
+and `dist`. The subdomain is a site alias with managed Netlify DNS and HTTPS;
+no separate Twilight build is needed. Do not set `VITE_HOST_PASSPORT` for the
+shared production build, since the apex and other events use the same bundle.
 
-1. Site settings → Domain management → add `twilight.checkins.party` as a
-   domain alias.
-2. DNS: `CNAME twilight → <site>.netlify.app` (or let Netlify DNS handle it).
-3. Wait for the certificate, then open the URL on a phone and "Add to Home
-   Screen".
+See [the production release record](docs/twilight/DEPLOYMENT.md) for the site
+ID and verification details. Open the production URL on a phone and use
+"Add to Home Screen" to install the passport.
 
 The PWA manifest for host mode is `/passports/twilight/manifest.host.webmanifest`
 (start URL and scope `/`); the path-mode one is `manifest.webmanifest`. Both are

@@ -28,7 +28,7 @@ All 36 clips now use short character dialogue, with five licensed stock voices: 
 
 Stable IDs are preserved, including `breakfast` for Brunch and `late-night-snack` for Snack Break. All-movies requires five movie badges; all-scenes requires twenty scene badges; all-meals requires the four meals; Immortal requires those three bonuses. Passport version 7 refreshes cached art/audio. The existing layout, schedule sheet, and claim flow remain in use. Twilight defaults to a dark blue-green palette with silver and burgundy accents, regardless of browser color preference. Its background is applied before React loads to avoid a bright initial frame; Shire retains its own theme. Motion now uses brief transform/opacity transitions, complete exit animations, fixed-height badge swipes, scroll/focus restoration, and reduced-motion handling. Loading prepares the first badge rows with a timeout and never waits for audio readiness. Certificate export expands vertically for the larger badge set and uses the Twilight filename.
 
-The site domain did not resolve during this work. Local preview is available; production DNS/hosting remains a separate finishing step. Nothing has been published by this task.
+Production is live at [twilight.checkins.party](https://twilight.checkins.party). Netlify builds the shared app from `main`; the Twilight subdomain selects this passport at `/`. See `DEPLOYMENT.md` for the release and verification record.
 
 ## First instinct and final verdict
 
