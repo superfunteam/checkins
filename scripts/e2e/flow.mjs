@@ -15,6 +15,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
 const REPO = process.cwd(); const S = path.join(REPO, '.e2e'); const BASE = 'http://localhost:4173';
+const twilight = JSON.parse(fs.readFileSync(path.join(REPO, 'public/passports/twilight/passport.json'), 'utf8'));
 fs.mkdirSync(S + '/shots', { recursive: true });
 const results = []; const ok = (name, cond, extra='') => { results.push((cond ? 'PASS ' : 'FAIL ') + name + (extra ? '  ' + extra : '')); };
 fs.rmSync(S + '/profile', { recursive: true, force: true });
@@ -27,7 +28,7 @@ try {
   await page.goto(BASE + '/event/twilight'); await sleep(2000);
   await page.screenshot(S + '/shots/01-splash.png');
   ok('splash shows Enter Forks', await page.clickText('Enter Forks'));
-  ok('name prompt', await page.waitForText('Forks High School'));
+  ok('name prompt', await page.waitForText(twilight.content.name.prompt));
   await sleep(600); await page.screenshot(S + '/shots/02-name.png');
   await page.eval(`const i=[...document.querySelectorAll('input')].find(i=>i.offsetParent!==null); const set=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set; set.call(i,'Bella Tester'); i.dispatchEvent(new Event('input',{bubbles:true}));`);
   await sleep(200); ok('continue', await page.clickText('Continue'));
