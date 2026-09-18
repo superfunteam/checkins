@@ -58,7 +58,7 @@ try {
 
   // Claim all five films -> secret "Forever" should auto-unlock
   for (const film of ['Twilight','New Moon','Eclipse','Breaking Dawn – Part 1','Breaking Dawn – Part 2']) {
-    await page.eval(`[...document.querySelectorAll('.badge-card')].find(c=>c.textContent.trim().startsWith(${JSON.stringify(film)})).click()`);
+    await page.eval(`[...document.querySelectorAll('.badge-card')].find(c=>c.querySelector('p')?.textContent.trim()===${JSON.stringify(film)}).click()`);
     await page.waitForText('Claim This Badge'); await sleep(400);
     await page.clickText('Claim This Badge'); await sleep(300);
     if (await page.eval(`return document.body.innerText.includes('I So Swear')`)) { await page.clickText('I So Swear'); }

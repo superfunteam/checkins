@@ -103,6 +103,20 @@ export default function BadgeCard({ badge, index }) {
           )}
         </div>
 
+        {!showAsMystery && (
+          <span
+            className="badge-type-pill pointer-events-none absolute left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-1.5 py-px text-[9px] font-medium uppercase leading-3 tracking-wide text-earth-800"
+            style={{
+              bottom: borderWidth + 3,
+              fontFamily: "'Google Sans Flex', sans-serif",
+              backgroundColor: 'var(--color-background-100)',
+              backgroundImage: `linear-gradient(${getTypeColor(badge.type)}40, ${getTypeColor(badge.type)}40)`,
+            }}
+          >
+            {getTypeLabel(badge.type)}
+          </span>
+        )}
+
         {/* Claimed indicator - gold star for secrets, purple checkmark for regular */}
         {isClaimed && (
           <motion.div
@@ -137,18 +151,6 @@ export default function BadgeCard({ badge, index }) {
       >
         {showAsMystery ? '\u00A0' : badge.name}
       </p>
-
-      {!showAsMystery && (
-        <span
-          className="badge-type-pill mt-auto rounded-full px-2 py-0.5 text-[10px] font-medium uppercase leading-4 tracking-wider text-earth-800"
-          style={{
-            fontFamily: "'Google Sans Flex', sans-serif",
-            backgroundColor: `${getTypeColor(badge.type)}25`,
-          }}
-        >
-          {getTypeLabel(badge.type)}
-        </span>
-      )}
     </motion.button>
   );
 }
