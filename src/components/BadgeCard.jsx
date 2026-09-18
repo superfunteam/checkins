@@ -11,7 +11,7 @@ const SHUFFLE_TILTS = ['badge-tilt-left', 'badge-tilt-right', 'badge-tilt-none']
 
 export default function BadgeCard({ badge, index }) {
   const { badges, openBadgeModal, isSecretUnlocked } = useApp();
-  const { getAssetUrl, badgeShape } = usePassport();
+  const { getAssetUrl, badgeShape, getTypeLabel, getTypeColor } = usePassport();
   const reduceMotion = useReducedMotion();
   const badgeImageRef = useRef(null);
 
@@ -137,6 +137,18 @@ export default function BadgeCard({ badge, index }) {
       >
         {showAsMystery ? '\u00A0' : badge.name}
       </p>
+
+      {!showAsMystery && (
+        <span
+          className="badge-type-pill mt-auto rounded-full px-2 py-0.5 text-[10px] font-medium uppercase leading-4 tracking-wider text-earth-800"
+          style={{
+            fontFamily: "'Google Sans Flex', sans-serif",
+            backgroundColor: `${getTypeColor(badge.type)}25`,
+          }}
+        >
+          {getTypeLabel(badge.type)}
+        </span>
+      )}
     </motion.button>
   );
 }
