@@ -1,0 +1,45 @@
+{
+  "character": "carlisle",
+  "request": {
+    "voice_description": "An adult male dramatic actor with a clear, gentle mid-low baritone, neutral educated American diction and smooth, warm resonance. Patient physician and protective father: calm authority without distance or condescension. Precise consonants, supple pitch and attentive warmth; he listens even while speaking. Gratitude feels personal, a warning is quietly firm, and urgency remains controlled rather than loud. A natural conversational pace with small considered pauses, not sleepy, sermon-like or an audiobook narrator. There is kindness and moral resolve under every line. Intimate dry studio recording, no music or ambient effects.",
+    "model_id": "eleven_ttv_v3",
+    "text": "Thank you for coming. I know what it cost you to be here. We are asking for a little patience, and a chance to show you the truth. You don't have to share our hopes. Just look carefully, ask your questions, and decide for yourself.",
+    "guidance_scale": 5,
+    "seed": 240926,
+    "loudness": 0.5
+  },
+  "designHash": "a1ee092a9437e2435930d64d4fdf34ec7013073309cf065ff7d34390f60276dd",
+  "requestId": null,
+  "previews": [
+    {
+      "generated_voice_id": "Lbc7ZaIWjsWvCqKKmNc5",
+      "media_type": "audio/mpeg",
+      "duration_secs": 17.321041666666666,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "carlisle-preview-1.mp3"
+    },
+    {
+      "generated_voice_id": "EVSoDKiBw56GvZGI3MWt",
+      "media_type": "audio/mpeg",
+      "duration_secs": 15.152875,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "carlisle-preview-2.mp3"
+    },
+    {
+      "generated_voice_id": "GgN0E1O9KZszNBMvZZnz",
+      "media_type": "audio/mpeg",
+      "duration_secs": 16.119416666666666,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "carlisle-preview-3.mp3"
+    }
+  ],
+  "voiceId": "Lbc7ZaIWjsWvCqKKmNc5",
+  "selectedPreview": 1,
+  "createRequestId": null
+}

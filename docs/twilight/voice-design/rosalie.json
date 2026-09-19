@@ -1,0 +1,45 @@
+{
+  "character": "rosalie",
+  "request": {
+    "voice_description": "A young adult woman with a rich, polished low-mid feminine voice, cool American diction and a very slight smoky edge. Proud, observant and guarded, with a cutting dry wit. She speaks economically, letting the end of a sentence fall with exacting certainty. Sarcasm has a sharp eyebrow in the sound, never a cartoon villain's sneer. Affection briefly softens the hard surface; a painful memory exposes a quieter vulnerability underneath. Controlled conversational pace, beautifully clear consonants, restrained but responsive emotion. A believable dramatic actor speaking to someone nearby, not a grand theatrical monologue or an advertisement. Clean studio audio.",
+    "model_id": "eleven_ttv_v3",
+    "text": "Oh, that's the plan? Wonderful. I suppose someone thought this through. Look, I can be difficult. We all know that. But if you're going to take a risk like this, at least understand what you're giving up. You don't get to change your mind afterward.",
+    "guidance_scale": 5,
+    "seed": 240924,
+    "loudness": 0.5
+  },
+  "designHash": "2964b77f1594535c048f66aa09c5af1501b504e536cbd4d14bc1e0fc630eec7b",
+  "requestId": null,
+  "previews": [
+    {
+      "generated_voice_id": "BOk6C5wvWCtF9AYTKrgE",
+      "media_type": "audio/mpeg",
+      "duration_secs": 20.507958333333335,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "rosalie-preview-1.mp3"
+    },
+    {
+      "generated_voice_id": "s2kY5fhvwvdwYoaAqMxh",
+      "media_type": "audio/mpeg",
+      "duration_secs": 20.429625,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "rosalie-preview-2.mp3"
+    },
+    {
+      "generated_voice_id": "21XJYwKvNkndM301XeBx",
+      "media_type": "audio/mpeg",
+      "duration_secs": 17.164291666666667,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "rosalie-preview-3.mp3"
+    }
+  ],
+  "voiceId": "BOk6C5wvWCtF9AYTKrgE",
+  "selectedPreview": 1,
+  "createRequestId": null
+}

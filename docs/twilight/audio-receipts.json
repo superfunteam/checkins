@@ -1,650 +1,1405 @@
 {
   "breakfast": {
     "character": "Charlie",
-    "voice": "Roger",
-    "voiceId": "CwhRBWXzGAHq8TQ4Fs17",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Charlie \u2014 weary dry-humored dad",
+    "voiceId": "Yn1ZnOMTMRamOK9TGYbL",
+    "castDesignHash": "36cbce080408e2b3a1560da53926369e084293aa08f7df833c0db7bafb5229b0",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "995c6300b4dc0a611a8dbb8c41d7a0dfabbbf021d55861acd246a8f2e18efdce",
-    "durationSeconds": 1.93,
-    "bytes": 31390,
-    "requestId": "QXlVvMp0NsweOkVbF8GE"
+    "request": {
+      "text": "[dryly] [warmly] I made coffee. You\u2019re gonna need it.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192029,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "dryly",
+        "warmly"
+      ],
+      "intent": "A tired dad slides over a mug; the warning is affectionate, with a tiny amused lift on need it."
+    },
+    "spokenText": "I made coffee. You\u2019re gonna need it.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 3,
+    "scriptHash": "3537a07eff2bd565d42abe19de7ab465d79b84e84a0347496ab52da6eb70fd96",
+    "audioSha256": "46b92d5cbb03388d126a5a19cb98ba197b62ceeee729d79afbde60348a5b5808",
+    "durationSeconds": 2.612,
+    "bytes": 63363,
+    "requestId": "9xk7ITi1s6IClobOrTDW"
   },
   "first-sight": {
     "character": "Jessica Stanley",
-    "voice": "Jessica",
-    "voiceId": "cgSgspJ2msm6clMCkdW9",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Jessica \u2014 curious cafeteria confidante",
+    "voiceId": "uwt0GvruNJ1NtHeSiR0M",
+    "castDesignHash": "a35164e223eb057b87fa0b317a99baa780bf8af8252dd715086fa2716f8676b1",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "1eef35a6c83ba8dea99358b4523edfcfc92b715db42abd9f0e947f605e2627e5",
-    "durationSeconds": 0.97,
-    "bytes": 15925,
-    "requestId": "QRBuPJZ0QpVH7b5VsLjt"
-  },
-  "twilight": {
-    "character": "Bella",
-    "voice": "Laura",
-    "voiceId": "FGY2WhTYpPnrIDTdsKH5",
-    "model": "eleven_turbo_v2_5",
-    "voiceSettings": {
-      "stability": 0.45,
-      "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+    "request": {
+      "text": "[curious] [conspiratorial] That\u2019s Edward Cullen.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192037,
+      "language_code": "en"
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "8d42209cccb31102197717fbd6848c590ac43b5aab85350a91e65a0d848e8cbe",
-    "durationSeconds": 1.31,
-    "bytes": 21358,
-    "requestId": "BtDslMwrTwH69sEHh5p8"
+    "performance": {
+      "tags": [
+        "curious",
+        "conspiratorial"
+      ],
+      "intent": "Cafeteria gossip to a new friend; a quick confidential identification, interest on the name."
+    },
+    "spokenText": "That\u2019s Edward Cullen.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "ee3cfce0df33759f9b14971863552b1cb2857f357cf8e15d4e07250ce14a6df4",
+    "audioSha256": "65975840b7fa7322ebeb374e430cce3bd055b93014a934e9b53e7a837d9fd3e6",
+    "durationSeconds": 1.698,
+    "bytes": 41421,
+    "requestId": "N6jHxk19LEp6Ouil1K1w"
   },
   "the-van": {
     "character": "Edward",
-    "voice": "Eric",
-    "voiceId": "cjVigY5qzO86Huf0OWal",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Edward \u2014 restrained romantic",
+    "voiceId": "HuHkqhWqn7u2VPDSdzNt",
+    "castDesignHash": "180d8cf8868c7c0197018ce6e9a45e82cc833ae0a2d55b773b4582ebf061548f",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "ee633ea2275f93f6a5afd17faac9f3daab37656e96bb990b5a08d0cd5aa0b6a4",
-    "durationSeconds": 0.71,
-    "bytes": 11745,
-    "requestId": "wMLBnJWx8rNRmENi1qPQ"
+    "request": {
+      "text": "[dryly] [dismissive] You can Google it.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192047,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "dryly",
+        "dismissive"
+      ],
+      "intent": "A clipped, evasive little joke intended to stop a dangerous line of questioning."
+    },
+    "spokenText": "You can Google it.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "251518639def4d2103fdc1335c1e69898ce5aecad972c0d4e8b4903f233e2d57",
+    "audioSha256": "144f699e21651865ce4a02466facf752abde8d7a5d7b8b8208eb0c3c87d931db",
+    "durationSeconds": 1.228,
+    "bytes": 30136,
+    "requestId": "sqNmvgRTWMOgp1Q0ADkj"
   },
   "skin-of-a-killer": {
     "character": "Edward",
-    "voice": "Eric",
-    "voiceId": "cjVigY5qzO86Huf0OWal",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Edward \u2014 restrained romantic",
+    "voiceId": "HuHkqhWqn7u2VPDSdzNt",
+    "castDesignHash": "180d8cf8868c7c0197018ce6e9a45e82cc833ae0a2d55b773b4582ebf061548f",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "d431555d5eb797490c8749e8c19667cff8faff7d6671eae0e94370ed95bc180a",
-    "durationSeconds": 1.44,
-    "bytes": 23448,
-    "requestId": "Se3lrGShn640oBUNaBpP"
+    "request": {
+      "text": "[quietly] [pained] This is the skin of a killer, Bella.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192057,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "quietly",
+        "pained"
+      ],
+      "intent": "A vulnerable confession disguised as a warning; self-disgust catches on killer, then tenderness on Bella."
+    },
+    "spokenText": "This is the skin of a killer, Bella.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "a0edeafd213661d08139409b0f3f2420457622d0dced867d5a19c694d79ff646",
+    "audioSha256": "c3eb8860c6121c491bb6c10bd219699b6f85fd92d14674ebf0db470f4f4038c2",
+    "durationSeconds": 2.038,
+    "bytes": 49571,
+    "requestId": "GCDFW1XoczH1tEehRayE"
   },
   "vampire-baseball": {
     "character": "Rosalie",
-    "voice": "Jessica",
-    "voiceId": "cgSgspJ2msm6clMCkdW9",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Rosalie \u2014 cool sharp-edged elegance",
+    "voiceId": "BOk6C5wvWCtF9AYTKrgE",
+    "castDesignHash": "2964b77f1594535c048f66aa09c5af1501b504e536cbd4d14bc1e0fc630eec7b",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "d9487d7180dedf8167a09b23ee7f69719af0c1f9076940044e59b265b045c41c",
-    "durationSeconds": 0.76,
-    "bytes": 12581,
-    "requestId": "yh1oXF7U3Lf2k8m7kEJn"
+    "request": {
+      "text": "[amused] [affectionate] My monkey man.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192067,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "amused",
+        "affectionate"
+      ],
+      "intent": "A private, fondly teasing reaction to an outrageous stunt; smile without a big laugh."
+    },
+    "spokenText": "My monkey man.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "1a4168feda9098cbe5ef52a9c44ac9d3cba6f9630fe347852c0bb875715ddee4",
+    "audioSha256": "53d968b90804807ea093987a48934bdfcb057d5629d1cd06bd15430c3c60945c",
+    "durationSeconds": 1.724,
+    "bytes": 42048,
+    "requestId": "z1Ud9gQhraJXOiaFHJHQ"
+  },
+  "twilight": {
+    "character": "Bella",
+    "voice": "Twilight \u2014 Bella \u2014 intimate and unguarded",
+    "voiceId": "PW0cTaYMsoKkc8HrnuXb",
+    "castDesignHash": "5d2b21bc37f161ff7c8097238efca43fcaa86ca9350d468dc00846f9531f43eb",
+    "model": "eleven_v3",
+    "voiceSettings": {
+      "stability": 0.5,
+      "similarity_boost": 0.75,
+      "speed": 1
+    },
+    "request": {
+      "text": "[softly] [sincere] I want you. Always.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192077,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "softly",
+        "sincere"
+      ],
+      "intent": "Direct desire and a settled promise; allow the second sentence to land gently."
+    },
+    "spokenText": "I want you. Always.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "1693144107f84faac8527ca4f277f10d2d2a6e72b712487d19ebce2527433f60",
+    "audioSha256": "6b47371c36a86fff1f21c2b758343688bb01532764a989d009a4ca03202a5faa",
+    "durationSeconds": 2.926,
+    "bytes": 70887,
+    "requestId": "6ghf9e1SruJt31Uo679s"
   },
   "lunch": {
     "character": "Rosalie",
-    "voice": "Jessica",
-    "voiceId": "cgSgspJ2msm6clMCkdW9",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Rosalie \u2014 cool sharp-edged elegance",
+    "voiceId": "BOk6C5wvWCtF9AYTKrgE",
+    "castDesignHash": "2964b77f1594535c048f66aa09c5af1501b504e536cbd4d14bc1e0fc630eec7b",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "33d5fa49a850da6ba6adf8a68542bc7a362cb44a7d876daea67caa8a3e5ad6fe",
-    "durationSeconds": 0.97,
-    "bytes": 15925,
-    "requestId": "31xEFOLOOpjvUtjkqC1B"
+    "request": {
+      "text": "[sarcastic] [incredulous] Is she even Italian?",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192087,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "sarcastic",
+        "incredulous"
+      ],
+      "intent": "A sharp skeptical aside about the family cooking plan, with the emphasis on Italian."
+    },
+    "spokenText": "Is she even Italian?",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "735ba6fe5f31abc3c6a12138f2fa43926b1150ae824af4e53cf36f2b6e57f2d6",
+    "audioSha256": "8e1da24f2f0c07163fc8d12fdb1ce84be70e7d23e106e5ce2149954d13f81a0b",
+    "durationSeconds": 1.829,
+    "bytes": 44555,
+    "requestId": "F0GHHxBs2UVjXEbx2Vb9"
   },
   "paper-cut": {
     "character": "Bella",
-    "voice": "Laura",
-    "voiceId": "FGY2WhTYpPnrIDTdsKH5",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Bella \u2014 intimate and unguarded",
+    "voiceId": "PW0cTaYMsoKkc8HrnuXb",
+    "castDesignHash": "5d2b21bc37f161ff7c8097238efca43fcaa86ca9350d468dc00846f9531f43eb",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "7ec281832b906adb28f787cc3c7ba02c230fa0435dcb0a57a76fd3937f048e07",
-    "durationSeconds": 0.91,
-    "bytes": 15089,
-    "requestId": "dS1sfygX2Fqk3Ume4no9"
+    "request": {
+      "text": "[startled] Ow! Papercut.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192097,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "startled"
+      ],
+      "intent": "An involuntary little yelp, then an embarrassed everyday explanation; keep it human and quick."
+    },
+    "spokenText": "Ow! Papercut.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "187b4397389494420f0a3a5573e9385cd22692d89ea2fa47778e1ae3980094ca",
+    "audioSha256": "f12983faedb48f8f21ce7bfb697b12e19fce7e07be8eaf100bbd8ed44b0f8016",
+    "durationSeconds": 2.038,
+    "bytes": 49571,
+    "requestId": "gVQtr2qAjqBtz8t4auPZ"
   },
   "the-goodbye": {
     "character": "Edward",
-    "voice": "Eric",
-    "voiceId": "cjVigY5qzO86Huf0OWal",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Edward \u2014 restrained romantic",
+    "voiceId": "HuHkqhWqn7u2VPDSdzNt",
+    "castDesignHash": "180d8cf8868c7c0197018ce6e9a45e82cc833ae0a2d55b773b4582ebf061548f",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "f8833c6f56789ec18758882f844b818b768f7229b732e810c40bbf5bfb1dbda1",
-    "durationSeconds": 1.62,
-    "bytes": 26374,
-    "requestId": "jNu9UgDQmQP3X2DSrSAZ"
+    "request": {
+      "text": "[restrained] [sorrowful] You just don\u2019t belong in my world, Bella.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192107,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "restrained",
+        "sorrowful"
+      ],
+      "intent": "He forces himself to sound certain while breaking his own heart; controlled, no sobbing."
+    },
+    "spokenText": "You just don\u2019t belong in my world, Bella.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "16964286299567c71b47d47014e5e5a4cd122f51e6b4700fb8021a6c6338ed35",
+    "audioSha256": "2be18fac8c04f06aae1f3954fb133f6ae3bcfa105c73d55da170de737a04ffed",
+    "durationSeconds": 2.508,
+    "bytes": 60856,
+    "requestId": "cEeZVhGnEANd0KlFtLZu"
   },
   "garage-days": {
     "character": "Jacob",
-    "voice": "Liam",
-    "voiceId": "TX3LPaxmHKxFdv7VOQHJ",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Jacob \u2014 warm and impulsive",
+    "voiceId": "Moka3likhr2g5k6ENKkJ",
+    "castDesignHash": "d86f08b14ae1e60fac4e82da0159eb3b4b3df33fb5d2512b3d17fe96ab74d70d",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "be18e1e665c2dd423db6c5b675a887668f05f0f25c03c2c289829fb3241f939f",
-    "durationSeconds": 1.36,
-    "bytes": 22194,
-    "requestId": "Bt4l6pEtPDcRnqADe5Zv"
+    "request": {
+      "text": "[playful] [amused] Scrap metal. You shouldn\u2019t have.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192117,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "playful",
+        "amused"
+      ],
+      "intent": "An affectionate mock thank-you for an obviously terrible present; the smile is audible."
+    },
+    "spokenText": "Scrap metal. You shouldn\u2019t have.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "3440deb5e1453078e262a90340285f4764d5439f50013df6f0ef5ea25f9f9a02",
+    "audioSha256": "f17a804ecce098aa35856f336eefa59a6710b493ffb32eaba552ac50db7c909a",
+    "durationSeconds": 2.429,
+    "bytes": 58975,
+    "requestId": "JY6q6MemKJcOUIgD3syH"
   },
   "volterra": {
     "character": "Bella",
-    "voice": "Laura",
-    "voiceId": "FGY2WhTYpPnrIDTdsKH5",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Bella \u2014 intimate and unguarded",
+    "voiceId": "PW0cTaYMsoKkc8HrnuXb",
+    "castDesignHash": "5d2b21bc37f161ff7c8097238efca43fcaa86ca9350d468dc00846f9531f43eb",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "7e3754068a54464029b81124a2fecca7cb656a29de0dbd10ba03c59734281ea8",
-    "durationSeconds": 1.41,
-    "bytes": 23030,
-    "requestId": "oUIinIeIS5MWa1UlJeMp"
+    "request": {
+      "text": "[urgent] [calling out] Edward, stop! I\u2019m right here!",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192127,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "urgent",
+        "calling out"
+      ],
+      "intent": "She needs him to hear her in a crowd; fear tips into relief on right here, no theatrical screaming."
+    },
+    "spokenText": "Edward, stop! I\u2019m right here!",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "cc061377eac225f7fc5347b0f041200cc17446b2787fc63f4663b1895d1941e6",
+    "audioSha256": "62b4a18261ee2bd69fd3fb87205698e6c5a157cdaeb717ce4c36d088b4d02d76",
+    "durationSeconds": 2.116,
+    "bytes": 51452,
+    "requestId": "wMXeKxsglJ6ogzX9Zgxf"
   },
   "new-moon": {
     "character": "Edward",
-    "voice": "Eric",
-    "voiceId": "cjVigY5qzO86Huf0OWal",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Edward \u2014 restrained romantic",
+    "voiceId": "HuHkqhWqn7u2VPDSdzNt",
+    "castDesignHash": "180d8cf8868c7c0197018ce6e9a45e82cc833ae0a2d55b773b4582ebf061548f",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "77dbd924f2ee87a4bb03f6e7536c29ea1697f1bc31898084a1a2cc9d88f5f484",
-    "durationSeconds": 0.78,
-    "bytes": 12999,
-    "requestId": "5HjDL37GpTgIiDtadq2I"
+    "request": {
+      "text": "[tender] [earnest] Marry me, Bella.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192137,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "tender",
+        "earnest"
+      ],
+      "intent": "A simple, intimate proposal with real stakes; no grand narrator cadence."
+    },
+    "spokenText": "Marry me, Bella.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "a96ad600423740cef36882b83c231f4baeda24109bf27fa3f4120b3427654645",
+    "audioSha256": "f1af654e166e22cd65f0ed60f8ab3becd1fe4b509cce57b6252f13d4cc2f17fa",
+    "durationSeconds": 1.149,
+    "bytes": 28255,
+    "requestId": "OnCC5sYqkQ1T6Xayju7k"
   },
   "late-night-snack": {
     "character": "Jacob",
-    "voice": "Liam",
-    "voiceId": "TX3LPaxmHKxFdv7VOQHJ",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Jacob \u2014 warm and impulsive",
+    "voiceId": "Moka3likhr2g5k6ENKkJ",
+    "castDesignHash": "d86f08b14ae1e60fac4e82da0159eb3b4b3df33fb5d2512b3d17fe96ab74d70d",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "3be5a71db7a28796b61d731a5613671d30e339769792a5ca1157c4951759ad31",
-    "durationSeconds": 1.49,
-    "bytes": 24284,
-    "requestId": "iwPpgpIv2AgOj12jMjLR"
+    "request": {
+      "text": "[playful] [confident] I\u2019m team snacks. Pass them over.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192147,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "playful",
+        "confident"
+      ],
+      "intent": "A warm, spontaneous joke to friends; toss off the second sentence like a casual request."
+    },
+    "spokenText": "I\u2019m team snacks. Pass them over.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "c1f2607d418674e3c8b28b66ca648bf9f99cc9170761a79e974a3149f243d5b0",
+    "audioSha256": "fc4ded625095ecad9e5ab759bcd68292064116261ba9ec1ea5b601fbcd9413ff",
+    "durationSeconds": 1.802,
+    "bytes": 43928,
+    "requestId": "1v0fCO3K6gPAVlR5OsU2"
   },
   "cullen-origins": {
     "character": "Jasper",
-    "voice": "Roger",
-    "voiceId": "CwhRBWXzGAHq8TQ4Fs17",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Jasper \u2014 restrained Southern intensity",
+    "voiceId": "yu0nL1iuwEpx3eLmrrph",
+    "castDesignHash": "fc8ca8b9bc489a1f5416a19ca668e32dcac75db0deef4d61c7f3c063abdfdcaa",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "0d1aeb902c0e5967344531cae8fe279cdc788dec2a73cb2704792b80cdfa83d3",
-    "durationSeconds": 2.04,
-    "bytes": 33061,
-    "requestId": "HJGT9pi4Pdr4prJI445L"
+    "request": {
+      "text": "[reflective] [regretful] I thought what I had with Maria was love.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192157,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "reflective",
+        "regretful"
+      ],
+      "intent": "An old mistake admitted quietly; a small hurt underneath the word love."
+    },
+    "spokenText": "I thought what I had with Maria was love.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "60becb0f6164540ba0d181938f19d83f7cdec5aa6469df663f28249f409aaab1",
+    "audioSha256": "a54c2cb68583dd6fa79d438f5375f8eaddb5a12f59fe114e4402e8e1cd2501c0",
+    "durationSeconds": 2.064,
+    "bytes": 50198,
+    "requestId": "w6bkLkljGapXvAcnQ00k"
   },
   "jacobs-confession": {
     "character": "Jacob",
-    "voice": "Liam",
-    "voiceId": "TX3LPaxmHKxFdv7VOQHJ",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Jacob \u2014 warm and impulsive",
+    "voiceId": "Moka3likhr2g5k6ENKkJ",
+    "castDesignHash": "d86f08b14ae1e60fac4e82da0159eb3b4b3df33fb5d2512b3d17fe96ab74d70d",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "d706818d278f28cdba36c2eee03b775e678f2cc26954a033e94ec29d0de92cd8",
-    "durationSeconds": 1.1,
-    "bytes": 18015,
-    "requestId": "TXXo1UNHXOXa2cQkA6dI"
+    "request": {
+      "text": "[earnest] [vulnerable] You feel something for me.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192167,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "earnest",
+        "vulnerable"
+      ],
+      "intent": "Confidence masking the need to be chosen; lean gently on something, not a demand."
+    },
+    "spokenText": "You feel something for me.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "2cda266039f2a63b226bed8d51c07bcee88bd55100a9399a0f2a2980387243cf",
+    "audioSha256": "e92e32b600d71456ba7c75bbbe6209c87f6414c1984c8fc413e4380a07b6ffc9",
+    "durationSeconds": 1.698,
+    "bytes": 41421,
+    "requestId": "Yd7Mwhtnn41lMgfKXKt1"
   },
   "the-kiss": {
     "character": "Bella",
-    "voice": "Laura",
-    "voiceId": "FGY2WhTYpPnrIDTdsKH5",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Bella \u2014 intimate and unguarded",
+    "voiceId": "PW0cTaYMsoKkc8HrnuXb",
+    "castDesignHash": "5d2b21bc37f161ff7c8097238efca43fcaa86ca9350d468dc00846f9531f43eb",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "1177198f160b4688cd21c69ebd081705bc78eb59b6d3071af04e2700262cadcc",
-    "durationSeconds": 1.25,
-    "bytes": 20523,
-    "requestId": "TPAoOsSIUoRZxf7e2xJm"
+    "request": {
+      "text": "[breathless] [resolute] I\u2019m asking you to kiss me.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192177,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "breathless",
+        "resolute"
+      ],
+      "intent": "A difficult request she has finally decided to make; intimate and clear rather than sleepy."
+    },
+    "spokenText": "I\u2019m asking you to kiss me.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "58c7b5fc0244f44b8b1db4fa41d6ff648e459a5750e8318b74431346fa33adf3",
+    "audioSha256": "684db19eb3c7399214e167cdd9d3c5b5a3e6f50699b674723c867353fa2f9143",
+    "durationSeconds": 1.881,
+    "bytes": 45809,
+    "requestId": "IEUaEiZy3S9jkenKIq2i"
   },
   "the-tent": {
     "character": "Jacob",
-    "voice": "Liam",
-    "voiceId": "TX3LPaxmHKxFdv7VOQHJ",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Jacob \u2014 warm and impulsive",
+    "voiceId": "Moka3likhr2g5k6ENKkJ",
+    "castDesignHash": "d86f08b14ae1e60fac4e82da0159eb3b4b3df33fb5d2512b3d17fe96ab74d70d",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "a4a183d917e542ad35c727bf4c00bf79f4b3578d966da2ab8d05ae6a25de0983",
-    "durationSeconds": 1.23,
-    "bytes": 20105,
-    "requestId": "1csrCMMYixkPJ2aTjsAC"
+    "request": {
+      "text": "[smug] [teasing] I am hotter than you.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192187,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "smug",
+        "teasing"
+      ],
+      "intent": "A perfectly timed friendly-rival jab; relish hotter, then let the line fall away."
+    },
+    "spokenText": "I am hotter than you.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "93a69ee693b041d7a018fe2ac9dd0a093f4a4103501cdceea52a60dee0e83a7f",
+    "audioSha256": "b142c7c336edb8c6cb1a6a4daec4bbd0ec08010e0fadaf438ca6035d7d135d8f",
+    "durationSeconds": 1.776,
+    "bytes": 43301,
+    "requestId": "6ucePxeAx899tCpu6UlS"
   },
   "newborn-battle": {
     "character": "Jasper",
-    "voice": "Roger",
-    "voiceId": "CwhRBWXzGAHq8TQ4Fs17",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Jasper \u2014 restrained Southern intensity",
+    "voiceId": "yu0nL1iuwEpx3eLmrrph",
+    "castDesignHash": "fc8ca8b9bc489a1f5416a19ca668e32dcac75db0deef4d61c7f3c063abdfdcaa",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "c84fd02c25827be9d3f296a3e0710f315a4d0ad66dc19b709c219b79993d59fa",
-    "durationSeconds": 1.83,
-    "bytes": 29718,
-    "requestId": "m1yCZYnNEsRmbJ7KsD4K"
+    "request": {
+      "text": "[focused] [firm] Stay focused. I know how they fight.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192197,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "focused",
+        "firm"
+      ],
+      "intent": "Quiet tactical command to allies, urgent and economical with no shouted drill-sergeant delivery."
+    },
+    "spokenText": "Stay focused. I know how they fight.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "6654310dce78e1ead74666d8a42d8191df4afe83c6686bd99bb632ccd600d4a1",
+    "audioSha256": "68dfb9252ebe4220bdd65ac6b32bdae24f4d430f19908f2cb9a000d3552f04e2",
+    "durationSeconds": 2.429,
+    "bytes": 58975,
+    "requestId": "J20dQRx7Gk3YGdNN6DYN"
   },
   "eclipse": {
     "character": "Bella",
-    "voice": "Laura",
-    "voiceId": "FGY2WhTYpPnrIDTdsKH5",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Bella \u2014 intimate and unguarded",
+    "voiceId": "PW0cTaYMsoKkc8HrnuXb",
+    "castDesignHash": "5d2b21bc37f161ff7c8097238efca43fcaa86ca9350d468dc00846f9531f43eb",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "71ff2f2df5349c612a799e3c6b009c5178998dfbb1595a332d4cffa57c358161",
-    "durationSeconds": 0.89,
-    "bytes": 14671,
-    "requestId": "jsDb7c2YSIuy8fsnafrP"
+    "request": {
+      "text": "[warmly] [certain] I love you more.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192207,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "warmly",
+        "certain"
+      ],
+      "intent": "A soft reply with smiling confidence; the final word settles the argument."
+    },
+    "spokenText": "I love you more.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "4630c23b6d44d51efccc1baaeaf4a49f82249b9cb42abc3d612a1c86e38ee2fc",
+    "audioSha256": "502d1da4cb41274bd8a928d7e3972ce5b78cc4ab31c16ddec394c335cc2ab4bf",
+    "durationSeconds": 1.332,
+    "bytes": 32643,
+    "requestId": "zbq8iTID5YAL4MsqInEo"
   },
   "the-wedding": {
     "character": "Edward",
-    "voice": "Eric",
-    "voiceId": "cjVigY5qzO86Huf0OWal",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Edward \u2014 restrained romantic",
+    "voiceId": "HuHkqhWqn7u2VPDSdzNt",
+    "castDesignHash": "180d8cf8868c7c0197018ce6e9a45e82cc833ae0a2d55b773b4582ebf061548f",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "8ad83c4219ddcee6e9d91b46b10710d83c4616dc9bdc9ed70d74dce5909bb945",
-    "durationSeconds": 1.23,
-    "bytes": 20105,
-    "requestId": "RLgnZHfIDgUTU7BsScYx"
+    "request": {
+      "text": "[tender] [smiling] But let\u2019s start with forever.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192217,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "tender",
+        "smiling"
+      ],
+      "intent": "A vow offered at close range; reverent affection, almost disbelieving happiness."
+    },
+    "spokenText": "But let\u2019s start with forever.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "2d032dab3ab0dbb32b1d9c70f03147c33a40a4b50e3725b7bfe5fdf86a0e4b4f",
+    "audioSha256": "7fe0a864e6f2a53e74989e0076143ade6c318b2027d80b4d209f9320b62ecdd9",
+    "durationSeconds": 1.541,
+    "bytes": 37659,
+    "requestId": "9iOZH2KnyMVJZERMs6ss"
   },
   "isle-esme": {
     "character": "Edward",
-    "voice": "Eric",
-    "voiceId": "cjVigY5qzO86Huf0OWal",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Edward \u2014 restrained romantic",
+    "voiceId": "HuHkqhWqn7u2VPDSdzNt",
+    "castDesignHash": "180d8cf8868c7c0197018ce6e9a45e82cc833ae0a2d55b773b4582ebf061548f",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "442d23dbd999bf0df9a7c31225ec540c06f7497429949a46dfb30ccd133ffcb0",
-    "durationSeconds": 1.93,
-    "bytes": 31390,
-    "requestId": "B1CZ2xKfg7P0rGCMSpPp"
+    "request": {
+      "text": "[intimate] [awed] Last night was the best night of my existence.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192227,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "intimate",
+        "awed"
+      ],
+      "intent": "Private wonder after a life-changing night, warm and a little surprised by his own honesty."
+    },
+    "spokenText": "Last night was the best night of my existence.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "6d4396269fa951709c9fe18066db1209360d244d65bbe559f0216e20b026c0cd",
+    "audioSha256": "048db74384c3557162805143931e81605fceb5015261f44236028fca1a4e974d",
+    "durationSeconds": 3.474,
+    "bytes": 84052,
+    "requestId": "hQf8OOHG3bqUDfqCo52I"
   },
   "renesmee-born": {
     "character": "Edward",
-    "voice": "Eric",
-    "voiceId": "cjVigY5qzO86Huf0OWal",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Edward \u2014 restrained romantic",
+    "voiceId": "HuHkqhWqn7u2VPDSdzNt",
+    "castDesignHash": "180d8cf8868c7c0197018ce6e9a45e82cc833ae0a2d55b773b4582ebf061548f",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "e518b5c79aabeaedde1c1efad4206c5b934c6c1ac36a36263ea1863a269bfc0e",
-    "durationSeconds": 1.31,
-    "bytes": 21358,
-    "requestId": "kYlntwSLyL3pxaLVFTwK"
+    "request": {
+      "text": "[panicked] [pleading] Stay with me, Bella. I need you.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192237,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "panicked",
+        "pleading"
+      ],
+      "intent": "Control is failing; he needs her to stay alive. The second sentence cracks open into raw need."
+    },
+    "spokenText": "Stay with me, Bella. I need you.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "60dc5bdcc0182d9b085659a674c659b836c13ac0156731d884d14af0d698d10c",
+    "audioSha256": "e34ea2fbb5aae065ef220efc84dfeede74de572c7f07b53562ac619a06a65877",
+    "durationSeconds": 2.194,
+    "bytes": 53332,
+    "requestId": "0zQbv4LoQO62MANXaBGc"
   },
   "imprinting": {
     "character": "Jacob",
-    "voice": "Liam",
-    "voiceId": "TX3LPaxmHKxFdv7VOQHJ",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Jacob \u2014 warm and impulsive",
+    "voiceId": "Moka3likhr2g5k6ENKkJ",
+    "castDesignHash": "d86f08b14ae1e60fac4e82da0159eb3b4b3df33fb5d2512b3d17fe96ab74d70d",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "89c9f69db4fcad225388ea030c4ae262e255aebd2afc90437353fcec53b343af",
-    "durationSeconds": 1.8,
-    "bytes": 29300,
-    "requestId": "O7bKzItDzPFw0IuAbonQ"
+    "request": {
+      "text": "[protective] [resolute] I\u2019ll keep her safe. Whatever it takes.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192248,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "protective",
+        "resolute"
+      ],
+      "intent": "A steady promise to protect a child; unwavering responsibility and warmth."
+    },
+    "spokenText": "I\u2019ll keep her safe. Whatever it takes.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 2,
+    "scriptHash": "0476b6b9cec851f3fca044317242ab602130eefa88c085453823230f0ae933b1",
+    "audioSha256": "93864dcf4bd505443e8e6aee8070c3d45aa2dd52d53e35775f93e34a4dda8f91",
+    "durationSeconds": 2.612,
+    "bytes": 63363,
+    "requestId": "bckynXi1Cdi0OtWBsoGk"
   },
   "breaking-dawn-1": {
     "character": "Charlie",
-    "voice": "Roger",
-    "voiceId": "CwhRBWXzGAHq8TQ4Fs17",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Charlie \u2014 weary dry-humored dad",
+    "voiceId": "Yn1ZnOMTMRamOK9TGYbL",
+    "castDesignHash": "36cbce080408e2b3a1560da53926369e084293aa08f7df833c0db7bafb5229b0",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "bb224d1669cbfd0152f497a8df228c8e203450a111585cf1bcc6d4ff287aa0de",
-    "durationSeconds": 1.85,
-    "bytes": 30136,
-    "requestId": "WxtoRMt8J2h0RqJPnq2I"
+    "request": {
+      "text": "[deadpan] [wry] I know, I look hot.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192257,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "deadpan",
+        "wry"
+      ],
+      "intent": "An awkward dad undercuts wedding emotion with a dry joke, tossed away rather than performed for applause."
+    },
+    "spokenText": "I know, I look hot.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "70204d3fa26eb90931a4093e3b5c4b7143aaffa595628d521cf44283a802ebdd",
+    "audioSha256": "1af27b554b4f57629b5e4908c63fce3b1ba15bd358cecf69dd63c5221b04d32e",
+    "durationSeconds": 1.646,
+    "bytes": 40167,
+    "requestId": "b3x9YGf1R1wybVuLsjuk"
   },
   "dinner": {
     "character": "Charlie",
-    "voice": "Roger",
-    "voiceId": "CwhRBWXzGAHq8TQ4Fs17",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Charlie \u2014 weary dry-humored dad",
+    "voiceId": "Yn1ZnOMTMRamOK9TGYbL",
+    "castDesignHash": "36cbce080408e2b3a1560da53926369e084293aa08f7df833c0db7bafb5229b0",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "b3c852fd20f36056eda8c968c25aaac7eb7bba167dcd8df732c3f6113ad6f0eb",
-    "durationSeconds": 2.17,
-    "bytes": 35151,
-    "requestId": "ymw8X4rpmHgxVB7TcNIH"
+    "request": {
+      "text": "[matter-of-fact] [warmly] Everybody eats. That\u2019s my only rule tonight.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192267,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "matter-of-fact",
+        "warmly"
+      ],
+      "intent": "Practical hospitality from the dad at the table; a mock rule with a soft edge."
+    },
+    "spokenText": "Everybody eats. That\u2019s my only rule tonight.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "d702091caeed03267b954772d57c3c91b33a24bcd2d84382344d14fe641c1f2f",
+    "audioSha256": "d2ff30badc6fbea917f69f2d0e3710c38f3394e5b28e0564a451b03ac963f179",
+    "durationSeconds": 3.318,
+    "bytes": 80291,
+    "requestId": "351QjWZWTPJylAFkfFlb"
   },
   "rapid-growth": {
     "character": "Bella",
-    "voice": "Laura",
-    "voiceId": "FGY2WhTYpPnrIDTdsKH5",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Bella \u2014 intimate and unguarded",
+    "voiceId": "PW0cTaYMsoKkc8HrnuXb",
+    "castDesignHash": "5d2b21bc37f161ff7c8097238efca43fcaa86ca9350d468dc00846f9531f43eb",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "4dd64ae1d07143e25830436a98f4298bcbe3afbcb58373422ef9650af6e613bc",
-    "durationSeconds": 1.46,
-    "bytes": 23866,
-    "requestId": "QZ1IwAf5F2x4otTd7b1r"
+    "request": {
+      "text": "[firm] [protective] She was born, not bitten.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192277,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "firm",
+        "protective"
+      ],
+      "intent": "A mother corrects a dangerous misunderstanding; clear contrast between born and bitten."
+    },
+    "spokenText": "She was born, not bitten.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "d242cfc69c3b1fbf8bbef94fd62a05e0652c247cbbbeb4a5f878f454ee448a81",
+    "audioSha256": "eaf81698453231603758029c5072b262ca4a86966e6ccf5425793e0bfc0c488a",
+    "durationSeconds": 2.508,
+    "bytes": 60856,
+    "requestId": "z0fRJo0o6EWzhwOUAt2r"
   },
   "the-witnesses": {
     "character": "Carlisle",
-    "voice": "Roger",
-    "voiceId": "CwhRBWXzGAHq8TQ4Fs17",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Carlisle \u2014 compassionate calm authority",
+    "voiceId": "Lbc7ZaIWjsWvCqKKmNc5",
+    "castDesignHash": "a1ee092a9437e2435930d64d4fdf34ec7013073309cf065ff7d34390f60276dd",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "06c1df5c7b5037ce42a952430240df743d30b994c2924c68c87dcfccede121c1",
-    "durationSeconds": 1.91,
-    "bytes": 30972,
-    "requestId": "Vr5Ui2EjGPrkv1GUuUbs"
+    "request": {
+      "text": "[grateful] [earnest] I asked for witnesses. You answered.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192287,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "grateful",
+        "earnest"
+      ],
+      "intent": "Quiet appreciation to people who took a real risk; the second sentence acknowledges their courage."
+    },
+    "spokenText": "I asked for witnesses. You answered.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "7c81edccc330fd974643a5144782ec249cf50fcafd1ead3243bd09ad485fe03a",
+    "audioSha256": "4461e79d402ba1927e81f7d772f9588ecbcd25c8b74af1438ddfdeb847a31386",
+    "durationSeconds": 3.788,
+    "bytes": 91576,
+    "requestId": "WiSdX2LXkJVSIb3hCRqP"
   },
   "the-battle": {
     "character": "Alice",
-    "voice": "Jessica",
-    "voiceId": "cgSgspJ2msm6clMCkdW9",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Alice \u2014 sparkling knowing mischief",
+    "voiceId": "OkT905VXfWpp0HlkToBB",
+    "castDesignHash": "1b5b23bcf9c165fb6e28da2c5581f9fbadc98bf2b738183310b681072aff20dc",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "273977df3e8d7d08398b8a578e9c1ff86218bb3890b59270f2d4f0ed6921c617",
-    "durationSeconds": 1.38,
-    "bytes": 22612,
-    "requestId": "VeGQVpRAXmHmdvf40Z3y"
+    "request": {
+      "text": "[grave] [confident] Now you know. That\u2019s your future.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192297,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "grave",
+        "confident"
+      ],
+      "intent": "An unmistakable warning delivered with eerie certainty; let future land without a theatrical growl."
+    },
+    "spokenText": "Now you know. That\u2019s your future.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "57056396a58cb65906370e5ee21ba1e637af1029a10b00d165bb9ea85f60a4ed",
+    "audioSha256": "25bafd5f3e6d0c133cf30fd7c3334ddb2b1a02b1ccf5692217f20582a50e4c42",
+    "durationSeconds": 2.847,
+    "bytes": 69006,
+    "requestId": "bSf7CUNAPp1or74D8hQM"
   },
   "breaking-dawn-2": {
     "character": "Bella",
-    "voice": "Laura",
-    "voiceId": "FGY2WhTYpPnrIDTdsKH5",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Bella \u2014 intimate and unguarded",
+    "voiceId": "PW0cTaYMsoKkc8HrnuXb",
+    "castDesignHash": "5d2b21bc37f161ff7c8097238efca43fcaa86ca9350d468dc00846f9531f43eb",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "dc7e9bef87e5164e74ff1de37b86edf052fa0a464f77418114383428e7723bdd",
-    "durationSeconds": 0.63,
-    "bytes": 10492,
-    "requestId": "oyXN49jmQdj7FOsl1pjh"
+    "request": {
+      "text": "[softly] [lovingly] Forever.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192307,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "softly",
+        "lovingly"
+      ],
+      "intent": "A single sincere answer to a lifelong promise; one natural word, not drawn into a whisper effect."
+    },
+    "spokenText": "Forever.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "1af0edd3996b5b5b21931ad03d05708616262cf71f950ab62471bb00e99f8a22",
+    "audioSha256": "9f19edc812e5dcc8771cb3126596cd456610c23419b35e330bd6664f8b0d63f7",
+    "durationSeconds": 2.194,
+    "bytes": 53332,
+    "requestId": "3Fw4iyZ74LpTFxDqTPxd"
   },
   "secret-movies": {
     "character": "Edward",
-    "voice": "Eric",
-    "voiceId": "cjVigY5qzO86Huf0OWal",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Edward \u2014 restrained romantic",
+    "voiceId": "HuHkqhWqn7u2VPDSdzNt",
+    "castDesignHash": "180d8cf8868c7c0197018ce6e9a45e82cc833ae0a2d55b773b4582ebf061548f",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "2a009fd27a5b3a7f44356862b3f5124100dca49214356d82869082e28a189cc6",
-    "durationSeconds": 2.06,
-    "bytes": 33479,
-    "requestId": "F5X058MBcQPlTovpuI8T"
+    "request": {
+      "text": "[warmly] [inviting] You stayed through everything. Stay a little longer.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192317,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "warmly",
+        "inviting"
+      ],
+      "intent": "Intimate gratitude to someone who stayed, followed by a gentle invitation with a hint of humor."
+    },
+    "spokenText": "You stayed through everything. Stay a little longer.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "62a5b8c88fff81a152cb9a9b6f8b430f6e05a97920f8016578b8ee6b8abc7532",
+    "audioSha256": "3670e804310a2ed0cb3690c31c9095ab73401112b7df77dd475d6a4a4c8c8c1d",
+    "durationSeconds": 3.553,
+    "bytes": 85933,
+    "requestId": "yTgXKh86fKJNSgZKVVqj"
   },
   "secret-meals": {
     "character": "Charlie",
-    "voice": "Roger",
-    "voiceId": "CwhRBWXzGAHq8TQ4Fs17",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Charlie \u2014 weary dry-humored dad",
+    "voiceId": "Yn1ZnOMTMRamOK9TGYbL",
+    "castDesignHash": "36cbce080408e2b3a1560da53926369e084293aa08f7df833c0db7bafb5229b0",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "50ed9a667ed515e710f1a2ec4dac589ec943d81ca9ca18899dcb7c3c3cb09735",
-    "durationSeconds": 2.09,
-    "bytes": 33897,
-    "requestId": "s4AleuAttVUmheetv6BV"
+    "request": {
+      "text": "[amused] [approving] You ate everything? That\u2019s my kind of team.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192327,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "amused",
+        "approving"
+      ],
+      "intent": "Surprised admiration, then a dad joke delivered with a tiny smile."
+    },
+    "spokenText": "You ate everything? That\u2019s my kind of team.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "feb059de4e07c4b5f4fe9bf12e35a2d587729f915b6d38c1fe3158a00e21e7ec",
+    "audioSha256": "a7bb452ad45135f0e5c9e325bc50e6a49d7285fa87b8f3ef9de09fbf78715310",
+    "durationSeconds": 2.926,
+    "bytes": 70887,
+    "requestId": "J0uYTeteqgzymZrqCoHL"
   },
   "secret-scenes": {
     "character": "Alice",
-    "voice": "Jessica",
-    "voiceId": "cgSgspJ2msm6clMCkdW9",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Alice \u2014 sparkling knowing mischief",
+    "voiceId": "OkT905VXfWpp0HlkToBB",
+    "castDesignHash": "1b5b23bcf9c165fb6e28da2c5581f9fbadc98bf2b738183310b681072aff20dc",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "bbee0692abdc4386b51166075c39a7ed987a5e92e6d75f3790c4c942a54043d2",
-    "durationSeconds": 2.14,
-    "bytes": 34733,
-    "requestId": "UdrSsjCEqm4L8GsfMJyN"
+    "request": {
+      "text": "[delighted] [mischievous] I saw you finishing every scene. Obviously.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192337,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "delighted",
+        "mischievous"
+      ],
+      "intent": "A proud little victory lap, with obviously tossed off as a knowing punchline."
+    },
+    "spokenText": "I saw you finishing every scene. Obviously.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "ef51fae4451e4e45ddfd639c001d206bcbf45e4dcf11ae3be6528f1319aa9a36",
+    "audioSha256": "f27469bdc4032c560d7fb81be3dd71a274a213f18b324834d80debf634cdb7ac",
+    "durationSeconds": 4.362,
+    "bytes": 105368,
+    "requestId": "4knZeomjOru5pqR7bWb0"
   },
   "secret-immortal": {
     "character": "Bella",
-    "voice": "Laura",
-    "voiceId": "FGY2WhTYpPnrIDTdsKH5",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Bella \u2014 intimate and unguarded",
+    "voiceId": "PW0cTaYMsoKkc8HrnuXb",
+    "castDesignHash": "5d2b21bc37f161ff7c8097238efca43fcaa86ca9350d468dc00846f9531f43eb",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "0b6ee78f52061a7c3e0dc5d4d423ecedfb4efd8696d480ae8bb2518023984cd0",
-    "durationSeconds": 1.38,
-    "bytes": 22612,
-    "requestId": "Nu3iaRrykIBhm0gBbFJL"
+    "request": {
+      "text": "[confident] [awed] I was born to be a vampire.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192347,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "confident",
+        "awed"
+      ],
+      "intent": "She finally recognizes herself; delighted conviction, with a little wonder at the realization."
+    },
+    "spokenText": "I was born to be a vampire.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "1affda1f5ba08a5ba8353f6201c55d10a7c7b68a7b182e7cb15e001faea9888e",
+    "audioSha256": "96b195f753d16746a192d52f0e7c5359269cbdf2cfeb8b683b82d4a63dddfeff",
+    "durationSeconds": 2.847,
+    "bytes": 69006,
+    "requestId": "dAVvjVNTSoxuWZevvlR2"
   },
   "greeting-1": {
     "character": "Bella",
-    "voice": "Laura",
-    "voiceId": "FGY2WhTYpPnrIDTdsKH5",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Bella \u2014 intimate and unguarded",
+    "voiceId": "PW0cTaYMsoKkc8HrnuXb",
+    "castDesignHash": "5d2b21bc37f161ff7c8097238efca43fcaa86ca9350d468dc00846f9531f43eb",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "7b65689987dffa7406e83cd87922f8a7cd8694272e98bcd3110478f2010b70fc",
-    "durationSeconds": 1.15,
-    "bytes": 18851,
-    "requestId": "uPOlSsMRRZO8UR0TDJKT"
+    "request": {
+      "text": "[wry] [warmly] Forks is growing on me.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192357,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "wry",
+        "warmly"
+      ],
+      "intent": "A quietly surprised admission that this rainy place is becoming home."
+    },
+    "spokenText": "Forks is growing on me.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "131fbc41f4d9364b6105fdc9ea62f5eb592e2066a611968366ed957ed835d7d4",
+    "audioSha256": "8c53012f16ac9cb0f532902ac382fa14ae27786bf0604c60203fc0672c66ae7d",
+    "durationSeconds": 2.325,
+    "bytes": 56467,
+    "requestId": "cntwZv71A4mTO5PHjlh1"
   },
   "greeting-2": {
     "character": "Charlie",
-    "voice": "Roger",
-    "voiceId": "CwhRBWXzGAHq8TQ4Fs17",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Charlie \u2014 weary dry-humored dad",
+    "voiceId": "Yn1ZnOMTMRamOK9TGYbL",
+    "castDesignHash": "36cbce080408e2b3a1560da53926369e084293aa08f7df833c0db7bafb5229b0",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "d9b78506c8939b3fcc4654ec214aef9bcffbbc7a61f4edf8432e6e6ff085f237",
-    "durationSeconds": 1.93,
-    "bytes": 31390,
-    "requestId": "eiJQlXkgoXoVYi5vkJNe"
+    "request": {
+      "text": "[casual] [welcoming] I\u2019ve got coffee. Make yourself at home.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192367,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "casual",
+        "welcoming"
+      ],
+      "intent": "A slightly awkward dad genuinely glad to have company; easy and unshowy."
+    },
+    "spokenText": "I\u2019ve got coffee. Make yourself at home.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "4bcf17f394fc98c220e493183261be52f4c0a2c640de7a49a95eed18603294ce",
+    "audioSha256": "8e0665ba605edbc528a214c634e3bd89d4f26c94792af865d8318b8d3286027a",
+    "durationSeconds": 2.508,
+    "bytes": 60856,
+    "requestId": "CQUnRTg82TlOiyuVAiE9"
   },
   "greeting-3": {
     "character": "Alice",
-    "voice": "Jessica",
-    "voiceId": "cgSgspJ2msm6clMCkdW9",
-    "model": "eleven_turbo_v2_5",
+    "voice": "Twilight \u2014 Alice \u2014 sparkling knowing mischief",
+    "voiceId": "OkT905VXfWpp0HlkToBB",
+    "castDesignHash": "1b5b23bcf9c165fb6e28da2c5581f9fbadc98bf2b738183310b681072aff20dc",
+    "model": "eleven_v3",
     "voiceSettings": {
-      "stability": 0.45,
+      "stability": 0.5,
       "similarity_boost": 0.75,
-      "style": 0,
-      "use_speaker_boost": true,
-      "speed": 1.12
+      "speed": 1
     },
-    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
-    "scriptHash": "750b4abff6db3280d8d97880fb65655efe97ee61d8cba2aef130fe057b7075c9",
-    "durationSeconds": 2.53,
-    "bytes": 41003,
-    "requestId": "ImYUJVKj8uOUQFo8k2kB"
+    "request": {
+      "text": "[playful] [knowing] I\u2019ve seen your future. You\u2019re staying for all five.",
+      "model_id": "eleven_v3",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "speed": 1
+      },
+      "seed": 9192377,
+      "language_code": "en"
+    },
+    "performance": {
+      "tags": [
+        "playful",
+        "knowing"
+      ],
+      "intent": "A cheerful prediction shared like a secret; mock certainty without a sales pitch."
+    },
+    "spokenText": "I\u2019ve seen your future. You\u2019re staying for all five.",
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
+    "outputFormat": "mp3_44100_192",
+    "take": 1,
+    "scriptHash": "7b3f02e434b5c160cd617f35ccc810411b0b9aac1d85adfd2761c5fb88e550b0",
+    "audioSha256": "d80183f8d3b85ab854dc9f623920ed1d618fd31cf17d4316a463aecdbe530e6f",
+    "durationSeconds": 3.997,
+    "bytes": 96591,
+    "requestId": "YeHGNzNL4XFdZBBS5LoZ"
   }
 }

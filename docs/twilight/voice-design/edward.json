@@ -1,0 +1,45 @@
+{
+  "character": "edward",
+  "request": {
+    "voice_description": "A young adult male dramatic actor with a light, low-mid baritone, neutral American accent and precise, slightly old-fashioned diction. Intimate, close-miked speech with a soft velvety resonance, a faint grain at the ends of phrases, and quiet breath between thoughts. He carries years of loneliness under youthful composure: protective, self-critical, intensely romantic, sometimes wry. Emotion lives in small shifts of pitch and a voice that briefly catches when composure slips. Natural conversational tempo; crisp consonants without an announcer's polish. Tenderness should warm the tone; danger should tighten it rather than become a theatrical growl. Clean dry studio recording, no music or effects.",
+    "model_id": "eleven_ttv_v3",
+    "text": "I thought keeping my distance would make this easier. It hasn't. You ask one ordinary question, and suddenly I can't remember the answer I rehearsed. I am trying to do the right thing. But when you look at me like that, staying away feels impossible.",
+    "guidance_scale": 5,
+    "seed": 240919,
+    "loudness": 0.5
+  },
+  "designHash": "180d8cf8868c7c0197018ce6e9a45e82cc833ae0a2d55b773b4582ebf061548f",
+  "requestId": null,
+  "previews": [
+    {
+      "generated_voice_id": "HuHkqhWqn7u2VPDSdzNt",
+      "media_type": "audio/mpeg",
+      "duration_secs": 19.567583333333335,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "edward-preview-1.mp3"
+    },
+    {
+      "generated_voice_id": "zirfk1o9Z6J2k6cFvowA",
+      "media_type": "audio/mpeg",
+      "duration_secs": 19.332458333333335,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "edward-preview-2.mp3"
+    },
+    {
+      "generated_voice_id": "YyWeEh203n13p9JfzldT",
+      "media_type": "audio/mpeg",
+      "duration_secs": 19.88104166666667,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "edward-preview-3.mp3"
+    }
+  ],
+  "voiceId": "HuHkqhWqn7u2VPDSdzNt",
+  "selectedPreview": 1,
+  "createRequestId": null
+}

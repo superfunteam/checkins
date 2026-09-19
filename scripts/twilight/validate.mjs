@@ -1,24 +1,49 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 
 const root = 'public/passports/twilight';
 const p = JSON.parse(fs.readFileSync(`${root}/passport.json`));
 const production = JSON.parse(fs.readFileSync('docs/twilight/production.json'));
 const audio = JSON.parse(fs.readFileSync('docs/twilight/audio-receipts.json'));
+const transcripts = JSON.parse(fs.readFileSync('docs/twilight/voice-review-transcript.json'));
 const dialogue = [...production.badges, ...production.greetings];
+assert.equal(production.model, 'eleven_v3');
+assert.equal(production.voiceSettings.speed, 1);
+assert.equal(Object.keys(production.voices).length, 9);
+assert.equal(new Set(Object.values(production.voices).map(voice => voice.id)).size, 9, 'Each character has a distinct voice');
+for (const [character, voice] of Object.entries(production.voices)) {
+  const design = JSON.parse(fs.readFileSync(`docs/twilight/voice-design/${character}.json`));
+  assert.equal(design.request.model_id, 'eleven_ttv_v3');
+  assert.equal(design.request.voice_description, voice.designDescription, `Traits sent to Voice Design: ${character}`);
+  assert.equal(design.voiceId, voice.id);
+  assert.equal(design.designHash, voice.designHash);
+}
 assert.equal(dialogue.length, 36);
 for (const line of dialogue) {
   assert(line.narration.trim().split(/\s+/).length <= 10, `Keep ${line.id} punchy`);
   assert(line.character && production.voices[line.voice], line.id);
   assert(['film-quote', 'original-character-line'].includes(line.kind), line.id);
   if (line.kind === 'film-quote') assert(line.source, line.id);
-  assert(!/[\[\]…]/.test(line.narration), `No acting tags or long pause cues: ${line.id}`);
+  assert(!/[\[\]…]/.test(line.narration), `Keep spoken words separate from direction: ${line.id}`);
+  assert(line.performance.tags.length > 0 && line.performance.intent, `Direct each performance: ${line.id}`);
+  assert.equal(line.synthesisText, `${line.performance.tags.map(tag => `[${tag}]`).join(' ')} ${line.narration}`);
   const receipt = audio[line.id];
   assert.equal(receipt?.model, production.model, `Regenerate ${line.id}`);
   assert.equal(receipt.voiceId, production.voices[line.voice].id, line.id);
+  assert.equal(receipt.castDesignHash, production.voices[line.voice].designHash, line.id);
   assert.deepEqual(receipt.voiceSettings, production.voiceSettings, line.id);
-  assert(receipt.durationSeconds > 0.3 && receipt.durationSeconds <= 6, line.id);
+  assert.equal(receipt.request.model_id, 'eleven_v3', line.id);
+  assert.equal(receipt.request.text, line.synthesisText, `Performance directions actually sent: ${line.id}`);
+  assert.equal(receipt.spokenText, line.narration, line.id);
+  assert(receipt.durationSeconds > 0.3 && receipt.durationSeconds <= 8, line.id);
+  const greeting = line.id.startsWith('greeting-');
+  const file = `${root}/assets/audio/${greeting ? 'greetings' : 'badges'}/${greeting ? '' : 'badge-'}${line.id}.mp3`;
+  const hash = createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+  assert.equal(hash, receipt.audioSha256, `Published audio matches receipt: ${line.id}`);
+  assert.equal(transcripts.clips[line.id].audioSha256, hash, line.id);
+  assert.equal(transcripts.clips[line.id].wordsMatch, true, `Spoken words verified: ${line.id}`);
 }
 const ids = new Set(p.badges.map(b => b.id));
 assert.equal(ids.size, 33);
@@ -63,7 +88,7 @@ for (const image of finalArt.images) {
 assert.equal(p.settings.badgeShape, 'arch');
 assert.equal(p.theme.mode, 'dark');
 assert.equal(p.pwa.backgroundColor, p.theme.colors.background['100']);
-assert.equal(p.version, 7);
+assert.equal(p.version, 8);
 assert.equal(p.features.teamPoll, true);
 const teams = JSON.parse(fs.readFileSync('docs/twilight/team-art/manifest.json'));
 assert.deepEqual(teams.images.map(image => image.id), ['edward', 'jacob', 'charlie']);

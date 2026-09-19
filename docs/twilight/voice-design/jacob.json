@@ -1,0 +1,45 @@
+{
+  "character": "jacob",
+  "request": {
+    "voice_description": "A young adult male actor with a warm mid-low register, an open chest resonance, a slight gravelly edge and an everyday American West Coast accent. Friendly and spontaneous, with a smile audible in his teasing. Athletic energy, easy confidence and fast emotional access: humor can turn into hurt or fiercely protective sincerity in one breath. Speech has buoyant pitch changes and natural contractions, without a radio-host rhythm. Let playful lines land with a small knowing lift; let vulnerable lines lose the swagger. Masculine and grounded, never a monster growl or a stereotyped accent. Conversational pace with room for a meaningful beat. Dry close-miked dramatic dialogue, no effects.",
+    "model_id": "eleven_ttv_v3",
+    "text": "You know you can just ask for help, right? I might give you a hard time about it. That's part of the deal. But I'll show up. Rain, broken engines, terrible decisions, whatever it is. Just don't tell me you're fine when I can see you're not.",
+    "guidance_scale": 5,
+    "seed": 240921,
+    "loudness": 0.5
+  },
+  "designHash": "d86f08b14ae1e60fac4e82da0159eb3b4b3df33fb5d2512b3d17fe96ab74d70d",
+  "requestId": null,
+  "previews": [
+    {
+      "generated_voice_id": "Moka3likhr2g5k6ENKkJ",
+      "media_type": "audio/mpeg",
+      "duration_secs": 18.052458333333334,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "jacob-preview-1.mp3"
+    },
+    {
+      "generated_voice_id": "zzZXSJi56moUn29S8WyJ",
+      "media_type": "audio/mpeg",
+      "duration_secs": 14.604291666666667,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "jacob-preview-2.mp3"
+    },
+    {
+      "generated_voice_id": "GUsrBCruKQR4b3LF4RlS",
+      "media_type": "audio/mpeg",
+      "duration_secs": 15.727583333333333,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "jacob-preview-3.mp3"
+    }
+  ],
+  "voiceId": "Moka3likhr2g5k6ENKkJ",
+  "selectedPreview": 1,
+  "createRequestId": null
+}

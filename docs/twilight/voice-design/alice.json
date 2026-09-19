@@ -1,0 +1,45 @@
+{
+  "character": "alice",
+  "request": {
+    "voice_description": "A young adult female actor with a clear bright mid-high voice, a delicate bell-like resonance and a light American accent. Quick-witted, affectionate and mischievously certain of herself. Her energy comes from playful changes of pitch, smiling consonants and little confidential drops in volume, not squeakiness or cartoon excitement. She can shift from delighted conspirator to suddenly serious warning while retaining poise. A nimble conversational rhythm, short purposeful pauses and graceful articulation; she sounds like she knows a secret and cannot quite resist sharing it. Expressive natural character dialogue, no sales-pitch enthusiasm, no music or effects.",
+    "model_id": "eleven_ttv_v3",
+    "text": "Don't look so worried. I already know how this turns out. Well, most of it. There's one tiny detail I may have to improvise, but that's the fun part. Give me your hand. Trust me. And try to look surprised when everyone starts cheering.",
+    "guidance_scale": 5,
+    "seed": 240923,
+    "loudness": 0.5
+  },
+  "designHash": "1b5b23bcf9c165fb6e28da2c5581f9fbadc98bf2b738183310b681072aff20dc",
+  "requestId": null,
+  "previews": [
+    {
+      "generated_voice_id": "OkT905VXfWpp0HlkToBB",
+      "media_type": "audio/mpeg",
+      "duration_secs": 17.007583333333333,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "alice-preview-1.mp3"
+    },
+    {
+      "generated_voice_id": "snujZ1BV2Z17JzYmEBQi",
+      "media_type": "audio/mpeg",
+      "duration_secs": 16.119416666666666,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "alice-preview-2.mp3"
+    },
+    {
+      "generated_voice_id": "iMW7CzB59ogJIkhwOTSP",
+      "media_type": "audio/mpeg",
+      "duration_secs": 16.3545,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "alice-preview-3.mp3"
+    }
+  ],
+  "voiceId": "OkT905VXfWpp0HlkToBB",
+  "selectedPreview": 1,
+  "createRequestId": null
+}

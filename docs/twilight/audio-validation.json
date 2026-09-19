@@ -1,12 +1,15 @@
 {
   "clips": 36,
-  "model": "eleven_turbo_v2_5",
-  "totalSeconds": 52.95,
-  "minSeconds": 0.63,
-  "maxSeconds": 2.53,
-  "medianSeconds": 1.395,
-  "previousTotalSeconds": 528.2,
-  "transcript": "All 36 clips matched after ignoring case, punctuation, spaces and Papercut word separation.",
+  "voices": 9,
+  "model": "eleven_v3",
+  "totalSeconds": 85.917,
+  "minSeconds": 1.149,
+  "maxSeconds": 4.362,
+  "medianSeconds": 2.325,
+  "previousTotalSeconds": 52.95,
+  "transcript": "All 36 clips matched after ignoring case, punctuation and spaces.",
   "decodedAll": true,
-  "hashesMatchAll": true
+  "hashesMatchAll": true,
+  "humanListeningApproved": false,
+  "checkedAt": "2026-09-19T14:49:24.907032+00:00"
 }

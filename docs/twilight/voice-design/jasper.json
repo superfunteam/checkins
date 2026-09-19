@@ -1,0 +1,45 @@
+{
+  "character": "jasper",
+  "request": {
+    "voice_description": "A young adult man with a lean medium-low voice, lightly rough resonance and a subtle, believable Texas-influenced American accent. Measured, watchful and tightly controlled, with softened Southern vowels rather than an exaggerated drawl. He speaks like someone who is constantly managing what he feels: tension held in the breath, thoughtful pauses and occasional flashes of raw regret. Tactical instructions are concise and calm; personal memories carry an intimate wounded honesty. Natural speaking tempo, no cowboy caricature, no booming military bark, no polished narrator cadence. Clean close-miked cinematic dialogue with expressive micro-inflections and no background sound.",
+    "model_id": "eleven_ttv_v3",
+    "text": "You learn to watch the little things. The shoulders. The breath before somebody moves. That's usually all the warning you get. I wasn't always good at knowing when to walk away. These days, I'm trying to give other people the chance I didn't take.",
+    "guidance_scale": 5,
+    "seed": 240925,
+    "loudness": 0.5
+  },
+  "designHash": "fc8ca8b9bc489a1f5416a19ca668e32dcac75db0deef4d61c7f3c063abdfdcaa",
+  "requestId": null,
+  "previews": [
+    {
+      "generated_voice_id": "yu0nL1iuwEpx3eLmrrph",
+      "media_type": "audio/mpeg",
+      "duration_secs": 17.085958333333334,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "jasper-preview-1.mp3"
+    },
+    {
+      "generated_voice_id": "TeHAXPdR2F8wlwYCaLLj",
+      "media_type": "audio/mpeg",
+      "duration_secs": 15.727583333333333,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "jasper-preview-2.mp3"
+    },
+    {
+      "generated_voice_id": "rMi0jNdLo6OZO0leOs9e",
+      "media_type": "audio/mpeg",
+      "duration_secs": 15.387958333333334,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "jasper-preview-3.mp3"
+    }
+  ],
+  "voiceId": "yu0nL1iuwEpx3eLmrrph",
+  "selectedPreview": 1,
+  "createRequestId": null
+}

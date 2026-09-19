@@ -76,7 +76,7 @@ badges.sort((a,b) => {
   const parse = s => { const [,h,m,p] = s.match(/(\d+):(\d+)(am|pm)/); return (+h % 12) * 60 + +m + (p === 'pm' ? 720 : 0); };
   return parse(a.time) - parse(b.time);
 }).forEach((b,i) => b.order = i + 1);
-passport.version = Math.max(7, passport.version || 1);
+passport.version = Math.max(8, passport.version || 1);
 delete passport._notes;
 passport.settings = { ...passport.settings, badgeShape: 'arch' };
 passport.theme.mode = 'dark';

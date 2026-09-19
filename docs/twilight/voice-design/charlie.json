@@ -1,0 +1,45 @@
+{
+  "character": "charlie",
+  "request": {
+    "voice_description": "A middle-aged American man with a lean, weathered, slightly nasal low-mid baritone and a soft gravelly rasp. An ordinary small-town Pacific Northwest dad: tired after work, laconic, emotionally guarded, quietly protective. His delivery is dry and understated, with clipped starts, little sighs through the nose, an almost swallowed chuckle and a reluctant warmth. Mild roughness suggests late nights and beer, without drunken slurring. Jokes are tossed away with perfect deadpan timing; concern emerges as an awkward softening of the voice. Natural speech, not a booming sheriff, seductive bass, audiobook narrator or comic caricature. Clean close-miked roomless recording.",
+    "model_id": "eleven_ttv_v3",
+    "text": "There's coffee if you want some. It's probably terrible. Made it before the game, so you're taking your chances. Look, I'm not great at the big speeches. Just come home in one piece, all right? And maybe answer your phone once in a while.",
+    "guidance_scale": 5,
+    "seed": 240922,
+    "loudness": 0.5
+  },
+  "designHash": "36cbce080408e2b3a1560da53926369e084293aa08f7df833c0db7bafb5229b0",
+  "requestId": null,
+  "previews": [
+    {
+      "generated_voice_id": "Yn1ZnOMTMRamOK9TGYbL",
+      "media_type": "audio/mpeg",
+      "duration_secs": 17.321041666666666,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "charlie-preview-1.mp3"
+    },
+    {
+      "generated_voice_id": "Z3bfLPBE118a795GypyN",
+      "media_type": "audio/mpeg",
+      "duration_secs": 15.309625,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "charlie-preview-2.mp3"
+    },
+    {
+      "generated_voice_id": "Iy3ciWy2sSwGzuoR0Zvf",
+      "media_type": "audio/mpeg",
+      "duration_secs": 13.402666666666667,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "charlie-preview-3.mp3"
+    }
+  ],
+  "voiceId": "Yn1ZnOMTMRamOK9TGYbL",
+  "selectedPreview": 1,
+  "createRequestId": null
+}

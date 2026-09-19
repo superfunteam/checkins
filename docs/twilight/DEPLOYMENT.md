@@ -17,7 +17,7 @@ DNS record, and the issued `*.checkins.party` certificate covers HTTPS. The
 apex remains `checkins.party`. The client routes the Twilight hostname to its
 passport at `/`; do not force `VITE_HOST_PASSPORT` in production.
 
-## Verification
+## Initial release verification — September 17, 2026
 
 - Full local end-to-end suite and Twilight content validation passed before
   release, including silent updates, bonus claims, and Shire regression.
@@ -39,3 +39,13 @@ Some resolvers may retain the earlier negative DNS response during initial
 propagation. Public DNS answers were used directly for HTTPS asset and browser
 verification without disabling certificate checks. Browser QA used an isolated
 profile; it did not change any guest's existing progress.
+
+## Audio release — September 19, 2026
+
+Content version 8 replaces all 36 Turbo recordings with Eleven v3 dialogue.
+Nine distinct character voices were created with Eleven v3 Voice Design using
+full acoustic and character profiles. Every clip includes explicit emotion
+and delivery cues in its submitted speech text and uses natural speed 1.0.
+Generation receipts and transcript checks cover the exact audio hashes.
+The content-version bump invalidates cached clips without resetting claims
+or team choices. Listening samples and the full review are in `VOICE-NOTES.md`.

@@ -1,0 +1,18 @@
+{
+  "character": "Edward",
+  "voice": "Eric",
+  "voiceId": "cjVigY5qzO86Huf0OWal",
+  "model": "eleven_turbo_v2_5",
+  "voiceSettings": {
+    "stability": 0.45,
+    "similarity_boost": 0.75,
+    "style": 0,
+    "use_speaker_boost": true,
+    "speed": 1.12
+  },
+  "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+  "scriptHash": "f8833c6f56789ec18758882f844b818b768f7229b732e810c40bbf5bfb1dbda1",
+  "durationSeconds": 1.62,
+  "bytes": 26374,
+  "requestId": "jNu9UgDQmQP3X2DSrSAZ"
+}

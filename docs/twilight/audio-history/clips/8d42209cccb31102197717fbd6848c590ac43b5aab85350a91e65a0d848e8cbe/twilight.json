@@ -1,0 +1,18 @@
+{
+  "character": "Bella",
+  "voice": "Laura",
+  "voiceId": "FGY2WhTYpPnrIDTdsKH5",
+  "model": "eleven_turbo_v2_5",
+  "voiceSettings": {
+    "stability": 0.45,
+    "similarity_boost": 0.75,
+    "style": 0,
+    "use_speaker_boost": true,
+    "speed": 1.12
+  },
+  "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+  "scriptHash": "8d42209cccb31102197717fbd6848c590ac43b5aab85350a91e65a0d848e8cbe",
+  "durationSeconds": 1.31,
+  "bytes": 21358,
+  "requestId": "BtDslMwrTwH69sEHh5p8"
+}

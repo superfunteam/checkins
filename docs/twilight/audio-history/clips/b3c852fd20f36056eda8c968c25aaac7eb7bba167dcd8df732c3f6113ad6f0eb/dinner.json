@@ -1,0 +1,18 @@
+{
+  "character": "Charlie",
+  "voice": "Roger",
+  "voiceId": "CwhRBWXzGAHq8TQ4Fs17",
+  "model": "eleven_turbo_v2_5",
+  "voiceSettings": {
+    "stability": 0.45,
+    "similarity_boost": 0.75,
+    "style": 0,
+    "use_speaker_boost": true,
+    "speed": 1.12
+  },
+  "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+  "scriptHash": "b3c852fd20f36056eda8c968c25aaac7eb7bba167dcd8df732c3f6113ad6f0eb",
+  "durationSeconds": 2.17,
+  "bytes": 35151,
+  "requestId": "ymw8X4rpmHgxVB7TcNIH"
+}

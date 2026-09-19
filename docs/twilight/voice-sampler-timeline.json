@@ -1,27 +1,56 @@
 [
   {
     "id": "skin-of-a-killer",
+    "character": "Edward",
     "start": 0,
-    "end": 1.395
+    "end": 2.007
+  },
+  {
+    "id": "volterra",
+    "character": "Bella",
+    "start": 2.557,
+    "end": 4.637
   },
   {
     "id": "the-tent",
-    "start": 1.895,
-    "end": 3.083
+    "character": "Jacob",
+    "start": 5.187,
+    "end": 6.932
   },
   {
     "id": "breaking-dawn-1",
-    "start": 3.583,
-    "end": 5.387
-  },
-  {
-    "id": "secret-immortal",
-    "start": 5.887,
-    "end": 7.242
+    "character": "Charlie",
+    "start": 7.482,
+    "end": 9.085
   },
   {
     "id": "secret-scenes",
-    "start": 7.742,
-    "end": 9.847
+    "character": "Alice",
+    "start": 9.635,
+    "end": 13.963
+  },
+  {
+    "id": "lunch",
+    "character": "Rosalie",
+    "start": 14.513,
+    "end": 16.296
+  },
+  {
+    "id": "cullen-origins",
+    "character": "Jasper",
+    "start": 16.846,
+    "end": 18.876
+  },
+  {
+    "id": "the-witnesses",
+    "character": "Carlisle",
+    "start": 19.426,
+    "end": 23.186
+  },
+  {
+    "id": "first-sight",
+    "character": "Jessica Stanley",
+    "start": 23.736,
+    "end": 25.403
   }
 ]

@@ -1,0 +1,650 @@
+{
+  "breakfast": {
+    "character": "Charlie",
+    "voice": "Roger",
+    "voiceId": "CwhRBWXzGAHq8TQ4Fs17",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "995c6300b4dc0a611a8dbb8c41d7a0dfabbbf021d55861acd246a8f2e18efdce",
+    "durationSeconds": 1.93,
+    "bytes": 31390,
+    "requestId": "QXlVvMp0NsweOkVbF8GE"
+  },
+  "first-sight": {
+    "character": "Jessica Stanley",
+    "voice": "Jessica",
+    "voiceId": "cgSgspJ2msm6clMCkdW9",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "1eef35a6c83ba8dea99358b4523edfcfc92b715db42abd9f0e947f605e2627e5",
+    "durationSeconds": 0.97,
+    "bytes": 15925,
+    "requestId": "QRBuPJZ0QpVH7b5VsLjt"
+  },
+  "twilight": {
+    "character": "Bella",
+    "voice": "Laura",
+    "voiceId": "FGY2WhTYpPnrIDTdsKH5",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "8d42209cccb31102197717fbd6848c590ac43b5aab85350a91e65a0d848e8cbe",
+    "durationSeconds": 1.31,
+    "bytes": 21358,
+    "requestId": "BtDslMwrTwH69sEHh5p8"
+  },
+  "the-van": {
+    "character": "Edward",
+    "voice": "Eric",
+    "voiceId": "cjVigY5qzO86Huf0OWal",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "ee633ea2275f93f6a5afd17faac9f3daab37656e96bb990b5a08d0cd5aa0b6a4",
+    "durationSeconds": 0.71,
+    "bytes": 11745,
+    "requestId": "wMLBnJWx8rNRmENi1qPQ"
+  },
+  "skin-of-a-killer": {
+    "character": "Edward",
+    "voice": "Eric",
+    "voiceId": "cjVigY5qzO86Huf0OWal",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "d431555d5eb797490c8749e8c19667cff8faff7d6671eae0e94370ed95bc180a",
+    "durationSeconds": 1.44,
+    "bytes": 23448,
+    "requestId": "Se3lrGShn640oBUNaBpP"
+  },
+  "vampire-baseball": {
+    "character": "Rosalie",
+    "voice": "Jessica",
+    "voiceId": "cgSgspJ2msm6clMCkdW9",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "d9487d7180dedf8167a09b23ee7f69719af0c1f9076940044e59b265b045c41c",
+    "durationSeconds": 0.76,
+    "bytes": 12581,
+    "requestId": "yh1oXF7U3Lf2k8m7kEJn"
+  },
+  "lunch": {
+    "character": "Rosalie",
+    "voice": "Jessica",
+    "voiceId": "cgSgspJ2msm6clMCkdW9",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "33d5fa49a850da6ba6adf8a68542bc7a362cb44a7d876daea67caa8a3e5ad6fe",
+    "durationSeconds": 0.97,
+    "bytes": 15925,
+    "requestId": "31xEFOLOOpjvUtjkqC1B"
+  },
+  "paper-cut": {
+    "character": "Bella",
+    "voice": "Laura",
+    "voiceId": "FGY2WhTYpPnrIDTdsKH5",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "7ec281832b906adb28f787cc3c7ba02c230fa0435dcb0a57a76fd3937f048e07",
+    "durationSeconds": 0.91,
+    "bytes": 15089,
+    "requestId": "dS1sfygX2Fqk3Ume4no9"
+  },
+  "the-goodbye": {
+    "character": "Edward",
+    "voice": "Eric",
+    "voiceId": "cjVigY5qzO86Huf0OWal",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "f8833c6f56789ec18758882f844b818b768f7229b732e810c40bbf5bfb1dbda1",
+    "durationSeconds": 1.62,
+    "bytes": 26374,
+    "requestId": "jNu9UgDQmQP3X2DSrSAZ"
+  },
+  "garage-days": {
+    "character": "Jacob",
+    "voice": "Liam",
+    "voiceId": "TX3LPaxmHKxFdv7VOQHJ",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "be18e1e665c2dd423db6c5b675a887668f05f0f25c03c2c289829fb3241f939f",
+    "durationSeconds": 1.36,
+    "bytes": 22194,
+    "requestId": "Bt4l6pEtPDcRnqADe5Zv"
+  },
+  "volterra": {
+    "character": "Bella",
+    "voice": "Laura",
+    "voiceId": "FGY2WhTYpPnrIDTdsKH5",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "7e3754068a54464029b81124a2fecca7cb656a29de0dbd10ba03c59734281ea8",
+    "durationSeconds": 1.41,
+    "bytes": 23030,
+    "requestId": "oUIinIeIS5MWa1UlJeMp"
+  },
+  "new-moon": {
+    "character": "Edward",
+    "voice": "Eric",
+    "voiceId": "cjVigY5qzO86Huf0OWal",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "77dbd924f2ee87a4bb03f6e7536c29ea1697f1bc31898084a1a2cc9d88f5f484",
+    "durationSeconds": 0.78,
+    "bytes": 12999,
+    "requestId": "5HjDL37GpTgIiDtadq2I"
+  },
+  "late-night-snack": {
+    "character": "Jacob",
+    "voice": "Liam",
+    "voiceId": "TX3LPaxmHKxFdv7VOQHJ",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "3be5a71db7a28796b61d731a5613671d30e339769792a5ca1157c4951759ad31",
+    "durationSeconds": 1.49,
+    "bytes": 24284,
+    "requestId": "iwPpgpIv2AgOj12jMjLR"
+  },
+  "cullen-origins": {
+    "character": "Jasper",
+    "voice": "Roger",
+    "voiceId": "CwhRBWXzGAHq8TQ4Fs17",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "0d1aeb902c0e5967344531cae8fe279cdc788dec2a73cb2704792b80cdfa83d3",
+    "durationSeconds": 2.04,
+    "bytes": 33061,
+    "requestId": "HJGT9pi4Pdr4prJI445L"
+  },
+  "jacobs-confession": {
+    "character": "Jacob",
+    "voice": "Liam",
+    "voiceId": "TX3LPaxmHKxFdv7VOQHJ",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "d706818d278f28cdba36c2eee03b775e678f2cc26954a033e94ec29d0de92cd8",
+    "durationSeconds": 1.1,
+    "bytes": 18015,
+    "requestId": "TXXo1UNHXOXa2cQkA6dI"
+  },
+  "the-kiss": {
+    "character": "Bella",
+    "voice": "Laura",
+    "voiceId": "FGY2WhTYpPnrIDTdsKH5",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "1177198f160b4688cd21c69ebd081705bc78eb59b6d3071af04e2700262cadcc",
+    "durationSeconds": 1.25,
+    "bytes": 20523,
+    "requestId": "TPAoOsSIUoRZxf7e2xJm"
+  },
+  "the-tent": {
+    "character": "Jacob",
+    "voice": "Liam",
+    "voiceId": "TX3LPaxmHKxFdv7VOQHJ",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "a4a183d917e542ad35c727bf4c00bf79f4b3578d966da2ab8d05ae6a25de0983",
+    "durationSeconds": 1.23,
+    "bytes": 20105,
+    "requestId": "1csrCMMYixkPJ2aTjsAC"
+  },
+  "newborn-battle": {
+    "character": "Jasper",
+    "voice": "Roger",
+    "voiceId": "CwhRBWXzGAHq8TQ4Fs17",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "c84fd02c25827be9d3f296a3e0710f315a4d0ad66dc19b709c219b79993d59fa",
+    "durationSeconds": 1.83,
+    "bytes": 29718,
+    "requestId": "m1yCZYnNEsRmbJ7KsD4K"
+  },
+  "eclipse": {
+    "character": "Bella",
+    "voice": "Laura",
+    "voiceId": "FGY2WhTYpPnrIDTdsKH5",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "71ff2f2df5349c612a799e3c6b009c5178998dfbb1595a332d4cffa57c358161",
+    "durationSeconds": 0.89,
+    "bytes": 14671,
+    "requestId": "jsDb7c2YSIuy8fsnafrP"
+  },
+  "the-wedding": {
+    "character": "Edward",
+    "voice": "Eric",
+    "voiceId": "cjVigY5qzO86Huf0OWal",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "8ad83c4219ddcee6e9d91b46b10710d83c4616dc9bdc9ed70d74dce5909bb945",
+    "durationSeconds": 1.23,
+    "bytes": 20105,
+    "requestId": "RLgnZHfIDgUTU7BsScYx"
+  },
+  "isle-esme": {
+    "character": "Edward",
+    "voice": "Eric",
+    "voiceId": "cjVigY5qzO86Huf0OWal",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "442d23dbd999bf0df9a7c31225ec540c06f7497429949a46dfb30ccd133ffcb0",
+    "durationSeconds": 1.93,
+    "bytes": 31390,
+    "requestId": "B1CZ2xKfg7P0rGCMSpPp"
+  },
+  "renesmee-born": {
+    "character": "Edward",
+    "voice": "Eric",
+    "voiceId": "cjVigY5qzO86Huf0OWal",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "e518b5c79aabeaedde1c1efad4206c5b934c6c1ac36a36263ea1863a269bfc0e",
+    "durationSeconds": 1.31,
+    "bytes": 21358,
+    "requestId": "kYlntwSLyL3pxaLVFTwK"
+  },
+  "imprinting": {
+    "character": "Jacob",
+    "voice": "Liam",
+    "voiceId": "TX3LPaxmHKxFdv7VOQHJ",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "89c9f69db4fcad225388ea030c4ae262e255aebd2afc90437353fcec53b343af",
+    "durationSeconds": 1.8,
+    "bytes": 29300,
+    "requestId": "O7bKzItDzPFw0IuAbonQ"
+  },
+  "breaking-dawn-1": {
+    "character": "Charlie",
+    "voice": "Roger",
+    "voiceId": "CwhRBWXzGAHq8TQ4Fs17",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "bb224d1669cbfd0152f497a8df228c8e203450a111585cf1bcc6d4ff287aa0de",
+    "durationSeconds": 1.85,
+    "bytes": 30136,
+    "requestId": "WxtoRMt8J2h0RqJPnq2I"
+  },
+  "dinner": {
+    "character": "Charlie",
+    "voice": "Roger",
+    "voiceId": "CwhRBWXzGAHq8TQ4Fs17",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "b3c852fd20f36056eda8c968c25aaac7eb7bba167dcd8df732c3f6113ad6f0eb",
+    "durationSeconds": 2.17,
+    "bytes": 35151,
+    "requestId": "ymw8X4rpmHgxVB7TcNIH"
+  },
+  "rapid-growth": {
+    "character": "Bella",
+    "voice": "Laura",
+    "voiceId": "FGY2WhTYpPnrIDTdsKH5",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "4dd64ae1d07143e25830436a98f4298bcbe3afbcb58373422ef9650af6e613bc",
+    "durationSeconds": 1.46,
+    "bytes": 23866,
+    "requestId": "QZ1IwAf5F2x4otTd7b1r"
+  },
+  "the-witnesses": {
+    "character": "Carlisle",
+    "voice": "Roger",
+    "voiceId": "CwhRBWXzGAHq8TQ4Fs17",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "06c1df5c7b5037ce42a952430240df743d30b994c2924c68c87dcfccede121c1",
+    "durationSeconds": 1.91,
+    "bytes": 30972,
+    "requestId": "Vr5Ui2EjGPrkv1GUuUbs"
+  },
+  "the-battle": {
+    "character": "Alice",
+    "voice": "Jessica",
+    "voiceId": "cgSgspJ2msm6clMCkdW9",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "273977df3e8d7d08398b8a578e9c1ff86218bb3890b59270f2d4f0ed6921c617",
+    "durationSeconds": 1.38,
+    "bytes": 22612,
+    "requestId": "VeGQVpRAXmHmdvf40Z3y"
+  },
+  "breaking-dawn-2": {
+    "character": "Bella",
+    "voice": "Laura",
+    "voiceId": "FGY2WhTYpPnrIDTdsKH5",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "dc7e9bef87e5164e74ff1de37b86edf052fa0a464f77418114383428e7723bdd",
+    "durationSeconds": 0.63,
+    "bytes": 10492,
+    "requestId": "oyXN49jmQdj7FOsl1pjh"
+  },
+  "secret-movies": {
+    "character": "Edward",
+    "voice": "Eric",
+    "voiceId": "cjVigY5qzO86Huf0OWal",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "2a009fd27a5b3a7f44356862b3f5124100dca49214356d82869082e28a189cc6",
+    "durationSeconds": 2.06,
+    "bytes": 33479,
+    "requestId": "F5X058MBcQPlTovpuI8T"
+  },
+  "secret-meals": {
+    "character": "Charlie",
+    "voice": "Roger",
+    "voiceId": "CwhRBWXzGAHq8TQ4Fs17",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "50ed9a667ed515e710f1a2ec4dac589ec943d81ca9ca18899dcb7c3c3cb09735",
+    "durationSeconds": 2.09,
+    "bytes": 33897,
+    "requestId": "s4AleuAttVUmheetv6BV"
+  },
+  "secret-scenes": {
+    "character": "Alice",
+    "voice": "Jessica",
+    "voiceId": "cgSgspJ2msm6clMCkdW9",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "bbee0692abdc4386b51166075c39a7ed987a5e92e6d75f3790c4c942a54043d2",
+    "durationSeconds": 2.14,
+    "bytes": 34733,
+    "requestId": "UdrSsjCEqm4L8GsfMJyN"
+  },
+  "secret-immortal": {
+    "character": "Bella",
+    "voice": "Laura",
+    "voiceId": "FGY2WhTYpPnrIDTdsKH5",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "0b6ee78f52061a7c3e0dc5d4d423ecedfb4efd8696d480ae8bb2518023984cd0",
+    "durationSeconds": 1.38,
+    "bytes": 22612,
+    "requestId": "Nu3iaRrykIBhm0gBbFJL"
+  },
+  "greeting-1": {
+    "character": "Bella",
+    "voice": "Laura",
+    "voiceId": "FGY2WhTYpPnrIDTdsKH5",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "7b65689987dffa7406e83cd87922f8a7cd8694272e98bcd3110478f2010b70fc",
+    "durationSeconds": 1.15,
+    "bytes": 18851,
+    "requestId": "uPOlSsMRRZO8UR0TDJKT"
+  },
+  "greeting-2": {
+    "character": "Charlie",
+    "voice": "Roger",
+    "voiceId": "CwhRBWXzGAHq8TQ4Fs17",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "d9b78506c8939b3fcc4654ec214aef9bcffbbc7a61f4edf8432e6e6ff085f237",
+    "durationSeconds": 1.93,
+    "bytes": 31390,
+    "requestId": "eiJQlXkgoXoVYi5vkJNe"
+  },
+  "greeting-3": {
+    "character": "Alice",
+    "voice": "Jessica",
+    "voiceId": "cgSgspJ2msm6clMCkdW9",
+    "model": "eleven_turbo_v2_5",
+    "voiceSettings": {
+      "stability": 0.45,
+      "similarity_boost": 0.75,
+      "style": 0,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+    "scriptHash": "750b4abff6db3280d8d97880fb65655efe97ee61d8cba2aef130fe057b7075c9",
+    "durationSeconds": 2.53,
+    "bytes": 41003,
+    "requestId": "ImYUJVKj8uOUQFo8k2kB"
+  }
+}

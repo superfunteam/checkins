@@ -1,0 +1,45 @@
+{
+  "character": "jessica",
+  "request": {
+    "voice_description": "A young adult woman with a bright mid-register American voice, a lightly nasal conversational edge and quick, lively pitch changes. Socially alert, curious and a little competitive; the friend leaning across a cafeteria table to share the interesting detail. Casual contemporary diction, slightly breathy starts, quick emphasis on a name, and a conspiratorial lowering of volume. Her wit is youthful and self-aware, with a touch of incredulity rather than mean caricature. Natural spontaneous dialogue; no announcer polish, cartoon valley-girl exaggeration or overly sugary cheer. Clean close-miked speech, no music or background noise.",
+    "model_id": "eleven_ttv_v3",
+    "text": "Okay, so you noticed him. Everybody notices him. I'm just telling you what I know, which is apparently more than anyone will actually admit. You can go say hello if you want. I'll be right here, pretending I'm not watching the whole thing.",
+    "guidance_scale": 5,
+    "seed": 240927,
+    "loudness": 0.5
+  },
+  "designHash": "a35164e223eb057b87fa0b317a99baa780bf8af8252dd715086fa2716f8676b1",
+  "requestId": null,
+  "previews": [
+    {
+      "generated_voice_id": "uwt0GvruNJ1NtHeSiR0M",
+      "media_type": "audio/mpeg",
+      "duration_secs": 14.447583333333334,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "jessica-preview-1.mp3"
+    },
+    {
+      "generated_voice_id": "0yRJrGy52SF0DztNqZIm",
+      "media_type": "audio/mpeg",
+      "duration_secs": 13.167583333333333,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "jessica-preview-2.mp3"
+    },
+    {
+      "generated_voice_id": "7xqfcBIqRCx6nsRIw6g7",
+      "media_type": "audio/mpeg",
+      "duration_secs": 14.029625,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "jessica-preview-3.mp3"
+    }
+  ],
+  "voiceId": "uwt0GvruNJ1NtHeSiR0M",
+  "selectedPreview": 1,
+  "createRequestId": null
+}

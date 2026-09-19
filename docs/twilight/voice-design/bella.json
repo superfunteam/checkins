@@ -1,0 +1,45 @@
+{
+  "character": "bella",
+  "request": {
+    "voice_description": "A young adult woman dramatic actor with a low-mid feminine register, American Pacific Northwest speech and a lightly husky, airy texture. Candid, inward, intelligent and slightly awkward; she seems to discover the words as she says them. Small catches of breath, subtle vocal fry at relaxed phrase endings and an occasional broken onset convey vulnerability, without exaggerated stammering. Her dry humor is almost accidental. Under pressure her voice becomes urgent and unexpectedly firm; in romance it is close, honest and grounded. Natural compact conversational pacing, varied intonation, no sing-song narration or polished commercial brightness. Clean intimate studio speech, no background sounds.",
+    "model_id": "eleven_ttv_v3",
+    "text": "I had a whole speech ready. Of course I did. And now you're here, and all I can remember is that I don't want you to leave. That sounds dramatic. I know. I'm usually better at pretending this stuff doesn't matter. It matters. You matter to me.",
+    "guidance_scale": 5,
+    "seed": 240920,
+    "loudness": 0.5
+  },
+  "designHash": "5d2b21bc37f161ff7c8097238efca43fcaa86ca9350d468dc00846f9531f43eb",
+  "requestId": null,
+  "previews": [
+    {
+      "generated_voice_id": "PW0cTaYMsoKkc8HrnuXb",
+      "media_type": "audio/mpeg",
+      "duration_secs": 19.88104166666667,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "bella-preview-1.mp3"
+    },
+    {
+      "generated_voice_id": "W3IStCQbSk24qDU9Mm9T",
+      "media_type": "audio/mpeg",
+      "duration_secs": 19.88104166666667,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "bella-preview-2.mp3"
+    },
+    {
+      "generated_voice_id": "J0PqDNSXoxvgK5KKfLeX",
+      "media_type": "audio/mpeg",
+      "duration_secs": 21.239416666666667,
+      "language": "en",
+      "detected_labels": null,
+      "previews": null,
+      "file": "bella-preview-3.mp3"
+    }
+  ],
+  "voiceId": "PW0cTaYMsoKkc8HrnuXb",
+  "selectedPreview": 1,
+  "createRequestId": null
+}

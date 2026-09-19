@@ -1,182 +1,218 @@
 [
   {
     "id": "breakfast",
+    "character": "Charlie",
     "start": 0,
-    "end": 1.887
+    "end": 2.561
   },
   {
     "id": "first-sight",
-    "start": 2.387,
-    "end": 3.325
+    "character": "Jessica Stanley",
+    "start": 3.111,
+    "end": 4.778
   },
   {
     "id": "the-van",
-    "start": 3.825,
-    "end": 4.5
+    "character": "Edward",
+    "start": 5.328,
+    "end": 6.528
   },
   {
     "id": "skin-of-a-killer",
-    "start": 5.0,
-    "end": 6.395
+    "character": "Edward",
+    "start": 7.078,
+    "end": 9.085
   },
   {
     "id": "vampire-baseball",
-    "start": 6.895,
-    "end": 7.617
+    "character": "Rosalie",
+    "start": 9.635,
+    "end": 11.315
   },
   {
     "id": "twilight",
-    "start": 8.117,
-    "end": 9.382
+    "character": "Bella",
+    "start": 11.865,
+    "end": 14.745
   },
   {
     "id": "lunch",
-    "start": 9.882,
-    "end": 10.804
+    "character": "Rosalie",
+    "start": 15.295,
+    "end": 17.078
   },
   {
     "id": "paper-cut",
-    "start": 11.304,
-    "end": 12.179
+    "character": "Bella",
+    "start": 17.628,
+    "end": 19.628
   },
   {
     "id": "the-goodbye",
-    "start": 12.679,
-    "end": 14.256
+    "character": "Edward",
+    "start": 20.178,
+    "end": 22.635
   },
   {
     "id": "garage-days",
-    "start": 14.756,
-    "end": 16.074
+    "character": "Jacob",
+    "start": 23.185,
+    "end": 25.585
   },
   {
     "id": "volterra",
-    "start": 16.574,
-    "end": 17.955
+    "character": "Bella",
+    "start": 26.135,
+    "end": 28.216
   },
   {
     "id": "new-moon",
-    "start": 18.455,
-    "end": 19.188
+    "character": "Edward",
+    "start": 28.766,
+    "end": 29.879
   },
   {
     "id": "late-night-snack",
-    "start": 19.688,
-    "end": 21.137
+    "character": "Jacob",
+    "start": 30.429,
+    "end": 32.189
   },
   {
     "id": "cullen-origins",
-    "start": 21.637,
-    "end": 23.63
+    "character": "Jasper",
+    "start": 32.739,
+    "end": 34.769
   },
   {
     "id": "jacobs-confession",
-    "start": 24.13,
-    "end": 25.197
+    "character": "Jacob",
+    "start": 35.319,
+    "end": 36.982
   },
   {
     "id": "the-kiss",
-    "start": 25.697,
-    "end": 26.921
+    "character": "Bella",
+    "start": 37.532,
+    "end": 39.372
   },
   {
     "id": "the-tent",
-    "start": 27.421,
-    "end": 28.609
+    "character": "Jacob",
+    "start": 39.922,
+    "end": 41.667
   },
   {
     "id": "newborn-battle",
-    "start": 29.109,
-    "end": 30.908
+    "character": "Jasper",
+    "start": 42.217,
+    "end": 44.617
   },
   {
     "id": "eclipse",
-    "start": 31.408,
-    "end": 32.269
+    "character": "Bella",
+    "start": 45.167,
+    "end": 46.448
   },
   {
     "id": "the-wedding",
-    "start": 32.769,
-    "end": 33.953
+    "character": "Edward",
+    "start": 46.998,
+    "end": 48.494
   },
   {
     "id": "isle-esme",
-    "start": 34.453,
-    "end": 36.335
+    "character": "Edward",
+    "start": 49.044,
+    "end": 52.484
   },
   {
     "id": "renesmee-born",
-    "start": 36.835,
-    "end": 38.108
+    "character": "Edward",
+    "start": 53.034,
+    "end": 55.194
   },
   {
     "id": "imprinting",
-    "start": 38.608,
-    "end": 40.372
+    "character": "Jacob",
+    "start": 55.744,
+    "end": 58.326
   },
   {
     "id": "breaking-dawn-1",
-    "start": 40.872,
-    "end": 42.676
+    "character": "Charlie",
+    "start": 58.876,
+    "end": 60.479
   },
   {
     "id": "dinner",
-    "start": 43.176,
-    "end": 45.3
+    "character": "Charlie",
+    "start": 61.029,
+    "end": 64.309
   },
   {
     "id": "rapid-growth",
-    "start": 45.8,
-    "end": 47.228
+    "character": "Bella",
+    "start": 64.859,
+    "end": 67.34
   },
   {
     "id": "the-witnesses",
-    "start": 47.728,
-    "end": 49.593
+    "character": "Carlisle",
+    "start": 67.89,
+    "end": 71.65
   },
   {
     "id": "the-battle",
-    "start": 50.093,
-    "end": 51.437
+    "character": "Alice",
+    "start": 72.2,
+    "end": 75.0
   },
   {
     "id": "breaking-dawn-2",
-    "start": 51.937,
-    "end": 52.526
+    "character": "Bella",
+    "start": 75.55,
+    "end": 77.71
   },
   {
     "id": "secret-movies",
-    "start": 53.026,
-    "end": 55.055
+    "character": "Edward",
+    "start": 78.26,
+    "end": 81.786
   },
   {
     "id": "secret-meals",
-    "start": 55.555,
-    "end": 57.613
+    "character": "Charlie",
+    "start": 82.336,
+    "end": 85.216
   },
   {
     "id": "secret-scenes",
-    "start": 58.113,
-    "end": 60.217
+    "character": "Alice",
+    "start": 85.766,
+    "end": 90.094
   },
   {
     "id": "secret-immortal",
-    "start": 60.717,
-    "end": 62.073
+    "character": "Bella",
+    "start": 90.644,
+    "end": 93.444
   },
   {
     "id": "greeting-1",
-    "start": 62.573,
-    "end": 63.672
+    "character": "Bella",
+    "start": 93.994,
+    "end": 96.275
   },
   {
     "id": "greeting-2",
-    "start": 64.172,
-    "end": 66.078
+    "character": "Charlie",
+    "start": 96.825,
+    "end": 99.305
   },
   {
     "id": "greeting-3",
-    "start": 66.578,
-    "end": 69.066
+    "character": "Alice",
+    "start": 99.855,
+    "end": 103.804
   }
 ]

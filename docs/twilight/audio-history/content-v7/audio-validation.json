@@ -1,0 +1,12 @@
+{
+  "clips": 36,
+  "model": "eleven_turbo_v2_5",
+  "totalSeconds": 52.95,
+  "minSeconds": 0.63,
+  "maxSeconds": 2.53,
+  "medianSeconds": 1.395,
+  "previousTotalSeconds": 528.2,
+  "transcript": "All 36 clips matched after ignoring case, punctuation, spaces and Papercut word separation.",
+  "decodedAll": true,
+  "hashesMatchAll": true
+}

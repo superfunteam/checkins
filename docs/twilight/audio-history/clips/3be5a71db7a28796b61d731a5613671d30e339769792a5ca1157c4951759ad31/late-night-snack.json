@@ -1,0 +1,18 @@
+{
+  "character": "Jacob",
+  "voice": "Liam",
+  "voiceId": "TX3LPaxmHKxFdv7VOQHJ",
+  "model": "eleven_turbo_v2_5",
+  "voiceSettings": {
+    "stability": 0.45,
+    "similarity_boost": 0.75,
+    "style": 0,
+    "use_speaker_boost": true,
+    "speed": 1.12
+  },
+  "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+  "scriptHash": "3be5a71db7a28796b61d731a5613671d30e339769792a5ca1157c4951759ad31",
+  "durationSeconds": 1.49,
+  "bytes": 24284,
+  "requestId": "iwPpgpIv2AgOj12jMjLR"
+}

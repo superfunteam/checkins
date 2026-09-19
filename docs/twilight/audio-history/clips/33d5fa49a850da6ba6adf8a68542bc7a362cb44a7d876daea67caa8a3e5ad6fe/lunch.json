@@ -1,0 +1,18 @@
+{
+  "character": "Rosalie",
+  "voice": "Jessica",
+  "voiceId": "cgSgspJ2msm6clMCkdW9",
+  "model": "eleven_turbo_v2_5",
+  "voiceSettings": {
+    "stability": 0.45,
+    "similarity_boost": 0.75,
+    "style": 0,
+    "use_speaker_boost": true,
+    "speed": 1.12
+  },
+  "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+  "scriptHash": "33d5fa49a850da6ba6adf8a68542bc7a362cb44a7d876daea67caa8a3e5ad6fe",
+  "durationSeconds": 0.97,
+  "bytes": 15925,
+  "requestId": "31xEFOLOOpjvUtjkqC1B"
+}

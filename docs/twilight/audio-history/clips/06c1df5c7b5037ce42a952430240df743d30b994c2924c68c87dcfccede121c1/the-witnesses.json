@@ -1,0 +1,18 @@
+{
+  "character": "Carlisle",
+  "voice": "Roger",
+  "voiceId": "CwhRBWXzGAHq8TQ4Fs17",
+  "model": "eleven_turbo_v2_5",
+  "voiceSettings": {
+    "stability": 0.45,
+    "similarity_boost": 0.75,
+    "style": 0,
+    "use_speaker_boost": true,
+    "speed": 1.12
+  },
+  "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.06,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-48dB:start_silence=0.10,areverse,loudnorm=I=-16:TP=-1.5:LRA=11",
+  "scriptHash": "06c1df5c7b5037ce42a952430240df743d30b994c2924c68c87dcfccede121c1",
+  "durationSeconds": 1.91,
+  "bytes": 30972,
+  "requestId": "Vr5Ui2EjGPrkv1GUuUbs"
+}
