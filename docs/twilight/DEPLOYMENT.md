@@ -49,3 +49,7 @@ and delivery cues in its submitted speech text and uses natural speed 1.0.
 Generation receipts and transcript checks cover the exact audio hashes.
 The content-version bump invalidates cached clips without resetting claims
 or team choices. Listening samples and the full review are in `VOICE-NOTES.md`.
+
+## Baseball art and secret locks — content version 9
+
+Twilight’s final mystery badge now uses the same lock as the other secrets. The Shire ring remains specific to its Ringbearer badge. Vampire Baseball has a new natural pitching composition, with the previous original preserved for reference. Version 9 changes the asset URLs so cached phones receive the replacement while keeping their existing badge claims and team choice.

@@ -84,7 +84,7 @@ export default function BadgeCard({ badge, index }) {
           {showAsMystery ? (
             // Lock placeholder for secret badges
             <img
-              src={getAssetUrl(badge.finale || badge.id === 'secret-ringbearer' ? 'assets/images/lock-ring.png' : 'assets/images/lock.png')}
+              src={getAssetUrl(badge.id === 'secret-ringbearer' ? 'assets/images/lock-ring.png' : 'assets/images/lock.png')}
               alt="Locked"
               className="w-full h-full object-cover"
             />

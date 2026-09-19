@@ -33,7 +33,7 @@ add('breakfast', 'meal', 'Brunch', '11:00am ish', 'Fuel for forever', 'Brunch be
 scene('twilight', 'first-sight', 'The Cullens Arrive', '0:08:45', 'Enter the Cullens', 'Bella spots Edward across the cafeteria. Beautiful, mysterious, and apparently above eating lunch. Forks just got interesting.', 'FIRST SIGHT OF THE CULLENS. Fully clothed brunette Bella in a blue jacket notices pale bronze-haired Edward across a rainy school cafeteria. Four elegant Cullen siblings softly behind him. An untouched red apple. Intense eye contact.');
 scene('twilight', 'the-van', 'Emergency Contact', '0:27:00', 'One inconvenient handprint', 'Edward stops Tyler’s van with one hand. Bella notices. His cover story now has a very inconvenient dent.', 'Edward in a dark coat braces his palm against the deeply dented blue side of a sliding van, shielding fully clothed Bella crouched beside a red pickup in a rain-glazed school parking lot. Dramatic frozen impact, no injuries, silver rain.');
 scene('twilight', 'skin-of-a-killer', 'A Very Sparkly Secret', '1:04:00', 'Sunlight spills secrets', 'Sunlight reveals Edward’s sparkle; the Cullen house reveals his family. Immortality comes with secrets, excellent windows, and ambitious dinner plans.', 'A luminous faceted diamond-like crystal held in an antique silver setting rests among white wildflowers in a sunlit forest meadow. Shafts of sunlight scatter a thousand tiny rainbow sparkles across blue-green cedar boughs. A delicate red ribbon suggests a shared secret. Symbolic supernatural revelation, tranquil romantic landscape, no people.');
-scene('twilight', 'vampire-baseball', 'Vampire Baseball', '1:12:00', 'Thunder. Bats. Trouble.', 'Thunder hides the hits. Alice pitches; the Cullens play. Then James, Laurent, and Victoria arrive. So much for a friendly game.', 'Pixie-haired Alice Cullen in vintage white baseball uniform winds up for a dramatic pitch on a misty forest baseball field. Big white baseball in foreground, teammates as small silhouettes, lightning arcs over Olympic mountains. Three ominous distant strangers at forest edge.');
+scene('twilight', 'vampire-baseball', 'Vampire Baseball', '1:12:00', 'Thunder. Bats. Trouble.', 'Thunder hides the hits. Alice pitches; the Cullens play. Then James, Laurent, and Victoria arrive. So much for a friendly game.', 'Alice Cullen with a dark pixie cut pitches in a damp forest clearing, normal baseball held behind her shoulder, grounded athletic anatomy and quiet storm lighting. Natural cinematic realism with restrained painterly detail. No giant foreground ball or extreme foreshortening.');
 add('twilight', 'movie', 'Twilight', '12:57pm ish', 'First film complete', 'James’s hunt is over. Bella and Edward make it to prom. One film down; the yearning is just getting started.', 'FINAL TWILIGHT MOVIE ACHIEVEMENT. Bella in a modest deep-blue prom dress and Edward in a dark suit dance beneath a glowing gazebo at night, blue woodland behind them, a luminous red apple subtly nestled in foreground ivy. Lush sweeping romantic finale art.', { startTime: '11:00am ish', edition: 'Extended Edition' });
 add('lunch', 'meal', 'Lunch', '1:00pm ish', 'Refuel before heartbreak', 'Refuel before New Moon. Heartbreak and questionable motorcycle decisions are easier to handle after a proper lunch.', 'Rich warm lunch still life: toasted sandwiches, steaming soup, fries, a red apple and a glass of water on a rainy Pacific Northwest diner table. Red vinyl booth, misty pines through window. Cozy delicious painted fantasy-game feast.');
 
@@ -76,7 +76,7 @@ badges.sort((a,b) => {
   const parse = s => { const [,h,m,p] = s.match(/(\d+):(\d+)(am|pm)/); return (+h % 12) * 60 + +m + (p === 'pm' ? 720 : 0); };
   return parse(a.time) - parse(b.time);
 }).forEach((b,i) => b.order = i + 1);
-passport.version = Math.max(8, passport.version || 1);
+passport.version = Math.max(9, passport.version || 1);
 delete passport._notes;
 passport.settings = { ...passport.settings, badgeShape: 'arch' };
 passport.theme.mode = 'dark';
@@ -161,6 +161,9 @@ passport.content.certificate.footer = 'Forks remembers.';
 passport.content.schedule.title = 'Today’s Saga · 11am Start';
 passport.audio.greetings = [1,2,3].map(i => `assets/audio/greetings/greeting-${i}.mp3`);
 fs.writeFileSync(file, JSON.stringify(passport, null, 2) + '\n');
+
+// Preserve the revised art direction when rebuilding the content handoff.
+production.find(b => b.id === 'vampire-baseball').imagePrompt = JSON.parse(fs.readFileSync('docs/twilight/final-art/baseball-revision.json', 'utf8')).prompt;
 
 const greetings = [1, 2, 3].map(i => ({ id: `greeting-${i}`, ...voiceLines[`greeting-${i}`] }));
 fs.writeFileSync('docs/twilight/production.json', JSON.stringify({ model: voiceModel, voiceSettings, imageMode: 'built-in image_gen', style, films, voices, badges: production, greetings }, null, 2) + '\n');

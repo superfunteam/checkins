@@ -88,7 +88,7 @@ for (const image of finalArt.images) {
 assert.equal(p.settings.badgeShape, 'arch');
 assert.equal(p.theme.mode, 'dark');
 assert.equal(p.pwa.backgroundColor, p.theme.colors.background['100']);
-assert.equal(p.version, 8);
+assert.equal(p.version, 9);
 assert.equal(p.features.teamPoll, true);
 const teams = JSON.parse(fs.readFileSync('docs/twilight/team-art/manifest.json'));
 assert.deepEqual(teams.images.map(image => image.id), ['edward', 'jacob', 'charlie']);
