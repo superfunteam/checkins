@@ -61,7 +61,7 @@ def main():
    subprocess.run(['ffmpeg','-v','error','-y','-f','concat','-safe','0','-i',str(listing),'-b:a','192k',str(out/(filename+'.mp3'))],check=True)
    (out/(filename+'-timeline.json')).write_text(json.dumps(timeline,indent=2)+'\n')
   montage([i['id'] for i in items],'voice-review-all')
-  montage(['skin-of-a-killer','volterra','the-tent','breaking-dawn-1','secret-scenes','lunch','cullen-origins','the-witnesses','first-sight'],'voice-sampler')
+  montage(['skin-of-a-killer','volterra','the-tent','breaking-dawn-1','secret-scenes','lunch','newborn-battle','the-witnesses','first-sight'],'voice-sampler')
   (out/'voice-review-transcript.json').write_text(json.dumps(validation,indent=2)+'\n')
   durations=[receipts[i['id']]['durationSeconds'] for i in items]
   summary={'clips':len(items),'voices':len(plan['voices']),'model':plan['model'],'totalSeconds':round(sum(durations),3),'minSeconds':min(durations),'maxSeconds':max(durations),'medianSeconds':sorted(durations)[len(durations)//2],'previousTotalSeconds':52.95,'transcript':'All 36 clips matched after ignoring case, punctuation and spaces.','decodedAll':True,'hashesMatchAll':all(sha((stage/f'{i["id"]}.mp3').read_bytes())==receipts[i['id']]['audioSha256'] for i in items),'humanListeningApproved':False,'checkedAt':datetime.datetime.now(datetime.timezone.utc).isoformat()}

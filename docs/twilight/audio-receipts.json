@@ -506,10 +506,10 @@
     "requestId": "1v0fCO3K6gPAVlR5OsU2"
   },
   "cullen-origins": {
-    "character": "Jasper",
-    "voice": "Twilight \u2014 Jasper \u2014 restrained Southern intensity",
-    "voiceId": "yu0nL1iuwEpx3eLmrrph",
-    "castDesignHash": "fc8ca8b9bc489a1f5416a19ca668e32dcac75db0deef4d61c7f3c063abdfdcaa",
+    "character": "Edward",
+    "voice": "Twilight \u2014 Edward \u2014 restrained romantic",
+    "voiceId": "HuHkqhWqn7u2VPDSdzNt",
+    "castDesignHash": "180d8cf8868c7c0197018ce6e9a45e82cc833ae0a2d55b773b4582ebf061548f",
     "model": "eleven_v3",
     "voiceSettings": {
       "stability": 0.5,
@@ -517,7 +517,7 @@
       "speed": 1
     },
     "request": {
-      "text": "[reflective] [regretful] I thought what I had with Maria was love.",
+      "text": "[reflective] [wistful] I had a different life before all this.",
       "model_id": "eleven_v3",
       "voice_settings": {
         "stability": 0.5,
@@ -530,19 +530,19 @@
     "performance": {
       "tags": [
         "reflective",
-        "regretful"
+        "wistful"
       ],
-      "intent": "An old mistake admitted quietly; a small hurt underneath the word love."
+      "intent": "A brief personal admission to Bella; a trace of longing for his human life, intimate and conversational."
     },
-    "spokenText": "I thought what I had with Maria was love.",
+    "spokenText": "I had a different life before all this.",
     "processing": "silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.08,areverse,silenceremove=start_periods=1:start_duration=0.02:start_threshold=-55dB:start_silence=0.12,areverse,loudnorm=I=-18:TP=-1.5:LRA=11",
     "outputFormat": "mp3_44100_192",
     "take": 1,
-    "scriptHash": "60becb0f6164540ba0d181938f19d83f7cdec5aa6469df663f28249f409aaab1",
-    "audioSha256": "a54c2cb68583dd6fa79d438f5375f8eaddb5a12f59fe114e4402e8e1cd2501c0",
-    "durationSeconds": 2.064,
-    "bytes": 50198,
-    "requestId": "w6bkLkljGapXvAcnQ00k"
+    "scriptHash": "795917e323494c77cc4b54ff7cd6aad5d91a02a68cb8daafa1e97cdbb0a39764",
+    "audioSha256": "f5643f44861fe4faeea9e1ff377bb4e4f9595bb1785eae519ee2a2dd2f0bbdf1",
+    "durationSeconds": 2.273,
+    "bytes": 55213,
+    "requestId": "usF9Hb1Ptlm8AD1mMSq0"
   },
   "jacobs-confession": {
     "character": "Jacob",

@@ -982,129 +982,115 @@
       "requestId": null
     },
     "cullen-origins": {
-      "audioSha256": "a54c2cb68583dd6fa79d438f5375f8eaddb5a12f59fe114e4402e8e1cd2501c0",
-      "expected": "I thought what I had with Maria was love.",
-      "transcript": "I thought what I had with Maria was love",
+      "audioSha256": "f5643f44861fe4faeea9e1ff377bb4e4f9595bb1785eae519ee2a2dd2f0bbdf1",
+      "expected": "I had a different life before all this.",
+      "transcript": "I had a different life before all this",
       "wordsMatch": true,
       "words": [
         {
           "text": "I",
-          "start": 0.12,
-          "end": 0.2,
-          "type": "word",
-          "logprob": -0.0001408954558428377
-        },
-        {
-          "text": " ",
-          "start": 0.2,
-          "end": 0.22,
-          "type": "spacing",
-          "logprob": -3.576278118089249e-07
-        },
-        {
-          "text": "thought",
           "start": 0.22,
-          "end": 0.42,
+          "end": 0.26,
           "type": "word",
-          "logprob": -3.576278118089249e-07
+          "logprob": -9.536738616588991e-07
         },
         {
           "text": " ",
-          "start": 0.42,
-          "end": 0.44,
-          "type": "spacing",
-          "logprob": -1.1920928244535389e-07
-        },
-        {
-          "text": "what",
-          "start": 0.46,
-          "end": 0.56,
-          "type": "word",
-          "logprob": -1.1920928244535389e-07
-        },
-        {
-          "text": " ",
-          "start": 0.56,
-          "end": 0.64,
-          "type": "spacing",
-          "logprob": 0.0
-        },
-        {
-          "text": "I",
-          "start": 0.64,
-          "end": 0.68,
-          "type": "word",
-          "logprob": 0.0
-        },
-        {
-          "text": " ",
-          "start": 0.68,
-          "end": 0.72,
+          "start": 0.26,
+          "end": 0.3,
           "type": "spacing",
           "logprob": 0.0
         },
         {
           "text": "had",
-          "start": 0.72,
-          "end": 0.86,
+          "start": 0.3,
+          "end": 0.4,
           "type": "word",
           "logprob": 0.0
         },
         {
           "text": " ",
-          "start": 0.86,
-          "end": 0.9,
+          "start": 0.4,
+          "end": 0.44,
+          "type": "spacing",
+          "logprob": 0.0
+        },
+        {
+          "text": "a",
+          "start": 0.44,
+          "end": 0.52,
+          "type": "word",
+          "logprob": 0.0
+        },
+        {
+          "text": " ",
+          "start": 0.52,
+          "end": 0.56,
           "type": "spacing",
           "logprob": -2.3841855067985307e-07
         },
         {
-          "text": "with",
-          "start": 0.9,
-          "end": 1.04,
+          "text": "different",
+          "start": 0.56,
+          "end": 0.84,
           "type": "word",
           "logprob": -2.3841855067985307e-07
         },
         {
           "text": " ",
-          "start": 1.04,
-          "end": 1.08,
+          "start": 0.84,
+          "end": 0.88,
           "type": "spacing",
-          "logprob": -2.2649508537142538e-05
+          "logprob": 0.0
         },
         {
-          "text": "Maria",
-          "start": 1.08,
-          "end": 1.44,
+          "text": "life",
+          "start": 0.88,
+          "end": 1.18,
           "type": "word",
-          "logprob": -2.2649508537142538e-05
+          "logprob": 0.0
         },
         {
           "text": " ",
-          "start": 1.44,
-          "end": 1.48,
+          "start": 1.18,
+          "end": 1.22,
           "type": "spacing",
           "logprob": -1.1920928244535389e-07
         },
         {
-          "text": "was",
-          "start": 1.48,
-          "end": 1.66,
+          "text": "before",
+          "start": 1.22,
+          "end": 1.56,
           "type": "word",
           "logprob": -1.1920928244535389e-07
         },
         {
           "text": " ",
-          "start": 1.66,
+          "start": 1.56,
+          "end": 1.62,
+          "type": "spacing",
+          "logprob": 0.0
+        },
+        {
+          "text": "all",
+          "start": 1.62,
           "end": 1.72,
-          "type": "spacing",
-          "logprob": -1.1920922133867862e-06
+          "type": "word",
+          "logprob": 0.0
         },
         {
-          "text": "love",
+          "text": " ",
           "start": 1.72,
-          "end": 1.98,
+          "end": 1.78,
+          "type": "spacing",
+          "logprob": 0.0
+        },
+        {
+          "text": "this",
+          "start": 1.78,
+          "end": 2.04,
           "type": "word",
-          "logprob": -1.1920922133867862e-06
+          "logprob": 0.0
         }
       ],
       "requestId": null

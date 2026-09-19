@@ -36,21 +36,21 @@
     "end": 16.296
   },
   {
-    "id": "cullen-origins",
+    "id": "newborn-battle",
     "character": "Jasper",
     "start": 16.846,
-    "end": 18.876
+    "end": 19.246
   },
   {
     "id": "the-witnesses",
     "character": "Carlisle",
-    "start": 19.426,
-    "end": 23.186
+    "start": 19.796,
+    "end": 23.556
   },
   {
     "id": "first-sight",
     "character": "Jessica Stanley",
-    "start": 23.736,
-    "end": 25.403
+    "start": 24.106,
+    "end": 25.773
   }
 ]

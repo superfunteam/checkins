@@ -1,6 +1,6 @@
 # Twilight voice notes
 
-36 short character clips: 33 badges and three greetings. Content version 8 uses a distinct designed voice for each of the nine speaking characters.
+36 short character clips: 33 badges and three greetings. Content version 8 introduced a distinct designed voice for each of the nine speaking characters; version 10 corrects the backstory checkpoint to Edward.
 
 ## Casting and synthesis
 
@@ -208,15 +208,15 @@ Submitted text: `[playful] [confident] I’m team snacks. Pass them over.`
 
 Original party dialogue.
 
-### A Century of Secrets — Jasper
+### Edward’s Backstory — Edward
 
-> I thought what I had with Maria was love.
+> I had a different life before all this.
 
-Delivery: An old mistake admitted quietly; a small hurt underneath the word love.
+Delivery: A brief personal admission to Bella; a trace of longing for his human life, intimate and conversational.
 
-Submitted text: `[reflective] [regretful] I thought what I had with Maria was love.`
+Submitted text: `[reflective] [wistful] I had a different life before all this.`
 
-[Film excerpt](https://en.wikiquote.org/wiki/The_Twilight_Saga:_Eclipse).
+Original character dialogue, following the host’s Edward backstory checkpoint.
 
 ### Team Jacob Makes a Case — Jacob
 

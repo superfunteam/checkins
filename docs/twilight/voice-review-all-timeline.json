@@ -79,140 +79,140 @@
   },
   {
     "id": "cullen-origins",
-    "character": "Jasper",
+    "character": "Edward",
     "start": 32.739,
-    "end": 34.769
+    "end": 34.98
   },
   {
     "id": "jacobs-confession",
     "character": "Jacob",
-    "start": 35.319,
-    "end": 36.982
+    "start": 35.53,
+    "end": 37.193
   },
   {
     "id": "the-kiss",
     "character": "Bella",
-    "start": 37.532,
-    "end": 39.372
+    "start": 37.743,
+    "end": 39.583
   },
   {
     "id": "the-tent",
     "character": "Jacob",
-    "start": 39.922,
-    "end": 41.667
+    "start": 40.133,
+    "end": 41.878
   },
   {
     "id": "newborn-battle",
     "character": "Jasper",
-    "start": 42.217,
-    "end": 44.617
+    "start": 42.428,
+    "end": 44.828
   },
   {
     "id": "eclipse",
     "character": "Bella",
-    "start": 45.167,
-    "end": 46.448
+    "start": 45.378,
+    "end": 46.659
   },
   {
     "id": "the-wedding",
     "character": "Edward",
-    "start": 46.998,
-    "end": 48.494
+    "start": 47.209,
+    "end": 48.704
   },
   {
     "id": "isle-esme",
     "character": "Edward",
-    "start": 49.044,
-    "end": 52.484
+    "start": 49.254,
+    "end": 52.694
   },
   {
     "id": "renesmee-born",
     "character": "Edward",
-    "start": 53.034,
-    "end": 55.194
+    "start": 53.244,
+    "end": 55.404
   },
   {
     "id": "imprinting",
     "character": "Jacob",
-    "start": 55.744,
-    "end": 58.326
+    "start": 55.954,
+    "end": 58.537
   },
   {
     "id": "breaking-dawn-1",
     "character": "Charlie",
-    "start": 58.876,
-    "end": 60.479
+    "start": 59.087,
+    "end": 60.69
   },
   {
     "id": "dinner",
     "character": "Charlie",
-    "start": 61.029,
-    "end": 64.309
+    "start": 61.24,
+    "end": 64.52
   },
   {
     "id": "rapid-growth",
     "character": "Bella",
-    "start": 64.859,
-    "end": 67.34
+    "start": 65.07,
+    "end": 67.55
   },
   {
     "id": "the-witnesses",
     "character": "Carlisle",
-    "start": 67.89,
-    "end": 71.65
+    "start": 68.1,
+    "end": 71.86
   },
   {
     "id": "the-battle",
     "character": "Alice",
-    "start": 72.2,
-    "end": 75.0
+    "start": 72.41,
+    "end": 75.21
   },
   {
     "id": "breaking-dawn-2",
     "character": "Bella",
-    "start": 75.55,
-    "end": 77.71
+    "start": 75.76,
+    "end": 77.92
   },
   {
     "id": "secret-movies",
     "character": "Edward",
-    "start": 78.26,
-    "end": 81.786
+    "start": 78.47,
+    "end": 81.996
   },
   {
     "id": "secret-meals",
     "character": "Charlie",
-    "start": 82.336,
-    "end": 85.216
+    "start": 82.546,
+    "end": 85.426
   },
   {
     "id": "secret-scenes",
     "character": "Alice",
-    "start": 85.766,
-    "end": 90.094
+    "start": 85.976,
+    "end": 90.304
   },
   {
     "id": "secret-immortal",
     "character": "Bella",
-    "start": 90.644,
-    "end": 93.444
+    "start": 90.854,
+    "end": 93.654
   },
   {
     "id": "greeting-1",
     "character": "Bella",
-    "start": 93.994,
-    "end": 96.275
+    "start": 94.204,
+    "end": 96.485
   },
   {
     "id": "greeting-2",
     "character": "Charlie",
-    "start": 96.825,
-    "end": 99.305
+    "start": 97.035,
+    "end": 99.515
   },
   {
     "id": "greeting-3",
     "character": "Alice",
-    "start": 99.855,
-    "end": 103.804
+    "start": 100.065,
+    "end": 104.014
   }
 ]

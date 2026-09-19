@@ -1,6 +1,6 @@
 {
   "id": "twilight",
-  "version": 9,
+  "version": 10,
   "meta": {
     "name": "The Twilight Passport",
     "shortName": "Twilight Passport",
@@ -244,10 +244,10 @@
     {
       "id": "cullen-origins",
       "type": "scene",
-      "name": "A Century of Secrets",
+      "name": "Edward’s Backstory",
       "time": "4:42pm ish",
-      "shortDesc": "The Cullen backstories",
-      "longDesc": "Eclipse · ~0:47:00\n\nBefore the Cullens were family, each had another life. Rosalie and Jasper reveal the memories behind those golden eyes.",
+      "shortDesc": "Before Bella, before forever",
+      "longDesc": "Eclipse · ~0:47:00\n\nBefore Bella, before Forks, Edward had another life. Meet the human behind the vampire—and the past he still carries.",
       "instruction": "Watch this scene to claim.",
       "image": "assets/images/badges/badge-cullen-origins.webp",
       "sound": "assets/audio/badges/badge-cullen-origins.mp3",

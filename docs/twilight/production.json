@@ -351,20 +351,19 @@
     },
     {
       "id": "cullen-origins",
-      "name": "A Century of Secrets",
-      "character": "Jasper",
-      "voice": "jasper",
-      "narration": "I thought what I had with Maria was love.",
-      "kind": "film-quote",
-      "source": "https://en.wikiquote.org/wiki/The_Twilight_Saga:_Eclipse",
+      "name": "Edward’s Backstory",
+      "character": "Edward",
+      "voice": "edward",
+      "narration": "I had a different life before all this.",
+      "kind": "original-character-line",
       "performance": {
         "tags": [
           "reflective",
-          "regretful"
+          "wistful"
         ],
-        "intent": "An old mistake admitted quietly; a small hurt underneath the word love."
+        "intent": "A brief personal admission to Bella; a trace of longing for his human life, intimate and conversational."
       },
-      "synthesisText": "[reflective] [regretful] I thought what I had with Maria was love.",
+      "synthesisText": "[reflective] [wistful] I had a different life before all this.",
       "imagePrompt": "Use case: stylized-concept. ONE square collectible achievement illustration for a Twilight viewing party. Lush hand-painted gothic romance novel cover meets premium fantasy role-playing video game inventory art. Visible oil brushwork, luminous cinematic atmosphere, exquisite materials, emotionally expressive fictional characters. Moody blue-green Pacific Northwest colors, silver highlights, rich burgundy accents; adapt the lighting to this scene. Bold central composition readable at 120 pixels. Full-bleed square painting; important subjects within central 75 percent for circle and arch UI crops. No words, lettering, logos, watermark, UI, border, panels or collage. Fully clothed characters, no nudity, no graphic gore. Do not imitate a photographic movie still. Scene: A century of Cullen family history: an antique silver pocket watch, aged family portrait of elegant pale Edward and Carlisle in early twentieth-century civilian suits, a weathered journal, dried white rose, modern glass Cullen home glimpsed through forest mist. Deep reflective gilded oil painting, no readable writing."
     },
     {
