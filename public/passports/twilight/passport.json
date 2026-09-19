@@ -5,6 +5,13 @@
     "name": "The Twilight Passport",
     "shortName": "Twilight Passport",
     "description": "Official Documentation of One's Journey Through Forks, Washington",
+    "canonicalUrl": "https://twilight.checkins.party/",
+    "socialImage": {
+      "path": "assets/images/social/twilight-og-v1.jpg",
+      "width": 1200,
+      "height": 630,
+      "alt": "The Twilight Passport — Edward, Jacob, and beer-in-hand Charlie in a moonlit Forks forest."
+    },
     "eventType": "Watch Party",
     "hosts": {
       "names": [
@@ -735,6 +742,7 @@
     "backgroundMusic": {}
   },
   "pwa": {
+    "iconPrefix": "twilight-moon-v1",
     "themeColor": "#0f1c22",
     "backgroundColor": "#0f1c22"
   },

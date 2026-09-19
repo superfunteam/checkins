@@ -11,6 +11,7 @@
 import fs from 'fs';
 import path from 'path';
 import { generateManifest } from './src/utils/manifestGenerator.js';
+import { renderPassportMetadata } from './src/utils/passportMetadata.js';
 
 const PASSPORTS_DIR = path.resolve('public/passports');
 const MANIFEST_RE = /^\/passports\/([a-z0-9-]+)\/manifest(\.host)?\.webmanifest$/;
@@ -49,7 +50,7 @@ export function passportManifestsPlugin() {
 
     // Seed the event surface before React or web fonts load, avoiding a light
     // flash when opening a dark passport. Full theme application stays in React.
-    transformIndexHtml(html) {
+    transformIndexHtml(html, context) {
       const themes = Object.fromEntries(listPassportIds().map(id => {
         const { theme } = readPassport(id);
         return [id, { mode: theme.mode || 'light', bg: theme.colors.background['100'], text: theme.colors.text['800'], muted: theme.colors.text['600'], primary: theme.colors.primary['500'] }];
@@ -67,7 +68,10 @@ export function passportManifestsPlugin() {
         root.style.colorScheme = theme.mode;
         for (const [key,value] of Object.entries({'background-100':theme.bg,'text-800':theme.text,'text-600':theme.muted,'primary-500':theme.primary})) root.style.setProperty('--color-'+key,value);
       })();`;
-      return html.replace('<!-- Primary Meta Tags -->', `<style>html[data-passport-theme],html[data-passport-theme] body{background:var(--color-background-100);color:var(--color-text-800)}</style><script>${script}</script>\n    <!-- Primary Meta Tags -->`);
+      html = html.replace('<!-- Primary Meta Tags -->', `<style>html[data-passport-theme],html[data-passport-theme] body{background:var(--color-background-100);color:var(--color-text-800)}</style><script>${script}</script>\n    <!-- Primary Meta Tags -->`);
+      const pathId = context?.originalUrl?.match(/^\/event\/([a-z0-9-]+)(?:\/|\?|$)/)?.[1];
+      const passport = pathId || forcedPassport ? readPassport(pathId || forcedPassport) : null;
+      return passport?.meta.socialImage ? renderPassportMetadata(html, passport) : html;
     },
 
     configureServer(server) {
@@ -82,13 +86,24 @@ export function passportManifestsPlugin() {
       });
     },
 
-    closeBundle() {
+    writeBundle() {
+      const html = fs.readFileSync(path.resolve(outDir, 'index.html'), 'utf8');
       for (const id of listPassportIds()) {
         const passport = readPassport(id);
         const dir = path.resolve(outDir, 'passports', id);
         fs.mkdirSync(dir, { recursive: true });
         fs.writeFileSync(path.join(dir, 'manifest.webmanifest'), manifestFor(passport, false));
         fs.writeFileSync(path.join(dir, 'manifest.host.webmanifest'), manifestFor(passport, true));
+        if (passport.meta.socialImage) {
+          // Netlify rewrites both public entry URLs to these crawlable shells.
+          // Keep the same app bundle and routes; only head metadata differs.
+          fs.writeFileSync(path.join(dir, 'index.html'), renderPassportMetadata(html, passport, {
+            manifest: `/passports/${id}/manifest.host.webmanifest`,
+          }));
+          fs.writeFileSync(path.join(dir, 'event.html'), renderPassportMetadata(html, passport, {
+            manifest: `/passports/${id}/manifest.webmanifest`,
+          }));
+        }
       }
     },
   };

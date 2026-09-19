@@ -5,6 +5,7 @@
  * which writes real manifest files per passport. The browser side just points
  * <link rel="manifest"> at the right file for the current host mode.
  */
+import { getPassportMetadata } from './passportMetadata.js';
 
 /**
  * @param {Object} passport - Full passport configuration
@@ -14,6 +15,7 @@
 export function generateManifest(passport, { basePath = `/event/${passport.id}` } = {}) {
   const { meta, pwa, theme } = passport;
   const iconBase = `/passports/${passport.id}/assets/images/icons`;
+  const iconPrefix = pwa?.iconPrefix || 'icon';
 
   return {
     id: basePath,
@@ -28,10 +30,10 @@ export function generateManifest(passport, { basePath = `/event/${passport.id}` 
     scope: basePath,
     categories: ['entertainment', 'games'],
     icons: [
-      { src: `${iconBase}/icon-192.png`, sizes: '192x192', type: 'image/png' },
-      { src: `${iconBase}/icon-512.png`, sizes: '512x512', type: 'image/png' },
-      { src: `${iconBase}/icon-maskable-192.png`, sizes: '192x192', type: 'image/png', purpose: 'maskable' },
-      { src: `${iconBase}/icon-maskable-512.png`, sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+      { src: `${iconBase}/${iconPrefix}-192.png`, sizes: '192x192', type: 'image/png' },
+      { src: `${iconBase}/${iconPrefix}-512.png`, sizes: '512x512', type: 'image/png' },
+      { src: `${iconBase}/${iconPrefix}-maskable-192.png`, sizes: '192x192', type: 'image/png', purpose: 'maskable' },
+      { src: `${iconBase}/${iconPrefix}-maskable-512.png`, sizes: '512x512', type: 'image/png', purpose: 'maskable' },
     ],
   };
 }
@@ -65,24 +67,55 @@ export function injectManifest(passport, basePath = `/event/${passport.id}`) {
  * @param {Object} passport - Passport configuration
  */
 export function updateMetaTags(passport) {
-  const { meta, pwa, theme } = passport;
-  const iconBase = `/passports/${passport.id}/assets/images/icons`;
+  const metadata = getPassportMetadata(passport, window.location.origin + window.location.pathname);
+  document.title = metadata.title;
+  for (const [name, content] of Object.entries(metadata.named)) setMetaTag(name, content);
+  for (const [name, content] of Object.entries(metadata.properties)) setMetaProperty(name, content);
 
-  document.title = meta.name;
+  let canonical = document.querySelector('link[rel="canonical"]');
+  if (!canonical) {
+    canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    document.head.appendChild(canonical);
+  }
+  canonical.href = metadata.canonical;
 
-  setMetaTag('theme-color', pwa?.themeColor || theme.colors.primary['500']);
-  setMetaTag('description', meta.description);
-  setMetaTag('apple-mobile-web-app-title', meta.shortName);
+  // Reuse identical links on content refresh; replace stale event branding when
+  // navigating between passports, including the generic startup favicon.
+  setIconLinks(metadata.icons);
+}
 
-  setMetaProperty('og:title', meta.name);
-  setMetaProperty('og:description', meta.description);
-  setMetaProperty('og:url', window.location.origin + window.location.pathname);
-  setMetaTag('twitter:title', meta.name);
-  setMetaTag('twitter:description', meta.description);
+// A client-side trip back to the event listing must not keep Twilight's moon
+// or social image on the shared Checkins pages.
+export function resetPassportBranding() {
+  const url = window.location.origin + window.location.pathname;
+  setMetaProperty('og:image', 'https://checkins.party/unfurl.png');
+  setMetaTag('twitter:image', 'https://checkins.party/unfurl.png');
+  setMetaProperty('og:image:alt', 'Checkins — badges and check-ins for events');
+  setMetaTag('twitter:image:alt', 'Checkins — badges and check-ins for events');
+  setMetaProperty('og:url', url);
+  setMetaTag('twitter:url', url);
+  document.querySelector('link[rel="canonical"]')?.setAttribute('href', url);
+  document.querySelector('link[rel="manifest"]')?.remove();
+  setIconLinks([
+    { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon.png' },
+    { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon.png' },
+    { rel: 'apple-touch-icon', sizes: '192x192', href: '/images/icon-maskable-192.png' },
+  ]);
+}
 
-  document.querySelectorAll('link[rel="apple-touch-icon"]').forEach((icon) => {
-    icon.href = `${iconBase}/icon-maskable-192.png`;
-  });
+function setIconLinks(icons) {
+  const existing = [...document.querySelectorAll('link[rel="icon"], link[rel="apple-touch-icon"]')];
+  const matches = existing.length === icons.length && icons.every((icon, i) =>
+    Object.entries(icon).every(([key, value]) => existing[i].getAttribute(key) === value));
+  if (!matches) {
+    existing.forEach(icon => icon.remove());
+    for (const attributes of icons) {
+      const icon = document.createElement('link');
+      for (const [key, value] of Object.entries(attributes)) icon.setAttribute(key, value);
+      document.head.appendChild(icon);
+    }
+  }
 }
 
 function setMetaTag(name, content) {

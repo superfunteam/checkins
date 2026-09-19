@@ -43,6 +43,13 @@ try {
   const grid = await page.eval(`const imgs=[...document.querySelectorAll('.badge-card img')]; return {cards:document.querySelectorAll('.badge-card').length, loaded:imgs.filter(i=>i.complete&&i.naturalWidth>0).length, broken:imgs.filter(i=>i.complete&&i.naturalWidth===0).length, progress:(document.body.innerText.match(/(\\d+)\\/(\\d+)/)||[])[0], build: window.__BUILD_ID__, sw: !!navigator.serviceWorker.controller}`);
   ok('33 badge cards, all images load', grid.cards===33 && grid.loaded===33 && grid.broken===0, JSON.stringify(grid));
   ok('service worker controlling, build e2e-1', grid.sw && grid.build==='e2e-1');
+  const branding = await page.eval(`return {
+    image: document.querySelector('meta[property="og:image"]').content,
+    twitter: document.querySelector('meta[name="twitter:image"]').content,
+    canonical: document.querySelector('link[rel=canonical]').href,
+    icons: [...document.querySelectorAll('link[rel=icon]')].map(i=>i.getAttribute('href')),
+  }`);
+  ok('Twilight social image and moon favicon', branding.image.endsWith('/social/twilight-og-v1.jpg') && branding.twitter===branding.image && branding.canonical==='https://twilight.checkins.party/' && branding.icons.length===2 && branding.icons.every(i=>i.includes('twilight-moon-v1')), JSON.stringify(branding));
 
   // Claim breakfast through the modal + honor system
   await page.eval(`[...document.querySelectorAll('.badge-card')].find(c=>c.textContent.includes('Brunch')).click()`);
@@ -100,6 +107,17 @@ try {
   const shire = await page.eval(`const imgs=[...document.querySelectorAll('.badge-card img')]; await Promise.all(imgs.map(i=>i.complete?null:new Promise(r=>{i.onload=r;i.onerror=r;}))); return {title: document.title, cards: document.querySelectorAll('.badge-card').length, loaded: imgs.filter(i=>i.naturalWidth>0).length, manifest: document.querySelector('link[rel=manifest]')?.getAttribute('href'), font: getComputedStyle(document.querySelector('h1')).fontFamily}`);
   ok('shire passport unaffected', shire.title==='The Shire Passport' && shire.cards===20 && shire.loaded===20 && shire.manifest==='/passports/shire/manifest.webmanifest', JSON.stringify(shire));
   await page.screenshot(S + '/shots/11-shire.png');
+
+  // Client-side navigation must clear event artwork on shared Checkins pages.
+  await page.goto(BASE + '/event/twilight');
+  await page.waitForText("Bella Tester's Saga");
+  await page.eval(`history.pushState({}, '', '/events'); dispatchEvent(new PopStateEvent('popstate'));`);
+  await page.waitForText('Choose your adventure');
+  const sharedBranding = await page.eval(`return {
+    image: document.querySelector('meta[property="og:image"]').content,
+    icons: [...document.querySelectorAll('link[rel=icon]')].map(i=>i.getAttribute('href')),
+  }`);
+  ok('Leaving Twilight restores shared branding', sharedBranding.image==='https://checkins.party/unfurl.png' && sharedBranding.icons.every(i=>i==='/favicon.png'), JSON.stringify(sharedBranding));
 
   // Host mode in the same browser
   await page.goto('http://twilight.localhost:4173/'); await sleep(1500);

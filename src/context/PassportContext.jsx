@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect, useCallback, useMemo, u
 import { useParams } from 'react-router-dom';
 import { loadPassport, buildAssetUrl, getPrimaryBadges, getSecretBadges, getBadgeById, getBadgeType } from '../utils/passportLoader';
 import { loadFonts, setFontVariables } from '../utils/fontLoader';
-import { injectManifest, updateMetaTags } from '../utils/manifestGenerator';
+import { injectManifest, updateMetaTags, resetPassportBranding } from '../utils/manifestGenerator';
 import { getPassportBasePath } from '../utils/hostPassport';
 
 const PassportContext = createContext(null);
@@ -59,6 +59,7 @@ export function PassportProvider({ passportId: passportIdProp, children }) {
   const lastJsonRef = useRef(null);
 
   useEffect(() => () => {
+    resetPassportBranding();
     delete document.documentElement.dataset.passportTheme;
     document.documentElement.style.removeProperty('color-scheme');
   }, []);

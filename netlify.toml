@@ -2,8 +2,30 @@
   command = "npm run build"
   publish = "dist"
 
-# Single-page app: every path (on every host alias, e.g. twilight.checkins.party)
-# is served by index.html and routed client-side.
+# Serve branded HTML to link-preview crawlers before JavaScript runs.
+[[redirects]]
+  from = "https://twilight.checkins.party/"
+  to = "/passports/twilight/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://twilight.checkins.party/favicon.ico"
+  to = "/passports/twilight/assets/images/icons/twilight-moon-v1.ico"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/event/twilight"
+  to = "/passports/twilight/event.html"
+  status = 200
+
+[[redirects]]
+  from = "/event/twilight/*"
+  to = "/passports/twilight/event.html"
+  status = 200
+
+# The remaining single-page app routes retain the shared Checkins shell.
 [[redirects]]
   from = "/*"
   to = "/index.html"
@@ -31,6 +53,11 @@
 
 [[headers]]
   for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/passports/:id/*.html"
   [headers.values]
     Cache-Control = "no-cache"
 
