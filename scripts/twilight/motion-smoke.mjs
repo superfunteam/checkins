@@ -69,7 +69,7 @@ try {
   // No audio-ready events or hung image may prevent first-time onboarding.
   await page.send('Page.addScriptToEvaluateOnNewDocument',{source:`window.Image=class {set src(value){} }; window.Audio=class {addEventListener(){} removeEventListener(){} load(){} pause(){} play(){return Promise.resolve()} };`});
   await page.eval('localStorage.removeItem("passport-twilight")');await page.goto(base+'/event/twilight');
-  await page.clickText('Enter Forks');assert(await page.waitForText('Forks High School'));await sleep(300);await page.clickText('Continue');
+  await page.clickText('Enter Forks');assert(await page.waitForText('Your name for the Forks register?'));await sleep(300);await page.clickText('Continue');
   assert(await page.waitForText('Begin My Saga',8500),'Hung media must not trap onboarding');
   fs.writeFileSync(out+'/metrics.json',JSON.stringify({baseline:{imageVisibleMs:952,layoutCount:35},after:metrics,restoredScroll:restored.scroll,reducedMotion:true,bonusQueue:true,hungMediaRecovery:true},null,2));
   console.log('PASS: immediate badge image, stable swipe height, claim timer cancellation, complete exits, scroll/focus restoration, schedule/certificate Escape, reduced motion, bonus queue, hung media recovery.',metrics);

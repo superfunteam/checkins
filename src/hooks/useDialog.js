@@ -1,9 +1,29 @@
-import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
+import { useCallback, useLayoutEffect, useRef } from 'react';
 
 import { usePresence, useReducedMotion } from 'framer-motion';
 
 const dialogs = [];
 let savedPage = null;
+
+// Keep the final frame applied until unmount, including when React is busy.
+// On interruption, preserve the current frame before cancelling so the next
+// animation continues from here instead of jumping to its starting position.
+function animateSurface(element, initial, target, options) {
+  if (!element) return null;
+  const properties = Object.keys(target);
+  const from = Object.fromEntries(properties.map(key => [key, element.style[key] || initial[key]]));
+  Object.assign(element.style, target);
+  const animation = element.animate([from, target], { ...options, fill: 'both' });
+  return {
+    finished: animation.finished,
+    cancel() {
+      const current = getComputedStyle(element);
+      const frame = Object.fromEntries(properties.map(key => [key, current[key]]));
+      Object.assign(element.style, frame);
+      animation.cancel();
+    },
+  };
+}
 
 // Keep the page still until the last dialog has completed its exit animation.
 // Retained dialog children (or AnimatePresence children) clean up after exit.
@@ -21,7 +41,7 @@ export function useDialog(ref, onClose, { nativeMotion = false, backdropRef, ope
   const closeRef = useRef(onClose);
   closeRef.current = onClose;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const previousFocus = document.activeElement;
     const entry = { ref };
     if (dialogs.length === 0) {
@@ -67,12 +87,15 @@ export function useDialog(ref, onClose, { nativeMotion = false, backdropRef, ope
   useLayoutEffect(() => {
     if (!nativeMotion || !ref.current) return;
     const sheet = ref.current;
-    const distance = reduceMotion ? 'none' : `translateY(${isPresent ? 24 : 16}px)`;
-    const options = { duration: reduceMotion ? 120 : isPresent ? 200 : 160, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' };
-    const surface = sheet.animate(isPresent
-      ? [{ opacity: 0, transform: distance }, { opacity: 1, transform: 'none' }]
-      : [{ opacity: getComputedStyle(sheet).opacity, transform: getComputedStyle(sheet).transform }, { opacity: 0, transform: distance }], options);
-    const overlay = backdropRef?.current?.animate([{ opacity: isPresent ? 0 : 1 }, { opacity: isPresent ? 1 : 0 }], { duration: 160, easing: 'ease-out' });
+    const hidden = { opacity: '0', transform: reduceMotion ? 'none' : 'translateY(16px)' };
+    const visible = { opacity: '1', transform: 'none' };
+    const options = {
+      duration: reduceMotion ? 0 : isPresent ? 200 : 160,
+      easing: isPresent ? 'cubic-bezier(0.22, 1, 0.36, 1)' : 'ease-in',
+    };
+    const surface = animateSurface(sheet, hidden, isPresent ? visible : hidden, options);
+    const overlay = animateSurface(backdropRef?.current, { opacity: '0' },
+      { opacity: isPresent ? '1' : '0' }, { duration: reduceMotion ? 0 : 160, easing: 'linear' });
     let cancelled = false;
     Promise.all([surface.finished, overlay?.finished]).then(() => {
       if (!cancelled && !isPresent) removeRef.current?.();

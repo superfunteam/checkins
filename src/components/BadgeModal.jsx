@@ -88,22 +88,33 @@ function BadgeDialog({ selectedBadge, open, onExited }) {
     : -1;
 
   const goToPrevBadge = useCallback(() => {
-    if (currentIndex > 0) {
+    if (isPresent && currentIndex > 0) {
       setSlideDirection(1);
       setShowHonorSystem(false);
       setJustClaimed(false);
       openBadgeModal(navigableBadges[currentIndex - 1]);
     }
-  }, [currentIndex, navigableBadges, openBadgeModal]);
+  }, [isPresent, currentIndex, navigableBadges, openBadgeModal]);
 
   const goToNextBadge = useCallback(() => {
-    if (currentIndex < navigableBadges.length - 1) {
+    if (isPresent && currentIndex < navigableBadges.length - 1) {
       setSlideDirection(-1);
       setShowHonorSystem(false);
       setJustClaimed(false);
       openBadgeModal(navigableBadges[currentIndex + 1]);
     }
-  }, [currentIndex, navigableBadges, openBadgeModal]);
+  }, [isPresent, currentIndex, navigableBadges, openBadgeModal]);
+
+  useLayoutEffect(() => {
+    modalContentRef.current?.scrollTo({ top: 0, behavior: 'instant' });
+  }, [selectedBadge.id]);
+
+  useEffect(() => {
+    if (!open) {
+      clearTimeout(claimTimer.current);
+      claimTimer.current = null;
+    }
+  }, [open]);
 
   useEffect(() => {
     if (showHonorSystem && honorSystemRef.current && modalContentRef.current) {
@@ -124,8 +135,9 @@ function BadgeDialog({ selectedBadge, open, onExited }) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isPresent, showQrScanner, goToPrevBadge, goToNextBadge]);
 
-  const handleDragEnd = (e, info) => {
+  const handleSwipe = (e, info) => {
     const swipeThreshold = 50;
+    if (Math.abs(info.offset.x) <= Math.abs(info.offset.y)) return;
     if (info.offset.x > swipeThreshold) goToPrevBadge();
     else if (info.offset.x < -swipeThreshold) goToNextBadge();
   };
@@ -136,6 +148,7 @@ function BadgeDialog({ selectedBadge, open, onExited }) {
   const typeColor = getTypeColor(selectedBadge.type);
 
   const handleClaimClick = () => {
+    if (!isPresent) return;
     if (selectedBadge.requiresQrScan) {
       setShowQrScanner(true);
       setQrError(null);
@@ -177,15 +190,9 @@ function BadgeDialog({ selectedBadge, open, onExited }) {
     setShowQrScanner(false);
   };
 
-  const contentVariants = {
-    enter: (direction) => ({ x: reduceMotion ? 0 : direction > 0 ? -24 : 24, opacity: 0 }),
-    center: { x: 0, opacity: 1 },
-    exit: (direction) => ({ x: reduceMotion ? 0 : direction > 0 ? 24 : -24, opacity: 0 }),
-  };
-
   return (
     <>
-          <div ref={backdropRef} className="modal-backdrop" onClick={closeBadgeModal} />
+          <div ref={backdropRef} className="modal-backdrop" onClick={isPresent ? closeBadgeModal : undefined} />
 
           <div
             ref={modalContentRef}
@@ -194,39 +201,30 @@ function BadgeDialog({ selectedBadge, open, onExited }) {
             aria-modal="true"
             aria-labelledby="badge-dialog-title"
             tabIndex={-1}
+            inert={isPresent ? undefined : ''}
             style={{ WebkitOverflowScrolling: 'touch', overscrollBehavior: 'contain' }}
           >
-            <AnimatePresence initial={false} mode="wait" custom={slideDirection} onExitComplete={() => modalContentRef.current?.scrollTo({ top: 0, behavior: 'instant' })}>
+            <button
+              className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center text-earth-400 hover:text-earth-600"
+              onClick={closeBadgeModal}
+              aria-label="Close badge"
+            >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+              {/* Replace the page directly: no retained outgoing art or drag spring
+                  can reappear after the sheet has started closing. */}
               <motion.div
                 key={selectedBadge.id}
-                custom={slideDirection}
-                variants={contentVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
+                initial={reduceMotion || !slideDirection ? false : { x: slideDirection * -12, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: reduceMotion ? 0 : 0.14, ease: easeOut }}
-                drag={reduceMotion ? false : "x"}
-                dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={0.08}
-                onDragEnd={handleDragEnd}
+                onPanEnd={handleSwipe}
                 className="badge-detail-page p-6 pb-8"
               >
-                <button
-                  className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center text-earth-400 hover:text-earth-600"
-                  onClick={closeBadgeModal}
-                  aria-label="Close badge"
-                >
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-
-                <motion.div
-                  className="flex justify-center mb-4"
-                  initial={false}
-                  animate={justClaimed && !reduceMotion ? { scale: [1, 1.06, 1] } : { scale: 1 }}
-                  transition={{ duration: 0.24, ease: easeOut }}
-                >
+                <div className="flex justify-center mb-4">
                   <div
                     className="w-48 h-48 overflow-hidden"
                     style={badgeStylesData}
@@ -237,7 +235,7 @@ function BadgeDialog({ selectedBadge, open, onExited }) {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                </motion.div>
+                </div>
 
                 <div className="flex items-center justify-center gap-2 flex-wrap">
                   <span
@@ -362,7 +360,6 @@ function BadgeDialog({ selectedBadge, open, onExited }) {
                   )}
                 </AnimatePresence>
               </motion.div>
-            </AnimatePresence>
           </div>
 
           <AnimatePresence>
