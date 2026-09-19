@@ -55,8 +55,8 @@ for (const [secret, type] of [['secret-movies','movie'],['secret-scenes','scene'
 }
 assert.deepEqual(new Set(p.badges.find(b => b.id === 'secret-immortal').unlockCondition.badgeIds), new Set(['secret-movies','secret-scenes','secret-meals']));
 assert.equal(p.schedule.dayStart, '10:30');
-assert.equal(p.schedule.dayEnd, '21:32');
-assert.deepEqual(ofType('meal').map(b => [b.name,b.time]), [['Brunch','11:00am ish'],['Lunch','1:00pm ish'],['Snack Break','3:15pm ish'],['Dinner','7:25pm ish']]);
+assert.equal(p.schedule.dayEnd, '22:07');
+assert.deepEqual(ofType('meal').map(b => [b.name,b.time]), [['Brunch','11:00am ish'],['Lunch','1:35pm ish'],['Snack Break','3:50pm ish'],['Dinner','8:00pm ish']]);
 const parse = time => { const [,h,m,period] = time.match(/(\d+):(\d+)(am|pm)/); return (+h % 12) * 60 + +m + (period === 'pm' ? 720 : 0); };
 for (const b of p.badges) {
   assert(b.name && b.shortDesc && b.longDesc);

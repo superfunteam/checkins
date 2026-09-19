@@ -11,36 +11,36 @@
     {
       "id": "twilight",
       "name": "Twilight",
-      "start": "11:00",
-      "end": "12:57",
+      "start": "11:35",
+      "end": "13:32",
       "edition": "Extended Edition"
     },
     {
       "id": "new-moon",
       "name": "New Moon",
-      "start": "13:05",
-      "end": "15:10",
+      "start": "13:40",
+      "end": "15:45",
       "edition": "Extended Edition"
     },
     {
       "id": "eclipse",
       "name": "Eclipse",
-      "start": "15:20",
-      "end": "17:23",
+      "start": "15:55",
+      "end": "17:58",
       "edition": "Extended Edition"
     },
     {
       "id": "breaking-dawn-1",
       "name": "Breaking Dawn – Part 1",
-      "start": "17:30",
-      "end": "19:22",
+      "start": "18:05",
+      "end": "19:57",
       "edition": "Extended Edition"
     },
     {
       "id": "breaking-dawn-2",
       "name": "Breaking Dawn – Part 2",
-      "start": "19:30",
-      "end": "21:23",
+      "start": "20:05",
+      "end": "21:58",
       "edition": "Theatrical Edition"
     }
   ],

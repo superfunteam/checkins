@@ -4,7 +4,7 @@ Completed scope: 33 badges with finished illustrations, 33 character dialogue cl
 
 ## Host schedule
 
-Arrival/setup 10:30 a.m.; brunch and Twilight at 11; Twilight ends about 12:57; lunch at 1; New Moon 1:05–3:10; snack 3:15; Eclipse 3:20–5:23; Breaking Dawn Part 1 5:30–7:22; dinner 7:25; Breaking Dawn Part 2 7:30–9:23; farewell credits through 9:32 p.m. These are the host's estimates, not independently verified edition runtimes.
+Arrival/setup 10:30 a.m.; brunch at 11; Twilight actually started at 11:35. All film and scene cues, plus subsequent meals, move 35 minutes later with the existing breaks preserved: Twilight ends about 1:32 p.m.; lunch at 1:35; New Moon 1:40–3:45; snack 3:50; Eclipse 3:55–5:58; Breaking Dawn Part 1 6:05–7:57; dinner 8; Breaking Dawn Part 2 8:05–9:58; farewell credits through 10:07 p.m. Arrival and brunch retain their original times. Later times are projections from the host's estimates, not independently verified edition runtimes.
 
 Scene wall-clock times add the first sheet's offsets to the second sheet's film starts. Seconds remain in `movieOffset`; wall-clock labels round down to the minute. The app instructs guests to follow the on-screen scene if playback differs. No source timecode has silently been replaced.
 
